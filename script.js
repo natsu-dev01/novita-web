@@ -60,6 +60,7 @@
     favorites: readFavorites(),
     modalCommand: null,
     lastFocused: null,
+    previousHash: '',
   };
 
   const categoryById = new Map(CATEGORIES.map((category) => [category.id, category]));
@@ -69,6 +70,7 @@
     navToggle: $('#nav-toggle'),
     nav: $('#main-nav'),
     search: $('#command-search'),
+    searchClear: $('#search-clear'),
     chips: $('#category-chips'),
     grid: $('#command-grid'),
     countLabel: $('#command-count-label'),
@@ -95,7 +97,11 @@
     modalAliases: $('#modal-aliases'),
     modalCopy: $('#modal-copy'),
     modalCopyAliases: $('#modal-copy-aliases'),
+    modalShare: $('#modal-share'),
     modalWhatsapp: $('#modal-whatsapp'),
+    mobileBar: $('#mobile-bar'),
+    mobileFavorites: $('#mobile-favorites'),
+    mobileFavCount: $('#mobile-fav-count'),
   };
 
   // ---------- Utilidades ----------
@@ -170,6 +176,136 @@
 
     if (!copied) showToast('No se pudo copiar. Copia manualmente: ' + value);
     return copied;
+  }
+
+  // ---------- Bloqueo de scroll (iOS incluido) ----------
+
+  let lockedScrollY = 0;
+  let lockedPadding = '';
+
+  function lockScroll() {
+    if (document.body.classList.contains('scroll-locked')) return;
+
+    lockedScrollY = window.scrollY || window.pageYOffset || 0;
+    lockedPadding = document.body.style.paddingRight;
+
+    const gap = window.innerWidth - document.documentElement.clientWidth;
+    if (gap > 0) document.body.style.paddingRight = gap + 'px';
+
+    document.body.style.top = '-' + lockedScrollY + 'px';
+    document.body.classList.add('scroll-locked', 'modal-open');
+  }
+
+  function unlockScroll() {
+    if (!document.body.classList.contains('scroll-locked')) return;
+
+    document.body.classList.remove('scroll-locked', 'modal-open');
+    document.body.style.top = '';
+    document.body.style.paddingRight = lockedPadding;
+
+    window.scrollTo(0, lockedScrollY);
+  }
+
+  // ---------- Barra móvil, buscador y enlaces ----------
+
+  function updateMobileFavorites() {
+    if (!els.mobileFavCount) return;
+
+    const total = state.favorites.size;
+    els.mobileFavCount.textContent = total > 99 ? '99+' : String(total);
+    els.mobileFavCount.hidden = total === 0;
+  }
+
+  function syncSearchClear() {
+    if (!els.searchClear || !els.search) return;
+    els.searchClear.hidden = !els.search.value;
+  }
+
+  function centerActiveChip() {
+    if (!els.chips || els.chips.scrollWidth <= els.chips.clientWidth + 2) return;
+
+    const active = els.chips.querySelector('.chip.active');
+    if (!active) return;
+
+    const target = active.offsetLeft - (els.chips.clientWidth - active.offsetWidth) / 2;
+    els.chips.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+  }
+
+  function updateMobileBar() {
+    if (!els.mobileBar) return;
+
+    const section = document.getElementById('comandos');
+    const marker = window.scrollY + window.innerHeight * 0.45;
+    const inCommands = section ? marker >= section.offsetTop : false;
+    const current =
+      state.category === 'favorites'
+        ? 'favoritos'
+        : inCommands
+          ? 'comandos'
+          : 'inicio';
+
+    $$('.mobile-bar-item', els.mobileBar).forEach((item) => {
+      const active = item.dataset.mobileSection === current;
+      item.classList.toggle('active', active);
+      if (active) item.setAttribute('aria-current', 'true');
+      else item.removeAttribute('aria-current');
+    });
+  }
+
+  function setHash(hash) {
+    if (!window.history || !history.replaceState) return;
+
+    const base = location.pathname + location.search;
+    try {
+      history.replaceState(null, '', hash ? base + hash : base);
+    } catch {
+      /* historial no disponible */
+    }
+  }
+
+  function comandoHash(name) {
+    return '#comando=' + encodeURIComponent(name);
+  }
+
+  function applyHash() {
+    const raw = String(location.hash || '').replace(/^#/, '');
+    if (!raw) return;
+
+    if (raw === 'faq-instalar') {
+      const faq = document.getElementById('faq-instalar');
+      if (faq) {
+        faq.open = true;
+        faq.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    const equal = raw.indexOf('=');
+    const key = equal >= 0 ? raw.slice(0, equal) : raw;
+    const value = equal >= 0 ? decodeURIComponent(raw.slice(equal + 1)) : '';
+
+    if (key === 'comando' && value) {
+      openModal(value);
+      return;
+    }
+
+    if (key === 'comandos') {
+      let target = value || 'all';
+      if (target === 'favoritos') target = 'favorites';
+
+      const valid =
+        target === 'all' ||
+        target === 'favorites' ||
+        CATEGORIES.some((category) => category.id === target);
+
+      if (valid) setCategory(target, false);
+
+      const section = document.getElementById('comandos');
+      if (section) {
+        const top = section.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
   }
 
   // ---------- Datos derivados ----------
@@ -289,7 +425,7 @@
 
   // ---------- Chips de filtro ----------
 
-  function renderChips() {
+  function renderChips(center) {
     if (!els.chips) return;
 
     const source = state.showAliases
@@ -332,6 +468,9 @@
         );
       })
       .join('');
+
+    updateMobileFavorites();
+    if (center) centerActiveChip();
   }
 
   // ---------- Tarjetas de comando ----------
@@ -463,8 +602,14 @@
   function setCategory(id, scroll) {
     state.category = id || 'all';
     state.visible = PAGE_SIZE;
-    renderChips();
+    renderChips(true);
     renderCommands();
+    updateMobileBar();
+
+    if (scroll !== false) {
+      const linkId = state.category === 'favorites' ? 'favoritos' : state.category;
+      setHash('#comandos=' + encodeURIComponent(linkId));
+    }
 
     if (scroll !== false && els.grid) {
       const top = els.grid.getBoundingClientRect().top + window.scrollY - 120;
@@ -478,6 +623,7 @@
     state.query = String(value || '');
     state.visible = PAGE_SIZE;
     renderCommands();
+    syncSearchClear();
   }
 
   // ---------- Favoritos ----------
@@ -521,6 +667,8 @@
 
     state.modalCommand = command;
     state.lastFocused = document.activeElement;
+    state.previousHash =
+      location.hash && location.hash.indexOf('#comando=') === 0 ? '' : location.hash || '';
 
     const category = command.__category;
     const base =
@@ -576,7 +724,8 @@
     if (els.modalCopyAliases) els.modalCopyAliases.hidden = aliases.length === 0;
 
     els.modal.hidden = false;
-    document.body.classList.add('modal-open');
+    lockScroll();
+    setHash(comandoHash(command.name));
 
     if (els.modalClose) els.modalClose.focus();
   }
@@ -585,8 +734,9 @@
     if (!els.modal || els.modal.hidden) return;
 
     els.modal.hidden = true;
-    document.body.classList.remove('modal-open');
+    unlockScroll();
     state.modalCommand = null;
+    setHash(state.previousHash || '');
 
     if (state.lastFocused && typeof state.lastFocused.focus === 'function') {
       state.lastFocused.focus();
@@ -650,8 +800,11 @@
     if (els.search) {
       let debounce = null;
 
+      syncSearchClear();
+
       els.search.addEventListener('input', (event) => {
         const value = event.target.value;
+        syncSearchClear();
         clearTimeout(debounce);
         debounce = setTimeout(() => setQuery(value), 120);
       });
@@ -662,6 +815,15 @@
           setQuery('');
           els.search.blur();
         }
+      });
+    }
+
+    if (els.searchClear) {
+      els.searchClear.addEventListener('click', () => {
+        if (!els.search) return;
+        els.search.value = '';
+        setQuery('');
+        els.search.focus();
       });
     }
 
@@ -690,8 +852,10 @@
         state.showAliases = false;
         state.sort = 'az';
         saveSort();
+        syncSearchClear();
         renderChips();
         renderCommands();
+        updateMobileBar();
         showToast('Filtros restablecidos');
       });
     }
@@ -774,6 +938,7 @@
     bindNav();
     bindModal();
     bindFaq();
+    bindMobileBar();
   }
 
   function copyCommand(button, name) {
@@ -886,6 +1051,10 @@
       });
     }
 
+    if (els.modalShare) {
+      els.modalShare.addEventListener('click', shareCommand);
+    }
+
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && els.modal && !els.modal.hidden) {
         closeModal();
@@ -918,6 +1087,48 @@
     });
   }
 
+  function shareCommand() {
+    const command = state.modalCommand;
+    if (!command) return;
+
+    const name = commandName(command.name);
+    const url = new URL(location.href);
+    url.hash = comandoHash(command.name);
+
+    const data = {
+      title: name + ' — NovitaBot',
+      text: 'Prueba el comando ' + name + ' en NovitaBot',
+      url: url.toString(),
+    };
+
+    if (navigator.share && location.protocol === 'https:') {
+      navigator.share(data).catch(() => {
+        /* el usuario cerró el menú de compartir */
+      });
+      return;
+    }
+
+    copyText(data.url).then((ok) => {
+      if (ok === false) return;
+      showToast('Enlace copiado');
+    });
+  }
+
+  function bindMobileBar() {
+    if (els.mobileFavorites) {
+      els.mobileFavorites.addEventListener('click', () => {
+        setCategory('favorites');
+        updateMobileBar();
+        showToast(
+          state.favorites.size ? 'Mostrando tus favoritos' : 'Aún no tienes favoritos'
+        );
+      });
+    }
+
+    window.addEventListener('hashchange', applyHash);
+    updateMobileFavorites();
+  }
+
   // ---------- Header, progreso y scroll ----------
 
   function bindScroll() {
@@ -935,6 +1146,8 @@
       if (els.backToTop) {
         els.backToTop.classList.toggle('show', window.scrollY > 700);
       }
+
+      updateMobileBar();
     };
 
     onScroll();
@@ -945,6 +1158,8 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
+
+    window.addEventListener('resize', updateMobileBar, { passive: true });
 
     const links = $$('.main-nav a');
     if (!links.length) return;
@@ -1081,6 +1296,25 @@
     });
   }
 
+  // ---------- Service worker ----------
+
+  function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+
+    const secure =
+      location.protocol === 'https:' ||
+      location.hostname === 'localhost' ||
+      location.hostname === '127.0.0.1';
+
+    if (!secure) return;
+
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {
+        /* sin service worker: la web sigue funcionando */
+      });
+    });
+  }
+
   // ---------- Inicio ----------
 
   function init() {
@@ -1094,6 +1328,8 @@
     bindScroll();
     bindReveal();
     bindCounters();
+    applyHash();
+    registerServiceWorker();
 
     if (COMMANDS.length) {
       document.documentElement.classList.add('js-ready');

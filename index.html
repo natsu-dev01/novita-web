@@ -2,22 +2,45 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#07060c" />
     <meta
       name="description"
-      content="NovitaBot es el asistente oficial de WhatsApp con economía, juegos, IA, mascotas, multimedia, texto a voz y más de 950 comandos."
+      content="NovitaBot es el asistente oficial de WhatsApp con economía, juegos, IA, mascotas, multimedia, texto a voz y más de 950 comandos. Instalable en iPhone, Android y PC."
     />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="NovitaBot" />
+
     <meta property="og:title" content="NovitaBot — Tu asistente oficial de WhatsApp" />
     <meta
       property="og:description"
       content="222 plugins, 957 comandos, IA, TTS, efectos de voz, economía, juegos y administración de grupos."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/logo.jpeg" />
+    <meta property="og:url" content="https://darkcore.xyz/" />
+    <meta property="og:site_name" content="NovitaBot" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:image" content="https://darkcore.xyz/assets/logo.jpeg" />
+    <meta property="og:image:alt" content="Logo oficial de NovitaBot" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NovitaBot — Tu asistente oficial de WhatsApp" />
+    <meta
+      name="twitter:description"
+      content="222 plugins, 957 comandos, IA, TTS, efectos de voz, economía, juegos y administración de grupos."
+    />
+    <meta name="twitter:image" content="https://darkcore.xyz/assets/logo.jpeg" />
+    <link rel="canonical" href="https://darkcore.xyz/" />
     <title>NovitaBot — Tu asistente oficial de WhatsApp</title>
 
-    <link rel="icon" type="image/jpeg" href="assets/logo.jpeg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preload" as="image" href="assets/logo.jpeg" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -33,10 +56,11 @@
           {
             "@type": "SoftwareApplication",
             "name": "NovitaBot",
+            "url": "https://darkcore.xyz/",
             "applicationCategory": "CommunicationApplication",
             "operatingSystem": "WhatsApp",
             "description": "Asistente oficial de WhatsApp con economía, juegos, IA, mascotas, multimedia, texto a voz y más de 950 comandos.",
-            "image": "assets/logo.jpeg",
+            "image": "https://darkcore.xyz/assets/logo.jpeg",
             "author": { "@type": "Person", "name": "Manuel VG" },
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
           },
@@ -81,6 +105,22 @@
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text": "Las novedades se publican en el canal oficial Novita Updates. También puedes unirte al grupo oficial desde esta página."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Puedo instalar la web como app en mi celular?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sí. En iPhone abre la web en Safari, toca Compartir y elige Añadir a pantalla de inicio. En Android abre el menú del navegador y toca Instalar aplicación o Añadir a pantalla de inicio."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿La web funciona sin conexión?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sí, una vez que la abres por primera vez queda guardada en tu dispositivo. Puedes volver a consultar los comandos sin conexión; los enlaces a WhatsApp necesitan internet."
                 }
               }
             ]
@@ -387,6 +427,15 @@
                 autocomplete="off"
                 spellcheck="false"
               />
+              <button
+                class="search-clear"
+                id="search-clear"
+                type="button"
+                aria-label="Borrar búsqueda"
+                hidden
+              >
+                ×
+              </button>
               <kbd>/</kbd>
             </label>
 
@@ -419,6 +468,13 @@
             </div>
           </div>
 
+          <noscript>
+            <div class="noscript-note">
+              El explorador necesita JavaScript. Puedes entrar al grupo y escribir
+              <code>#menu</code> para ver todos los comandos directamente en WhatsApp.
+            </div>
+          </noscript>
+
           <div class="command-grid" id="command-grid"></div>
 
           <div class="load-more-wrap">
@@ -426,8 +482,7 @@
           </div>
 
           <p class="command-hint">
-            💡 Haz clic en una tarjeta para ver sus detalles, copiar el comando o guardarlo en
-            favoritos.
+            💡 Toca una tarjeta para ver sus detalles, copiar el comando o guardarlo en favoritos.
           </p>
         </div>
       </section>
@@ -469,8 +524,22 @@
               <a class="btn btn-primary" href="#comandos">Ver los comandos</a>
             </div>
             <div class="preview-images">
-              <img src="assets/menu-1.jpg" alt="Vista previa del menú de NovitaBot" loading="lazy" />
-              <img src="assets/welcome.jpeg" alt="Bienvenida de NovitaBot" loading="lazy" />
+              <img
+                src="assets/menu-1.jpg"
+                alt="Vista previa del menú de NovitaBot"
+                width="1200"
+                height="1302"
+                loading="lazy"
+                decoding="async"
+              />
+              <img
+                src="assets/welcome.jpeg"
+                alt="Bienvenida de NovitaBot"
+                width="1280"
+                height="724"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </div>
         </div>
@@ -543,6 +612,27 @@
                 grupo oficial para participar en eventos y compartir con la comunidad.
               </p>
             </details>
+
+            <details class="faq-item reveal" name="faq" id="faq-instalar">
+              <summary>¿Puedo instalarla como app en mi celular?</summary>
+              <p>
+                Sí. En <strong>iPhone</strong>, abre esta página en Safari, toca el botón
+                <strong>Compartir</strong> y elige <strong>Añadir a pantalla de inicio</strong>.
+                En <strong>Android</strong>, abre el menú del navegador y toca
+                <strong>Instalar aplicación</strong> o <strong>Añadir a pantalla de inicio</strong>.
+                En <strong>PC</strong> puedes instalarla desde el icono de instalación de la barra
+                de direcciones en Chrome o Edge.
+              </p>
+            </details>
+
+            <details class="faq-item reveal" name="faq">
+              <summary>¿La web funciona sin conexión?</summary>
+              <p>
+                Sí. Después de abrirla por primera vez queda guardada en tu dispositivo, así que
+                puedes consultar los comandos y tus favoritos sin internet. Los enlaces a WhatsApp
+                sí necesitan conexión.
+              </p>
+            </details>
           </div>
         </div>
       </section>
@@ -551,7 +641,7 @@
         <div class="container">
           <div class="community-card reveal">
             <div class="community-glow" aria-hidden="true"></div>
-            <img class="community-logo" src="assets/logo.jpeg" alt="NovitaBot" width="72" height="72" />
+            <img class="community-logo" src="assets/logo.jpeg" alt="NovitaBot" width="72" height="72" loading="lazy" decoding="async" />
             <span class="kicker">Comunidad oficial</span>
             <h2>Únete a la familia <span class="gradient-text">Novita</span></h2>
             <p>
@@ -591,7 +681,7 @@
           </a>
           <p class="footer-text">
             Tu asistente oficial de WhatsApp. Economía, juegos, IA, multimedia y voz en un solo
-            lugar.
+            lugar. Instalable en iPhone, Android y PC.
           </p>
         </div>
 
@@ -627,6 +717,49 @@
         <span>Hecho con 💜 para la comunidad.</span>
       </div>
     </footer>
+
+    <nav class="mobile-bar" id="mobile-bar" aria-label="Accesos rápidos">
+      <a class="mobile-bar-item" href="#inicio" data-mobile-section="inicio">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <path d="M9 21v-7h6v7" />
+        </svg>
+        <span>Inicio</span>
+      </a>
+
+      <a class="mobile-bar-item" href="#comandos" data-mobile-section="comandos">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h10" />
+        </svg>
+        <span>Comandos</span>
+      </a>
+
+      <button
+        class="mobile-bar-item"
+        id="mobile-favorites"
+        type="button"
+        aria-label="Ver favoritos"
+        data-mobile-section="favoritos"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z" />
+        </svg>
+        <span>Favoritos <b id="mobile-fav-count" hidden>0</b></span>
+      </button>
+
+      <a
+        class="mobile-bar-item"
+        href="https://chat.whatsapp.com/LkF1B22nqA72wBDioCMSZ6?s=sh&p=i&mlu=4&ilr=4&iam=2"
+        target="_blank"
+        rel="noopener"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20l1.3-5.2A8.5 8.5 0 1 1 21 11.5z" />
+          <path d="M8.5 8.2c.4-.1.8 0 1 .4l.8 1.6c.1.3 0 .6-.2.9l-.6.7c.6 1.2 1.6 2.2 2.8 2.8l.7-.6c.3-.2.6-.3.9-.2l1.6.8c.4.2.5.6.4 1-.2.8-1 1.5-1.9 1.6-3.6.4-7.4-3.4-7-7 .1-.9.8-1.7 1.5-1.9z" />
+        </svg>
+        <span>WhatsApp</span>
+      </a>
+    </nav>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -670,6 +803,15 @@
           <button class="btn btn-primary" id="modal-copy" type="button">Copiar comando</button>
           <button class="btn btn-ghost" id="modal-copy-aliases" type="button" hidden>
             Copiar alias
+          </button>
+          <button class="btn btn-ghost" id="modal-share" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <path d="m8.6 10.7 6.8-4.4M8.6 13.3l6.8 4.4" />
+            </svg>
+            Compartir
           </button>
           <button class="btn btn-ghost" id="modal-whatsapp" type="button">
             Probar en WhatsApp

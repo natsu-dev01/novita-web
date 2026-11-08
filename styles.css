@@ -2639,3 +2639,550 @@ code {
   }
 }
 
+
+/* ============================================================
+   Mejoras iOS, movil, PWA y escritorio
+   ============================================================ */
+
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --mobile-bar-height: 64px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body.scroll-locked {
+  overscroll-behavior: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+button,
+a,
+input,
+select,
+textarea,
+summary {
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 3px;
+}
+
+section[id] {
+  scroll-margin-top: calc(88px + var(--safe-top));
+}
+
+/* ---------- Header y navegacion con safe area ---------- */
+
+.site-header {
+  padding-top: calc(16px + var(--safe-top));
+}
+
+.site-header.scrolled {
+  padding-top: calc(10px + var(--safe-top));
+}
+
+.btn-ghost,
+.toast,
+.back-to-top,
+.mobile-bar,
+.main-nav {
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* ---------- Buscador: boton para borrar ---------- */
+
+.search-box {
+  position: relative;
+}
+
+.search-box input::-webkit-search-cancel-button,
+.search-box input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-clear {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.search-clear:hover {
+  color: var(--text);
+  background: var(--surface-strong);
+  border-color: var(--border-strong);
+}
+
+.search-clear:active {
+  transform: scale(0.92);
+}
+
+/* ---------- Chips con desplazamiento tactil ---------- */
+
+.category-chips {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 2px;
+}
+
+.chip {
+  scroll-snap-align: start;
+}
+
+.chip:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Tarjetas: objetivos tactiles comodos ---------- */
+
+.command-copy,
+.command-detail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.command-card:active {
+  transform: scale(0.995);
+}
+
+/* ---------- Modal: bottom sheet en celular ---------- */
+
+.modal {
+  padding: max(20px, var(--safe-top)) max(20px, var(--safe-right))
+    max(20px, var(--safe-bottom)) max(20px, var(--safe-left));
+}
+
+.modal-card {
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px - var(--safe-top) - var(--safe-bottom));
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.modal-backdrop {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- Barra movil ---------- */
+
+.mobile-bar {
+  display: none;
+}
+
+.mobile-bar-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 48px;
+  padding: 5px 2px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.mobile-bar-item svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mobile-bar-item.active {
+  color: var(--pink-soft);
+  background: rgba(255, 116, 200, 0.09);
+}
+
+.mobile-bar-item:active {
+  transform: scale(0.95);
+}
+
+.mobile-bar-item b {
+  position: absolute;
+  top: 2px;
+  right: 50%;
+  margin-right: -24px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--gradient);
+  color: #1a0c24;
+  font-size: 0.62rem;
+  line-height: 17px;
+  text-align: center;
+}
+
+/* ---------- Aviso sin JavaScript ---------- */
+
+.noscript-note {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- Tablets y celulares ---------- */
+
+@media (max-width: 900px) {
+  body {
+    padding-bottom: calc(var(--mobile-bar-height) + var(--safe-bottom));
+  }
+
+  .mobile-bar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 85;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 6px calc(8px + var(--safe-right))
+      calc(6px + var(--safe-bottom)) calc(8px + var(--safe-left));
+    border-top: 1px solid var(--border);
+    background: rgba(10, 8, 16, 0.93);
+  }
+
+  .back-to-top {
+    bottom: calc(var(--mobile-bar-height) + 14px + var(--safe-bottom));
+  }
+
+  .toast {
+    bottom: calc(var(--mobile-bar-height) + 18px + var(--safe-bottom));
+  }
+
+  .main-nav {
+    inset: calc(76px + var(--safe-top)) calc(16px + var(--safe-right)) auto
+      calc(16px + var(--safe-left));
+    max-height: calc(100dvh - 96px - var(--safe-top));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* En pantallas tactiles no dejamos efectos hover pegados. */
+  .command-card:hover,
+  .category-card:hover,
+  .feature-card:hover,
+  .favorite-btn:hover,
+  .btn:hover {
+    transform: none;
+  }
+
+  .command-copy,
+  .command-detail {
+    min-height: 36px;
+    padding: 0 12px;
+    font-size: 0.76rem;
+  }
+
+  .favorite-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .text-button {
+    min-height: 40px;
+    padding: 0 2px;
+  }
+
+  .chip {
+    min-height: 40px;
+  }
+
+  .alias-chip {
+    min-height: 34px;
+  }
+
+  .faq-item summary {
+    min-height: 52px;
+  }
+
+  .category-chips {
+    scrollbar-width: none;
+  }
+
+  .category-chips::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: min(
+      calc(100% - 28px - var(--safe-left) - var(--safe-right)),
+      var(--container)
+    );
+  }
+
+  .site-header {
+    padding-top: calc(12px + var(--safe-top));
+  }
+
+  .site-header.scrolled {
+    padding-top: calc(8px + var(--safe-top));
+  }
+
+  .search-box {
+    height: 56px;
+  }
+
+  .search-clear {
+    width: 32px;
+    height: 32px;
+  }
+
+  .sort-control select {
+    font-size: 1rem;
+  }
+
+  .modal {
+    align-items: end;
+    padding: 0;
+  }
+
+  .modal-card {
+    width: 100%;
+    max-width: none;
+    max-height: calc(100dvh - var(--safe-top) - 12px);
+    padding: 28px 20px calc(24px + var(--safe-bottom));
+    border-radius: 24px 24px 0 0;
+    border-bottom: 0;
+    animation: sheet-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .modal-card::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 44px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .modal-close {
+    top: calc(16px + var(--safe-top));
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-title {
+    padding-right: 44px;
+  }
+
+  .modal-actions {
+    gap: 9px;
+  }
+
+  .modal-actions .btn {
+    min-height: 48px;
+  }
+
+  .back-to-top {
+    right: 14px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .mobile-bar-item {
+    font-size: 0.64rem;
+  }
+
+  .command-hint {
+    font-size: 0.8rem;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Pantallas grandes ---------- */
+
+@media (min-width: 1440px) {
+  :root {
+    --container: 1240px;
+  }
+
+  .command-grid {
+    gap: 16px;
+  }
+
+  .command-card {
+    padding: 20px;
+  }
+}
+
+/* ---------- Ajustes para pantallas pequenas ---------- */
+
+@media (max-width: 380px) {
+  .mobile-bar-item {
+    font-size: 0.6rem;
+  }
+
+  .mobile-bar-item svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .brand {
+    gap: 8px;
+    font-size: 1rem;
+  }
+
+  .brand img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.1rem, 10.5vw, 2.7rem);
+  }
+}
+
+/* ---------- Modo instalado (PWA) ---------- */
+
+@media (display-mode: standalone) {
+  .skip-link {
+    top: calc(-70px - var(--safe-top));
+  }
+
+  .skip-link:focus {
+    top: calc(14px + var(--safe-top));
+  }
+
+  .mobile-bar {
+    padding-bottom: calc(6px + var(--safe-bottom));
+  }
+}
+
+/* ---------- Bloqueo de scroll (iOS incluido) ---------- */
+
+body.scroll-locked {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* ---------- iOS: evita el zoom al enfocar campos ---------- */
+
+@media (max-width: 900px) {
+  .search-box input,
+  .sort-control select {
+    font-size: 16px;
+  }
+}
+
+/* ---------- Escritorio ---------- */
+
+@media (min-width: 901px) {
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  .mobile-bar {
+    display: none !important;
+  }
+
+  .command-card:focus-within {
+    border-color: var(--border-strong);
+  }
+}
+
+/* ---------- Celular en horizontal con poca altura ---------- */
+
+@media (max-width: 900px) and (max-height: 430px) {
+  .mobile-bar {
+    display: none;
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+
+  .back-to-top {
+    bottom: calc(14px + var(--safe-bottom));
+  }
+
+  .toast {
+    bottom: calc(18px + var(--safe-bottom));
+  }
+}
+
+/* ---------- Movimiento reducido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
