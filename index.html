@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07060c" />
+    <meta
+      name="description"
+      content="NovitaBot es el asistente oficial de WhatsApp con economía, juegos, IA, mascotas, multimedia, texto a voz y más de 950 comandos."
+    />
+    <meta property="og:title" content="NovitaBot — Tu asistente oficial de WhatsApp" />
+    <meta
+      property="og:description"
+      content="222 plugins, 957 comandos, IA, TTS, efectos de voz, economía, juegos y administración de grupos."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/logo.jpeg" />
+    <title>NovitaBot — Tu asistente oficial de WhatsApp</title>
+
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "NovitaBot",
+            "applicationCategory": "CommunicationApplication",
+            "operatingSystem": "WhatsApp",
+            "description": "Asistente oficial de WhatsApp con economía, juegos, IA, mascotas, multimedia, texto a voz y más de 950 comandos.",
+            "image": "assets/logo.jpeg",
+            "author": { "@type": "Person", "name": "Manuel VG" },
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Cómo empiezo a usar NovitaBot?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Entra al grupo oficial desde el botón de WhatsApp y escribe #menu. El bot responderá con todos sus comandos organizados por categorías."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Necesito instalar algo?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. NovitaBot funciona directamente en WhatsApp, sin instalar aplicaciones adicionales."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Cuántos comandos tiene NovitaBot?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "NovitaBot tiene 222 plugins y 957 comandos en total, incluyendo alias, repartidos en 15 categorías."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Qué es el texto a voz de NovitaBot?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Es una función que convierte texto en audio o nota de voz en 25 idiomas y permite aplicar efectos como voz grave, aguda, robot o eco."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Dónde veo las novedades del bot?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Las novedades se publican en el canal oficial Novita Updates. También puedes unirte al grupo oficial desde esta página."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#inicio">Saltar al contenido</a>
+    <div class="reading-progress" id="reading-progress" aria-hidden="true"><span></span></div>
+
+    <div class="page-glow glow-a" aria-hidden="true"></div>
+    <div class="page-glow glow-b" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <header class="site-header" id="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#inicio" aria-label="NovitaBot, ir al inicio">
+          <img src="assets/logo.jpeg" alt="Logo de NovitaBot" width="44" height="44" />
+          <span class="brand-name">Novita<span>Bot</span></span>
+        </a>
+
+        <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+          <a href="#funciones">Funciones</a>
+          <a href="#categorias">Categorías</a>
+          <a href="#comandos">Comandos</a>
+          <a href="#empezar">Cómo empezar</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="header-actions">
+          <a
+            class="btn btn-ghost hide-mobile"
+            href="https://whatsapp.com/channel/0029Vb94gAXEQIapCNyaZ844"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="dot dot-live" aria-hidden="true"></span>
+            Canal
+          </a>
+          <a
+            class="btn btn-primary"
+            href="https://chat.whatsapp.com/LkF1B22nqA72wBDioCMSZ6?s=sh&p=i&mlu=4&ilr=4&iam=2"
+            target="_blank"
+            rel="noopener"
+          >
+            Abrir WhatsApp
+          </a>
+          <button
+            class="nav-toggle"
+            id="nav-toggle"
+            type="button"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+            aria-controls="main-nav"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section" id="inicio">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="pill reveal">
+              <span class="dot dot-live" aria-hidden="true"></span>
+              En línea · <strong id="hero-command-count">957</strong> comandos disponibles
+            </span>
+
+            <h1 class="reveal">
+              El bot que tu grupo
+              <span class="gradient-text">necesita</span>.
+            </h1>
+
+            <p class="hero-lead reveal">
+              Economía, juegos, IA, mascotas, descargas, multimedia y voz. Todo en un solo bot
+              de WhatsApp, rápido y siempre disponible.
+            </p>
+
+            <div class="hero-actions reveal">
+              <a
+                class="btn btn-primary btn-lg"
+                href="https://chat.whatsapp.com/LkF1B22nqA72wBDioCMSZ6?s=sh&p=i&mlu=4&ilr=4&iam=2"
+                target="_blank"
+                rel="noopener"
+              >
+                Unirme al grupo
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+              <a class="btn btn-ghost btn-lg" href="#comandos">Explorar comandos</a>
+            </div>
+
+            <ul class="hero-tags reveal" aria-label="Características principales">
+              <li>🧠 IA</li>
+              <li>🎙️ TTS</li>
+              <li>🎛️ Efectos de voz</li>
+              <li>💰 Economía</li>
+              <li>🛡️ Moderación</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual reveal" aria-hidden="true">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+
+            <div class="phone">
+              <div class="phone-frame">
+                <div class="phone-status">
+                  <span>9:41</span>
+                  <span class="phone-status-icons">
+                    <span class="signal"></span>
+                    <span class="wifi"></span>
+                    <span class="battery"></span>
+                  </span>
+                </div>
+
+                <div class="chat-head">
+                  <img src="assets/logo.jpeg" alt="" width="34" height="34" />
+                  <div>
+                    <strong>NovitaBot</strong>
+                    <span>en línea</span>
+                  </div>
+                  <span class="chat-badge">✓</span>
+                </div>
+
+                <div class="chat-body">
+                  <div class="chat-date">HOY</div>
+                  <div class="bubble bubble-out">#menu</div>
+
+                  <div class="bubble bubble-in bubble-menu">
+                    <span class="bubble-title">🌸 NovitaBot</span>
+                    <span class="bubble-line">✦ 222 plugins activos</span>
+                    <span class="bubble-line">✦ 957 comandos</span>
+                    <span class="bubble-line">✦ 25 idiomas de voz</span>
+                    <div class="mini-grid">
+                      <span>💰 Economía</span>
+                      <span>🎮 Juegos</span>
+                      <span>🐾 Mascotas</span>
+                      <span>🧠 IA</span>
+                    </div>
+                  </div>
+
+                  <div class="bubble bubble-out">#voz Hola, bienvenidos a Novita</div>
+                  <div class="bubble bubble-in bubble-audio">
+                    <span class="play">▶</span>
+                    <span class="wave">
+                      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                    </span>
+                    <span class="audio-time">0:04</span>
+                  </div>
+
+                  <div class="typing">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+
+                <div class="chat-input">
+                  <span>Escribe #menu…</span>
+                  <span class="send">➤</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="float-card float-one">
+              <span class="float-icon">🎙️</span>
+              <div>
+                <strong>Texto a voz</strong>
+                <small>25 idiomas · efectos</small>
+              </div>
+            </div>
+
+            <div class="float-card float-two">
+              <span class="float-icon">⚡</span>
+              <div>
+                <strong>Respuesta rápida</strong>
+                <small>activo 24/7</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-section" aria-label="Estadísticas de NovitaBot">
+        <div class="container">
+          <div class="stats-card reveal">
+            <div class="stat">
+              <strong data-count="222">222</strong>
+              <span>Plugins</span>
+            </div>
+            <div class="stat">
+              <strong data-count="957">957</strong>
+              <span>Comandos</span>
+            </div>
+            <div class="stat">
+              <strong data-count="15">15</strong>
+              <span>Categorías</span>
+            </div>
+            <div class="stat">
+              <strong data-count="25">25</strong>
+              <span>Idiomas TTS</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="funciones">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="kicker">Funciones</span>
+            <h2>Todo lo que tu grupo necesita, <span class="gradient-text">en un solo bot</span></h2>
+            <p>
+              NovitaBot combina diversión, herramientas útiles y moderación automática sin
+              complicaciones.
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card reveal">
+              <span class="feature-icon icon-purple">🧠</span>
+              <h3>Inteligencia artificial</h3>
+              <p>Conversa, genera ideas, crea imágenes y resume textos largos directamente en el chat.</p>
+              <span class="feature-tag">IA · Imágenes · Resúmenes</span>
+            </article>
+
+            <article class="feature-card reveal">
+              <span class="feature-icon icon-pink">🎙️</span>
+              <h3>Texto a voz y efectos</h3>
+              <p>Convierte texto en audio o nota de voz en 25 idiomas. Aplica voces grave, aguda, robot, eco y más.</p>
+              <span class="feature-tag">TTS · Notas de voz · Filtros</span>
+            </article>
+
+            <article class="feature-card reveal">
+              <span class="feature-icon icon-gold">💰</span>
+              <h3>Economía y progreso</h3>
+              <p>Gana monedas, sube de nivel, completa misiones, administra tu banco y presume tus logros.</p>
+              <span class="feature-tag">Monedas · Niveles · Tienda</span>
+            </article>
+
+            <article class="feature-card reveal">
+              <span class="feature-icon icon-cyan">🎮</span>
+              <h3>Juegos y mascotas</h3>
+              <p>Competencias, apuestas, juegos por turnos y mascotas que crecen contigo.</p>
+              <span class="feature-tag">Juegos · Mascotas · Retos</span>
+            </article>
+
+            <article class="feature-card reveal">
+              <span class="feature-icon icon-green">🛡️</span>
+              <h3>Administración de grupos</h3>
+              <p>Antilink, antispam, antibot, bienvenidas, despedidas y herramientas de moderación.</p>
+              <span class="feature-tag">Moderación · Welcome · Seguridad</span>
+            </article>
+
+            <article class="feature-card reveal">
+              <span class="feature-icon icon-blue">🎨</span>
+              <h3>Multimedia sin límites</h3>
+              <p>Stickers, conversión de imagen, audio y video, descargas y edición rápida.</p>
+              <span class="feature-tag">Stickers · Conversión · Descargas</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section categories-section" id="categorias">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="kicker">15 categorías</span>
+            <h2>Explora por <span class="gradient-text">categoría</span></h2>
+            <p>
+              Cada área tiene sus propios comandos. Elige una tarjeta y salta directo al
+              explorador con el filtro aplicado.
+            </p>
+          </div>
+
+          <div class="category-grid" id="category-grid"></div>
+        </div>
+      </section>
+
+      <section class="section commands-section" id="comandos">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="kicker">Explorador</span>
+            <h2>Encuentra tu próximo <span class="gradient-text">comando favorito</span></h2>
+            <p>
+              Busca entre los <strong id="commands-total">957</strong> comandos reales del bot.
+              Todos usan el prefijo <code>#</code>.
+            </p>
+          </div>
+
+          <div class="command-tools reveal">
+            <label class="search-box" for="command-search">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-3.5-3.5"></path>
+              </svg>
+              <input
+                id="command-search"
+                type="search"
+                placeholder="Busca un comando: tts, menu, welcome, ban…"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <kbd>/</kbd>
+            </label>
+
+            <div class="category-chips" id="category-chips" aria-label="Filtrar por categoría"></div>
+
+            <div class="command-controls">
+              <button class="btn btn-ghost btn-sm" id="random-command" type="button">
+                🎲 Comando aleatorio
+              </button>
+              <label class="sort-control" for="command-sort">
+                <span>Ordenar por</span>
+                <select id="command-sort">
+                  <option value="az">A – Z</option>
+                  <option value="category">Categoría</option>
+                  <option value="aliases">Más alias</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="command-meta reveal">
+            <span id="command-count-label" aria-live="polite">Mostrando comandos</span>
+            <div class="command-meta-actions">
+              <label class="switch" for="show-aliases">
+                <input type="checkbox" id="show-aliases" />
+                <span class="switch-track" aria-hidden="true"></span>
+                <span class="switch-label">Mostrar alias <b id="alias-count">735</b></span>
+              </label>
+              <button class="text-button" id="clear-filters" type="button">Limpiar filtros</button>
+            </div>
+          </div>
+
+          <div class="command-grid" id="command-grid"></div>
+
+          <div class="load-more-wrap">
+            <button class="btn btn-ghost" id="load-more" type="button">Ver más comandos</button>
+          </div>
+
+          <p class="command-hint">
+            💡 Haz clic en una tarjeta para ver sus detalles, copiar el comando o guardarlo en
+            favoritos.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="empezar">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="kicker">Empieza en segundos</span>
+            <h2>Así de fácil es usar <span class="gradient-text">NovitaBot</span></h2>
+            <p>No necesitas instalar nada. Solo entra al grupo y escribe.</p>
+          </div>
+
+          <div class="steps-grid">
+            <article class="step-card reveal">
+              <span class="step-number">01</span>
+              <h3>Entra al grupo</h3>
+              <p>Abre el enlace oficial y únete. El bot estará disponible al instante.</p>
+            </article>
+            <article class="step-card reveal">
+              <span class="step-number">02</span>
+              <h3>Escribe <code>#menu</code></h3>
+              <p>Verás todos los comandos organizados por categorías, sin recortes.</p>
+            </article>
+            <article class="step-card reveal">
+              <span class="step-number">03</span>
+              <h3>Disfruta y comparte</h3>
+              <p>Juega, gana monedas, cuida tu mascota y sorprende a tu grupo con voz e IA.</p>
+            </article>
+          </div>
+
+          <div class="preview-banner reveal">
+            <div class="preview-copy">
+              <span class="kicker">Vista previa</span>
+              <h3>Un menú completo, bonito y sin límites</h3>
+              <p>
+                NovitaBot muestra todos sus comandos con un diseño cuidado, incluso cuando el
+                mensaje es muy largo.
+              </p>
+              <a class="btn btn-primary" href="#comandos">Ver los comandos</a>
+            </div>
+            <div class="preview-images">
+              <img src="assets/menu-1.jpg" alt="Vista previa del menú de NovitaBot" loading="lazy" />
+              <img src="assets/welcome.jpeg" alt="Bienvenida de NovitaBot" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="kicker">Preguntas frecuentes</span>
+            <h2>Todo lo que quieres <span class="gradient-text">saber</span></h2>
+            <p>Respuestas rápidas antes de empezar a usar NovitaBot.</p>
+          </div>
+
+          <div class="faq-list">
+            <details class="faq-item reveal" name="faq" open>
+              <summary>¿Cómo empiezo a usar NovitaBot?</summary>
+              <p>
+                Entra al grupo oficial desde el botón de WhatsApp y escribe <code>#menu</code>.
+                El bot responderá con todos sus comandos organizados por categorías. También
+                puedes explorarlos aquí y copiar el que necesites.
+              </p>
+            </details>
+
+            <details class="faq-item reveal" name="faq">
+              <summary>¿Necesito instalar algo?</summary>
+              <p>
+                No. NovitaBot funciona directamente dentro de WhatsApp, sin aplicaciones ni
+                registros adicionales. Solo necesitas estar en el grupo donde está activo.
+              </p>
+            </details>
+
+            <details class="faq-item reveal" name="faq">
+              <summary>¿Cuántos comandos tiene el bot?</summary>
+              <p>
+                Tiene <strong>222 plugins</strong> y <strong>957 comandos</strong> en total,
+                incluyendo alias, repartidos en <strong>15 categorías</strong>: economía, juegos,
+                IA, mascotas, multimedia, administración y más.
+              </p>
+            </details>
+
+            <details class="faq-item reveal" name="faq">
+              <summary>¿Qué es el texto a voz y los efectos de voz?</summary>
+              <p>
+                Es una función que convierte texto en audio o nota de voz en 25 idiomas. También
+                puedes aplicar efectos como voz grave, aguda, robot, eco y otros filtros
+                divertidos.
+              </p>
+            </details>
+
+            <details class="faq-item reveal" name="faq">
+              <summary>¿Cómo guardo mis comandos favoritos?</summary>
+              <p>
+                Toca la estrella <strong>☆</strong> en cualquier tarjeta. Tus favoritos se guardan
+                en este navegador y puedes verlos con el filtro <strong>⭐ Favoritos</strong>.
+              </p>
+            </details>
+
+            <details class="faq-item reveal" name="faq">
+              <summary>¿Puedo ver también los alias de los comandos?</summary>
+              <p>
+                Sí. Activa el interruptor <strong>Mostrar alias</strong> en el explorador para
+                incluir los 735 alias además de los 222 comandos principales.
+              </p>
+            </details>
+
+            <details class="faq-item reveal" name="faq">
+              <summary>¿Dónde veo las novedades y eventos?</summary>
+              <p>
+                En el canal oficial <strong>Novita Updates</strong>. También puedes unirte al
+                grupo oficial para participar en eventos y compartir con la comunidad.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="comunidad">
+        <div class="container">
+          <div class="community-card reveal">
+            <div class="community-glow" aria-hidden="true"></div>
+            <img class="community-logo" src="assets/logo.jpeg" alt="NovitaBot" width="72" height="72" />
+            <span class="kicker">Comunidad oficial</span>
+            <h2>Únete a la familia <span class="gradient-text">Novita</span></h2>
+            <p>
+              Recibe novedades, participa en eventos y comparte con otros usuarios. El canal y el
+              grupo oficial están a un clic.
+            </p>
+            <div class="community-actions">
+              <a
+                class="btn btn-primary btn-lg"
+                href="https://chat.whatsapp.com/LkF1B22nqA72wBDioCMSZ6?s=sh&p=i&mlu=4&ilr=4&iam=2"
+                target="_blank"
+                rel="noopener"
+              >
+                Unirme al grupo
+              </a>
+              <a
+                class="btn btn-ghost btn-lg"
+                href="https://whatsapp.com/channel/0029Vb94gAXEQIapCNyaZ844"
+                target="_blank"
+                rel="noopener"
+              >
+                Seguir el canal
+              </a>
+            </div>
+            <p class="community-note">Creado por <strong>Manuel VG</strong> · Novita Updates</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand" href="#inicio">
+            <img src="assets/logo.jpeg" alt="" width="36" height="36" />
+            <span class="brand-name">Novita<span>Bot</span></span>
+          </a>
+          <p class="footer-text">
+            Tu asistente oficial de WhatsApp. Economía, juegos, IA, multimedia y voz en un solo
+            lugar.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <strong>Explorar</strong>
+          <a href="#funciones">Funciones</a>
+          <a href="#categorias">Categorías</a>
+          <a href="#comandos">Comandos</a>
+          <a href="#empezar">Cómo empezar</a>
+          <a href="#faq">Preguntas frecuentes</a>
+        </div>
+
+        <div class="footer-links">
+          <strong>Oficial</strong>
+          <a
+            href="https://whatsapp.com/channel/0029Vb94gAXEQIapCNyaZ844"
+            target="_blank"
+            rel="noopener"
+            >Canal de WhatsApp</a
+          >
+          <a
+            href="https://chat.whatsapp.com/LkF1B22nqA72wBDioCMSZ6?s=sh&p=i&mlu=4&ilr=4&iam=2"
+            target="_blank"
+            rel="noopener"
+            >Grupo oficial</a
+          >
+          <a href="https://github.com/natsu-dev01" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <span>© <span id="year">2026</span> NovitaBot. Todos los derechos reservados.</span>
+        <span>Hecho con 💜 para la comunidad.</span>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <button class="back-to-top" id="back-to-top" type="button" aria-label="Volver arriba">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 19V5M6 11l6-6 6 6" />
+      </svg>
+    </button>
+
+    <div class="modal" id="command-modal" hidden>
+      <div class="modal-backdrop" data-modal-close></div>
+      <div
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-desc"
+      >
+        <button
+          class="modal-close"
+          id="modal-close"
+          type="button"
+          aria-label="Cerrar detalles"
+          data-modal-close
+        >
+          ×
+        </button>
+
+        <span class="modal-cat" id="modal-cat"></span>
+        <h3 class="modal-title" id="modal-title">#comando</h3>
+        <p class="modal-desc" id="modal-desc"></p>
+
+        <div class="modal-usage" id="modal-usage" hidden></div>
+
+        <div class="modal-aliases-wrap" id="modal-aliases-wrap" hidden>
+          <strong>Alias</strong>
+          <div class="modal-aliases" id="modal-aliases"></div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="modal-copy" type="button">Copiar comando</button>
+          <button class="btn btn-ghost" id="modal-copy-aliases" type="button" hidden>
+            Copiar alias
+          </button>
+          <button class="btn btn-ghost" id="modal-whatsapp" type="button">
+            Probar en WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
