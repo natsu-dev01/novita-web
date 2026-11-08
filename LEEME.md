@@ -21,7 +21,7 @@ Haz doble clic en `index.html` o abre la carpeta con cualquier navegador moderno
 | `styles.css` | Diseño, animaciones, modo oscuro y responsive |
 | `script.js` | Buscador, filtros, favoritos, modal, enlaces y service worker |
 | `data.js` | Datos reales: 222 plugins y 957 comandos |
-| `status.json` | Estado del bot: online, versión, tiempo activo y servicios |
+| `status.json` | Respaldo local del estado (la web lee el gist en vivo) |
 | `manifest.webmanifest` | Configuración de la app instalable |
 | `sw.js` | Caché offline y actualización en segundo plano |
 | `assets/` | Logo, capturas e iconos de la app |
@@ -35,7 +35,7 @@ Haz doble clic en `index.html` o abre la carpeta con cualquier navegador moderno
 - Orden por nombre, categoría o cantidad de alias.
 - Modal con descripción, uso, alias, copiado y enlace para probar el comando en WhatsApp.
 - Comando aleatorio, copiado rápido y avisos visuales.
-- Sección **Estado del bot** en vivo: latencia real, tiempo activo, versión, región y estado de cada servicio, con comprobación automática cada 60 segundos.
+- Sección **Estado del bot** en vivo: señal del último latido, tiempo activo, versión, región y estado de cada servicio, con comprobación automática cada 30 segundos.
 - **Comando del día**: un comando destacado que cambia cada día, con copiado y acceso a sus detalles.
 - **Recientes**: los últimos comandos que abriste quedan guardados en el navegador para volver a ellos.
 - Botón **Compartir web** en la comunidad (menú nativo en iPhone y Android; copia el enlace en escritorio).
@@ -70,27 +70,64 @@ Los datos se generan desde las carpetas reales de `plugins/` del bot. Si agregas
 
 ## Estado del bot
 
-La sección **Estado** (`#estado`) obtiene los datos de `status.json` y mide la latencia real desde el dispositivo del visitante.
+La sección **Estado** (`#estado`) ya no usa un archivo estático: lee el latido real que el bot publica en un **gist secreto de GitHub**. Así la web sigue siendo estática (Vercel) y el bot no necesita abrir puertos ni exponer una API.
+
+- **Gist de estado:** `96ebdd7b6f0c8faffa7f86ed01ac64bb`
+- **URL que lee la web:** `https://gist.githubusercontent.com/natsu-dev01/96ebdd7b6f0c8faffa7f86ed01ac64bb/raw/status.json`
+- **Frecuencia del latido:** cada 60 segundos (configurable en el bot). GitHub puede tardar cerca de un minuto en reflejar el último cambio en la URL `raw`.
+- **Caducidad:** si el último latido tiene más de 4 minutos, la web marca el bot como **Sin conexión**, aunque el gist todavía diga `online: true`.
+
+El bot publica datos reales de su proceso:
 
 ```json
 {
+  "name": "Novita Bot",
   "online": true,
-  "version": "3.2.0",
-  "startedAt": "2026-11-08T06:00:00.000Z",
-  "region": "Global",
+  "connection": "online",
+  "version": "1.0.0",
+  "startedAt": "2026-11-08T13:53:30.541Z",
+  "updatedAt": "2026-11-08T13:54:30.708Z",
+  "uptimeMs": 60167,
+  "region": "Perú",
+  "commands": 957,
+  "plugins": 222,
+  "messages": 12,
+  "errors": 0,
+  "lastMessageAt": "2026-11-08T13:54:20.000Z",
   "services": [
     { "name": "WhatsApp", "status": "online" }
   ]
 }
 ```
 
-- `online`: `true` o `false`. Si es `false`, la web muestra el bot fuera de línea.
-- `startedAt`: fecha y hora del último reinicio. El **tiempo activo** se calcula en vivo desde ese valor.
-- `services`: cada servicio con `status` `online`, `degraded` u `offline`. Si uno falla, la tarjeta pasa a **Servicio limitado**.
-- `maintenanceNote`: texto opcional para explicar una mantención.
-- `version` y `region`: se muestran tal cual en las métricas.
+- `updatedAt`: momento del último latido. La web muestra la métrica **Señal** con su antigüedad y, si supera los 4 minutos, pasa a **Sin conexión**.
+- `startedAt`: arranque real del proceso. El **tiempo activo** se calcula en vivo desde ese valor.
+- `connection`: estado real de Baileys (`online`, `connecting` u `offline`).
+- `services`: WhatsApp, motor de comandos, base de datos y web. Si uno falla, la tarjeta pasa a **Servicio limitado**.
+- `messages` y `errors`: actividad y errores desde el último arranque.
+- `version`, `commands`, `plugins`, `region`: se muestran tal cual en las métricas.
 
-Actualiza `startedAt` cuando reinicies el bot para que el tiempo activo sea correcto. Si más adelante tienes una API real, cambia `statusUrl` dentro del bloque `bot` de `data.js`; el resto funciona igual. Si `status.json` no responde, la web muestra los últimos datos guardados en el navegador y avisa cuando no hay conexión.
+### Configurar el publicador en el bot
+
+El bot publica el estado desde `lib/integrations/status-publisher.js` y `lib/core/runtime-status.js`, arrancado desde `index.js`. Antes de iniciar el bot, el token de GitHub se resuelve en este orden:
+
+1. `STATUS_TOKEN`
+2. `BACKUP_TOKEN`
+3. `GITHUB_TOKEN` / `GH_TOKEN`
+4. `gh auth token` (si GitHub CLI está autenticado con scope `gist`)
+
+Variables opcionales:
+
+| Variable | Valor por defecto | Función |
+| --- | --- | --- |
+| `STATUS_ENABLED` | `1` | `0` desactiva el publicador |
+| `STATUS_GIST_ID` | `96ebdd7b6f0c8faffa7f86ed01ac64bb` | Gist donde se publica |
+| `STATUS_INTERVAL_SECONDS` | `60` | Segundos entre latidos (mínimo 15) |
+| `STATUS_REGION` | `Perú` | Región mostrada en la web |
+
+> El gist es **secreto**: no aparece en búsquedas, pero cualquiera con el enlace puede leerlo. No publiques tokens, sesiones ni datos privados en él.
+
+Si el gist no responde, la web mantiene los últimos datos guardados en el navegador y avisa cuando no hay conexión. `status.json` queda solo como respaldo local y no se actualiza solo.
 
 ## Publicar
 

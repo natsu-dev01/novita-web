@@ -91,7 +91,7 @@
                 "name": "¿Cómo sé si el bot está en línea?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "La sección Estado de la web comprueba el servicio en tiempo real y muestra la latencia, el tiempo activo, la versión y el estado de cada servicio."
+                  "text": "La sección Estado de la web lee el latido real que envía el bot y muestra la señal, el tiempo activo, la versión y el estado de cada servicio."
                 }
               },
               {
@@ -376,8 +376,8 @@
             <span class="kicker">Estado en vivo</span>
             <h2>¿Cómo está <span class="gradient-text">NovitaBot</span> ahora?</h2>
             <p>
-              Comprobamos el servicio desde tu dispositivo: estado, latencia y tiempo activo se
-              actualizan automáticamente.
+              Leemos el latido real del bot: estado, señal y tiempo activo se actualizan
+              automáticamente.
             </p>
           </div>
 
@@ -406,9 +406,9 @@
 
               <div class="status-metrics">
                 <div class="status-metric">
-                  <span>Latencia</span>
-                  <strong id="status-latency">—</strong>
-                  <small>respuesta</small>
+                  <span>Señal</span>
+                  <strong id="status-signal">—</strong>
+                  <small>último latido</small>
                 </div>
                 <div class="status-metric">
                   <span>Tiempo activo</span>
@@ -710,8 +710,8 @@
             <details class="faq-item reveal" name="faq">
               <summary>¿Cómo sé si el bot está en línea?</summary>
               <p>
-                La sección <a href="#estado"><strong>Estado</strong></a> comprueba el servicio en
-                tiempo real y muestra la latencia, el tiempo activo, la versión y el estado de cada
+                La sección <a href="#estado"><strong>Estado</strong></a> lee el latido real que
+                envía el bot y muestra la señal, el tiempo activo, la versión y el estado de cada
                 servicio. También puedes tocar <strong>Estado</strong> en la barra inferior del
                 celular.
               </p>

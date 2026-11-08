@@ -3965,15 +3965,15 @@ body.scroll-locked {
   font-size: 0.67rem;
 }
 
-#status-latency[data-quality="good"] {
+#status-signal[data-quality="good"] {
   color: var(--green);
 }
 
-#status-latency[data-quality="mid"] {
+#status-signal[data-quality="mid"] {
   color: var(--gold);
 }
 
-#status-latency[data-quality="slow"] {
+#status-signal[data-quality="slow"] {
   color: #ff8fb3;
 }
 

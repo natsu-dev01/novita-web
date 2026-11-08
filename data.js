@@ -9,7 +9,7 @@ window.NOVITA_DATA = {
     "channel": "https://whatsapp.com/channel/0029Vb94gAXEQIapCNyaZ844",
     "group": "https://chat.whatsapp.com/LkF1B22nqA72wBDioCMSZ6?s=sh&p=i&mlu=4&ilr=4&iam=2",
     "channelName": "Novita Updates",
-    "statusUrl": "status.json"
+    "statusUrl": "https://gist.githubusercontent.com/natsu-dev01/96ebdd7b6f0c8faffa7f86ed01ac64bb/raw/status.json"
   },
   "categories": [
     {

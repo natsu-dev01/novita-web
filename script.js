@@ -13,8 +13,12 @@
   const SORT_KEY = 'novita:sort';
   const RECENT_KEY = 'novita:recent';
   const STATUS_KEY = 'novita:last-status';
-  const STATUS_REFRESH_MS = 60 * 1000;
+  const STATUS_REFRESH_MS = 30 * 1000;
   const STATUS_TIMEOUT_MS = 8000;
+  // El gist puede tardar ~1 minuto en reflejar el último latido, así que se
+  // toleran 4 minutos sin señal antes de considerar el bot caído.
+  const STATUS_STALE_MS = 4 * 60 * 1000;
+  const STATUS_LIVE_REFRESH_MS = 10 * 1000;
   const MAX_RECENT = 12;
 
   const $ = (selector, scope) => (scope || document).querySelector(selector);
@@ -161,7 +165,7 @@
     statusTitle: $('#status-title'),
     statusDetail: $('#status-detail'),
     statusRefresh: $('#status-refresh'),
-    statusLatency: $('#status-latency'),
+    statusSignal: $('#status-signal'),
     statusUptime: $('#status-uptime'),
     statusVersion: $('#status-version'),
     statusRegion: $('#status-region'),
@@ -1624,11 +1628,10 @@
   const statusInfo = {
     payload: null,
     state: 'checking',
-    latency: null,
     checkedAt: 0,
     busy: false,
     timer: null,
-    uptimeTimer: null,
+    liveTimer: null,
   };
 
   function statusEndpoint() {
@@ -1643,8 +1646,20 @@
     }
   }
 
+  function statusAge(payload) {
+    const raw = payload && payload.updatedAt ? Date.parse(payload.updatedAt) : NaN;
+    if (!Number.isFinite(raw)) return null;
+    return Math.max(0, Date.now() - raw);
+  }
+
   function computeStatusState(payload) {
     if (!payload) return 'error';
+
+    const age = statusAge(payload);
+
+    // Un latido viejo significa que el bot dejó de publicar: está caído,
+    // aunque el último gist guardado todavía diga "online".
+    if (age !== null && age > STATUS_STALE_MS) return 'offline';
     if (payload.online === false) return 'offline';
 
     const services = Array.isArray(payload.services) ? payload.services : [];
@@ -1684,26 +1699,57 @@
     }
   }
 
-  function latencyQuality(ms) {
+  function formatSignalAge(ms) {
+    if (!Number.isFinite(ms)) return '—';
+
+    const seconds = Math.max(0, Math.round(ms / 1000));
+    if (seconds < 5) return 'ahora';
+    if (seconds < 60) return 'hace ' + seconds + ' s';
+
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return 'hace ' + minutes + ' min';
+
+    const hours = Math.floor(minutes / 60);
+    return 'hace ' + hours + ' h';
+  }
+
+  function signalQuality(ms) {
     if (!Number.isFinite(ms)) return '';
-    if (ms < 300) return 'good';
-    if (ms < 900) return 'mid';
+    if (ms < 150 * 1000) return 'good';
+    if (ms < STATUS_STALE_MS) return 'mid';
     return 'slow';
   }
 
-  function updateStatusUptime() {
-    if (!els.statusUptime) return;
-
+  function updateStatusLive() {
     const payload = statusInfo.payload;
-    const started = payload && payload.startedAt ? Date.parse(payload.startedAt) : NaN;
-    const active = statusInfo.state === 'operational' || statusInfo.state === 'degraded';
 
-    if (!Number.isFinite(started) || !active) {
-      els.statusUptime.textContent = '—';
-      return;
+    if (els.statusSignal) {
+      const age = statusAge(payload);
+      els.statusSignal.textContent = formatSignalAge(age);
+      els.statusSignal.dataset.quality = signalQuality(age);
     }
 
-    els.statusUptime.textContent = formatUptime(Date.now() - started);
+    if (els.statusUptime) {
+      const started = payload && payload.startedAt ? Date.parse(payload.startedAt) : NaN;
+      const active = statusInfo.state === 'operational' || statusInfo.state === 'degraded';
+
+      if (!Number.isFinite(started) || !active) {
+        els.statusUptime.textContent = '—';
+      } else {
+        els.statusUptime.textContent = formatUptime(Date.now() - started);
+      }
+    }
+
+    // Si el latido caduca entre comprobaciones, la tarjeta pasa a "Sin conexión".
+    // Solo se recalcula cuando ya hay un estado real (no en "Comprobando" ni "Sin datos").
+    if (payload && ['operational', 'degraded', 'offline'].includes(statusInfo.state)) {
+      const next = computeStatusState(payload);
+      if (next !== statusInfo.state) {
+        statusInfo.state = next;
+        renderStatus();
+        updateHeaderStatus();
+      }
+    }
   }
 
   function renderStatus() {
@@ -1722,23 +1768,30 @@
     };
 
     const current = labels[stateName] || labels.checking;
-    let detail = 'Estamos midiendo la respuesta del servicio.';
+    let detail = 'Esperando el último latido del bot.';
 
     if (stateName === 'operational') {
-      detail = statusInfo.latency
-        ? 'Responde en ' + statusInfo.latency + ' ms. Todo listo para usar el bot.'
+      const age = statusAge(payload);
+      detail = Number.isFinite(age)
+        ? 'Latido recibido ' + formatSignalAge(age) + '. Todo listo para usar el bot.'
         : 'Todos los servicios están funcionando.';
     } else if (stateName === 'degraded') {
       detail =
         payload.maintenanceNote ||
         'Algunos servicios están limitados. Vuelve a intentarlo en unos minutos.';
     } else if (stateName === 'offline') {
-      if (navigator.onLine) {
-        detail = 'El bot está fuera de línea. Vuelve a intentarlo en unos minutos.';
-      } else {
+      const age = statusAge(payload);
+      const stale = payload.online !== false && age !== null && age > STATUS_STALE_MS;
+
+      if (!navigator.onLine) {
         detail = payload && payload.name
           ? 'Sin conexión. Mostrando los últimos datos guardados del bot.'
           : 'Sin conexión. Conéctate a internet para comprobar el estado.';
+      } else if (stale) {
+        detail =
+          'El bot dejó de enviar señal ' + formatSignalAge(age) + '. Puede estar apagado.';
+      } else {
+        detail = 'El bot está fuera de línea. Vuelve a intentarlo en unos minutos.';
       }
     } else if (stateName === 'error') {
       detail =
@@ -1751,9 +1804,10 @@
     if (els.statusTitle) els.statusTitle.textContent = current[1];
     if (els.statusDetail) els.statusDetail.textContent = detail;
 
-    if (els.statusLatency) {
-      els.statusLatency.textContent = statusInfo.latency ? statusInfo.latency + ' ms' : '—';
-      els.statusLatency.dataset.quality = latencyQuality(statusInfo.latency);
+    if (els.statusSignal) {
+      const age = statusAge(payload);
+      els.statusSignal.textContent = formatSignalAge(age);
+      els.statusSignal.dataset.quality = signalQuality(age);
     }
 
     if (els.statusVersion) els.statusVersion.textContent = payload.version || '—';
@@ -1772,7 +1826,7 @@
       els.statusChecked.textContent = statusInfo.checkedAt ? formatClock(statusInfo.checkedAt) : '—';
     }
 
-    updateStatusUptime();
+    updateStatusLive();
 
     if (els.statusServices) {
       const services =
@@ -1819,9 +1873,8 @@
     if (dot) dot.classList.toggle('dot-live', statusInfo.state === 'operational');
   }
 
-  function applyStatusPayload(payload, latency, checkedAt) {
+  function applyStatusPayload(payload, checkedAt) {
     statusInfo.payload = payload && typeof payload === 'object' ? payload : {};
-    statusInfo.latency = Number.isFinite(latency) ? latency : null;
     statusInfo.checkedAt = checkedAt || Date.now();
     statusInfo.state = computeStatusState(statusInfo.payload);
 
@@ -1871,7 +1924,6 @@
       }
     }
 
-    const started = performance.now();
     const controller = typeof AbortController === 'function' ? new AbortController() : null;
     const timeout = controller
       ? setTimeout(() => controller.abort(), STATUS_TIMEOUT_MS)
@@ -1887,10 +1939,9 @@
       if (!response.ok) throw new Error('HTTP ' + response.status);
 
       const payload = await response.json();
-      const latency = Math.round(performance.now() - started);
 
       statusInfo.busy = false;
-      applyStatusPayload(payload, latency, Date.now());
+      applyStatusPayload(payload, Date.now());
       if (manual) showToast('Estado actualizado');
     } catch {
       statusInfo.busy = false;
@@ -1937,7 +1988,10 @@
       checkStatus();
     }, STATUS_REFRESH_MS);
 
-    statusInfo.uptimeTimer = setInterval(updateStatusUptime, 30000);
+    statusInfo.liveTimer = setInterval(() => {
+      if (document.hidden) return;
+      updateStatusLive();
+    }, STATUS_LIVE_REFRESH_MS);
   }
 
   // ---------- Comando del día ----------

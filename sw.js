@@ -1,4 +1,4 @@
-const CACHE_NAME = 'novita-web-v6';
+const CACHE_NAME = 'novita-web-v7';
 
 const CORE_ASSETS = [
   '/',
@@ -6,7 +6,6 @@ const CORE_ASSETS = [
   '/styles.css',
   '/script.js',
   '/data.js',
-  '/status.json',
   '/manifest.webmanifest',
   '/assets/logo-256.jpg',
   '/assets/icon-192.png',

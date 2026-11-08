@@ -1,14 +1,14 @@
 {
   "name": "NovitaBot",
-  "online": true,
-  "version": "3.2.0",
-  "startedAt": "2026-11-08T06:00:00.000Z",
-  "updatedAt": "2026-11-08T09:30:00.000Z",
-  "region": "Global",
+  "online": false,
+  "version": "1.0.0",
+  "startedAt": null,
+  "updatedAt": null,
+  "region": "Perú",
   "services": [
-    { "name": "WhatsApp", "status": "online" },
-    { "name": "Motor de comandos", "status": "online" },
-    { "name": "Base de datos", "status": "online" },
+    { "name": "WhatsApp", "status": "offline" },
+    { "name": "Motor de comandos", "status": "offline" },
+    { "name": "Base de datos", "status": "offline" },
     { "name": "Web / PWA", "status": "online" }
   ]
 }
