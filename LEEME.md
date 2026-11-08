@@ -2,6 +2,9 @@
 
 Sitio estático oficial de **NovitaBot**, creado con datos reales del bot.
 
+- **Sitio en vivo:** https://novita-web.vercel.app
+- **Repositorio:** https://github.com/natsu-dev01/novita-web
+
 ## Abrir
 
 Haz doble clic en `index.html` o abre la carpeta con cualquier navegador moderno.
