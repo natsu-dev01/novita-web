@@ -1,4 +1,4 @@
-const CACHE_NAME = 'novita-web-v1';
+const CACHE_NAME = 'novita-web-v2';
 
 const CORE_ASSETS = [
   '/',

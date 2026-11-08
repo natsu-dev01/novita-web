@@ -99,6 +99,9 @@
     modalCopyAliases: $('#modal-copy-aliases'),
     modalShare: $('#modal-share'),
     modalWhatsapp: $('#modal-whatsapp'),
+    install: $('#install-app'),
+    installLabel: $('#install-app-label'),
+    hint: $('.command-hint'),
     mobileBar: $('#mobile-bar'),
     mobileFavorites: $('#mobile-favorites'),
     mobileFavCount: $('#mobile-fav-count'),
@@ -1296,6 +1299,99 @@
     });
   }
 
+  // ---------- Instalación y conexión ----------
+
+  function isStandalone() {
+    return (
+      (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
+      window.navigator.standalone === true
+    );
+  }
+
+  function isIos() {
+    const ua = navigator.userAgent || '';
+    return (
+      /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    );
+  }
+
+  function showInstallButton(label) {
+    if (!els.install) return;
+    if (els.installLabel) els.installLabel.textContent = label;
+    els.install.hidden = false;
+  }
+
+  function bindInstall() {
+    if (!els.install) return;
+
+    if (isStandalone()) {
+      els.install.hidden = true;
+      return;
+    }
+
+    let deferred = null;
+
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      if (typeof event.prompt === 'function') deferred = event;
+      showInstallButton('Instalar app');
+    });
+
+    window.addEventListener('appinstalled', () => {
+      els.install.hidden = true;
+      showToast('NovitaBot instalado');
+    });
+
+    if (isIos()) showInstallButton('Añadir a inicio');
+
+    els.install.addEventListener('click', async () => {
+      if (deferred) {
+        deferred.prompt();
+        const choice = await deferred.userChoice.catch(() => null);
+        deferred = null;
+
+        if (choice && choice.outcome === 'accepted') {
+          els.install.hidden = true;
+          showToast('Instalando NovitaBot');
+        }
+        return;
+      }
+
+      if (isIos()) {
+        const faq = document.getElementById('faq-instalar');
+        if (faq) {
+          faq.open = true;
+          faq.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          showToast('Safari: Compartir → Añadir a pantalla de inicio');
+        }
+        return;
+      }
+
+      showToast('Usa el menú del navegador para instalar la app');
+    });
+  }
+
+  function bindConnection() {
+    window.addEventListener('offline', () => {
+      showToast('Sin conexión: los comandos guardados siguen disponibles');
+    });
+
+    window.addEventListener('online', () => {
+      showToast('Conexión restablecida');
+    });
+  }
+
+  function updateHint() {
+    if (!els.hint) return;
+
+    const touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    els.hint.textContent = touch
+      ? '💡 Toca una tarjeta para ver sus detalles, copiar el comando o guardarlo en favoritos.'
+      : '💡 Haz clic en una tarjeta para ver sus detalles, copiar el comando o guardarlo en favoritos.';
+  }
+
   // ---------- Service worker ----------
 
   function registerServiceWorker() {
@@ -1328,6 +1424,9 @@
     bindScroll();
     bindReveal();
     bindCounters();
+    bindInstall();
+    bindConnection();
+    updateHint();
     applyHash();
     registerServiceWorker();
 

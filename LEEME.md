@@ -2,8 +2,9 @@
 
 Sitio estático oficial de **NovitaBot**, creado con datos reales del bot.
 
-- **Dominio final:** https://darkcore.xyz
-- **Sitio temporal:** https://novita-web.vercel.app
+- **Dominio final:** https://darkcore.xyz (pendiente de los registros DNS en Cloudflare)
+- **Producción actual:** https://novita-web.darkcore.xyz
+- **Alternativa:** https://novita-web.vercel.app
 - **Repositorio:** https://github.com/natsu-dev01/novita-web
 
 ## Abrir
@@ -40,6 +41,8 @@ Haz doble clic en `index.html` o abre la carpeta con cualquier navegador moderno
 - Enlaces compartibles: `#comando=tts` abre un comando y `#comandos=juegos` abre una categoría.
 - Botón **Compartir** en el modal (usa el menú nativo en iPhone y Android).
 - Instalable como aplicación (PWA) con iconos, pantalla completa y modo offline.
+- Botón **Instalar app** en el inicio: usa el instalador del navegador en Android, Chrome y Edge, y muestra las instrucciones de Safari en iPhone e iPad.
+- Aviso automático cuando el dispositivo pierde o recupera la conexión.
 - Respeta `prefers-reduced-motion` y evita el zoom automático al escribir en iPhone.
 
 ## Instalar como app
