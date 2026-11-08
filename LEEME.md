@@ -21,6 +21,7 @@ Haz doble clic en `index.html` o abre la carpeta con cualquier navegador moderno
 | `styles.css` | Diseño, animaciones, modo oscuro y responsive |
 | `script.js` | Buscador, filtros, favoritos, modal, enlaces y service worker |
 | `data.js` | Datos reales: 222 plugins y 957 comandos |
+| `status.json` | Estado del bot: online, versión, tiempo activo y servicios |
 | `manifest.webmanifest` | Configuración de la app instalable |
 | `sw.js` | Caché offline y actualización en segundo plano |
 | `assets/` | Logo, capturas e iconos de la app |
@@ -34,9 +35,14 @@ Haz doble clic en `index.html` o abre la carpeta con cualquier navegador moderno
 - Orden por nombre, categoría o cantidad de alias.
 - Modal con descripción, uso, alias, copiado y enlace para probar el comando en WhatsApp.
 - Comando aleatorio, copiado rápido y avisos visuales.
+- Sección **Estado del bot** en vivo: latencia real, tiempo activo, versión, región y estado de cada servicio, con comprobación automática cada 60 segundos.
+- **Comando del día**: un comando destacado que cambia cada día, con copiado y acceso a sus detalles.
+- **Recientes**: los últimos comandos que abriste quedan guardados en el navegador para volver a ellos.
+- Botón **Compartir web** en la comunidad (menú nativo en iPhone y Android; copia el enlace en escritorio).
+- Aviso de **nueva versión disponible** para actualizar la app instalada sin salir de la página.
 - Sección de categorías, preguntas frecuentes, barra de progreso y volver arriba.
 - Diseño responsive para celular, tablet y escritorio.
-- Barra de accesos rápidos en celular: Inicio, Comandos, Favoritos y WhatsApp.
+- Barra de accesos rápidos en celular: Inicio, Comandos, Estado, Favoritos y WhatsApp.
 - Modal tipo *bottom sheet* en celular, con áreas seguras para iPhone con notch.
 - Enlaces compartibles: `#comando=tts` abre un comando y `#comandos=juegos` abre una categoría.
 - Botón **Compartir** en el modal (usa el menú nativo en iPhone y Android).
@@ -61,6 +67,30 @@ Después de la primera visita la web queda guardada en el dispositivo y puede ab
 - **25 idiomas TTS**
 
 Los datos se generan desde las carpetas reales de `plugins/` del bot. Si agregas o quitas plugins, hay que regenerar `data.js` para que la web refleje los cambios.
+
+## Estado del bot
+
+La sección **Estado** (`#estado`) obtiene los datos de `status.json` y mide la latencia real desde el dispositivo del visitante.
+
+```json
+{
+  "online": true,
+  "version": "3.2.0",
+  "startedAt": "2026-11-08T06:00:00.000Z",
+  "region": "Global",
+  "services": [
+    { "name": "WhatsApp", "status": "online" }
+  ]
+}
+```
+
+- `online`: `true` o `false`. Si es `false`, la web muestra el bot fuera de línea.
+- `startedAt`: fecha y hora del último reinicio. El **tiempo activo** se calcula en vivo desde ese valor.
+- `services`: cada servicio con `status` `online`, `degraded` u `offline`. Si uno falla, la tarjeta pasa a **Servicio limitado**.
+- `maintenanceNote`: texto opcional para explicar una mantención.
+- `version` y `region`: se muestran tal cual en las métricas.
+
+Actualiza `startedAt` cuando reinicies el bot para que el tiempo activo sea correcto. Si más adelante tienes una API real, cambia `statusUrl` dentro del bloque `bot` de `data.js`; el resto funciona igual. Si `status.json` no responde, la web muestra los últimos datos guardados en el navegador y avisa cuando no hay conexión.
 
 ## Publicar
 
@@ -93,4 +123,5 @@ El subdominio `natsu-api.darkcore.xyz` pertenece a otro proyecto y no debe modif
 ## Notas
 
 - Los favoritos y el orden elegido se guardan en el almacenamiento local del navegador; no se envían a ningún servidor.
+- Los comandos recientes y el último estado del bot también se guardan en el navegador para funcionar sin conexión.
 - Si actualizas `styles.css`, `script.js` o las imágenes, cambia la versión de `CACHE_NAME` en `sw.js` para forzar la actualización en los dispositivos que ya instalaron la app.

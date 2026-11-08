@@ -1,4 +1,4 @@
-const CACHE_NAME = 'novita-web-v2';
+const CACHE_NAME = 'novita-web-v6';
 
 const CORE_ASSETS = [
   '/',
@@ -6,14 +6,15 @@ const CORE_ASSETS = [
   '/styles.css',
   '/script.js',
   '/data.js',
+  '/status.json',
   '/manifest.webmanifest',
-  '/assets/logo.jpeg',
+  '/assets/logo-256.jpg',
   '/assets/icon-192.png',
   '/assets/icon-512.png',
   '/assets/icon-maskable-512.png',
   '/assets/apple-touch-icon.png',
-  '/assets/menu-1.jpg',
-  '/assets/welcome.jpeg',
+  '/assets/menu-1-600.jpg',
+  '/assets/welcome-720.jpg',
 ];
 
 self.addEventListener('install', (event) => {
@@ -34,6 +35,10 @@ self.addEventListener('activate', (event) => {
       )
       .then(() => self.clients.claim())
   );
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('fetch', (event) => {

@@ -8,7 +8,8 @@ window.NOVITA_DATA = {
     "languages": 25,
     "channel": "https://whatsapp.com/channel/0029Vb94gAXEQIapCNyaZ844",
     "group": "https://chat.whatsapp.com/LkF1B22nqA72wBDioCMSZ6?s=sh&p=i&mlu=4&ilr=4&iam=2",
-    "channelName": "Novita Updates"
+    "channelName": "Novita Updates",
+    "statusUrl": "status.json"
   },
   "categories": [
     {

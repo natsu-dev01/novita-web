@@ -9,7 +9,7 @@
   "scope": "/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "background_color": "#07060c",
   "theme_color": "#07060c",
   "categories": ["utilities", "social", "entertainment"],
@@ -46,6 +46,13 @@
       "short_name": "Favoritos",
       "description": "Abre tus comandos guardados",
       "url": "/#comandos=favoritos",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Estado del bot",
+      "short_name": "Estado",
+      "description": "Consulta si NovitaBot está en línea",
+      "url": "/#estado",
       "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
     },
     {

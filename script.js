@@ -7,9 +7,15 @@
   const COMMANDS = Array.isArray(DATA.commands) ? DATA.commands : [];
   const PREFIX = BOT.prefix || '#';
 
-  const PAGE_SIZE = 24;
+  const MOBILE_QUERY = window.matchMedia ? window.matchMedia('(max-width: 640px)') : null;
+  const PAGE_SIZE = MOBILE_QUERY && MOBILE_QUERY.matches ? 12 : 24;
   const FAVORITES_KEY = 'novita:favorites';
   const SORT_KEY = 'novita:sort';
+  const RECENT_KEY = 'novita:recent';
+  const STATUS_KEY = 'novita:last-status';
+  const STATUS_REFRESH_MS = 60 * 1000;
+  const STATUS_TIMEOUT_MS = 8000;
+  const MAX_RECENT = 12;
 
   const $ = (selector, scope) => (scope || document).querySelector(selector);
   const $$ = (selector, scope) => Array.from((scope || document).querySelectorAll(selector));
@@ -51,6 +57,47 @@
     }
   }
 
+  function readRecent() {
+    try {
+      const raw = localStorage.getItem(RECENT_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(parsed)) return [];
+
+      const valid = new Set(COMMANDS.map((command) => command.name));
+      return parsed
+        .filter((name) => typeof name === 'string' && valid.has(name))
+        .slice(0, MAX_RECENT);
+    } catch {
+      return [];
+    }
+  }
+
+  function saveRecent() {
+    try {
+      localStorage.setItem(RECENT_KEY, JSON.stringify(state.recent));
+    } catch {
+      /* almacenamiento no disponible */
+    }
+  }
+
+  function readStatusCache() {
+    try {
+      const raw = localStorage.getItem(STATUS_KEY);
+      const parsed = raw ? JSON.parse(raw) : null;
+      return parsed && typeof parsed === 'object' ? parsed : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function saveStatusCache(payload) {
+    try {
+      localStorage.setItem(STATUS_KEY, JSON.stringify(payload));
+    } catch {
+      /* almacenamiento no disponible */
+    }
+  }
+
   const state = {
     query: '',
     category: 'all',
@@ -58,6 +105,7 @@
     showAliases: false,
     sort: readSort(),
     favorites: readFavorites(),
+    recent: readRecent(),
     modalCommand: null,
     lastFocused: null,
     previousHash: '',
@@ -71,6 +119,7 @@
     nav: $('#main-nav'),
     search: $('#command-search'),
     searchClear: $('#search-clear'),
+    commandSticky: $('#command-sticky'),
     chips: $('#category-chips'),
     grid: $('#command-grid'),
     countLabel: $('#command-count-label'),
@@ -105,6 +154,30 @@
     mobileBar: $('#mobile-bar'),
     mobileFavorites: $('#mobile-favorites'),
     mobileFavCount: $('#mobile-fav-count'),
+    headerStatus: $('#header-status'),
+    headerStatusText: $('#header-status-text'),
+    statusCard: $('#status-card'),
+    statusStateLabel: $('#status-state-label'),
+    statusTitle: $('#status-title'),
+    statusDetail: $('#status-detail'),
+    statusRefresh: $('#status-refresh'),
+    statusLatency: $('#status-latency'),
+    statusUptime: $('#status-uptime'),
+    statusVersion: $('#status-version'),
+    statusRegion: $('#status-region'),
+    statusCommands: $('#status-commands'),
+    statusPlugins: $('#status-plugins'),
+    statusServices: $('#status-services'),
+    statusChecked: $('#status-checked'),
+    dailyName: $('#daily-name'),
+    dailyCat: $('#daily-cat'),
+    dailyDesc: $('#daily-desc'),
+    dailyCopy: $('#daily-copy'),
+    dailyOpen: $('#daily-open'),
+    shareSite: $('#share-site'),
+    updateBanner: $('#update-banner'),
+    updateAccept: $('#update-accept'),
+    updateDismiss: $('#update-dismiss'),
   };
 
   // ---------- Utilidades ----------
@@ -136,6 +209,21 @@
 
   function commandName(name) {
     return PREFIX + name;
+  }
+
+  function explorerScrollOffset() {
+    const header = els.header ? els.header.offsetHeight : 0;
+    const sticky = els.commandSticky ? els.commandSticky.offsetHeight : 0;
+    return header + sticky + 14;
+  }
+
+  function tapFeedback(duration) {
+    if (!navigator.vibrate) return;
+    try {
+      navigator.vibrate(duration || 8);
+    } catch {
+      /* vibración no disponible */
+    }
   }
 
   let toastTimer = null;
@@ -206,10 +294,18 @@
     document.body.style.top = '';
     document.body.style.paddingRight = lockedPadding;
 
+    const root = document.documentElement;
+    const previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
     window.scrollTo(0, lockedScrollY);
+    root.style.scrollBehavior = previous;
   }
 
   // ---------- Barra móvil, buscador y enlaces ----------
+
+  let mobileBarItems = null;
+  let commandsSection = null;
+  let statusSectionEl = null;
 
   function updateMobileFavorites() {
     if (!els.mobileFavCount) return;
@@ -236,18 +332,30 @@
 
   function updateMobileBar() {
     if (!els.mobileBar) return;
+    if (window.innerWidth > 900) return;
 
-    const section = document.getElementById('comandos');
+    if (!mobileBarItems) mobileBarItems = $$('.mobile-bar-item', els.mobileBar);
+    if (!commandsSection) commandsSection = document.getElementById('comandos');
+    if (!statusSectionEl) statusSectionEl = document.getElementById('estado');
+
+    const section = commandsSection;
+    const statusSection = statusSectionEl;
     const marker = window.scrollY + window.innerHeight * 0.45;
     const inCommands = section ? marker >= section.offsetTop : false;
+    const inStatus =
+      statusSection && !inCommands
+        ? marker >= statusSection.offsetTop && marker < statusSection.offsetTop + statusSection.offsetHeight
+        : false;
     const current =
       state.category === 'favorites'
         ? 'favoritos'
         : inCommands
           ? 'comandos'
-          : 'inicio';
+          : inStatus
+            ? 'estado'
+            : 'inicio';
 
-    $$('.mobile-bar-item', els.mobileBar).forEach((item) => {
+    mobileBarItems.forEach((item) => {
       const active = item.dataset.mobileSection === current;
       item.classList.toggle('active', active);
       if (active) item.setAttribute('aria-current', 'true');
@@ -295,10 +403,12 @@
     if (key === 'comandos') {
       let target = value || 'all';
       if (target === 'favoritos') target = 'favorites';
+      if (target === 'recientes') target = 'recent';
 
       const valid =
         target === 'all' ||
         target === 'favorites' ||
+        target === 'recent' ||
         CATEGORIES.some((category) => category.id === target);
 
       if (valid) setCategory(target, false);
@@ -349,6 +459,8 @@
 
       if (state.category === 'favorites') {
         if (!state.favorites.has(command.name)) return false;
+      } else if (state.category === 'recent') {
+        if (!state.recent.includes(command.name)) return false;
       } else if (state.category !== 'all' && command.category !== state.category) {
         return false;
       }
@@ -359,6 +471,10 @@
 
   function sortedResults(list) {
     const items = list.slice();
+
+    if (state.category === 'recent') {
+      return items.sort((a, b) => state.recent.indexOf(a.name) - state.recent.indexOf(b.name));
+    }
 
     switch (state.sort) {
       case 'category':
@@ -410,9 +526,16 @@
         '<span class="category-card-icon">' +
         escapeHtml(category.icon || '✨') +
         '</span>' +
-        '<span class="category-card-count">' +
+        '<span class="category-card-count" aria-label="' +
         formatNumber(count) +
         (count === 1 ? ' comando' : ' comandos') +
+        '">' +
+        '<b>' +
+        formatNumber(count) +
+        '</b>' +
+        '<span class="count-label">' +
+        (count === 1 ? ' comando' : ' comandos') +
+        '</span>' +
         '</span>' +
         '</span>' +
         '<h3>' +
@@ -440,9 +563,18 @@
         state.favorites.has(command.name) && (state.showAliases || command.primary !== false)
     ).length;
 
+    const commandByName = new Map(COMMANDS.map((command) => [command.name, command]));
+    const recentCount = state.recent.filter((name) => {
+      const command = commandByName.get(name);
+      return command && (state.showAliases || command.primary !== false);
+    }).length;
+
     const items = [
       { id: 'all', icon: '✨', title: 'Todos', count: source.length },
       { id: 'favorites', icon: '⭐', title: 'Favoritos', count: favoriteCount },
+      ...(recentCount || state.category === 'recent'
+        ? [{ id: 'recent', icon: '🕘', title: 'Recientes', count: recentCount }]
+        : []),
       ...CATEGORIES.map((category) => ({
         ...category,
         count: source.filter((command) => command.category === category.id).length,
@@ -535,6 +667,15 @@
   }
 
   function emptyState(hiddenAliases) {
+    if (state.category === 'recent' && !state.query) {
+      return (
+        '<div class="empty-state">' +
+        '<strong>Aún no has visto comandos</strong>' +
+        'Abre cualquier comando y aparecerá aquí para volver a él rápidamente.' +
+        '</div>'
+      );
+    }
+
     if (state.category === 'favorites' && !state.query) {
       return (
         '<div class="empty-state">' +
@@ -605,17 +746,23 @@
   function setCategory(id, scroll) {
     state.category = id || 'all';
     state.visible = PAGE_SIZE;
+    tapFeedback(6);
     renderChips(true);
     renderCommands();
     updateMobileBar();
 
     if (scroll !== false) {
-      const linkId = state.category === 'favorites' ? 'favoritos' : state.category;
+      const linkId =
+        state.category === 'favorites'
+          ? 'favoritos'
+          : state.category === 'recent'
+            ? 'recientes'
+            : state.category;
       setHash('#comandos=' + encodeURIComponent(linkId));
     }
 
     if (scroll !== false && els.grid) {
-      const top = els.grid.getBoundingClientRect().top + window.scrollY - 120;
+      const top = els.grid.getBoundingClientRect().top + window.scrollY - explorerScrollOffset();
       if (Math.abs(window.scrollY - top) > 140) {
         window.scrollTo({ top, behavior: 'smooth' });
       }
@@ -642,6 +789,7 @@
       showToast('Añadido a favoritos');
     }
 
+    tapFeedback(8);
     saveFavorites();
     renderChips();
     renderCommands();
@@ -664,6 +812,14 @@
     return COMMANDS.find((command) => command.name === name) || null;
   }
 
+  function recordRecent(name) {
+    if (!name) return;
+
+    state.recent = [name, ...state.recent.filter((item) => item !== name)].slice(0, MAX_RECENT);
+    saveRecent();
+    renderChips();
+  }
+
   function openModal(name) {
     const command = findCommand(name);
     if (!command || !els.modal) return;
@@ -672,6 +828,8 @@
     state.lastFocused = document.activeElement;
     state.previousHash =
       location.hash && location.hash.indexOf('#comando=') === 0 ? '' : location.hash || '';
+
+    recordRecent(command.name);
 
     const category = command.__category;
     const base =
@@ -736,13 +894,29 @@
   function closeModal() {
     if (!els.modal || els.modal.hidden) return;
 
+    const command = state.modalCommand;
+    const lastFocused = state.lastFocused;
+
     els.modal.hidden = true;
     unlockScroll();
     state.modalCommand = null;
     setHash(state.previousHash || '');
 
-    if (state.lastFocused && typeof state.lastFocused.focus === 'function') {
-      state.lastFocused.focus();
+    if (state.category === 'recent') {
+      renderChips();
+      renderCommands();
+    }
+
+    let target = lastFocused;
+    if (target && !document.contains(target) && command && els.grid) {
+      target =
+        Array.from(els.grid.querySelectorAll('.command-card')).find(
+          (card) => card.dataset.command === command.name
+        ) || null;
+    }
+
+    if (target && typeof target.focus === 'function') {
+      target.focus();
     }
   }
 
@@ -940,8 +1114,13 @@
 
     bindNav();
     bindModal();
+    bindModalSwipe();
     bindFaq();
     bindMobileBar();
+    bindKeyboardHints();
+    bindDailyCommand();
+    bindShareSite();
+    bindUpdateBanner();
   }
 
   function copyCommand(button, name) {
@@ -950,6 +1129,7 @@
     copyText(value).then((ok) => {
       if (ok === false) return;
 
+      tapFeedback(8);
       showToast('Copiado: ' + value);
 
       if (!button) return;
@@ -1076,6 +1256,103 @@
     });
   }
 
+  function bindModalSwipe() {
+    if (!els.modal) return;
+
+    const card = $('.modal-card', els.modal);
+    if (!card) return;
+
+    let startY = 0;
+    let delta = 0;
+    let tracking = false;
+    let resetTimer = null;
+
+    const reset = (close) => {
+      clearTimeout(resetTimer);
+      card.classList.remove('is-dragging');
+      card.style.transition = 'transform 0.22s ease';
+      card.style.transform = '';
+      resetTimer = setTimeout(() => {
+        card.style.transition = '';
+      }, 240);
+      if (close) closeModal();
+    };
+
+    card.addEventListener(
+      'touchstart',
+      (event) => {
+        if (event.touches.length !== 1 || card.scrollTop > 0) return;
+        clearTimeout(resetTimer);
+        startY = event.touches[0].clientY;
+        delta = 0;
+        tracking = true;
+        card.classList.add('is-dragging');
+      },
+      { passive: true }
+    );
+
+    card.addEventListener(
+      'touchmove',
+      (event) => {
+        if (!tracking || event.touches.length !== 1) return;
+
+        delta = event.touches[0].clientY - startY;
+
+        if (delta <= 0 || card.scrollTop > 0) {
+          card.style.transform = '';
+          return;
+        }
+
+        if (event.cancelable) event.preventDefault();
+        card.style.transform = 'translateY(' + delta + 'px)';
+      },
+      { passive: false }
+    );
+
+    const finish = () => {
+      if (!tracking) return;
+      tracking = false;
+      reset(delta > 96);
+      delta = 0;
+    };
+
+    card.addEventListener('touchend', finish, { passive: true });
+    card.addEventListener('touchcancel', finish, { passive: true });
+  }
+
+  function bindKeyboardHints() {
+    const viewport = window.visualViewport;
+
+    const update = () => {
+      const keyboard = viewport ? viewport.height < window.innerHeight * 0.75 : false;
+      document.body.classList.toggle('keyboard-open', keyboard);
+    };
+
+    if (viewport) {
+      viewport.addEventListener('resize', update, { passive: true });
+      viewport.addEventListener('scroll', update, { passive: true });
+    }
+
+    document.addEventListener('focusin', (event) => {
+      const tag = event.target && event.target.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
+        document.body.classList.add('keyboard-open');
+      }
+    });
+
+    document.addEventListener('focusout', (event) => {
+      const tag = event.target && event.target.tagName;
+      if (tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') return;
+
+      setTimeout(() => {
+        const active = document.activeElement && document.activeElement.tagName;
+        if (active !== 'INPUT' && active !== 'TEXTAREA' && active !== 'SELECT') update();
+      }, 120);
+    });
+
+    update();
+  }
+
   function bindFaq() {
     const items = $$('.faq-item');
     if (!items.length) return;
@@ -1122,6 +1399,7 @@
       els.mobileFavorites.addEventListener('click', () => {
         setCategory('favorites');
         updateMobileBar();
+        tapFeedback(6);
         showToast(
           state.favorites.size ? 'Mostrando tus favoritos' : 'Aún no tienes favoritos'
         );
@@ -1135,9 +1413,19 @@
   // ---------- Header, progreso y scroll ----------
 
   function bindScroll() {
-    const onScroll = () => {
+    let scrollFrame = 0;
+
+    const updateScrollUI = () => {
       if (els.header) {
         els.header.classList.toggle('scrolled', window.scrollY > 12);
+      }
+
+      if (window.scrollY > 30 && document.body.classList.contains('nav-open')) {
+        document.body.classList.remove('nav-open');
+        if (els.navToggle) {
+          els.navToggle.setAttribute('aria-expanded', 'false');
+          els.navToggle.setAttribute('aria-label', 'Abrir menú');
+        }
       }
 
       if (els.progress && els.progress.firstElementChild) {
@@ -1153,7 +1441,16 @@
       updateMobileBar();
     };
 
-    onScroll();
+    // Un solo cálculo por frame: evita tirones al desplazarse en iPhone.
+    const onScroll = () => {
+      if (scrollFrame) return;
+      scrollFrame = window.requestAnimationFrame(() => {
+        scrollFrame = 0;
+        updateScrollUI();
+      });
+    };
+
+    updateScrollUI();
     window.addEventListener('scroll', onScroll, { passive: true });
 
     if (els.backToTop) {
@@ -1189,8 +1486,17 @@
       links.forEach((link) => link.classList.toggle('active', link === current.link));
     };
 
+    let navFrame = 0;
+    const onNavScroll = () => {
+      if (navFrame) return;
+      navFrame = window.requestAnimationFrame(() => {
+        navFrame = 0;
+        setActive();
+      });
+    };
+
     setActive();
-    window.addEventListener('scroll', setActive, { passive: true });
+    window.addEventListener('scroll', onNavScroll, { passive: true });
   }
 
   // ---------- Animaciones de aparición ----------
@@ -1276,6 +1582,8 @@
 
     if (els.heroCount) els.heroCount.textContent = formatNumber(totalCommands);
     if (els.commandsTotal) els.commandsTotal.textContent = formatNumber(totalCommands);
+    if (els.statusCommands) els.statusCommands.textContent = formatNumber(totalCommands);
+    if (els.statusPlugins) els.statusPlugins.textContent = formatNumber(totalPlugins);
     if (els.aliasCount) {
       els.aliasCount.textContent = formatNumber(
         COMMANDS.filter((command) => command.primary === false).length
@@ -1297,6 +1605,431 @@
       value.dataset.count = String(map.get(label));
       value.textContent = formatNumber(map.get(label));
     });
+  }
+
+  // ---------- Estado del bot ----------
+
+  const STATUS_FALLBACK = {
+    online: true,
+    version: '—',
+    region: 'Global',
+    services: [
+      { name: 'WhatsApp', status: 'online' },
+      { name: 'Motor de comandos', status: 'online' },
+      { name: 'Base de datos', status: 'online' },
+      { name: 'Web / PWA', status: 'online' },
+    ],
+  };
+
+  const statusInfo = {
+    payload: null,
+    state: 'checking',
+    latency: null,
+    checkedAt: 0,
+    busy: false,
+    timer: null,
+    uptimeTimer: null,
+  };
+
+  function statusEndpoint() {
+    const base = String(BOT.statusUrl || 'status.json');
+
+    try {
+      const url = new URL(base, location.href);
+      url.searchParams.set('t', String(Date.now()));
+      return url.toString();
+    } catch {
+      return base;
+    }
+  }
+
+  function computeStatusState(payload) {
+    if (!payload) return 'error';
+    if (payload.online === false) return 'offline';
+
+    const services = Array.isArray(payload.services) ? payload.services : [];
+    const degraded =
+      payload.degraded === true ||
+      payload.maintenance === true ||
+      services.some((service) => service && service.status && service.status !== 'online');
+
+    return degraded ? 'degraded' : 'operational';
+  }
+
+  function formatUptime(ms) {
+    if (!Number.isFinite(ms) || ms < 0) return '—';
+
+    const totalMinutes = Math.floor(ms / 60000);
+    if (totalMinutes < 1) return '< 1 min';
+
+    const days = Math.floor(totalMinutes / 1440);
+    const hours = Math.floor((totalMinutes % 1440) / 60);
+    const minutes = totalMinutes % 60;
+
+    if (days) return days + 'd ' + hours + 'h';
+    if (hours) return hours + 'h ' + minutes + 'm';
+    return minutes + ' min';
+  }
+
+  function formatClock(timestamp) {
+    if (!timestamp) return '—';
+
+    try {
+      return new Date(timestamp).toLocaleTimeString('es-ES', {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    } catch {
+      return '—';
+    }
+  }
+
+  function latencyQuality(ms) {
+    if (!Number.isFinite(ms)) return '';
+    if (ms < 300) return 'good';
+    if (ms < 900) return 'mid';
+    return 'slow';
+  }
+
+  function updateStatusUptime() {
+    if (!els.statusUptime) return;
+
+    const payload = statusInfo.payload;
+    const started = payload && payload.startedAt ? Date.parse(payload.startedAt) : NaN;
+    const active = statusInfo.state === 'operational' || statusInfo.state === 'degraded';
+
+    if (!Number.isFinite(started) || !active) {
+      els.statusUptime.textContent = '—';
+      return;
+    }
+
+    els.statusUptime.textContent = formatUptime(Date.now() - started);
+  }
+
+  function renderStatus() {
+    const stateName = statusInfo.state;
+    const payload = statusInfo.payload || {};
+    const forcedService = stateName === 'offline' || stateName === 'error' ? stateName : '';
+
+    if (els.statusCard) els.statusCard.dataset.state = stateName;
+
+    const labels = {
+      checking: ['Comprobando', 'Conectando con NovitaBot…'],
+      operational: ['En línea', 'Todo funcionando'],
+      degraded: ['Atención', 'Servicio limitado'],
+      offline: ['Sin conexión', 'NovitaBot sin conexión'],
+      error: ['Sin datos', 'No pudimos comprobar el estado'],
+    };
+
+    const current = labels[stateName] || labels.checking;
+    let detail = 'Estamos midiendo la respuesta del servicio.';
+
+    if (stateName === 'operational') {
+      detail = statusInfo.latency
+        ? 'Responde en ' + statusInfo.latency + ' ms. Todo listo para usar el bot.'
+        : 'Todos los servicios están funcionando.';
+    } else if (stateName === 'degraded') {
+      detail =
+        payload.maintenanceNote ||
+        'Algunos servicios están limitados. Vuelve a intentarlo en unos minutos.';
+    } else if (stateName === 'offline') {
+      if (navigator.onLine) {
+        detail = 'El bot está fuera de línea. Vuelve a intentarlo en unos minutos.';
+      } else {
+        detail = payload && payload.name
+          ? 'Sin conexión. Mostrando los últimos datos guardados del bot.'
+          : 'Sin conexión. Conéctate a internet para comprobar el estado.';
+      }
+    } else if (stateName === 'error') {
+      detail =
+        location.protocol === 'file:'
+          ? 'Abre la web desde internet para ver el estado en vivo.'
+          : 'El servicio no respondió. Comprueba tu conexión y vuelve a intentarlo.';
+    }
+
+    if (els.statusStateLabel) els.statusStateLabel.textContent = current[0];
+    if (els.statusTitle) els.statusTitle.textContent = current[1];
+    if (els.statusDetail) els.statusDetail.textContent = detail;
+
+    if (els.statusLatency) {
+      els.statusLatency.textContent = statusInfo.latency ? statusInfo.latency + ' ms' : '—';
+      els.statusLatency.dataset.quality = latencyQuality(statusInfo.latency);
+    }
+
+    if (els.statusVersion) els.statusVersion.textContent = payload.version || '—';
+    if (els.statusRegion) els.statusRegion.textContent = payload.region || 'Global';
+    if (els.statusCommands) {
+      els.statusCommands.textContent = formatNumber(
+        payload.commands || BOT.commands || COMMANDS.length
+      );
+    }
+    if (els.statusPlugins) {
+      els.statusPlugins.textContent = formatNumber(
+        payload.plugins || BOT.plugins || COMMANDS.filter((command) => command.primary !== false).length
+      );
+    }
+    if (els.statusChecked) {
+      els.statusChecked.textContent = statusInfo.checkedAt ? formatClock(statusInfo.checkedAt) : '—';
+    }
+
+    updateStatusUptime();
+
+    if (els.statusServices) {
+      const services =
+        Array.isArray(payload.services) && payload.services.length
+          ? payload.services
+          : STATUS_FALLBACK.services;
+
+      els.statusServices.innerHTML = services
+        .map((service) => {
+          const raw = service && service.status ? String(service.status) : 'online';
+          const allowed = ['online', 'degraded', 'offline', 'checking'];
+          const statusName = forcedService || (allowed.includes(raw) ? raw : 'online');
+          const name = service && service.name ? service.name : 'Servicio';
+
+          return (
+            '<span class="service-pill" data-status="' +
+            escapeHtml(statusName) +
+            '"><i aria-hidden="true"></i>' +
+            escapeHtml(name) +
+            '</span>'
+          );
+        })
+        .join('');
+    }
+  }
+
+  function updateHeaderStatus() {
+    if (!els.headerStatus) return;
+
+    const labels = {
+      checking: 'Comprobando',
+      operational: 'En línea',
+      degraded: 'Atención',
+      offline: 'Sin conexión',
+      error: 'Sin datos',
+    };
+
+    els.headerStatus.dataset.state = statusInfo.state;
+    if (els.headerStatusText) {
+      els.headerStatusText.textContent = labels[statusInfo.state] || 'Estado';
+    }
+
+    const dot = $('.dot', els.headerStatus);
+    if (dot) dot.classList.toggle('dot-live', statusInfo.state === 'operational');
+  }
+
+  function applyStatusPayload(payload, latency, checkedAt) {
+    statusInfo.payload = payload && typeof payload === 'object' ? payload : {};
+    statusInfo.latency = Number.isFinite(latency) ? latency : null;
+    statusInfo.checkedAt = checkedAt || Date.now();
+    statusInfo.state = computeStatusState(statusInfo.payload);
+
+    saveStatusCache(statusInfo.payload);
+
+    renderStatus();
+    updateHeaderStatus();
+  }
+
+  function applyStatusFailure() {
+    const cached = readStatusCache();
+
+    if (cached) statusInfo.payload = cached;
+    statusInfo.latency = null;
+    statusInfo.checkedAt = Date.now();
+    statusInfo.state = navigator.onLine ? 'error' : 'offline';
+
+    renderStatus();
+    updateHeaderStatus();
+  }
+
+  async function checkStatus(manual) {
+    if (statusInfo.busy) return;
+
+    if (!navigator.onLine) {
+      applyStatusFailure();
+      if (manual) showToast('Sin conexión a internet');
+      return;
+    }
+
+    if (location.protocol === 'file:') {
+      applyStatusFailure();
+      if (manual) showToast('Abre la web desde internet para ver el estado');
+      return;
+    }
+
+    statusInfo.busy = true;
+
+    if (manual) {
+      statusInfo.state = 'checking';
+      renderStatus();
+      updateHeaderStatus();
+
+      if (els.statusRefresh) {
+        els.statusRefresh.classList.add('is-loading');
+        els.statusRefresh.disabled = true;
+      }
+    }
+
+    const started = performance.now();
+    const controller = typeof AbortController === 'function' ? new AbortController() : null;
+    const timeout = controller
+      ? setTimeout(() => controller.abort(), STATUS_TIMEOUT_MS)
+      : null;
+
+    try {
+      const response = await fetch(statusEndpoint(), {
+        cache: 'no-store',
+        headers: { Accept: 'application/json' },
+        signal: controller ? controller.signal : undefined,
+      });
+
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+
+      const payload = await response.json();
+      const latency = Math.round(performance.now() - started);
+
+      statusInfo.busy = false;
+      applyStatusPayload(payload, latency, Date.now());
+      if (manual) showToast('Estado actualizado');
+    } catch {
+      statusInfo.busy = false;
+      applyStatusFailure();
+      if (manual) showToast('No se pudo comprobar el estado');
+    } finally {
+      if (timeout) clearTimeout(timeout);
+      if (els.statusRefresh) {
+        els.statusRefresh.classList.remove('is-loading');
+        els.statusRefresh.disabled = false;
+      }
+    }
+  }
+
+  function setupStatus() {
+    const cached = readStatusCache();
+
+    if (cached) {
+      statusInfo.payload = cached;
+      statusInfo.state = computeStatusState(cached);
+      renderStatus();
+      updateHeaderStatus();
+    }
+
+    if (els.statusRefresh) {
+      els.statusRefresh.addEventListener('click', () => {
+        tapFeedback(8);
+        checkStatus(true);
+      });
+    }
+
+    window.addEventListener('online', () => checkStatus());
+    window.addEventListener('offline', () => applyStatusFailure());
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) return;
+      if (Date.now() - statusInfo.checkedAt > STATUS_REFRESH_MS) checkStatus();
+    });
+
+    checkStatus();
+
+    statusInfo.timer = setInterval(() => {
+      if (document.hidden || !navigator.onLine) return;
+      checkStatus();
+    }, STATUS_REFRESH_MS);
+
+    statusInfo.uptimeTimer = setInterval(updateStatusUptime, 30000);
+  }
+
+  // ---------- Comando del día ----------
+
+  let dailyCommand = null;
+
+  function setupDailyCommand() {
+    const pool = COMMANDS.filter((command) => command.primary !== false);
+    if (!pool.length || !els.dailyName) return;
+
+    const day = Math.floor(Date.now() / 86400000);
+    dailyCommand = pool[day % pool.length];
+
+    const category = dailyCommand.__category;
+    els.dailyName.textContent = commandName(dailyCommand.name);
+
+    if (els.dailyCat) {
+      els.dailyCat.textContent = category
+        ? (category.icon ? category.icon + ' ' : '') + category.title
+        : capitalize(dailyCommand.category);
+    }
+
+    if (els.dailyDesc) {
+      els.dailyDesc.textContent = dailyCommand.description || 'Comando de NovitaBot';
+    }
+  }
+
+  function bindDailyCommand() {
+    if (els.dailyCopy) {
+      els.dailyCopy.addEventListener('click', () => {
+        if (dailyCommand) copyCommand(els.dailyCopy, dailyCommand.name);
+      });
+    }
+
+    if (els.dailyOpen) {
+      els.dailyOpen.addEventListener('click', () => {
+        if (dailyCommand) openModal(dailyCommand.name);
+      });
+    }
+  }
+
+  // ---------- Compartir la web ----------
+
+  function bindShareSite() {
+    if (!els.shareSite) return;
+
+    els.shareSite.addEventListener('click', () => {
+      const url = location.origin + location.pathname;
+      const data = {
+        title: 'NovitaBot',
+        text: 'Mira todos los comandos de NovitaBot y su estado en vivo.',
+        url,
+      };
+
+      if (navigator.share && location.protocol === 'https:') {
+        navigator.share(data).catch(() => {
+          /* el usuario cerró el menú de compartir */
+        });
+        return;
+      }
+
+      copyText(url).then((ok) => {
+        if (ok === false) return;
+        showToast('Enlace copiado');
+      });
+    });
+  }
+
+  // ---------- Aviso de nueva versión (PWA) ----------
+
+  let waitingWorker = null;
+
+  function showUpdateBanner(worker) {
+    if (!els.updateBanner) return;
+
+    if (worker) waitingWorker = worker;
+    els.updateBanner.hidden = false;
+  }
+
+  function bindUpdateBanner() {
+    if (els.updateAccept) {
+      els.updateAccept.addEventListener('click', () => {
+        if (waitingWorker) waitingWorker.postMessage({ type: 'SKIP_WAITING' });
+        window.location.reload();
+      });
+    }
+
+    if (els.updateDismiss) {
+      els.updateDismiss.addEventListener('click', () => {
+        if (els.updateBanner) els.updateBanner.hidden = true;
+      });
+    }
   }
 
   // ---------- Instalación y conexión ----------
@@ -1404,10 +2137,35 @@
 
     if (!secure) return;
 
+    const hadController = !!navigator.serviceWorker.controller;
+
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      // Un controlador nuevo significa que la app se actualizó por detrás.
+      if (hadController) showUpdateBanner();
+    });
+
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js').catch(() => {
-        /* sin service worker: la web sigue funcionando */
-      });
+      navigator.serviceWorker
+        .register('sw.js')
+        .then((registration) => {
+          if (registration.waiting && navigator.serviceWorker.controller) {
+            showUpdateBanner(registration.waiting);
+          }
+
+          registration.addEventListener('updatefound', () => {
+            const worker = registration.installing;
+            if (!worker) return;
+
+            worker.addEventListener('statechange', () => {
+              if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+                showUpdateBanner(worker);
+              }
+            });
+          });
+        })
+        .catch(() => {
+          /* sin service worker: la web sigue funcionando */
+        });
     });
   }
 
@@ -1416,7 +2174,14 @@
   function init() {
     if (els.year) els.year.textContent = String(new Date().getFullYear());
 
+    const connection =
+      navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (connection && connection.saveData) {
+      document.documentElement.classList.add('save-data');
+    }
+
     syncStats();
+    setupDailyCommand();
     renderCategoryGrid();
     renderChips();
     renderCommands();
@@ -1426,6 +2191,7 @@
     bindCounters();
     bindInstall();
     bindConnection();
+    setupStatus();
     updateHint();
     applyHash();
     registerServiceWorker();

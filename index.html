@@ -2,7 +2,10 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content"
+    />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#07060c" />
     <meta
@@ -40,13 +43,21 @@
     <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="preload" as="image" href="assets/logo.jpeg" fetchpriority="high" />
+    <link rel="preload" as="image" href="assets/logo-256.jpg" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+      />
+    </noscript>
     <link rel="stylesheet" href="styles.css" />
 
     <script type="application/ld+json">
@@ -73,6 +84,14 @@
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text": "Entra al grupo oficial desde el botón de WhatsApp y escribe #menu. El bot responderá con todos sus comandos organizados por categorías."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Cómo sé si el bot está en línea?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "La sección Estado de la web comprueba el servicio en tiempo real y muestra la latencia, el tiempo activo, la versión y el estado de cada servicio."
                 }
               },
               {
@@ -140,12 +159,20 @@
     <header class="site-header" id="site-header">
       <div class="container header-inner">
         <a class="brand" href="#inicio" aria-label="NovitaBot, ir al inicio">
-          <img src="assets/logo.jpeg" alt="Logo de NovitaBot" width="44" height="44" />
+          <img
+            src="assets/logo-256.jpg"
+            alt="Logo de NovitaBot"
+            width="44"
+            height="44"
+            fetchpriority="high"
+            decoding="async"
+          />
           <span class="brand-name">Novita<span>Bot</span></span>
         </a>
 
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
           <a href="#funciones">Funciones</a>
+          <a href="#estado">Estado</a>
           <a href="#categorias">Categorías</a>
           <a href="#comandos">Comandos</a>
           <a href="#empezar">Cómo empezar</a>
@@ -153,6 +180,10 @@
         </nav>
 
         <div class="header-actions">
+          <a class="header-status" id="header-status" href="#estado" aria-label="Ver el estado del bot">
+            <span class="dot" aria-hidden="true"></span>
+            <span id="header-status-text">Comprobando</span>
+          </a>
           <a
             class="btn btn-ghost hide-mobile"
             href="https://whatsapp.com/channel/0029Vb94gAXEQIapCNyaZ844"
@@ -251,7 +282,7 @@
                 </div>
 
                 <div class="chat-head">
-                  <img src="assets/logo.jpeg" alt="" width="34" height="34" />
+                  <img src="assets/logo-256.jpg" alt="" width="34" height="34" decoding="async" />
                   <div>
                     <strong>NovitaBot</strong>
                     <span>en línea</span>
@@ -339,6 +370,104 @@
         </div>
       </section>
 
+      <section class="section status-section" id="estado">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="kicker">Estado en vivo</span>
+            <h2>¿Cómo está <span class="gradient-text">NovitaBot</span> ahora?</h2>
+            <p>
+              Comprobamos el servicio desde tu dispositivo: estado, latencia y tiempo activo se
+              actualizan automáticamente.
+            </p>
+          </div>
+
+          <div class="status-grid">
+            <article class="status-card reveal" id="status-card" data-state="checking">
+              <div class="status-head" aria-live="polite">
+                <span class="status-orb" aria-hidden="true"><i></i></span>
+                <div class="status-head-copy">
+                  <span class="status-eyebrow" id="status-state-label">Comprobando</span>
+                  <h3 id="status-title">Conectando con NovitaBot…</h3>
+                  <p id="status-detail">Estamos midiendo la respuesta del servicio.</p>
+                </div>
+                <button
+                  class="status-refresh"
+                  id="status-refresh"
+                  type="button"
+                  aria-label="Comprobar el estado del bot"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 11a8 8 0 1 0-.6 4.5" />
+                    <path d="M20 4v7h-7" />
+                  </svg>
+                  <span>Comprobar</span>
+                </button>
+              </div>
+
+              <div class="status-metrics">
+                <div class="status-metric">
+                  <span>Latencia</span>
+                  <strong id="status-latency">—</strong>
+                  <small>respuesta</small>
+                </div>
+                <div class="status-metric">
+                  <span>Tiempo activo</span>
+                  <strong id="status-uptime">—</strong>
+                  <small>sin reinicios</small>
+                </div>
+                <div class="status-metric">
+                  <span>Versión</span>
+                  <strong id="status-version">—</strong>
+                  <small>actual</small>
+                </div>
+                <div class="status-metric">
+                  <span>Región</span>
+                  <strong id="status-region">—</strong>
+                  <small>servidor</small>
+                </div>
+                <div class="status-metric">
+                  <span>Comandos</span>
+                  <strong id="status-commands">957</strong>
+                  <small>activos</small>
+                </div>
+                <div class="status-metric">
+                  <span>Plugins</span>
+                  <strong id="status-plugins">222</strong>
+                  <small>cargados</small>
+                </div>
+              </div>
+
+              <div class="status-services" id="status-services" aria-label="Servicios del bot">
+                <span class="service-pill" data-status="checking"><i aria-hidden="true"></i>WhatsApp</span>
+                <span class="service-pill" data-status="checking"><i aria-hidden="true"></i>Motor de comandos</span>
+                <span class="service-pill" data-status="checking"><i aria-hidden="true"></i>Base de datos</span>
+                <span class="service-pill" data-status="checking"><i aria-hidden="true"></i>Web / PWA</span>
+              </div>
+
+              <div class="status-foot">
+                <span>Última comprobación: <b id="status-checked">—</b></span>
+                <span class="status-auto"><i aria-hidden="true"></i> Actualización automática</span>
+              </div>
+            </article>
+
+            <aside class="status-side reveal">
+              <span class="status-side-kicker">⭐ Comando del día</span>
+              <h3 id="daily-name">#menu</h3>
+              <span class="status-side-cat" id="daily-cat">✨ Todos</span>
+              <p id="daily-desc">Descubre un comando nuevo cada día y pruébalo en el grupo.</p>
+              <div class="status-side-actions">
+                <button class="btn btn-primary btn-sm" id="daily-copy" type="button">
+                  Copiar comando
+                </button>
+                <button class="btn btn-ghost btn-sm" id="daily-open" type="button">
+                  Ver detalles
+                </button>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="funciones">
         <div class="container">
           <div class="section-head reveal">
@@ -422,7 +551,7 @@
             </p>
           </div>
 
-          <div class="command-tools reveal">
+          <div class="command-sticky" id="command-sticky">
             <label class="search-box" for="command-search">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="11" cy="11" r="7"></circle>
@@ -433,7 +562,12 @@
                 type="search"
                 placeholder="Busca un comando: tts, menu, welcome, ban…"
                 autocomplete="off"
+                autocapitalize="off"
+                autocorrect="off"
                 spellcheck="false"
+                enterkeyhint="search"
+                inputmode="search"
+                aria-label="Buscar comandos"
               />
               <button
                 class="search-clear"
@@ -448,14 +582,16 @@
             </label>
 
             <div class="category-chips" id="category-chips" aria-label="Filtrar por categoría"></div>
+          </div>
 
+          <div class="command-tools reveal">
             <div class="command-controls">
               <button class="btn btn-ghost btn-sm" id="random-command" type="button">
                 🎲 Comando aleatorio
               </button>
               <label class="sort-control" for="command-sort">
                 <span>Ordenar por</span>
-                <select id="command-sort">
+                <select id="command-sort" aria-label="Ordenar comandos">
                   <option value="az">A – Z</option>
                   <option value="category">Categoría</option>
                   <option value="aliases">Más alias</option>
@@ -533,18 +669,18 @@
             </div>
             <div class="preview-images">
               <img
-                src="assets/menu-1.jpg"
+                src="assets/menu-1-600.jpg"
                 alt="Vista previa del menú de NovitaBot"
-                width="1200"
-                height="1302"
+                width="600"
+                height="651"
                 loading="lazy"
                 decoding="async"
               />
               <img
-                src="assets/welcome.jpeg"
+                src="assets/welcome-720.jpg"
                 alt="Bienvenida de NovitaBot"
-                width="1280"
-                height="724"
+                width="720"
+                height="407"
                 loading="lazy"
                 decoding="async"
               />
@@ -568,6 +704,16 @@
                 Entra al grupo oficial desde el botón de WhatsApp y escribe <code>#menu</code>.
                 El bot responderá con todos sus comandos organizados por categorías. También
                 puedes explorarlos aquí y copiar el que necesites.
+              </p>
+            </details>
+
+            <details class="faq-item reveal" name="faq">
+              <summary>¿Cómo sé si el bot está en línea?</summary>
+              <p>
+                La sección <a href="#estado"><strong>Estado</strong></a> comprueba el servicio en
+                tiempo real y muestra la latencia, el tiempo activo, la versión y el estado de cada
+                servicio. También puedes tocar <strong>Estado</strong> en la barra inferior del
+                celular.
               </p>
             </details>
 
@@ -649,7 +795,7 @@
         <div class="container">
           <div class="community-card reveal">
             <div class="community-glow" aria-hidden="true"></div>
-            <img class="community-logo" src="assets/logo.jpeg" alt="NovitaBot" width="72" height="72" loading="lazy" decoding="async" />
+            <img class="community-logo" src="assets/logo-256.jpg" alt="NovitaBot" width="72" height="72" loading="lazy" decoding="async" />
             <span class="kicker">Comunidad oficial</span>
             <h2>Únete a la familia <span class="gradient-text">Novita</span></h2>
             <p>
@@ -673,6 +819,9 @@
               >
                 Seguir el canal
               </a>
+              <button class="btn btn-ghost btn-lg" id="share-site" type="button">
+                Compartir web
+              </button>
             </div>
             <p class="community-note">Creado por <strong>Manuel VG</strong> · Novita Updates</p>
           </div>
@@ -684,7 +833,7 @@
       <div class="container footer-grid">
         <div>
           <a class="brand" href="#inicio">
-            <img src="assets/logo.jpeg" alt="" width="36" height="36" />
+            <img src="assets/logo-256.jpg" alt="" width="36" height="36" decoding="async" />
             <span class="brand-name">Novita<span>Bot</span></span>
           </a>
           <p class="footer-text">
@@ -696,6 +845,7 @@
         <div class="footer-links">
           <strong>Explorar</strong>
           <a href="#funciones">Funciones</a>
+          <a href="#estado">Estado del bot</a>
           <a href="#categorias">Categorías</a>
           <a href="#comandos">Comandos</a>
           <a href="#empezar">Cómo empezar</a>
@@ -742,6 +892,13 @@
         <span>Comandos</span>
       </a>
 
+      <a class="mobile-bar-item" href="#estado" data-mobile-section="estado">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 12h3.5l2.5-7 4 14 3-9 2 2H21" />
+        </svg>
+        <span>Estado</span>
+      </a>
+
       <button
         class="mobile-bar-item"
         id="mobile-favorites"
@@ -768,6 +925,19 @@
         <span>WhatsApp</span>
       </a>
     </nav>
+
+    <div class="update-banner" id="update-banner" hidden role="status" aria-live="polite">
+      <span class="update-banner-text">✨ Hay una versión nueva de la web</span>
+      <button class="update-banner-btn" id="update-accept" type="button">Actualizar</button>
+      <button
+        class="update-banner-close"
+        id="update-dismiss"
+        type="button"
+        aria-label="Cerrar aviso"
+      >
+        ×
+      </button>
+    </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 

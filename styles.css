@@ -380,6 +380,7 @@ code {
   position: relative;
   padding: 70px 0 48px;
   min-height: calc(100vh - 80px);
+  min-height: calc(100svh - 80px);
   display: flex;
   align-items: center;
 }
@@ -1466,6 +1467,7 @@ code {
 .preview-images img {
   width: 46%;
   max-width: 210px;
+  height: auto;
   border-radius: 16px;
   border: 1px solid var(--border-strong);
   box-shadow: var(--shadow);
@@ -2875,6 +2877,13 @@ section[id] {
     padding-bottom: calc(var(--mobile-bar-height) + var(--safe-bottom));
   }
 
+  .container {
+    width: min(
+      calc(100% - 32px - var(--safe-left) - var(--safe-right)),
+      var(--container)
+    );
+  }
+
   .mobile-bar {
     position: fixed;
     right: 0;
@@ -3181,6 +3190,418 @@ body.scroll-locked {
   }
 }
 
+/* ============================================================
+   Mejoras específicas para móvil
+   ============================================================ */
+
+.command-sticky {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.category-card-count b {
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .mobile-bar {
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+
+  /* Al escribir, la barra inferior se aparta para no tapar el teclado. */
+  body.keyboard-open .mobile-bar {
+    transform: translateY(calc(100% + 24px));
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  body.keyboard-open {
+    padding-bottom: 0;
+  }
+
+  /* En pantallas táctiles, el gesto de pulsar no debe dejar hover pegado. */
+  .chip:hover,
+  .btn:hover,
+  .category-card:hover,
+  .command-card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 60px 0;
+  }
+
+  .section-head {
+    margin-bottom: 30px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.62rem, 7.4vw, 2.1rem);
+  }
+
+  .section-head p {
+    font-size: 0.95rem;
+  }
+
+  /* El header mantiene la misma altura al hacer scroll para que la
+     barra de búsqueda fija encaje siempre. */
+  .site-header.scrolled {
+    padding-top: calc(12px + var(--safe-top));
+  }
+
+  .hero {
+    padding-top: 34px;
+  }
+
+  .brand {
+    min-height: 46px;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  .hero-copy,
+  .hero-visual {
+    min-width: 0;
+  }
+
+  .pill {
+    margin-bottom: 18px;
+    padding: 7px 13px;
+    font-size: 0.8rem;
+  }
+
+  .hero-lead {
+    margin-bottom: 24px;
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    margin-bottom: 26px;
+    gap: 10px;
+  }
+
+  /* Etiquetas del hero en una sola fila deslizable. */
+  .hero-tags {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 8px;
+    margin: 0 -14px;
+    padding: 0 14px 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: 14px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hero-tags::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-tags li {
+    flex: none;
+    scroll-snap-align: start;
+  }
+
+  .stats-section {
+    padding: 4px 0 30px;
+  }
+
+  .stat {
+    padding: 16px 10px;
+  }
+
+  .stat strong {
+    font-size: 1.65rem;
+  }
+
+  .stat span {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+  }
+
+  .feature-grid {
+    gap: 10px;
+  }
+
+  .feature-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.04rem;
+  }
+
+  .feature-card p {
+    margin-bottom: 14px;
+    font-size: 0.88rem;
+  }
+
+  /* Categorías: dos columnas compactas y sin descripción en el celular. */
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .category-card {
+    gap: 5px;
+    min-height: 92px;
+    padding: 13px;
+    border-radius: 14px;
+  }
+
+  .category-card-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+
+  .category-card-count {
+    padding: 2px 7px;
+    font-size: 0.64rem;
+  }
+
+  .category-card h3 {
+    margin-top: 2px;
+    font-size: 0.86rem;
+    line-height: 1.25;
+  }
+
+  .category-card p {
+    display: none;
+  }
+
+  .category-card .count-label {
+    display: none;
+  }
+
+  /* Buscador y filtros siempre a mano al recorrer los comandos. */
+  .command-sticky {
+    position: sticky;
+    top: calc(69px + var(--safe-top));
+    z-index: 35;
+    gap: 8px;
+    margin: 0 -14px 12px;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(7, 6, 12, 0.95);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+
+  .search-box {
+    height: 50px;
+    padding-inline: 13px;
+    border-radius: 14px;
+    gap: 9px;
+  }
+
+  .search-clear {
+    width: 40px;
+    height: 40px;
+  }
+
+  .category-chips {
+    gap: 6px;
+    padding-bottom: 0;
+    scroll-padding-inline: 14px;
+  }
+
+  .chip {
+    min-height: 40px;
+    padding: 7px 12px;
+    font-size: 0.8rem;
+  }
+
+  .chip .chip-count {
+    font-size: 0.66rem;
+  }
+
+  /* Aleatorio y orden en una sola fila para ahorrar altura. */
+  .command-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding-top: 0;
+  }
+
+  .command-controls .btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 10px;
+    overflow: hidden;
+    font-size: 0.76rem;
+    text-overflow: ellipsis;
+  }
+
+  .sort-control {
+    min-width: 0;
+  }
+
+  .sort-control > span {
+    display: none;
+  }
+
+  .sort-control select {
+    width: 100%;
+    min-height: 44px;
+    padding-inline: 12px 30px;
+    font-size: 1rem;
+    background-position: calc(100% - 14px) 19px, calc(100% - 9px) 19px;
+  }
+
+  .command-meta {
+    margin-bottom: 14px;
+    font-size: 0.84rem;
+  }
+
+  .command-meta-actions {
+    gap: 10px;
+  }
+
+  .switch {
+    min-height: 44px;
+  }
+
+  .command-grid {
+    gap: 10px;
+  }
+
+  .command-card {
+    gap: 6px;
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .command-name {
+    font-size: 0.9rem;
+  }
+
+  .favorite-btn {
+    width: 44px;
+    height: 44px;
+    margin: -6px -6px 0 0;
+    font-size: 1.1rem;
+  }
+
+  .command-cat {
+    padding: 3px 8px;
+    font-size: 0.7rem;
+  }
+
+  .command-desc {
+    -webkit-line-clamp: 2;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .command-foot {
+    gap: 6px;
+    font-size: 0.72rem;
+  }
+
+  .command-copy,
+  .command-detail {
+    min-height: 42px;
+    padding: 0 13px;
+    font-size: 0.78rem;
+  }
+
+  .load-more-wrap .btn {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .command-hint {
+    margin-top: 16px;
+    font-size: 0.78rem;
+  }
+
+  .faq-item summary {
+    padding: 15px 16px;
+  }
+
+  .faq-item p {
+    font-size: 0.88rem;
+  }
+
+  .preview-images img {
+    max-width: 132px;
+  }
+
+  .footer-links {
+    gap: 0;
+  }
+
+  .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .footer-bottom {
+    font-size: 0.75rem;
+  }
+
+  /* Respuesta táctil inmediata. */
+  .chip:active,
+  .btn:active,
+  .category-card:active,
+  .command-card:active {
+    transform: scale(0.985);
+  }
+
+  /* Gesto de arrastre del modal tipo bottom sheet. */
+  .modal-card {
+    touch-action: pan-y;
+  }
+
+  .modal-card.is-dragging {
+    animation: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .command-controls .btn {
+    font-size: 0.72rem;
+  }
+
+  .command-copy,
+  .command-detail {
+    min-height: 40px;
+    padding: 0 11px;
+    font-size: 0.74rem;
+  }
+
+  .category-card h3 {
+    font-size: 0.82rem;
+  }
+}
+
+/* En horizontal con poca altura el buscador fijo estorba. */
+@media (max-width: 900px) and (max-height: 430px) {
+  .command-sticky {
+    position: static;
+  }
+}
+
 /* ---------- Movimiento reducido ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -3196,5 +3617,955 @@ body.scroll-locked {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ============================================================
+   Estado del bot, comandos recientes y mejoras móviles
+   ============================================================ */
+
+/* ---------- Indicador de estado en el header ---------- */
+
+.header-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.83rem;
+  font-weight: 500;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.header-status:hover {
+  color: var(--text);
+  background: var(--surface-strong);
+  border-color: var(--border-strong);
+}
+
+.header-status .dot {
+  width: 7px;
+  height: 7px;
+}
+
+.header-status[data-state="checking"] .dot {
+  background: var(--muted-soft);
+  box-shadow: 0 0 0 4px rgba(124, 118, 151, 0.14);
+}
+
+.header-status[data-state="degraded"] .dot {
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(255, 209, 102, 0.14);
+}
+
+.header-status[data-state="offline"] .dot,
+.header-status[data-state="error"] .dot {
+  background: #ff5d8f;
+  box-shadow: 0 0 0 4px rgba(255, 93, 143, 0.14);
+}
+
+.header-status[data-state="offline"],
+.header-status[data-state="error"] {
+  color: #ffb3c9;
+}
+
+@media (max-width: 1080px) {
+  .header-status {
+    display: none;
+  }
+}
+
+/* ---------- Sección de estado ---------- */
+
+.status-section {
+  position: relative;
+  padding-top: 18px;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.85fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.status-card,
+.status-side {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+}
+
+.status-card {
+  padding: 28px;
+}
+
+.status-card::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  left: -80px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 211, 102, 0.17), transparent 65%);
+  pointer-events: none;
+  opacity: 0.95;
+  transition: background 0.3s ease, opacity 0.3s ease;
+}
+
+.status-card[data-state="degraded"]::before {
+  background: radial-gradient(circle, rgba(255, 209, 102, 0.17), transparent 65%);
+}
+
+.status-card[data-state="offline"]::before,
+.status-card[data-state="error"]::before {
+  background: radial-gradient(circle, rgba(255, 93, 143, 0.16), transparent 65%);
+}
+
+.status-card[data-state="checking"]::before {
+  background: radial-gradient(circle, rgba(154, 107, 255, 0.17), transparent 65%);
+}
+
+.status-head {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.status-orb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgba(37, 211, 102, 0.4);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 211, 102, 0.24), rgba(37, 211, 102, 0.05));
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.status-orb i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 18px rgba(37, 211, 102, 0.9);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status-orb::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(37, 211, 102, 0.55);
+  border-radius: inherit;
+  animation: status-ping 2.4s ease-out infinite;
+}
+
+@keyframes status-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  75%,
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+.status-card[data-state="checking"] .status-orb {
+  border-color: rgba(154, 107, 255, 0.42);
+  background: radial-gradient(circle, rgba(154, 107, 255, 0.24), rgba(154, 107, 255, 0.05));
+}
+
+.status-card[data-state="checking"] .status-orb i {
+  background: var(--purple);
+  box-shadow: 0 0 18px rgba(154, 107, 255, 0.85);
+}
+
+.status-card[data-state="checking"] .status-orb::after {
+  border-color: rgba(154, 107, 255, 0.55);
+}
+
+.status-card[data-state="degraded"] .status-orb {
+  border-color: rgba(255, 209, 102, 0.42);
+  background: radial-gradient(circle, rgba(255, 209, 102, 0.22), rgba(255, 209, 102, 0.05));
+}
+
+.status-card[data-state="degraded"] .status-orb i {
+  background: var(--gold);
+  box-shadow: 0 0 18px rgba(255, 209, 102, 0.85);
+}
+
+.status-card[data-state="degraded"] .status-orb::after {
+  border-color: rgba(255, 209, 102, 0.55);
+}
+
+.status-card[data-state="offline"] .status-orb,
+.status-card[data-state="error"] .status-orb {
+  border-color: rgba(255, 93, 143, 0.42);
+  background: radial-gradient(circle, rgba(255, 93, 143, 0.22), rgba(255, 93, 143, 0.05));
+}
+
+.status-card[data-state="offline"] .status-orb i,
+.status-card[data-state="error"] .status-orb i {
+  background: #ff5d8f;
+  box-shadow: 0 0 18px rgba(255, 93, 143, 0.85);
+}
+
+.status-card[data-state="offline"] .status-orb::after,
+.status-card[data-state="error"] .status-orb::after {
+  border-color: rgba(255, 93, 143, 0.55);
+  animation: none;
+}
+
+.status-head-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.status-eyebrow {
+  display: inline-block;
+  margin-bottom: 3px;
+  color: var(--green);
+  font-size: 0.71rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.status-card[data-state="checking"] .status-eyebrow {
+  color: var(--pink-soft);
+}
+
+.status-card[data-state="degraded"] .status-eyebrow {
+  color: var(--gold);
+}
+
+.status-card[data-state="offline"] .status-eyebrow,
+.status-card[data-state="error"] .status-eyebrow {
+  color: #ff9ab8;
+}
+
+.status-head h3 {
+  margin: 0 0 5px;
+  font-family: var(--font-display);
+  font-size: clamp(1.18rem, 2.4vw, 1.45rem);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.status-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.status-refresh {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: none;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.status-refresh:hover {
+  background: var(--surface-strong);
+  border-color: var(--border-strong);
+}
+
+.status-refresh:active {
+  transform: scale(0.96);
+}
+
+.status-refresh:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.status-refresh svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.status-refresh.is-loading svg {
+  animation: status-spin 0.9s linear infinite;
+}
+
+@keyframes status-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.status-metrics {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 22px 0 18px;
+}
+
+.status-metric {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.028);
+}
+
+.status-metric span {
+  display: block;
+  color: var(--muted-soft);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.status-metric strong {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-metric small {
+  display: block;
+  color: var(--muted-soft);
+  font-size: 0.67rem;
+}
+
+#status-latency[data-quality="good"] {
+  color: var(--green);
+}
+
+#status-latency[data-quality="mid"] {
+  color: var(--gold);
+}
+
+#status-latency[data-quality="slow"] {
+  color: #ff8fb3;
+}
+
+.status-services {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.service-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--muted);
+  font-size: 0.77rem;
+}
+
+.service-pill i {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+}
+
+.service-pill[data-status="degraded"] i {
+  background: var(--gold);
+  box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.12);
+}
+
+.service-pill[data-status="offline"] i,
+.service-pill[data-status="error"] i {
+  background: #ff5d8f;
+  box-shadow: 0 0 0 3px rgba(255, 93, 143, 0.12);
+}
+
+.service-pill[data-status="checking"] i {
+  background: var(--purple);
+  box-shadow: 0 0 0 3px rgba(154, 107, 255, 0.12);
+  animation: status-blink 1.2s ease-in-out infinite;
+}
+
+@keyframes status-blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.status-foot {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 14px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  color: var(--muted-soft);
+  font-size: 0.76rem;
+}
+
+.status-foot b {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.status-auto {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.status-auto i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: status-blink 1.8s ease-in-out infinite;
+}
+
+/* ---------- Comando del día ---------- */
+
+.status-side {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 116, 200, 0.13), transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(109, 74, 255, 0.12), transparent 55%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.018));
+}
+
+.status-side-kicker {
+  color: var(--pink-soft);
+  font-size: 0.71rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.status-side h3 {
+  margin: 12px 0 7px;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.status-side-cat {
+  align-self: flex-start;
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.71rem;
+}
+
+.status-side p {
+  margin: 14px 0 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.status-side-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.status-side-actions .btn {
+  min-height: 42px;
+  padding-inline: 16px;
+  font-size: 0.82rem;
+}
+
+/* ---------- Aviso de nueva versión ---------- */
+
+.update-banner {
+  position: fixed;
+  right: 16px;
+  bottom: calc(18px + var(--safe-bottom));
+  left: 16px;
+  z-index: 125;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 560px;
+  margin-inline: auto;
+  padding: 12px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  background: rgba(18, 15, 28, 0.96);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  font-size: 0.86rem;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  animation: update-in 0.3s ease;
+}
+
+@keyframes update-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.update-banner-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.update-banner-btn {
+  flex: none;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--gradient);
+  color: #160a20;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.update-banner-close {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.update-banner-close:hover {
+  color: var(--text);
+  background: var(--surface-strong);
+}
+
+/* ---------- Ajustes para celular ---------- */
+
+@media (max-width: 900px) {
+  .status-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .status-card,
+  .status-side {
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .mobile-bar {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    padding-inline: calc(2px + var(--safe-left)) calc(2px + var(--safe-right));
+  }
+
+  .mobile-bar-item {
+    gap: 2px;
+    padding: 5px 1px;
+    font-size: 0.6rem;
+  }
+
+  .mobile-bar-item svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .update-banner {
+    bottom: calc(var(--mobile-bar-height) + 14px + var(--safe-bottom));
+  }
+}
+
+@media (max-width: 640px) {
+  .status-card {
+    padding: 18px;
+  }
+
+  .status-head {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .status-orb {
+    width: 48px;
+    height: 48px;
+  }
+
+  .status-orb i {
+    width: 12px;
+    height: 12px;
+  }
+
+  .status-head-copy {
+    flex: 1 1 150px;
+  }
+
+  .status-refresh {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .status-refresh span {
+    display: none;
+  }
+
+  .status-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: 18px 0 16px;
+  }
+
+  .status-metric {
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .status-metric strong {
+    font-size: 1rem;
+  }
+
+  .status-foot {
+    margin-top: 16px;
+    padding-top: 14px;
+    font-size: 0.72rem;
+  }
+
+  .status-side {
+    padding: 20px;
+  }
+
+  .status-side p {
+    margin: 12px 0 18px;
+    font-size: 0.86rem;
+  }
+
+  .status-side-actions .btn {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .update-banner {
+    right: 12px;
+    left: 12px;
+    gap: 8px;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+
+  .update-banner-text {
+    line-height: 1.35;
+  }
+
+  .update-banner-btn {
+    min-height: 34px;
+    padding-inline: 12px;
+    font-size: 0.78rem;
+  }
+
+  .update-banner-close {
+    width: 30px;
+    height: 30px;
+  }
+
+  .mobile-bar-item {
+    font-size: 0.58rem;
+  }
+
+  .mobile-bar-item b {
+    margin-right: -22px;
+    min-width: 16px;
+    height: 16px;
+    font-size: 0.58rem;
+    line-height: 16px;
+  }
+
+  /* Menos brillo y desenfoque para que el celular vaya más fluido. */
+  .page-glow {
+    filter: blur(80px);
+    opacity: 0.42;
+  }
+
+  .glow-b {
+    opacity: 0.32;
+  }
+
+  .grid-overlay {
+    background-size: 54px 54px;
+    opacity: 0.38;
+  }
+}
+
+@media (max-width: 380px) {
+  .status-metric span,
+  .status-metric small {
+    font-size: 0.62rem;
+  }
+
+  .status-metric strong {
+    font-size: 0.92rem;
+  }
+
+  .mobile-bar-item {
+    font-size: 0.54rem;
+  }
+
+  .mobile-bar-item svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* En horizontal con poca altura ocultamos la barra inferior (ya existente). */
+@media (max-width: 900px) and (max-height: 430px) {
+  .update-banner {
+    bottom: calc(12px + var(--safe-bottom));
+  }
+}
+
+/* ---------- Movimiento reducido para el estado ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .status-orb::after,
+  .status-auto i,
+  .service-pill[data-status="checking"] i {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   Optimización final para iPhone y celulares
+   ============================================================ */
+
+html {
+  color-scheme: dark;
+}
+
+/* Los controles no deben seleccionar texto ni abrir menús al mantener pulsado. */
+.btn,
+.chip,
+.mobile-bar-item,
+.nav-toggle,
+.favorite-btn,
+.command-copy,
+.command-detail,
+.status-refresh,
+.update-banner-btn,
+.update-banner-close {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* En pantallas táctiles no se queda ningún hover pegado. */
+@media (hover: none), (pointer: coarse) {
+  .command-card:hover,
+  .category-card:hover,
+  .feature-card:hover,
+  .favorite-btn:hover,
+  .btn:hover,
+  .chip:hover,
+  .preview-banner:hover .preview-images img:first-child,
+  .preview-banner:hover .preview-images img:last-child {
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Respeta el notch y la isla dinámica también en horizontal. */
+  .back-to-top {
+    right: calc(14px + var(--safe-right));
+  }
+
+  .update-banner {
+    right: calc(12px + var(--safe-right));
+    left: calc(12px + var(--safe-left));
+  }
+
+  .toast {
+    max-width: calc(100% - 32px - var(--safe-left) - var(--safe-right));
+  }
+
+  /* Barras con fondo casi opaco: menos trabajo para la GPU en iPhone. */
+  .site-header.scrolled,
+  .command-sticky {
+    background: rgba(7, 6, 12, 0.94);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .main-nav {
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  /* Más área táctil en los cierres pequeños. */
+  .update-banner-close {
+    width: 44px;
+    height: 44px;
+  }
+
+  .update-banner-btn {
+    min-height: 44px;
+  }
+
+  .favorite-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .command-copy,
+  .command-detail {
+    min-height: 44px;
+  }
+
+  .chip,
+  .btn-sm,
+  .status-side-actions .btn {
+    min-height: 44px;
+  }
+
+  .status-refresh,
+  .text-button {
+    min-height: 44px;
+  }
+
+  .search-clear {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* En Safari la barra de direcciones cambia de altura: el buscador fijo
+     se mantiene pegado al header sin saltos. */
+  .command-sticky {
+    top: calc(68px + var(--safe-top));
+  }
+
+  .modal-close {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Menos animaciones infinitas: más batería y desplazamiento más fluido. */
+  .page-glow,
+  .orbit-one,
+  .float-card {
+    animation: none;
+  }
+
+  .phone {
+    animation-duration: 9s;
+  }
+
+  .status-orb::after,
+  .status-auto i {
+    animation-duration: 3s;
+  }
+
+  /* Evita que el teclado de iOS tape el último resultado. */
+  .load-more-wrap {
+    scroll-margin-bottom: calc(var(--mobile-bar-height) + 24px + var(--safe-bottom));
+  }
+}
+
+/* En la app instalada se comporta como una app nativa. */
+@media (display-mode: standalone) {
+  html,
+  body {
+    overscroll-behavior-y: none;
+  }
+
+  .site-header.scrolled,
+  .command-sticky,
+  .mobile-bar {
+    background: rgba(7, 6, 12, 0.97);
+  }
+}
+
+/* iPhone con Reduce Motion activado: sin parallax ni pulsos decorativos. */
+@media (prefers-reduced-motion: reduce) {
+  .page-glow,
+  .orbit-one,
+  .orbit-two,
+  .phone,
+  .float-card,
+  .dot-live,
+  .status-orb::after {
+    animation: none !important;
+  }
+}
+
+/* Ahorro de datos activado: menos efectos y sin desenfoques pesados. */
+.save-data .page-glow,
+.save-data .orbit-one,
+.save-data .orbit-two,
+.save-data .phone,
+.save-data .float-card,
+.save-data .dot-live {
+  animation: none !important;
+}
+
+.save-data .site-header.scrolled,
+.save-data .command-sticky,
+.save-data .main-nav,
+.save-data .toast,
+.save-data .back-to-top,
+.save-data .mobile-bar {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background: rgba(7, 6, 12, 0.97);
 }
 
