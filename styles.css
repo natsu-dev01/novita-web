@@ -188,6 +188,7 @@ code {
   height: 44px;
   border-radius: 14px;
   object-fit: cover;
+  background: #07060c;
   border: 1px solid var(--border-strong);
   box-shadow: 0 8px 24px rgba(255, 116, 200, 0.18);
 }
@@ -378,6 +379,7 @@ code {
 
 .hero {
   position: relative;
+  isolation: isolate;
   padding: 70px 0 48px;
   min-height: calc(100vh - 80px);
   min-height: calc(100svh - 80px);
@@ -385,7 +387,25 @@ code {
   align-items: center;
 }
 
+/* Marca de agua decorativa del banner de hosting (fondo, sin texto nuevo) */
+.hero-brand-art {
+  position: absolute;
+  z-index: 0;
+  top: 6%;
+  right: 0;
+  width: min(52vw, 680px);
+  height: 88%;
+  pointer-events: none;
+  opacity: 0.08;
+  background: url("assets/novita-hosting.jpg") center / contain no-repeat;
+  mix-blend-mode: screen;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+}
+
 .hero-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1.06fr 0.94fr;
   align-items: center;
@@ -408,6 +428,34 @@ code {
 
 .pill strong {
   color: var(--text);
+}
+
+.pill-text {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.pill[data-state="checking"] .dot {
+  background: var(--muted-soft);
+  box-shadow: 0 0 0 4px rgba(124, 118, 151, 0.14);
+}
+
+.pill[data-state="degraded"] .dot {
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(255, 209, 102, 0.16);
+}
+
+.pill[data-state="offline"] .dot,
+.pill[data-state="error"] .dot {
+  background: #ff5d8f;
+  box-shadow: 0 0 0 4px rgba(255, 93, 143, 0.16);
+}
+
+.pill[data-state="offline"],
+.pill[data-state="error"] {
+  color: #ffb3c9;
 }
 
 .hero h1 {
@@ -1518,6 +1566,68 @@ code {
   background: radial-gradient(circle, rgba(154, 107, 255, 0.28), transparent 65%);
   filter: blur(40px);
   pointer-events: none;
+}
+
+/* Banners de la marca como decoración de fondo */
+.community-card > *:not(.community-glow):not(.community-art) {
+  position: relative;
+  z-index: 1;
+}
+
+.community-glow {
+  z-index: 0;
+}
+
+.community-art {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  mix-blend-mode: screen;
+}
+
+.art-eventos {
+  left: -70px;
+  bottom: -90px;
+  width: 280px;
+  height: 280px;
+  opacity: 0.12;
+  background-image: url("assets/novita-eventos.jpg");
+  -webkit-mask-image: radial-gradient(circle, #000 35%, transparent 72%);
+  mask-image: radial-gradient(circle, #000 35%, transparent 72%);
+}
+
+.art-aviso {
+  right: -50px;
+  top: 40px;
+  width: 340px;
+  height: 170px;
+  opacity: 0.09;
+  background-image: url("assets/novita-aviso.jpg");
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 35%, #000 65%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 35%, #000 65%, transparent);
+}
+
+@media (max-width: 900px) {
+  .hero-brand-art {
+    width: 88vw;
+    right: -12%;
+    opacity: 0.05;
+  }
+
+  .art-aviso {
+    display: none;
+  }
+
+  .art-eventos {
+    left: -90px;
+    bottom: -80px;
+    width: 220px;
+    height: 220px;
+    opacity: 0.08;
+  }
 }
 
 .community-logo {

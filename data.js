@@ -3,13 +3,13 @@ window.NOVITA_DATA = {
     "name": "NovitaBot",
     "creator": "Manuel VG",
     "prefix": "#",
-    "plugins": 222,
-    "commands": 957,
     "languages": 25,
     "channel": "https://whatsapp.com/channel/0029Vb94gAXEQIapCNyaZ844",
     "group": "https://chat.whatsapp.com/LkF1B22nqA72wBDioCMSZ6?s=sh&p=i&mlu=4&ilr=4&iam=2",
     "channelName": "Novita Updates",
-    "statusUrl": "https://gist.githubusercontent.com/natsu-dev01/96ebdd7b6f0c8faffa7f86ed01ac64bb/raw/status.json"
+    "statusUrl": "https://gist.githubusercontent.com/natsu-dev01/96ebdd7b6f0c8faffa7f86ed01ac64bb/raw/status.json",
+    "plugins": 234,
+    "commands": 1014
   },
   "categories": [
     {
@@ -17,14 +17,14 @@ window.NOVITA_DATA = {
       "title": "Administración",
       "icon": "🛡️",
       "description": "Moderación, permisos y control total del grupo.",
-      "count": 158
+      "count": 160
     },
     {
       "id": "anime",
       "title": "Anime & Nekos",
       "icon": "🌸",
       "description": "Imágenes, reacciones y comandos kawaii.",
-      "count": 23
+      "count": 37
     },
     {
       "id": "descargas",
@@ -38,14 +38,14 @@ window.NOVITA_DATA = {
       "title": "Economía",
       "icon": "💰",
       "description": "Monedas, niveles, tienda, trabajos y recompensas.",
-      "count": 126
+      "count": 133
     },
     {
       "id": "entretenimiento",
       "title": "Entretenimiento",
       "icon": "🎲",
       "description": "Juegos rápidos, retos y diversión para el grupo.",
-      "count": 54
+      "count": 62
     },
     {
       "id": "ia",
@@ -59,7 +59,7 @@ window.NOVITA_DATA = {
       "title": "Información",
       "icon": "ℹ️",
       "description": "Datos, clima, noticias y consultas del día a día.",
-      "count": 96
+      "count": 98
     },
     {
       "id": "jadibot",
@@ -97,11 +97,18 @@ window.NOVITA_DATA = {
       "count": 33
     },
     {
+      "id": "pokemon",
+      "title": "Pokémon",
+      "icon": "⚡",
+      "description": "Batallas, equipos y torneos con tus Pokémon.",
+      "count": 12
+    },
+    {
       "id": "sistema",
       "title": "Sistema",
       "icon": "⚙️",
       "description": "Menú, estado, backups y herramientas internas.",
-      "count": 42
+      "count": 54
     },
     {
       "id": "staff",
@@ -120,6 +127,15 @@ window.NOVITA_DATA = {
   ],
   "commands": [
     {
+      "name": "21",
+      "base": "blackjack",
+      "primary": false,
+      "aliases": [],
+      "description": "Juega al blackjack contra la casa",
+      "usage": "<cantidad|todo> [pedir]",
+      "category": "juegos"
+    },
+    {
       "name": "8ball",
       "base": "8ball",
       "primary": true,
@@ -133,31 +149,22 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "bola8",
-      "base": "8ball",
+      "name": "abandonarmascota",
+      "base": "liberar",
       "primary": false,
       "aliases": [],
-      "description": "Hazle una pregunta a la bola mágica 8",
-      "usage": "<pregunta>",
-      "category": "juegos"
+      "description": "Libera una mascota de tu colección",
+      "usage": "<número o nombre> confirmar",
+      "category": "mascotas"
     },
     {
-      "name": "oraculo",
-      "base": "8ball",
+      "name": "about",
+      "base": "info",
       "primary": false,
       "aliases": [],
-      "description": "Hazle una pregunta a la bola mágica 8",
-      "usage": "<pregunta>",
-      "category": "juegos"
-    },
-    {
-      "name": "oráculo",
-      "base": "8ball",
-      "primary": false,
-      "aliases": [],
-      "description": "Hazle una pregunta a la bola mágica 8",
-      "usage": "<pregunta>",
-      "category": "juegos"
+      "description": "Muestra información, estado y estadísticas del bot",
+      "usage": "",
+      "category": "sistema"
     },
     {
       "name": "abrir",
@@ -173,6 +180,15 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
+      "name": "abrircofre",
+      "base": "cofre",
+      "primary": false,
+      "aliases": [],
+      "description": "Abre un cofre misterioso cada 6 horas",
+      "usage": "",
+      "category": "economia"
+    },
+    {
       "name": "abrirgrupo",
       "base": "abrir",
       "primary": false,
@@ -182,22 +198,49 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "groupopen",
-      "base": "abrir",
+      "name": "acariciar",
+      "base": "mimarmascota",
       "primary": false,
       "aliases": [],
-      "description": "Abre el grupo para que todos los miembros puedan escribir",
-      "usage": "",
-      "category": "admin"
+      "description": "Juega con tu mascota para subir su felicidad",
+      "usage": "[número o nombre]",
+      "category": "mascotas"
     },
     {
-      "name": "open",
-      "base": "abrir",
+      "name": "acerca",
+      "base": "info",
       "primary": false,
       "aliases": [],
-      "description": "Abre el grupo para que todos los miembros puedan escribir",
+      "description": "Muestra información, estado y estadísticas del bot",
       "usage": "",
-      "category": "admin"
+      "category": "sistema"
+    },
+    {
+      "name": "achievement",
+      "base": "logros",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tus logros y el progreso de cada uno",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "achievements",
+      "base": "logros",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tus logros y el progreso de cada uno",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "acortar",
+      "base": "shorturl",
+      "primary": false,
+      "aliases": [],
+      "description": "Acorta un enlace largo",
+      "usage": "<enlace>",
+      "category": "utilidades"
     },
     {
       "name": "activarmascota",
@@ -214,40 +257,31 @@ window.NOVITA_DATA = {
       "category": "mascotas"
     },
     {
-      "name": "usarmascota",
-      "base": "activarmascota",
+      "name": "actividad",
+      "base": "repo",
       "primary": false,
       "aliases": [],
-      "description": "Elige cuál de tus mascotas está activa",
-      "usage": "<número o nombre>",
-      "category": "mascotas"
+      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
+      "usage": "[cambios|staff|commits] [cantidad]",
+      "category": "sistema"
     },
     {
-      "name": "setpet",
-      "base": "activarmascota",
+      "name": "activo",
+      "base": "uptime",
       "primary": false,
       "aliases": [],
-      "description": "Elige cuál de tus mascotas está activa",
-      "usage": "<número o nombre>",
-      "category": "mascotas"
+      "description": "Muestra cuánto tiempo lleva activo el bot",
+      "usage": "",
+      "category": "sistema"
     },
     {
-      "name": "mascotaactiva",
-      "base": "activarmascota",
+      "name": "actualidad",
+      "base": "noticias",
       "primary": false,
       "aliases": [],
-      "description": "Elige cuál de tus mascotas está activa",
-      "usage": "<número o nombre>",
-      "category": "mascotas"
-    },
-    {
-      "name": "cambiarmascota",
-      "base": "activarmascota",
-      "primary": false,
-      "aliases": [],
-      "description": "Elige cuál de tus mascotas está activa",
-      "usage": "<número o nombre>",
-      "category": "mascotas"
+      "description": "Muestra los titulares de noticias más recientes en español",
+      "usage": "[tema]",
+      "category": "info"
     },
     {
       "name": "actualizar",
@@ -261,13 +295,22 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
-      "name": "update",
-      "base": "actualizar",
+      "name": "actualizarplugins",
+      "base": "plugins",
       "primary": false,
       "aliases": [],
-      "description": "Aplica una actualización a los jadibots (solo creador)",
-      "usage": "",
+      "description": "Estado y actualización de los plugins desde GitHub (dueño)",
+      "usage": "[status|update]",
       "category": "sistema"
+    },
+    {
+      "name": "addcoins",
+      "base": "darmonedas",
+      "primary": false,
+      "aliases": [],
+      "description": "Entrega monedas a un usuario (solo dueño)",
+      "usage": "@usuario <cantidad>",
+      "category": "economia"
     },
     {
       "name": "adivina",
@@ -277,15 +320,6 @@ window.NOVITA_DATA = {
         "guess",
         "adivinarnumero"
       ],
-      "description": "Adivina un número del 1 al 100 y gana monedas",
-      "usage": "[número|cancelar]",
-      "category": "juegos"
-    },
-    {
-      "name": "guess",
-      "base": "adivina",
-      "primary": false,
-      "aliases": [],
       "description": "Adivina un número del 1 al 100 y gana monedas",
       "usage": "[número|cancelar]",
       "category": "juegos"
@@ -313,128 +347,9 @@ window.NOVITA_DATA = {
         "bot",
         "boton",
         "botoff",
-        "on",
-        "off",
         "encender",
         "apagar"
       ],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "moderacion",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "moderación",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "unban",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "desbanear",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "banlist",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "baneados",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "bot",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "boton",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "botoff",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "on",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "off",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "encender",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
-      "usage": "<on|off|ban|unban|list>",
-      "category": "admin"
-    },
-    {
-      "name": "apagar",
-      "base": "admin",
-      "primary": false,
-      "aliases": [],
       "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
       "usage": "<on|off|ban|unban|list>",
       "category": "admin"
@@ -454,25 +369,7 @@ window.NOVITA_DATA = {
       "category": "mascotas"
     },
     {
-      "name": "comprarmascota",
-      "base": "adoptar",
-      "primary": false,
-      "aliases": [],
-      "description": "Adopta una mascota de la tienda",
-      "usage": "<id> [nombre]",
-      "category": "mascotas"
-    },
-    {
       "name": "adoptmascota",
-      "base": "adoptar",
-      "primary": false,
-      "aliases": [],
-      "description": "Adopta una mascota de la tienda",
-      "usage": "<id> [nombre]",
-      "category": "mascotas"
-    },
-    {
-      "name": "comprarpet",
       "base": "adoptar",
       "primary": false,
       "aliases": [],
@@ -501,13 +398,13 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "hangman",
-      "base": "ahorcado",
+      "name": "ai",
+      "base": "ia",
       "primary": false,
       "aliases": [],
-      "description": "Juega al ahorcado y gana monedas",
-      "usage": "[letra|palabra|cancelar]",
-      "category": "juegos"
+      "description": "Conversa con la IA, descarga música, videos y enlaces",
+      "usage": "<mensaje|descarga ...>",
+      "category": "ia"
     },
     {
       "name": "aire",
@@ -523,31 +420,22 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "calidadaire",
-      "base": "aire",
+      "name": "ajpg",
+      "base": "tojpeg",
       "primary": false,
       "aliases": [],
-      "description": "Consulta la calidad del aire de una ciudad",
-      "usage": "<ciudad>",
-      "category": "info"
+      "description": "Convierte una imagen o sticker a JPG",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
     },
     {
-      "name": "aqi",
-      "base": "aire",
+      "name": "ajustes",
+      "base": "botconfig",
       "primary": false,
       "aliases": [],
-      "description": "Consulta la calidad del aire de una ciudad",
-      "usage": "<ciudad>",
-      "category": "info"
-    },
-    {
-      "name": "calidad-aire",
-      "base": "aire",
-      "primary": false,
-      "aliases": [],
-      "description": "Consulta la calidad del aire de una ciudad",
-      "usage": "<ciudad>",
-      "category": "info"
+      "description": "Muestra la configuración editable de este bot",
+      "usage": "",
+      "category": "admin"
     },
     {
       "name": "alimentar",
@@ -564,15 +452,6 @@ window.NOVITA_DATA = {
       "category": "mascotas"
     },
     {
-      "name": "feed",
-      "base": "alimentar",
-      "primary": false,
-      "aliases": [],
-      "description": "Alimenta a tu mascota para subir su comida y felicidad",
-      "usage": "[número o nombre]",
-      "category": "mascotas"
-    },
-    {
       "name": "alimentarmascota",
       "base": "alimentar",
       "primary": false,
@@ -582,22 +461,56 @@ window.NOVITA_DATA = {
       "category": "mascotas"
     },
     {
-      "name": "darcomida",
-      "base": "alimentar",
+      "name": "all",
+      "base": "tag",
       "primary": false,
       "aliases": [],
-      "description": "Alimenta a tu mascota para subir su comida y felicidad",
-      "usage": "[número o nombre]",
-      "category": "mascotas"
+      "description": "Menciona a todos los miembros del grupo sin mostrar la lista",
+      "usage": "<mensaje>",
+      "category": "admin"
     },
     {
-      "name": "comidamascota",
-      "base": "alimentar",
+      "name": "alquilar",
+      "base": "alquiler",
       "primary": false,
       "aliases": [],
-      "description": "Alimenta a tu mascota para subir su comida y felicidad",
-      "usage": "[número o nombre]",
-      "category": "mascotas"
+      "description": "Alquila el bot para un grupo con NovitaCoins",
+      "usage": "[horas|días|semanas|meses|años|planes|estado|dar|quitar|eximir|lista]",
+      "category": "economia"
+    },
+    {
+      "name": "alquiler",
+      "base": "alquiler",
+      "primary": true,
+      "aliases": [
+        "alquilar",
+        "renta",
+        "rentar",
+        "arrendar",
+        "alquilerbot",
+        "rentarbot"
+      ],
+      "description": "Alquila el bot para un grupo con NovitaCoins",
+      "usage": "[horas|días|semanas|meses|años|planes|estado|dar|quitar|eximir|lista]",
+      "category": "economia"
+    },
+    {
+      "name": "alquilerbot",
+      "base": "alquiler",
+      "primary": false,
+      "aliases": [],
+      "description": "Alquila el bot para un grupo con NovitaCoins",
+      "usage": "[horas|días|semanas|meses|años|planes|estado|dar|quitar|eximir|lista]",
+      "category": "economia"
+    },
+    {
+      "name": "amanecer",
+      "base": "sol",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el amanecer y atardecer de una ciudad",
+      "usage": "<ciudad>",
+      "category": "info"
     },
     {
       "name": "amor",
@@ -612,34 +525,21 @@ window.NOVITA_DATA = {
       "category": "entretenimiento"
     },
     {
-      "name": "love",
-      "base": "amor",
+      "name": "anagrama",
+      "base": "ordena",
       "primary": false,
       "aliases": [],
-      "description": "Calcula la compatibilidad amorosa con otro usuario",
-      "usage": "@usuario",
-      "category": "entretenimiento"
+      "description": "Ordena la palabra desordenada y gana monedas",
+      "usage": "[palabra|cancelar]",
+      "category": "juegos"
     },
     {
-      "name": "ship",
-      "base": "amor",
+      "name": "anime",
+      "base": "neko",
       "primary": false,
       "aliases": [],
-      "description": "Calcula la compatibilidad amorosa con otro usuario",
-      "usage": "@usuario",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "animeinfo",
-      "base": "animeinfo",
-      "primary": true,
-      "aliases": [
-        "animebuscar",
-        "animeficha",
-        "animetv"
-      ],
-      "description": "Busca información de un anime con portada y sinopsis",
-      "usage": "<título>",
+      "description": "Envía imágenes neko aleatorias y gana NovitaCoins",
+      "usage": "[categoría] [cantidad]",
       "category": "anime"
     },
     {
@@ -661,6 +561,19 @@ window.NOVITA_DATA = {
       "category": "anime"
     },
     {
+      "name": "animeinfo",
+      "base": "animeinfo",
+      "primary": true,
+      "aliases": [
+        "animebuscar",
+        "animeficha",
+        "animetv"
+      ],
+      "description": "Busca información de un anime con portada y sinopsis",
+      "usage": "<título>",
+      "category": "anime"
+    },
+    {
       "name": "animetv",
       "base": "animeinfo",
       "primary": false,
@@ -668,6 +581,15 @@ window.NOVITA_DATA = {
       "description": "Busca información de un anime con portada y sinopsis",
       "usage": "<título>",
       "category": "anime"
+    },
+    {
+      "name": "anti-spam",
+      "base": "antispam",
+      "primary": false,
+      "aliases": [],
+      "description": "Activa el control de spam: flood, repeticiones, menciones y fraudes",
+      "usage": "on|off|kick|reset|status",
+      "category": "admin"
     },
     {
       "name": "antibot",
@@ -683,15 +605,6 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "antirobot",
-      "base": "antibot",
-      "primary": false,
-      "aliases": [],
-      "description": "Expulsa bots externos y revisa los grupos principales",
-      "usage": "on|off|on all|scan|scan all|scan force|add|remove|list",
-      "category": "admin"
-    },
-    {
       "name": "antibots",
       "base": "antibot",
       "primary": false,
@@ -701,12 +614,21 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "setantibot",
-      "base": "antibot",
+      "name": "antienlaces",
+      "base": "antilink",
       "primary": false,
       "aliases": [],
-      "description": "Expulsa bots externos y revisa los grupos principales",
-      "usage": "on|off|on all|scan|scan all|scan force|add|remove|list",
+      "description": "Activa o desactiva el borrado de enlaces de WhatsApp, Telegram y generales",
+      "usage": "on|off|test|tipos|status",
+      "category": "admin"
+    },
+    {
+      "name": "antiflood",
+      "base": "antispam",
+      "primary": false,
+      "aliases": [],
+      "description": "Activa el control de spam: flood, repeticiones, menciones y fraudes",
+      "usage": "on|off|kick|reset|status",
       "category": "admin"
     },
     {
@@ -723,15 +645,6 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "antienlaces",
-      "base": "antilink",
-      "primary": false,
-      "aliases": [],
-      "description": "Activa o desactiva el borrado de enlaces de WhatsApp, Telegram y generales",
-      "usage": "on|off|test|tipos|status",
-      "category": "admin"
-    },
-    {
       "name": "antilinks",
       "base": "antilink",
       "primary": false,
@@ -741,13 +654,34 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "setantilink",
-      "base": "antilink",
+      "name": "antiprivado",
+      "base": "antiprivado",
+      "primary": true,
+      "aliases": [
+        "antipv",
+        "antiprivados"
+      ],
+      "description": "Bloquea o desbloquea las respuestas del bot en privados",
+      "usage": "<on|off|status>",
+      "category": "sistema"
+    },
+    {
+      "name": "antiprivados",
+      "base": "antiprivado",
       "primary": false,
       "aliases": [],
-      "description": "Activa o desactiva el borrado de enlaces de WhatsApp, Telegram y generales",
-      "usage": "on|off|test|tipos|status",
-      "category": "admin"
+      "description": "Bloquea o desbloquea las respuestas del bot en privados",
+      "usage": "<on|off|status>",
+      "category": "sistema"
+    },
+    {
+      "name": "antipv",
+      "base": "antiprivado",
+      "primary": false,
+      "aliases": [],
+      "description": "Bloquea o desbloquea las respuestas del bot en privados",
+      "usage": "<on|off|status>",
+      "category": "sistema"
     },
     {
       "name": "antirobo",
@@ -765,48 +699,12 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "seguridad",
-      "base": "antirobo",
+      "name": "antirobot",
+      "base": "antibot",
       "primary": false,
       "aliases": [],
-      "description": "Protege el grupo contra robos y activa el auto-admin",
-      "usage": "on|off|autoadmin|status",
-      "category": "admin"
-    },
-    {
-      "name": "proteccion",
-      "base": "antirobo",
-      "primary": false,
-      "aliases": [],
-      "description": "Protege el grupo contra robos y activa el auto-admin",
-      "usage": "on|off|autoadmin|status",
-      "category": "admin"
-    },
-    {
-      "name": "protección",
-      "base": "antirobo",
-      "primary": false,
-      "aliases": [],
-      "description": "Protege el grupo contra robos y activa el auto-admin",
-      "usage": "on|off|autoadmin|status",
-      "category": "admin"
-    },
-    {
-      "name": "autoadmin",
-      "base": "antirobo",
-      "primary": false,
-      "aliases": [],
-      "description": "Protege el grupo contra robos y activa el auto-admin",
-      "usage": "on|off|autoadmin|status",
-      "category": "admin"
-    },
-    {
-      "name": "setantirobo",
-      "base": "antirobo",
-      "primary": false,
-      "aliases": [],
-      "description": "Protege el grupo contra robos y activa el auto-admin",
-      "usage": "on|off|autoadmin|status",
+      "description": "Expulsa bots externos y revisa los grupos principales",
+      "usage": "on|off|on all|scan|scan all|scan force|add|remove|list",
       "category": "admin"
     },
     {
@@ -823,31 +721,40 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "antiflood",
-      "base": "antispam",
+      "name": "apagar",
+      "base": "admin",
       "primary": false,
       "aliases": [],
-      "description": "Activa el control de spam: flood, repeticiones, menciones y fraudes",
-      "usage": "on|off|kick|reset|status",
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
       "category": "admin"
     },
     {
-      "name": "anti-spam",
-      "base": "antispam",
+      "name": "apuesta",
+      "base": "carrera",
       "primary": false,
       "aliases": [],
-      "description": "Activa el control de spam: flood, repeticiones, menciones y fraudes",
-      "usage": "on|off|kick|reset|status",
-      "category": "admin"
+      "description": "Apuesta por un caballo y gana 3 veces tu apuesta",
+      "usage": "<1-4> <cantidad|todo>",
+      "category": "juegos"
     },
     {
-      "name": "setantispam",
-      "base": "antispam",
+      "name": "aqi",
+      "base": "aire",
       "primary": false,
       "aliases": [],
-      "description": "Activa el control de spam: flood, repeticiones, menciones y fraudes",
-      "usage": "on|off|kick|reset|status",
-      "category": "admin"
+      "description": "Consulta la calidad del aire de una ciudad",
+      "usage": "<ciudad>",
+      "category": "info"
+    },
+    {
+      "name": "archive",
+      "base": "archiveorg",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video de Internet Archive",
+      "usage": "🗄️ *DESCARGA DE INTERNET ARCHIVE* 🔗 Uso: */archiveorg <enlace>* ✨ Ejemplo: */archiveorg https://archive.org/details/BigBuckBunny_124*",
+      "category": "descargas"
     },
     {
       "name": "archiveorg",
@@ -858,26 +765,98 @@ window.NOVITA_DATA = {
         "internetarchive"
       ],
       "description": "Descarga un video de Internet Archive",
-      "usage": "🗄️ *DESCARGA DE INTERNET ARCHIVE*\n\n🔗 Uso: */archiveorg <enlace>*\n✨ Ejemplo: */archiveorg https://archive.org/details/BigBuckBunny_124*",
+      "usage": "🗄️ *DESCARGA DE INTERNET ARCHIVE* 🔗 Uso: */archiveorg <enlace>* ✨ Ejemplo: */archiveorg https://archive.org/details/BigBuckBunny_124*",
       "category": "descargas"
     },
     {
-      "name": "archive",
-      "base": "archiveorg",
+      "name": "arrendar",
+      "base": "alquiler",
       "primary": false,
       "aliases": [],
-      "description": "Descarga un video de Internet Archive",
-      "usage": "🗄️ *DESCARGA DE INTERNET ARCHIVE*\n\n🔗 Uso: */archiveorg <enlace>*\n✨ Ejemplo: */archiveorg https://archive.org/details/BigBuckBunny_124*",
+      "description": "Alquila el bot para un grupo con NovitaCoins",
+      "usage": "[horas|días|semanas|meses|años|planes|estado|dar|quitar|eximir|lista]",
+      "category": "economia"
+    },
+    {
+      "name": "atardecer",
+      "base": "sol",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el amanecer y atardecer de una ciudad",
+      "usage": "<ciudad>",
+      "category": "info"
+    },
+    {
+      "name": "atraco",
+      "base": "crimen",
+      "primary": false,
+      "aliases": [],
+      "description": "Comete un crimen: gana mucho o paga la multa",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "audio",
+      "base": "play",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga y envía audio de YouTube en M4A",
+      "usage": "",
       "category": "descargas"
     },
     {
-      "name": "internetarchive",
-      "base": "archiveorg",
+      "name": "autoadmin",
+      "base": "antirobo",
       "primary": false,
       "aliases": [],
-      "description": "Descarga un video de Internet Archive",
-      "usage": "🗄️ *DESCARGA DE INTERNET ARCHIVE*\n\n🔗 Uso: */archiveorg <enlace>*\n✨ Ejemplo: */archiveorg https://archive.org/details/BigBuckBunny_124*",
-      "category": "descargas"
+      "description": "Protege el grupo contra robos y activa el auto-admin",
+      "usage": "on|off|autoadmin|status",
+      "category": "admin"
+    },
+    {
+      "name": "autogrupo",
+      "base": "horario",
+      "primary": false,
+      "aliases": [],
+      "description": "Programa la apertura y el cierre automático del grupo",
+      "usage": "<cerrar|abrir HH:MM|off|on|borrar>",
+      "category": "admin"
+    },
+    {
+      "name": "autores",
+      "base": "creditos",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los créditos, el creador y el equipo del bot",
+      "usage": "",
+      "category": "staff"
+    },
+    {
+      "name": "avances",
+      "base": "repo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
+      "usage": "[cambios|staff|commits] [cantidad]",
+      "category": "sistema"
+    },
+    {
+      "name": "ayuda",
+      "base": "menu",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el menú completo con todos los comandos, sin resumen y sin recortar el contenido",
+      "usage": "",
+      "category": "sistema"
+    },
+    {
+      "name": "b64",
+      "base": "base64",
+      "primary": false,
+      "aliases": [],
+      "description": "Codifica o decodifica texto en Base64",
+      "usage": "[d|e] <texto>",
+      "category": "utilidades"
     },
     {
       "name": "backup",
@@ -893,30 +872,21 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
-      "name": "respaldar",
-      "base": "backup",
-      "primary": false,
-      "aliases": [],
-      "description": "Crea y sube un backup consolidado del bot al repositorio privado",
-      "usage": "[estado|forzar]",
-      "category": "sistema"
-    },
-    {
-      "name": "respaldobot",
-      "base": "backup",
-      "primary": false,
-      "aliases": [],
-      "description": "Crea y sube un backup consolidado del bot al repositorio privado",
-      "usage": "[estado|forzar]",
-      "category": "sistema"
-    },
-    {
       "name": "backupbot",
       "base": "backup",
       "primary": false,
       "aliases": [],
       "description": "Crea y sube un backup consolidado del bot al repositorio privado",
       "usage": "[estado|forzar]",
+      "category": "sistema"
+    },
+    {
+      "name": "backupdetalle",
+      "base": "backupinfo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra información detallada del backup local y remoto",
+      "usage": "[archivos]",
       "category": "sistema"
     },
     {
@@ -934,40 +904,22 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
-      "name": "infobackup",
-      "base": "backupinfo",
+      "name": "backups",
+      "base": "repo",
       "primary": false,
       "aliases": [],
-      "description": "Muestra información detallada del backup local y remoto",
-      "usage": "[archivos]",
+      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
+      "usage": "[cambios|staff|commits] [cantidad]",
       "category": "sistema"
     },
     {
-      "name": "inforespaldo",
-      "base": "backupinfo",
+      "name": "balance",
+      "base": "cartera",
       "primary": false,
       "aliases": [],
-      "description": "Muestra información detallada del backup local y remoto",
-      "usage": "[archivos]",
-      "category": "sistema"
-    },
-    {
-      "name": "backupdetalle",
-      "base": "backupinfo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra información detallada del backup local y remoto",
-      "usage": "[archivos]",
-      "category": "sistema"
-    },
-    {
-      "name": "estadobackup",
-      "base": "backupinfo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra información detallada del backup local y remoto",
-      "usage": "[archivos]",
-      "category": "sistema"
+      "description": "Muestra tu saldo de NovitaCoins",
+      "usage": "",
+      "category": "economia"
     },
     {
       "name": "ban",
@@ -983,16 +935,34 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "banear",
-      "base": "ban",
+      "name": "banca",
+      "base": "bank",
       "primary": false,
       "aliases": [],
-      "description": "Banea a un usuario del bot (dueños, staff admin y administradores de grupo)",
-      "usage": "@usuario",
+      "description": "Consulta tu cuenta, deposita o retira monedas del banco",
+      "usage": "[depositar|retirar] [cantidad]",
+      "category": "economia"
+    },
+    {
+      "name": "banco",
+      "base": "bank",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta tu cuenta, deposita o retira monedas del banco",
+      "usage": "[depositar|retirar] [cantidad]",
+      "category": "economia"
+    },
+    {
+      "name": "baneados",
+      "base": "admin",
+      "primary": false,
+      "aliases": [],
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
       "category": "admin"
     },
     {
-      "name": "banuser",
+      "name": "banear",
       "base": "ban",
       "primary": false,
       "aliases": [],
@@ -1022,22 +992,22 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "banco",
-      "base": "bank",
+      "name": "banlist",
+      "base": "admin",
       "primary": false,
       "aliases": [],
-      "description": "Consulta tu cuenta, deposita o retira monedas del banco",
-      "usage": "[depositar|retirar] [cantidad]",
-      "category": "economia"
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
+      "category": "admin"
     },
     {
-      "name": "banca",
-      "base": "bank",
+      "name": "banuser",
+      "base": "ban",
       "primary": false,
       "aliases": [],
-      "description": "Consulta tu cuenta, deposita o retira monedas del banco",
-      "usage": "[depositar|retirar] [cantidad]",
-      "category": "economia"
+      "description": "Banea a un usuario del bot (dueños, staff admin y administradores de grupo)",
+      "usage": "@usuario",
+      "category": "admin"
     },
     {
       "name": "base64",
@@ -1052,22 +1022,58 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "b64",
-      "base": "base64",
+      "name": "batalla",
+      "base": "pelea",
       "primary": false,
       "aliases": [],
-      "description": "Codifica o decodifica texto en Base64",
-      "usage": "[d|e] <texto>",
-      "category": "utilidades"
+      "description": "Pelea contra un rival y apuesta monedas",
+      "usage": "<cantidad|todo>",
+      "category": "juegos"
     },
     {
-      "name": "codificar",
-      "base": "base64",
+      "name": "bau",
+      "base": "cofre",
       "primary": false,
       "aliases": [],
-      "description": "Codifica o decodifica texto en Base64",
-      "usage": "[d|e] <texto>",
-      "category": "utilidades"
+      "description": "Abre un cofre misterioso cada 6 horas",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "beg",
+      "base": "mendigar",
+      "primary": false,
+      "aliases": [],
+      "description": "Pide monedas en la calle con un pequeño tiempo de espera",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "beneficiospremium",
+      "base": "infopremium",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra qué incluye un jadibot premium, novedades, precios y comandos",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "bienvenida",
+      "base": "welcome",
+      "primary": false,
+      "aliases": [],
+      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
+      "usage": "on|off|texto|bye|textobye",
+      "category": "admin"
+    },
+    {
+      "name": "bienvenido",
+      "base": "welcome",
+      "primary": false,
+      "aliases": [],
+      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
+      "usage": "on|off|texto|bye|textobye",
+      "category": "admin"
     },
     {
       "name": "bingo",
@@ -1081,12 +1087,30 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "cartonbingo",
-      "base": "bingo",
+      "name": "bitcoin",
+      "base": "cripto",
       "primary": false,
       "aliases": [],
-      "description": "Genera un cartón de bingo aleatorio",
-      "usage": "[cantidad]",
+      "description": "Consulta precios y variación de criptomonedas en dólares y soles",
+      "usage": "[moneda]",
+      "category": "info"
+    },
+    {
+      "name": "bite",
+      "base": "hug",
+      "primary": false,
+      "aliases": [],
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "bj",
+      "base": "blackjack",
+      "primary": false,
+      "aliases": [],
+      "description": "Juega al blackjack contra la casa",
+      "usage": "<cantidad|todo> [pedir]",
       "category": "juegos"
     },
     {
@@ -1103,31 +1127,76 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "bj",
-      "base": "blackjack",
+      "name": "blancoynegro",
+      "base": "tobn",
       "primary": false,
       "aliases": [],
-      "description": "Juega al blackjack contra la casa",
-      "usage": "<cantidad|todo> [pedir]",
+      "description": "Convierte una imagen o sticker a blanco y negro",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "bola8",
+      "base": "8ball",
+      "primary": false,
+      "aliases": [],
+      "description": "Hazle una pregunta a la bola mágica 8",
+      "usage": "<pregunta>",
       "category": "juegos"
     },
     {
-      "name": "21",
-      "base": "blackjack",
+      "name": "bolsa",
+      "base": "invertir",
       "primary": false,
       "aliases": [],
-      "description": "Juega al blackjack contra la casa",
-      "usage": "<cantidad|todo> [pedir]",
-      "category": "juegos"
+      "description": "Invierte monedas con riesgo de ganar o perder",
+      "usage": "<cantidad|todo>",
+      "category": "economia"
     },
     {
-      "name": "veintiuno",
-      "base": "blackjack",
+      "name": "bonk",
+      "base": "hug",
       "primary": false,
       "aliases": [],
-      "description": "Juega al blackjack contra la casa",
-      "usage": "<cantidad|todo> [pedir]",
-      "category": "juegos"
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "book",
+      "base": "libro",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca libros y muestra portada, autor y año",
+      "usage": "<título o autor>",
+      "category": "info"
+    },
+    {
+      "name": "books",
+      "base": "libro",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca libros y muestra portada, autor y año",
+      "usage": "<título o autor>",
+      "category": "info"
+    },
+    {
+      "name": "borrar",
+      "base": "del",
+      "primary": false,
+      "aliases": [],
+      "description": "Borra un mensaje respondido (solo dueño o administradores)",
+      "usage": "[responde al mensaje]",
+      "category": "admin"
+    },
+    {
+      "name": "bot",
+      "base": "admin",
+      "primary": false,
+      "aliases": [],
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
+      "category": "admin"
     },
     {
       "name": "botconfig",
@@ -1145,48 +1214,39 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "config",
-      "base": "botconfig",
+      "name": "botinfo",
+      "base": "info",
       "primary": false,
       "aliases": [],
-      "description": "Muestra la configuración editable de este bot",
+      "description": "Muestra información, estado y estadísticas del bot",
       "usage": "",
+      "category": "sistema"
+    },
+    {
+      "name": "botname",
+      "base": "setname",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el nombre visible de este bot",
+      "usage": "<nombre|reset>",
       "category": "admin"
     },
     {
-      "name": "ajustes",
-      "base": "botconfig",
+      "name": "botoff",
+      "base": "admin",
       "primary": false,
       "aliases": [],
-      "description": "Muestra la configuración editable de este bot",
-      "usage": "",
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
       "category": "admin"
     },
     {
-      "name": "settings",
-      "base": "botconfig",
+      "name": "boton",
+      "base": "admin",
       "primary": false,
       "aliases": [],
-      "description": "Muestra la configuración editable de este bot",
-      "usage": "",
-      "category": "admin"
-    },
-    {
-      "name": "configuracion",
-      "base": "botconfig",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la configuración editable de este bot",
-      "usage": "",
-      "category": "admin"
-    },
-    {
-      "name": "configuración",
-      "base": "botconfig",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la configuración editable de este bot",
-      "usage": "",
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
       "category": "admin"
     },
     {
@@ -1197,24 +1257,6 @@ window.NOVITA_DATA = {
         "buttons",
         "opciones"
       ],
-      "description": "Muestra un mensaje con botones interactivos",
-      "usage": "",
-      "category": "admin"
-    },
-    {
-      "name": "buttons",
-      "base": "botones",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra un mensaje con botones interactivos",
-      "usage": "",
-      "category": "admin"
-    },
-    {
-      "name": "opciones",
-      "base": "botones",
-      "primary": false,
-      "aliases": [],
       "description": "Muestra un mensaje con botones interactivos",
       "usage": "",
       "category": "admin"
@@ -1232,71 +1274,8 @@ window.NOVITA_DATA = {
         "verbots",
         "listabots"
       ],
-      "description": "Lista los jadibots premium y normales que puedes ver",
-      "usage": "[premium|normal|todos]",
-      "category": "jadibot"
-    },
-    {
-      "name": "jadibots",
-      "base": "bots",
-      "primary": false,
-      "aliases": [],
-      "description": "Lista los jadibots premium y normales que puedes ver",
-      "usage": "[premium|normal|todos]",
-      "category": "jadibot"
-    },
-    {
-      "name": "subbots",
-      "base": "bots",
-      "primary": false,
-      "aliases": [],
-      "description": "Lista los jadibots premium y normales que puedes ver",
-      "usage": "[premium|normal|todos]",
-      "category": "jadibot"
-    },
-    {
-      "name": "misbots",
-      "base": "bots",
-      "primary": false,
-      "aliases": [],
-      "description": "Lista los jadibots premium y normales que puedes ver",
-      "usage": "[premium|normal|todos]",
-      "category": "jadibot"
-    },
-    {
-      "name": "misjadibots",
-      "base": "bots",
-      "primary": false,
-      "aliases": [],
-      "description": "Lista los jadibots premium y normales que puedes ver",
-      "usage": "[premium|normal|todos]",
-      "category": "jadibot"
-    },
-    {
-      "name": "listajadibots",
-      "base": "bots",
-      "primary": false,
-      "aliases": [],
-      "description": "Lista los jadibots premium y normales que puedes ver",
-      "usage": "[premium|normal|todos]",
-      "category": "jadibot"
-    },
-    {
-      "name": "verbots",
-      "base": "bots",
-      "primary": false,
-      "aliases": [],
-      "description": "Lista los jadibots premium y normales que puedes ver",
-      "usage": "[premium|normal|todos]",
-      "category": "jadibot"
-    },
-    {
-      "name": "listabots",
-      "base": "bots",
-      "primary": false,
-      "aliases": [],
-      "description": "Lista los jadibots premium y normales que puedes ver",
-      "usage": "[premium|normal|todos]",
+      "description": "Lista los jadibots principales, premium y normales",
+      "usage": "[principal|premium|normal|todos]",
       "category": "jadibot"
     },
     {
@@ -1321,13 +1300,31 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "stickerbrat",
-      "base": "brat",
+      "name": "broma",
+      "base": "chiste",
       "primary": false,
       "aliases": [],
-      "description": "Crea un sticker estilo brat con el texto que envíes o respondas",
-      "usage": "<texto>",
-      "category": "multimedia"
+      "description": "Cuenta un chiste aleatorio",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "btc",
+      "base": "cripto",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta precios y variación de criptomonedas en dólares y soles",
+      "usage": "[moneda]",
+      "category": "info"
+    },
+    {
+      "name": "bug",
+      "base": "report",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía un reporte al creador (verificado por IA) o revisa los reportes (dueño)",
+      "usage": "[texto] | list | close <id>",
+      "category": "admin"
     },
     {
       "name": "buscar",
@@ -1343,31 +1340,76 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "search",
-      "base": "buscar",
+      "name": "buscarcanal",
+      "base": "ytchannel",
       "primary": false,
       "aliases": [],
-      "description": "Busca información y enlaces en internet",
-      "usage": "<texto>",
-      "category": "info"
+      "description": "Busca canales de YouTube y muestra seguidores y enlace",
+      "usage": "<nombre del canal>",
+      "category": "descargas"
     },
     {
-      "name": "google",
-      "base": "buscar",
+      "name": "buscarplaylist",
+      "base": "ytplaylist",
       "primary": false,
       "aliases": [],
-      "description": "Busca información y enlaces en internet",
-      "usage": "<texto>",
-      "category": "info"
+      "description": "Busca listas de reproducción de YouTube",
+      "usage": "<búsqueda>",
+      "category": "descargas"
     },
     {
-      "name": "ddg",
-      "base": "buscar",
+      "name": "buscarvideo",
+      "base": "ytsearch",
       "primary": false,
       "aliases": [],
-      "description": "Busca información y enlaces en internet",
-      "usage": "<texto>",
-      "category": "info"
+      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
+      "usage": "<búsqueda>",
+      "category": "descargas"
+    },
+    {
+      "name": "buscarvideos",
+      "base": "ytsearch",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
+      "usage": "<búsqueda>",
+      "category": "descargas"
+    },
+    {
+      "name": "business",
+      "base": "negocio",
+      "primary": false,
+      "aliases": [],
+      "description": "Compra un negocio y cobra ingresos cada cierto tiempo",
+      "usage": "[comprar <id>|cobrar|lista]",
+      "category": "economia"
+    },
+    {
+      "name": "buttons",
+      "base": "botones",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra un mensaje con botones interactivos",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "buy",
+      "base": "comprar",
+      "primary": false,
+      "aliases": [],
+      "description": "Compra un producto de la tienda con NovitaCoins",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "caballos",
+      "base": "carrera",
+      "primary": false,
+      "aliases": [],
+      "description": "Apuesta por un caballo y gana 3 veces tu apuesta",
+      "usage": "<1-4> <cantidad|todo>",
+      "category": "juegos"
     },
     {
       "name": "calc",
@@ -1384,6 +1426,15 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
+      "name": "calcula",
+      "base": "mate",
+      "primary": false,
+      "aliases": [],
+      "description": "Resuelve operaciones matemáticas y gana monedas",
+      "usage": "[resultado|cancelar]",
+      "category": "utilidades"
+    },
+    {
       "name": "calculadora",
       "base": "calc",
       "primary": false,
@@ -1393,31 +1444,139 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "math",
-      "base": "calc",
+      "name": "calidad-aire",
+      "base": "aire",
       "primary": false,
       "aliases": [],
-      "description": "Calcula operaciones matemáticas",
-      "usage": "<operación>",
+      "description": "Consulta la calidad del aire de una ciudad",
+      "usage": "<ciudad>",
+      "category": "info"
+    },
+    {
+      "name": "calidadaire",
+      "base": "aire",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta la calidad del aire de una ciudad",
+      "usage": "<ciudad>",
+      "category": "info"
+    },
+    {
+      "name": "cambiardueno",
+      "base": "setowner",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el dueño de tu jadibot (el principal no se puede transferir)",
+      "usage": "@usuario",
+      "category": "admin"
+    },
+    {
+      "name": "cambiardueño",
+      "base": "setowner",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el dueño de tu jadibot (el principal no se puede transferir)",
+      "usage": "@usuario",
+      "category": "admin"
+    },
+    {
+      "name": "cambiarmascota",
+      "base": "activarmascota",
+      "primary": false,
+      "aliases": [],
+      "description": "Elige cuál de tus mascotas está activa",
+      "usage": "<número o nombre>",
+      "category": "mascotas"
+    },
+    {
+      "name": "cambiarnombre",
+      "base": "setname",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el nombre visible de este bot",
+      "usage": "<nombre|reset>",
+      "category": "admin"
+    },
+    {
+      "name": "cambiarvoz",
+      "base": "vozefecto",
+      "primary": false,
+      "aliases": [],
+      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
+      "usage": "<efecto> [responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "cambio",
+      "base": "dolar",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta el tipo de cambio actual entre monedas",
+      "usage": "[moneda base]",
+      "category": "info"
+    },
+    {
+      "name": "canalesyt",
+      "base": "ytchannel",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca canales de YouTube y muestra seguidores y enlace",
+      "usage": "<nombre del canal>",
+      "category": "descargas"
+    },
+    {
+      "name": "canalyt",
+      "base": "ytchannel",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca canales de YouTube y muestra seguidores y enlace",
+      "usage": "<nombre del canal>",
+      "category": "descargas"
+    },
+    {
+      "name": "cancion",
+      "base": "musica",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca una canción y muestra artista, álbum y portada",
+      "usage": "<canción o artista>",
+      "category": "descargas"
+    },
+    {
+      "name": "caracteres",
+      "base": "contar",
+      "primary": false,
+      "aliases": [],
+      "description": "Cuenta caracteres, palabras y líneas de un texto",
+      "usage": "<texto>",
       "category": "utilidades"
     },
     {
-      "name": "matematica",
-      "base": "calc",
+      "name": "card",
+      "base": "tarjeta",
       "primary": false,
       "aliases": [],
-      "description": "Calcula operaciones matemáticas",
-      "usage": "<operación>",
-      "category": "utilidades"
+      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
+      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
+      "category": "economia"
     },
     {
-      "name": "matemática",
-      "base": "calc",
+      "name": "cards",
+      "base": "carrusel",
       "primary": false,
       "aliases": [],
-      "description": "Calcula operaciones matemáticas",
-      "usage": "<operación>",
-      "category": "utilidades"
+      "description": "Muestra un carrusel de tarjetas interactivas",
+      "usage": "",
+      "category": "multimedia"
+    },
+    {
+      "name": "carousel",
+      "base": "carrusel",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra un carrusel de tarjetas interactivas",
+      "usage": "",
+      "category": "multimedia"
     },
     {
       "name": "carrera",
@@ -1435,51 +1594,6 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "race",
-      "base": "carrera",
-      "primary": false,
-      "aliases": [],
-      "description": "Apuesta por un caballo y gana 3 veces tu apuesta",
-      "usage": "<1-4> <cantidad|todo>",
-      "category": "juegos"
-    },
-    {
-      "name": "caballos",
-      "base": "carrera",
-      "primary": false,
-      "aliases": [],
-      "description": "Apuesta por un caballo y gana 3 veces tu apuesta",
-      "usage": "<1-4> <cantidad|todo>",
-      "category": "juegos"
-    },
-    {
-      "name": "apuesta",
-      "base": "carrera",
-      "primary": false,
-      "aliases": [],
-      "description": "Apuesta por un caballo y gana 3 veces tu apuesta",
-      "usage": "<1-4> <cantidad|todo>",
-      "category": "juegos"
-    },
-    {
-      "name": "hipodromo",
-      "base": "carrera",
-      "primary": false,
-      "aliases": [],
-      "description": "Apuesta por un caballo y gana 3 veces tu apuesta",
-      "usage": "<1-4> <cantidad|todo>",
-      "category": "juegos"
-    },
-    {
-      "name": "hipódromo",
-      "base": "carrera",
-      "primary": false,
-      "aliases": [],
-      "description": "Apuesta por un caballo y gana 3 veces tu apuesta",
-      "usage": "<1-4> <cantidad|todo>",
-      "category": "juegos"
-    },
-    {
       "name": "carrusel",
       "base": "carrusel",
       "primary": true,
@@ -1487,24 +1601,6 @@ window.NOVITA_DATA = {
         "carousel",
         "cards"
       ],
-      "description": "Muestra un carrusel de tarjetas interactivas",
-      "usage": "",
-      "category": "multimedia"
-    },
-    {
-      "name": "carousel",
-      "base": "carrusel",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra un carrusel de tarjetas interactivas",
-      "usage": "",
-      "category": "multimedia"
-    },
-    {
-      "name": "cards",
-      "base": "carrusel",
-      "primary": false,
-      "aliases": [],
       "description": "Muestra un carrusel de tarjetas interactivas",
       "usage": "",
       "category": "multimedia"
@@ -1524,65 +1620,25 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "coins",
-      "base": "cartera",
+      "name": "cartonbingo",
+      "base": "bingo",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tu saldo de NovitaCoins",
-      "usage": "",
-      "category": "economia"
+      "description": "Genera un cartón de bingo aleatorio",
+      "usage": "[cantidad]",
+      "category": "juegos"
     },
     {
-      "name": "saldo",
-      "base": "cartera",
+      "name": "cat",
+      "base": "gato",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tu saldo de NovitaCoins",
+      "description": "Envía una foto de un gato aleatorio",
       "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "balance",
-      "base": "cartera",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu saldo de NovitaCoins",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "wallet",
-      "base": "cartera",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu saldo de NovitaCoins",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "cazar",
-      "base": "cazar",
-      "primary": true,
-      "aliases": [
-        "caza",
-        "hunt",
-        "cazador"
-      ],
-      "description": "Caza animales para ganar NovitaCoins",
-      "usage": "",
-      "category": "economia"
+      "category": "entretenimiento"
     },
     {
       "name": "caza",
-      "base": "cazar",
-      "primary": false,
-      "aliases": [],
-      "description": "Caza animales para ganar NovitaCoins",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "hunt",
       "base": "cazar",
       "primary": false,
       "aliases": [],
@@ -1595,6 +1651,19 @@ window.NOVITA_DATA = {
       "base": "cazar",
       "primary": false,
       "aliases": [],
+      "description": "Caza animales para ganar NovitaCoins",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "cazar",
+      "base": "cazar",
+      "primary": true,
+      "aliases": [
+        "caza",
+        "hunt",
+        "cazador"
+      ],
       "description": "Caza animales para ganar NovitaCoins",
       "usage": "",
       "category": "economia"
@@ -1622,22 +1691,31 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "groupclose",
-      "base": "cerrar",
+      "name": "chatgpt",
+      "base": "ia",
       "primary": false,
       "aliases": [],
-      "description": "Cierra el grupo para que solo los administradores escriban",
-      "usage": "",
-      "category": "admin"
+      "description": "Conversa con la IA, descarga música, videos y enlaces",
+      "usage": "<mensaje|descarga ...>",
+      "category": "ia"
     },
     {
-      "name": "close",
-      "base": "cerrar",
+      "name": "chef",
+      "base": "cocinar",
       "primary": false,
       "aliases": [],
-      "description": "Cierra el grupo para que solo los administradores escriban",
+      "description": "Cocina platos y gana NovitaCoins con un tiempo de espera",
       "usage": "",
-      "category": "admin"
+      "category": "economia"
+    },
+    {
+      "name": "chest",
+      "base": "cofre",
+      "primary": false,
+      "aliases": [],
+      "description": "Abre un cofre misterioso cada 6 horas",
+      "usage": "",
+      "category": "economia"
     },
     {
       "name": "chiste",
@@ -1652,20 +1730,11 @@ window.NOVITA_DATA = {
       "category": "entretenimiento"
     },
     {
-      "name": "joke",
-      "base": "chiste",
+      "name": "christmas",
+      "base": "navidad",
       "primary": false,
       "aliases": [],
-      "description": "Cuenta un chiste aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "broma",
-      "base": "chiste",
-      "primary": false,
-      "aliases": [],
-      "description": "Cuenta un chiste aleatorio",
+      "description": "Muestra un mensaje navideño y la cuenta regresiva",
       "usage": "",
       "category": "entretenimiento"
     },
@@ -1683,31 +1752,22 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "daily",
-      "base": "claim",
+      "name": "claimneko",
+      "base": "rw",
       "primary": false,
       "aliases": [],
-      "description": "Reclama tu recompensa diaria y las recompensas pendientes de nekos",
-      "usage": "",
-      "category": "economia"
+      "description": "Da una neko al instante con su info y precio, y reclama tus recompensas",
+      "usage": "[categoría]",
+      "category": "anime"
     },
     {
-      "name": "diario",
-      "base": "claim",
+      "name": "clave",
+      "base": "password",
       "primary": false,
       "aliases": [],
-      "description": "Reclama tu recompensa diaria y las recompensas pendientes de nekos",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "reclamar",
-      "base": "claim",
-      "primary": false,
-      "aliases": [],
-      "description": "Reclama tu recompensa diaria y las recompensas pendientes de nekos",
-      "usage": "",
-      "category": "economia"
+      "description": "Genera una contraseña segura y aleatoria",
+      "usage": "[longitud]",
+      "category": "utilidades"
     },
     {
       "name": "clima",
@@ -1722,22 +1782,22 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "weather",
-      "base": "clima",
+      "name": "close",
+      "base": "cerrar",
       "primary": false,
       "aliases": [],
-      "description": "Muestra el clima actual y el pronóstico de una ciudad",
-      "usage": "<ciudad>",
-      "category": "info"
+      "description": "Cierra el grupo para que solo los administradores escriban",
+      "usage": "",
+      "category": "admin"
     },
     {
-      "name": "tiempo",
-      "base": "clima",
+      "name": "cocina",
+      "base": "cocinar",
       "primary": false,
       "aliases": [],
-      "description": "Muestra el clima actual y el pronóstico de una ciudad",
-      "usage": "<ciudad>",
-      "category": "info"
+      "description": "Cocina platos y gana NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
     },
     {
       "name": "cocinar",
@@ -1754,16 +1814,7 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "cocina",
-      "base": "cocinar",
-      "primary": false,
-      "aliases": [],
-      "description": "Cocina platos y gana NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "chef",
+      "name": "cocinarcomida",
       "base": "cocinar",
       "primary": false,
       "aliases": [],
@@ -1781,33 +1832,42 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "cocinarcomida",
-      "base": "cocinar",
-      "primary": false,
-      "aliases": [],
-      "description": "Cocina platos y gana NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
       "name": "code",
       "base": "code",
       "primary": true,
       "aliases": [
         "pairing"
       ],
-      "description": "Conecta un jadibot normal o premium con código de emparejamiento",
-      "usage": "[normal|premium] <número>",
+      "description": "Conecta tu WhatsApp como jadibot con código de emparejamiento",
+      "usage": "[normal|premium] [número]",
       "category": "jadibot"
     },
     {
-      "name": "pairing",
-      "base": "code",
+      "name": "codificar",
+      "base": "base64",
       "primary": false,
       "aliases": [],
-      "description": "Conecta un jadibot normal o premium con código de emparejamiento",
-      "usage": "[normal|premium] <número>",
-      "category": "jadibot"
+      "description": "Codifica o decodifica texto en Base64",
+      "usage": "[d|e] <texto>",
+      "category": "utilidades"
+    },
+    {
+      "name": "codigomorse",
+      "base": "morse",
+      "primary": false,
+      "aliases": [],
+      "description": "Traduce texto a código Morse y viceversa",
+      "usage": "<texto o morse>",
+      "category": "utilidades"
+    },
+    {
+      "name": "codigoqr",
+      "base": "qrgen",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera un código QR a partir de un texto o enlace",
+      "usage": "<texto o enlace>",
+      "category": "utilidades"
     },
     {
       "name": "cofre",
@@ -1824,38 +1884,29 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "chest",
-      "base": "cofre",
+      "name": "coin",
+      "base": "cripto",
       "primary": false,
       "aliases": [],
-      "description": "Abre un cofre misterioso cada 6 horas",
-      "usage": "",
-      "category": "economia"
+      "description": "Consulta precios y variación de criptomonedas en dólares y soles",
+      "usage": "[moneda]",
+      "category": "info"
     },
     {
-      "name": "tesoro",
-      "base": "cofre",
+      "name": "coinflip",
+      "base": "moneda",
       "primary": false,
       "aliases": [],
-      "description": "Abre un cofre misterioso cada 6 horas",
-      "usage": "",
-      "category": "economia"
+      "description": "Lanza una moneda y apuesta a cara o cruz",
+      "usage": "[cara|cruz] [apuesta]",
+      "category": "juegos"
     },
     {
-      "name": "abrircofre",
-      "base": "cofre",
+      "name": "coins",
+      "base": "cartera",
       "primary": false,
       "aliases": [],
-      "description": "Abre un cofre misterioso cada 6 horas",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "bau",
-      "base": "cofre",
-      "primary": false,
-      "aliases": [],
-      "description": "Abre un cofre misterioso cada 6 horas",
+      "description": "Muestra tu saldo de NovitaCoins",
       "usage": "",
       "category": "economia"
     },
@@ -1882,22 +1933,40 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "rgb",
-      "base": "color",
+      "name": "comandos",
+      "base": "menu",
       "primary": false,
       "aliases": [],
-      "description": "Convierte colores entre HEX, RGB y HSL",
-      "usage": "<hex o rgb>",
-      "category": "utilidades"
+      "description": "Muestra el menú completo con todos los comandos, sin resumen y sin recortar el contenido",
+      "usage": "",
+      "category": "sistema"
     },
     {
-      "name": "hex",
-      "base": "color",
+      "name": "combate",
+      "base": "pelea",
       "primary": false,
       "aliases": [],
-      "description": "Convierte colores entre HEX, RGB y HSL",
-      "usage": "<hex o rgb>",
-      "category": "utilidades"
+      "description": "Pelea contra un rival y apuesta monedas",
+      "usage": "<cantidad|todo>",
+      "category": "juegos"
+    },
+    {
+      "name": "comidamascota",
+      "base": "alimentar",
+      "primary": false,
+      "aliases": [],
+      "description": "Alimenta a tu mascota para subir su comida y felicidad",
+      "usage": "[número o nombre]",
+      "category": "mascotas"
+    },
+    {
+      "name": "compartir",
+      "base": "invitar",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera un mensaje listo para invitar gente a Novita Bot",
+      "usage": "",
+      "category": "admin"
     },
     {
       "name": "comprar",
@@ -1912,22 +1981,94 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "buy",
-      "base": "comprar",
+      "name": "comprarmascota",
+      "base": "adoptar",
       "primary": false,
       "aliases": [],
-      "description": "Compra un producto de la tienda con NovitaCoins",
-      "usage": "",
-      "category": "economia"
+      "description": "Adopta una mascota de la tienda",
+      "usage": "<id> [nombre]",
+      "category": "mascotas"
     },
     {
-      "name": "purchase",
-      "base": "comprar",
+      "name": "comprarpet",
+      "base": "adoptar",
       "primary": false,
       "aliases": [],
-      "description": "Compra un producto de la tienda con NovitaCoins",
+      "description": "Adopta una mascota de la tienda",
+      "usage": "<id> [nombre]",
+      "category": "mascotas"
+    },
+    {
+      "name": "comprimir",
+      "base": "tocomprimir",
+      "primary": false,
+      "aliases": [],
+      "description": "Comprime una imagen para que ocupe menos espacio",
+      "usage": "[calidad 1-100]",
+      "category": "multimedia"
+    },
+    {
+      "name": "comprimirimagen",
+      "base": "tocomprimir",
+      "primary": false,
+      "aliases": [],
+      "description": "Comprime una imagen para que ocupe menos espacio",
+      "usage": "[calidad 1-100]",
+      "category": "multimedia"
+    },
+    {
+      "name": "config",
+      "base": "botconfig",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra la configuración editable de este bot",
       "usage": "",
-      "category": "economia"
+      "category": "admin"
+    },
+    {
+      "name": "configgrupo",
+      "base": "estadogrupo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra si antibot, antilink y otras protecciones están ON u OFF",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "configjadibot",
+      "base": "setjadibot",
+      "primary": false,
+      "aliases": [],
+      "description": "Permite o bloquea que los usuarios conecten jadibots",
+      "usage": "public|premium on|off",
+      "category": "jadibot"
+    },
+    {
+      "name": "configuracion",
+      "base": "botconfig",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra la configuración editable de este bot",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "configuración",
+      "base": "botconfig",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra la configuración editable de este bot",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "consejo",
+      "base": "frase",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía una frase motivacional aleatoria",
+      "usage": "",
+      "category": "entretenimiento"
     },
     {
       "name": "contar",
@@ -1943,30 +2084,30 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "palabras",
-      "base": "contar",
+      "name": "contrasena",
+      "base": "password",
       "primary": false,
       "aliases": [],
-      "description": "Cuenta caracteres, palabras y líneas de un texto",
-      "usage": "<texto>",
+      "description": "Genera una contraseña segura y aleatoria",
+      "usage": "[longitud]",
       "category": "utilidades"
     },
     {
-      "name": "wordcount",
-      "base": "contar",
+      "name": "contraseña",
+      "base": "password",
       "primary": false,
       "aliases": [],
-      "description": "Cuenta caracteres, palabras y líneas de un texto",
-      "usage": "<texto>",
+      "description": "Genera una contraseña segura y aleatoria",
+      "usage": "[longitud]",
       "category": "utilidades"
     },
     {
-      "name": "caracteres",
-      "base": "contar",
+      "name": "convertir",
+      "base": "unidades",
       "primary": false,
       "aliases": [],
-      "description": "Cuenta caracteres, palabras y líneas de un texto",
-      "usage": "<texto>",
+      "description": "Convierte unidades de medida",
+      "usage": "<valor> <unidad> <destino>",
       "category": "utilidades"
     },
     {
@@ -1977,7 +2118,7 @@ window.NOVITA_DATA = {
         "coubdl"
       ],
       "description": "Descarga un video de Coub",
-      "usage": "🔁 *DESCARGA DE COUB*\n\n🔗 Uso: */coub <enlace>*\n✨ Ejemplo: */coub https://coub.com/view/vgtde37vzg*",
+      "usage": "🔁 *DESCARGA DE COUB* 🔗 Uso: */coub <enlace>* ✨ Ejemplo: */coub https://coub.com/view/vgtde37vzg*",
       "category": "descargas"
     },
     {
@@ -1986,8 +2127,53 @@ window.NOVITA_DATA = {
       "primary": false,
       "aliases": [],
       "description": "Descarga un video de Coub",
-      "usage": "🔁 *DESCARGA DE COUB*\n\n🔗 Uso: */coub <enlace>*\n✨ Ejemplo: */coub https://coub.com/view/vgtde37vzg*",
+      "usage": "🔁 *DESCARGA DE COUB* 🔗 Uso: */coub <enlace>* ✨ Ejemplo: */coub https://coub.com/view/vgtde37vzg*",
       "category": "descargas"
+    },
+    {
+      "name": "country",
+      "base": "pais",
+      "primary": false,
+      "aliases": [],
+      "description": "Elige tu país para ver tu dinero en tu moneda local",
+      "usage": "[código o nombre] | lista",
+      "category": "info"
+    },
+    {
+      "name": "creador",
+      "base": "info",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra información, estado y estadísticas del bot",
+      "usage": "",
+      "category": "sistema"
+    },
+    {
+      "name": "creadores",
+      "base": "creditos",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los créditos, el creador y el equipo del bot",
+      "usage": "",
+      "category": "staff"
+    },
+    {
+      "name": "crearencuesta",
+      "base": "encuesta",
+      "primary": false,
+      "aliases": [],
+      "description": "Crea una encuesta rápida en el chat",
+      "usage": "<pregunta> | <opción 1> | <opción 2> ...",
+      "category": "utilidades"
+    },
+    {
+      "name": "creditcard",
+      "base": "tarjeta",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
+      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
+      "category": "economia"
     },
     {
       "name": "creditos",
@@ -2023,31 +2209,13 @@ window.NOVITA_DATA = {
       "category": "staff"
     },
     {
-      "name": "autores",
-      "base": "creditos",
+      "name": "crime",
+      "base": "crimen",
       "primary": false,
       "aliases": [],
-      "description": "Muestra los créditos, el creador y el equipo del bot",
+      "description": "Comete un crimen: gana mucho o paga la multa",
       "usage": "",
-      "category": "staff"
-    },
-    {
-      "name": "creadores",
-      "base": "creditos",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los créditos, el creador y el equipo del bot",
-      "usage": "",
-      "category": "staff"
-    },
-    {
-      "name": "staffcreditos",
-      "base": "creditos",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los créditos, el creador y el equipo del bot",
-      "usage": "",
-      "category": "staff"
+      "category": "economia"
     },
     {
       "name": "crimen",
@@ -2058,33 +2226,6 @@ window.NOVITA_DATA = {
         "delito",
         "atraco"
       ],
-      "description": "Comete un crimen: gana mucho o paga la multa",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "crime",
-      "base": "crimen",
-      "primary": false,
-      "aliases": [],
-      "description": "Comete un crimen: gana mucho o paga la multa",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "delito",
-      "base": "crimen",
-      "primary": false,
-      "aliases": [],
-      "description": "Comete un crimen: gana mucho o paga la multa",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "atraco",
-      "base": "crimen",
-      "primary": false,
-      "aliases": [],
       "description": "Comete un crimen: gana mucho o paga la multa",
       "usage": "",
       "category": "economia"
@@ -2106,15 +2247,6 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "crypto",
-      "base": "cripto",
-      "primary": false,
-      "aliases": [],
-      "description": "Consulta precios y variación de criptomonedas en dólares y soles",
-      "usage": "[moneda]",
-      "category": "info"
-    },
-    {
       "name": "criptomoneda",
       "base": "cripto",
       "primary": false,
@@ -2124,7 +2256,7 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "bitcoin",
+      "name": "crypto",
       "base": "cripto",
       "primary": false,
       "aliases": [],
@@ -2133,31 +2265,31 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "btc",
-      "base": "cripto",
+      "name": "cuddle",
+      "base": "hug",
       "primary": false,
       "aliases": [],
-      "description": "Consulta precios y variación de criptomonedas en dólares y soles",
-      "usage": "[moneda]",
-      "category": "info"
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
     },
     {
-      "name": "eth",
-      "base": "cripto",
+      "name": "cuenta",
+      "base": "perfil",
       "primary": false,
       "aliases": [],
-      "description": "Consulta precios y variación de criptomonedas en dólares y soles",
-      "usage": "[moneda]",
-      "category": "info"
+      "description": "Muestra tu perfil, nivel y economía",
+      "usage": "",
+      "category": "perfil"
     },
     {
-      "name": "coin",
-      "base": "cripto",
+      "name": "cumple",
+      "base": "edad",
       "primary": false,
       "aliases": [],
-      "description": "Consulta precios y variación de criptomonedas en dólares y soles",
-      "usage": "[moneda]",
-      "category": "info"
+      "description": "Calcula tu edad exacta y tu próximo cumpleaños",
+      "usage": "<dd/mm/aaaa>",
+      "category": "utilidades"
     },
     {
       "name": "curiosidad",
@@ -2176,33 +2308,6 @@ window.NOVITA_DATA = {
       "category": "entretenimiento"
     },
     {
-      "name": "dato",
-      "base": "curiosidad",
-      "primary": false,
-      "aliases": [],
-      "description": "Comparte un dato curioso aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "sabias",
-      "base": "curiosidad",
-      "primary": false,
-      "aliases": [],
-      "description": "Comparte un dato curioso aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "sabías",
-      "base": "curiosidad",
-      "primary": false,
-      "aliases": [],
-      "description": "Comparte un dato curioso aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
       "name": "curiosidades",
       "base": "curiosidad",
       "primary": false,
@@ -2212,7 +2317,145 @@ window.NOVITA_DATA = {
       "category": "entretenimiento"
     },
     {
-      "name": "fact",
+      "name": "currency",
+      "base": "pais",
+      "primary": false,
+      "aliases": [],
+      "description": "Elige tu país para ver tu dinero en tu moneda local",
+      "usage": "[código o nombre] | lista",
+      "category": "info"
+    },
+    {
+      "name": "dado",
+      "base": "dado",
+      "primary": true,
+      "aliases": [
+        "dice",
+        "dados"
+      ],
+      "description": "Lanza un dado y apuesta monedas si quieres",
+      "usage": "[apuesta]",
+      "category": "juegos"
+    },
+    {
+      "name": "dados",
+      "base": "dado",
+      "primary": false,
+      "aliases": [],
+      "description": "Lanza un dado y apuesta monedas si quieres",
+      "usage": "[apuesta]",
+      "category": "juegos"
+    },
+    {
+      "name": "dai",
+      "base": "dailymotion",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video de Dailymotion",
+      "usage": "🎥 *DESCARGA DE DAILYMOTION* 🔗 Uso: */dailymotion <enlace>* ✨ Ejemplo: */dailymotion https://www.dailymotion.com/video/xbucbr2*",
+      "category": "descargas"
+    },
+    {
+      "name": "daily",
+      "base": "claim",
+      "primary": false,
+      "aliases": [],
+      "description": "Reclama tu recompensa diaria y las recompensas pendientes de nekos",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "dailymotion",
+      "base": "dailymotion",
+      "primary": true,
+      "aliases": [
+        "dm",
+        "dailymotiondl",
+        "dai"
+      ],
+      "description": "Descarga un video de Dailymotion",
+      "usage": "🎥 *DESCARGA DE DAILYMOTION* 🔗 Uso: */dailymotion <enlace>* ✨ Ejemplo: */dailymotion https://www.dailymotion.com/video/xbucbr2*",
+      "category": "descargas"
+    },
+    {
+      "name": "dailymotiondl",
+      "base": "dailymotion",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video de Dailymotion",
+      "usage": "🎥 *DESCARGA DE DAILYMOTION* 🔗 Uso: */dailymotion <enlace>* ✨ Ejemplo: */dailymotion https://www.dailymotion.com/video/xbucbr2*",
+      "category": "descargas"
+    },
+    {
+      "name": "daradmin",
+      "base": "promote",
+      "primary": false,
+      "aliases": [],
+      "description": "Da administrador a un usuario mencionado",
+      "usage": "@usuario",
+      "category": "admin"
+    },
+    {
+      "name": "darcoins",
+      "base": "darmonedas",
+      "primary": false,
+      "aliases": [],
+      "description": "Entrega monedas a un usuario (solo dueño)",
+      "usage": "@usuario <cantidad>",
+      "category": "economia"
+    },
+    {
+      "name": "darcomida",
+      "base": "alimentar",
+      "primary": false,
+      "aliases": [],
+      "description": "Alimenta a tu mascota para subir su comida y felicidad",
+      "usage": "[número o nombre]",
+      "category": "mascotas"
+    },
+    {
+      "name": "dardinero",
+      "base": "darmonedas",
+      "primary": false,
+      "aliases": [],
+      "description": "Entrega monedas a un usuario (solo dueño)",
+      "usage": "@usuario <cantidad>",
+      "category": "economia"
+    },
+    {
+      "name": "dare",
+      "base": "verdadreto",
+      "primary": false,
+      "aliases": [],
+      "description": "Lanza una verdad o un reto aleatorio",
+      "usage": "[verdad|reto]",
+      "category": "juegos"
+    },
+    {
+      "name": "darmonedas",
+      "base": "darmonedas",
+      "primary": true,
+      "aliases": [
+        "addcoins",
+        "darcoins",
+        "dardinero",
+        "regalarmonedas"
+      ],
+      "description": "Entrega monedas a un usuario (solo dueño)",
+      "usage": "@usuario <cantidad>",
+      "category": "economia"
+    },
+    {
+      "name": "darrango",
+      "base": "staff",
+      "primary": false,
+      "aliases": [],
+      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
+      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
+      "category": "staff"
+    },
+    {
+      "name": "dato",
       "base": "curiosidad",
       "primary": false,
       "aliases": [],
@@ -2230,124 +2473,31 @@ window.NOVITA_DATA = {
       "category": "entretenimiento"
     },
     {
-      "name": "dado",
-      "base": "dado",
-      "primary": true,
-      "aliases": [
-        "dice",
-        "dados"
-      ],
-      "description": "Lanza un dado y apuesta monedas si quieres",
-      "usage": "[apuesta]",
-      "category": "juegos"
-    },
-    {
-      "name": "dice",
-      "base": "dado",
+      "name": "ddg",
+      "base": "buscar",
       "primary": false,
       "aliases": [],
-      "description": "Lanza un dado y apuesta monedas si quieres",
-      "usage": "[apuesta]",
-      "category": "juegos"
+      "description": "Busca información y enlaces en internet",
+      "usage": "<texto>",
+      "category": "info"
     },
     {
-      "name": "dados",
-      "base": "dado",
+      "name": "decir",
+      "base": "tts",
       "primary": false,
       "aliases": [],
-      "description": "Lanza un dado y apuesta monedas si quieres",
-      "usage": "[apuesta]",
-      "category": "juegos"
+      "description": "Convierte texto en audio o nota de voz, con idiomas y velocidad",
+      "usage": "[idioma|nota|lento|rápido|traducir <idioma>] <texto>",
+      "category": "multimedia"
     },
     {
-      "name": "dailymotion",
-      "base": "dailymotion",
-      "primary": true,
-      "aliases": [
-        "dm",
-        "dailymotiondl",
-        "dai"
-      ],
-      "description": "Descarga un video de Dailymotion",
-      "usage": "🎥 *DESCARGA DE DAILYMOTION*\n\n🔗 Uso: */dailymotion <enlace>*\n✨ Ejemplo: */dailymotion https://www.dailymotion.com/video/xbucbr2*",
-      "category": "descargas"
-    },
-    {
-      "name": "dm",
-      "base": "dailymotion",
+      "name": "degradar",
+      "base": "demote",
       "primary": false,
       "aliases": [],
-      "description": "Descarga un video de Dailymotion",
-      "usage": "🎥 *DESCARGA DE DAILYMOTION*\n\n🔗 Uso: */dailymotion <enlace>*\n✨ Ejemplo: */dailymotion https://www.dailymotion.com/video/xbucbr2*",
-      "category": "descargas"
-    },
-    {
-      "name": "dailymotiondl",
-      "base": "dailymotion",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video de Dailymotion",
-      "usage": "🎥 *DESCARGA DE DAILYMOTION*\n\n🔗 Uso: */dailymotion <enlace>*\n✨ Ejemplo: */dailymotion https://www.dailymotion.com/video/xbucbr2*",
-      "category": "descargas"
-    },
-    {
-      "name": "dai",
-      "base": "dailymotion",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video de Dailymotion",
-      "usage": "🎥 *DESCARGA DE DAILYMOTION*\n\n🔗 Uso: */dailymotion <enlace>*\n✨ Ejemplo: */dailymotion https://www.dailymotion.com/video/xbucbr2*",
-      "category": "descargas"
-    },
-    {
-      "name": "darmonedas",
-      "base": "darmonedas",
-      "primary": true,
-      "aliases": [
-        "addcoins",
-        "darcoins",
-        "dardinero",
-        "regalarmonedas"
-      ],
-      "description": "Entrega monedas a un usuario (solo dueño)",
-      "usage": "@usuario <cantidad>",
-      "category": "economia"
-    },
-    {
-      "name": "addcoins",
-      "base": "darmonedas",
-      "primary": false,
-      "aliases": [],
-      "description": "Entrega monedas a un usuario (solo dueño)",
-      "usage": "@usuario <cantidad>",
-      "category": "economia"
-    },
-    {
-      "name": "darcoins",
-      "base": "darmonedas",
-      "primary": false,
-      "aliases": [],
-      "description": "Entrega monedas a un usuario (solo dueño)",
-      "usage": "@usuario <cantidad>",
-      "category": "economia"
-    },
-    {
-      "name": "dardinero",
-      "base": "darmonedas",
-      "primary": false,
-      "aliases": [],
-      "description": "Entrega monedas a un usuario (solo dueño)",
-      "usage": "@usuario <cantidad>",
-      "category": "economia"
-    },
-    {
-      "name": "regalarmonedas",
-      "base": "darmonedas",
-      "primary": false,
-      "aliases": [],
-      "description": "Entrega monedas a un usuario (solo dueño)",
-      "usage": "@usuario <cantidad>",
-      "category": "economia"
+      "description": "Quita el administrador a un usuario mencionado",
+      "usage": "@usuario",
+      "category": "admin"
     },
     {
       "name": "del",
@@ -2365,24 +2515,6 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "borrar",
-      "base": "del",
-      "primary": false,
-      "aliases": [],
-      "description": "Borra un mensaje respondido (solo dueño o administradores)",
-      "usage": "[responde al mensaje]",
-      "category": "admin"
-    },
-    {
-      "name": "eliminar",
-      "base": "del",
-      "primary": false,
-      "aliases": [],
-      "description": "Borra un mensaje respondido (solo dueño o administradores)",
-      "usage": "[responde al mensaje]",
-      "category": "admin"
-    },
-    {
       "name": "delete",
       "base": "del",
       "primary": false,
@@ -2392,13 +2524,31 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "rm",
-      "base": "del",
+      "name": "delito",
+      "base": "crimen",
       "primary": false,
       "aliases": [],
-      "description": "Borra un mensaje respondido (solo dueño o administradores)",
-      "usage": "[responde al mensaje]",
-      "category": "admin"
+      "description": "Comete un crimen: gana mucho o paga la multa",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "delivery",
+      "base": "repartir",
+      "primary": false,
+      "aliases": [],
+      "description": "Haz entregas a domicilio y gana NovitaCoins",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "deljadibot",
+      "base": "stopjadibot",
+      "primary": false,
+      "aliases": [],
+      "description": "Detiene un jadibot activo",
+      "usage": "",
+      "category": "jadibot"
     },
     {
       "name": "delmsg",
@@ -2417,24 +2567,6 @@ window.NOVITA_DATA = {
         "degradar",
         "quitaradmin"
       ],
-      "description": "Quita el administrador a un usuario mencionado",
-      "usage": "@usuario",
-      "category": "admin"
-    },
-    {
-      "name": "degradar",
-      "base": "demote",
-      "primary": false,
-      "aliases": [],
-      "description": "Quita el administrador a un usuario mencionado",
-      "usage": "@usuario",
-      "category": "admin"
-    },
-    {
-      "name": "quitaradmin",
-      "base": "demote",
-      "primary": false,
-      "aliases": [],
       "description": "Quita el administrador a un usuario mencionado",
       "usage": "@usuario",
       "category": "admin"
@@ -2480,6 +2612,132 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
+      "name": "desbanear",
+      "base": "admin",
+      "primary": false,
+      "aliases": [],
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
+      "category": "admin"
+    },
+    {
+      "name": "descargar",
+      "base": "videodl",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga video de cualquier sitio compatible con yt-dlp",
+      "usage": "🎬 *DESCARGA UNIVERSAL* 🔗 Uso: */videodl <enlace>* ✨ Ejemplo: */videodl https://www.dailymotion.com/video/xbucbr2* _Funciona con YouTube, Dailymotion, Streamable, Archive, Coub y cientos de sitios más._",
+      "category": "descargas"
+    },
+    {
+      "name": "descripciongrupo",
+      "base": "setdesc",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia la descripción del grupo",
+      "usage": "<texto>",
+      "category": "admin"
+    },
+    {
+      "name": "desordena",
+      "base": "ordena",
+      "primary": false,
+      "aliases": [],
+      "description": "Ordena la palabra desordenada y gana monedas",
+      "usage": "[palabra|cancelar]",
+      "category": "juegos"
+    },
+    {
+      "name": "destino",
+      "base": "suerte",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta tu fortuna diaria y recibe una pequeña recompensa",
+      "usage": "",
+      "category": "juegos"
+    },
+    {
+      "name": "devjob",
+      "base": "programar",
+      "primary": false,
+      "aliases": [],
+      "description": "Trabaja como programador freelance y gana NovitaCoins",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "devs",
+      "base": "repo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
+      "usage": "[cambios|staff|commits] [cantidad]",
+      "category": "sistema"
+    },
+    {
+      "name": "diario",
+      "base": "claim",
+      "primary": false,
+      "aliases": [],
+      "description": "Reclama tu recompensa diaria y las recompensas pendientes de nekos",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "dias",
+      "base": "racha",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra cuántos días llevas usando el bot y tu racha",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "dibuja",
+      "base": "imagine",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
+      "usage": "<descripción>",
+      "category": "ia"
+    },
+    {
+      "name": "dice",
+      "base": "dado",
+      "primary": false,
+      "aliases": [],
+      "description": "Lanza un dado y apuesta monedas si quieres",
+      "usage": "[apuesta]",
+      "category": "juegos"
+    },
+    {
+      "name": "divisas",
+      "base": "dolar",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta el tipo de cambio actual entre monedas",
+      "usage": "[moneda base]",
+      "category": "info"
+    },
+    {
+      "name": "dlvideo",
+      "base": "videodl",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga video de cualquier sitio compatible con yt-dlp",
+      "usage": "🎬 *DESCARGA UNIVERSAL* 🔗 Uso: */videodl <enlace>* ✨ Ejemplo: */videodl https://www.dailymotion.com/video/xbucbr2* _Funciona con YouTube, Dailymotion, Streamable, Archive, Coub y cientos de sitios más._",
+      "category": "descargas"
+    },
+    {
+      "name": "dm",
+      "base": "dailymotion",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video de Dailymotion",
+      "usage": "🎥 *DESCARGA DE DAILYMOTION* 🔗 Uso: */dailymotion <enlace>* ✨ Ejemplo: */dailymotion https://www.dailymotion.com/video/xbucbr2*",
+      "category": "descargas"
+    },
+    {
       "name": "dns",
       "base": "dns",
       "primary": true,
@@ -2492,22 +2750,40 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "resolver",
-      "base": "dns",
+      "name": "documento",
+      "base": "word",
       "primary": false,
       "aliases": [],
-      "description": "Consulta los registros DNS de un dominio",
-      "usage": "<dominio> [tipo]",
-      "category": "info"
+      "description": "Crea un documento Word (.docx) con tu texto",
+      "usage": "",
+      "category": "utilidades"
     },
     {
-      "name": "registrosdns",
-      "base": "dns",
+      "name": "docx",
+      "base": "word",
       "primary": false,
       "aliases": [],
-      "description": "Consulta los registros DNS de un dominio",
-      "usage": "<dominio> [tipo]",
-      "category": "info"
+      "description": "Crea un documento Word (.docx) con tu texto",
+      "usage": "",
+      "category": "utilidades"
+    },
+    {
+      "name": "dog",
+      "base": "perro",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía una foto aleatoria de un perro",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "dogs",
+      "base": "perro",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía una foto aleatoria de un perro",
+      "usage": "",
+      "category": "entretenimiento"
     },
     {
       "name": "dolar",
@@ -2533,31 +2809,22 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "cambio",
-      "base": "dolar",
+      "name": "domain",
+      "base": "dominio",
       "primary": false,
       "aliases": [],
-      "description": "Consulta el tipo de cambio actual entre monedas",
-      "usage": "[moneda base]",
+      "description": "Consulta la información WHOIS/RDAP de un dominio",
+      "usage": "<dominio>",
       "category": "info"
     },
     {
-      "name": "divisas",
-      "base": "dolar",
+      "name": "domicilio",
+      "base": "repartir",
       "primary": false,
       "aliases": [],
-      "description": "Consulta el tipo de cambio actual entre monedas",
-      "usage": "[moneda base]",
-      "category": "info"
-    },
-    {
-      "name": "tipo",
-      "base": "dolar",
-      "primary": false,
-      "aliases": [],
-      "description": "Consulta el tipo de cambio actual entre monedas",
-      "usage": "[moneda base]",
-      "category": "info"
+      "description": "Haz entregas a domicilio y gana NovitaCoins",
+      "usage": "",
+      "category": "economia"
     },
     {
       "name": "dominio",
@@ -2573,30 +2840,30 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "whois",
-      "base": "dominio",
+      "name": "duelopokemon",
+      "base": "pokebatalla",
       "primary": false,
       "aliases": [],
-      "description": "Consulta la información WHOIS/RDAP de un dominio",
-      "usage": "<dominio>",
-      "category": "info"
+      "description": "Batalla Pokémon 3 vs 3 contra otro jugador o un rival aleatorio",
+      "usage": "[@usuario]",
+      "category": "pokemon"
     },
     {
-      "name": "rdap",
-      "base": "dominio",
+      "name": "dueñobot",
+      "base": "setowner",
       "primary": false,
       "aliases": [],
-      "description": "Consulta la información WHOIS/RDAP de un dominio",
-      "usage": "<dominio>",
-      "category": "info"
+      "description": "Cambia el dueño de tu jadibot (el principal no se puede transferir)",
+      "usage": "@usuario",
+      "category": "admin"
     },
     {
-      "name": "domain",
-      "base": "dominio",
+      "name": "earthquake",
+      "base": "sismo",
       "primary": false,
       "aliases": [],
-      "description": "Consulta la información WHOIS/RDAP de un dominio",
-      "usage": "<dominio>",
+      "description": "Muestra los sismos más recientes del mundo en tiempo real",
+      "usage": "[magnitud] [lugar]",
       "category": "info"
     },
     {
@@ -2612,22 +2879,58 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "cumple",
-      "base": "edad",
+      "name": "efectovoz",
+      "base": "vozefecto",
       "primary": false,
       "aliases": [],
-      "description": "Calcula tu edad exacta y tu próximo cumpleaños",
-      "usage": "<dd/mm/aaaa>",
-      "category": "utilidades"
+      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
+      "usage": "<efecto> [responde a un audio o video]",
+      "category": "multimedia"
     },
     {
-      "name": "nacimiento",
-      "base": "edad",
+      "name": "eliminar",
+      "base": "del",
       "primary": false,
       "aliases": [],
-      "description": "Calcula tu edad exacta y tu próximo cumpleaños",
-      "usage": "<dd/mm/aaaa>",
-      "category": "utilidades"
+      "description": "Borra un mensaje respondido (solo dueño o administradores)",
+      "usage": "[responde al mensaje]",
+      "category": "admin"
+    },
+    {
+      "name": "elpendejo",
+      "base": "pendejo",
+      "primary": false,
+      "aliases": [],
+      "description": "Elige al pendejo oficial del grupo al azar",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "empresa",
+      "base": "negocio",
+      "primary": false,
+      "aliases": [],
+      "description": "Compra un negocio y cobra ingresos cada cierto tiempo",
+      "usage": "[comprar <id>|cobrar|lista]",
+      "category": "economia"
+    },
+    {
+      "name": "encender",
+      "base": "admin",
+      "primary": false,
+      "aliases": [],
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
+      "category": "admin"
+    },
+    {
+      "name": "encendido",
+      "base": "uptime",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra cuánto tiempo lleva activo el bot",
+      "usage": "",
+      "category": "sistema"
     },
     {
       "name": "encuesta",
@@ -2644,40 +2947,117 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "poll",
-      "base": "encuesta",
+      "name": "enlace",
+      "base": "link",
       "primary": false,
       "aliases": [],
-      "description": "Crea una encuesta rápida en el chat",
-      "usage": "<pregunta> | <opción 1> | <opción 2> ...",
-      "category": "utilidades"
+      "description": "Obtiene el enlace de invitación del grupo actual",
+      "usage": "",
+      "category": "admin"
     },
     {
-      "name": "votacion",
-      "base": "encuesta",
+      "name": "enlacegrupo",
+      "base": "link",
       "primary": false,
       "aliases": [],
-      "description": "Crea una encuesta rápida en el chat",
-      "usage": "<pregunta> | <opción 1> | <opción 2> ...",
-      "category": "utilidades"
+      "description": "Obtiene el enlace de invitación del grupo actual",
+      "usage": "",
+      "category": "admin"
     },
     {
-      "name": "votación",
-      "base": "encuesta",
+      "name": "enviar",
+      "base": "transferir",
       "primary": false,
       "aliases": [],
-      "description": "Crea una encuesta rápida en el chat",
-      "usage": "<pregunta> | <opción 1> | <opción 2> ...",
-      "category": "utilidades"
+      "description": "Transfiere monedas a otro usuario (comisión del 2%)",
+      "usage": "@usuario <cantidad>",
+      "category": "economia"
     },
     {
-      "name": "crearencuesta",
-      "base": "encuesta",
+      "name": "equipo",
+      "base": "staff",
       "primary": false,
       "aliases": [],
-      "description": "Crea una encuesta rápida en el chat",
-      "usage": "<pregunta> | <opción 1> | <opción 2> ...",
-      "category": "utilidades"
+      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
+      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
+      "category": "staff"
+    },
+    {
+      "name": "equipopokemon",
+      "base": "pokeequipo",
+      "primary": false,
+      "aliases": [],
+      "description": "Gestiona tu equipo Pokémon: ver, reroll, elegir, apodos y orden",
+      "usage": "[reroll [1-3]|set <1-3> <pokémon>|info <1-3|nombre>|lista [tipo]|buscar <nombre>|apodo <1-3> <nombre>|orden <1> <2> <3>]",
+      "category": "pokemon"
+    },
+    {
+      "name": "err",
+      "base": "error",
+      "primary": false,
+      "aliases": [],
+      "description": "Revisa los errores reales del bot (dueño)",
+      "usage": "[list|stats|clear|E-0001|test]",
+      "category": "sistema"
+    },
+    {
+      "name": "error",
+      "base": "error",
+      "primary": true,
+      "aliases": [
+        "errores",
+        "err",
+        "errors",
+        "fallos"
+      ],
+      "description": "Revisa los errores reales del bot (dueño)",
+      "usage": "[list|stats|clear|E-0001|test]",
+      "category": "sistema"
+    },
+    {
+      "name": "errores",
+      "base": "error",
+      "primary": false,
+      "aliases": [],
+      "description": "Revisa los errores reales del bot (dueño)",
+      "usage": "[list|stats|clear|E-0001|test]",
+      "category": "sistema"
+    },
+    {
+      "name": "errors",
+      "base": "error",
+      "primary": false,
+      "aliases": [],
+      "description": "Revisa los errores reales del bot (dueño)",
+      "usage": "[list|stats|clear|E-0001|test]",
+      "category": "sistema"
+    },
+    {
+      "name": "espacio",
+      "base": "nasa",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca imágenes del archivo de la NASA",
+      "usage": "<búsqueda>",
+      "category": "info"
+    },
+    {
+      "name": "estacionespacial",
+      "base": "iss",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra la ubicación actual de la Estación Espacial Internacional",
+      "usage": "",
+      "category": "info"
+    },
+    {
+      "name": "estadobackup",
+      "base": "backupinfo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra información detallada del backup local y remoto",
+      "usage": "[archivos]",
+      "category": "sistema"
     },
     {
       "name": "estadogrupo",
@@ -2695,49 +3075,76 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "statusgrupo",
-      "base": "estadogrupo",
+      "name": "estadostaff",
+      "base": "st",
       "primary": false,
       "aliases": [],
-      "description": "Muestra si antibot, antilink y otras protecciones están ON u OFF",
-      "usage": "",
+      "description": "Panel del staff: últimos reinicios, rangos y estado del bot",
+      "usage": "[reinicios|rangos|menu|ver|revisiones|ayuda]",
+      "category": "staff"
+    },
+    {
+      "name": "estilo",
+      "base": "setstyle",
+      "primary": false,
+      "aliases": [],
+      "description": "Activa o desactiva el marco visual de las respuestas",
+      "usage": "on|off|reset",
       "category": "admin"
     },
     {
-      "name": "vergrupo",
-      "base": "estadogrupo",
+      "name": "eth",
+      "base": "cripto",
       "primary": false,
       "aliases": [],
-      "description": "Muestra si antibot, antilink y otras protecciones están ON u OFF",
-      "usage": "",
+      "description": "Consulta precios y variación de criptomonedas en dólares y soles",
+      "usage": "[moneda]",
+      "category": "info"
+    },
+    {
+      "name": "expulsar",
+      "base": "kick",
+      "primary": false,
+      "aliases": [],
+      "description": "Expulsa a un usuario mencionado del grupo",
+      "usage": "@usuario",
       "category": "admin"
     },
     {
-      "name": "panelgrupo",
-      "base": "estadogrupo",
+      "name": "facebook",
+      "base": "fbdl",
       "primary": false,
       "aliases": [],
-      "description": "Muestra si antibot, antilink y otras protecciones están ON u OFF",
-      "usage": "",
-      "category": "admin"
+      "description": "Descarga un video de Facebook",
+      "usage": "<enlace de Facebook>",
+      "category": "descargas"
     },
     {
-      "name": "seguridadgrupo",
-      "base": "estadogrupo",
+      "name": "fact",
+      "base": "curiosidad",
       "primary": false,
       "aliases": [],
-      "description": "Muestra si antibot, antilink y otras protecciones están ON u OFF",
+      "description": "Comparte un dato curioso aleatorio",
       "usage": "",
-      "category": "admin"
+      "category": "entretenimiento"
     },
     {
-      "name": "configgrupo",
-      "base": "estadogrupo",
+      "name": "fallos",
+      "base": "error",
       "primary": false,
       "aliases": [],
-      "description": "Muestra si antibot, antilink y otras protecciones están ON u OFF",
-      "usage": "",
-      "category": "admin"
+      "description": "Revisa los errores reales del bot (dueño)",
+      "usage": "[list|stats|clear|E-0001|test]",
+      "category": "sistema"
+    },
+    {
+      "name": "fb",
+      "base": "fbdl",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video de Facebook",
+      "usage": "<enlace de Facebook>",
+      "category": "descargas"
     },
     {
       "name": "fbdl",
@@ -2753,24 +3160,6 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "facebook",
-      "base": "fbdl",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video de Facebook",
-      "usage": "<enlace de Facebook>",
-      "category": "descargas"
-    },
-    {
-      "name": "fb",
-      "base": "fbdl",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video de Facebook",
-      "usage": "<enlace de Facebook>",
-      "category": "descargas"
-    },
-    {
       "name": "fbvideo",
       "base": "fbdl",
       "primary": false,
@@ -2778,6 +3167,24 @@ window.NOVITA_DATA = {
       "description": "Descarga un video de Facebook",
       "usage": "<enlace de Facebook>",
       "category": "descargas"
+    },
+    {
+      "name": "feed",
+      "base": "alimentar",
+      "primary": false,
+      "aliases": [],
+      "description": "Alimenta a tu mascota para subir su comida y felicidad",
+      "usage": "[número o nombre]",
+      "category": "mascotas"
+    },
+    {
+      "name": "feriado",
+      "base": "feriados",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los próximos feriados de un país",
+      "usage": "[código de país]",
+      "category": "info"
     },
     {
       "name": "feriados",
@@ -2793,13 +3200,403 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "feriado",
-      "base": "feriados",
+      "name": "fight",
+      "base": "pelea",
       "primary": false,
       "aliases": [],
-      "description": "Muestra los próximos feriados de un país",
-      "usage": "[código de país]",
+      "description": "Pelea contra un rival y apuesta monedas",
+      "usage": "<cantidad|todo>",
+      "category": "juegos"
+    },
+    {
+      "name": "figu",
+      "base": "sticker",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte una imagen en sticker respondiendo a ella o con el comando en el pie de foto",
+      "usage": "",
+      "category": "multimedia"
+    },
+    {
+      "name": "fish",
+      "base": "pescar",
+      "primary": false,
+      "aliases": [],
+      "description": "Pesca y gana NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "flip",
+      "base": "moneda",
+      "primary": false,
+      "aliases": [],
+      "description": "Lanza una moneda y apuesta a cara o cruz",
+      "usage": "[cara|cruz] [apuesta]",
+      "category": "juegos"
+    },
+    {
+      "name": "flirt",
+      "base": "piropo",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía un piropo aleatorio",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "flux",
+      "base": "imagine",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
+      "usage": "<descripción>",
+      "category": "ia"
+    },
+    {
+      "name": "fortuna",
+      "base": "suerte",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta tu fortuna diaria y recibe una pequeña recompensa",
+      "usage": "",
+      "category": "juegos"
+    },
+    {
+      "name": "frase",
+      "base": "frase",
+      "primary": true,
+      "aliases": [
+        "consejo",
+        "motivacion",
+        "motivación"
+      ],
+      "description": "Envía una frase motivacional aleatoria",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "freelance",
+      "base": "programar",
+      "primary": false,
+      "aliases": [],
+      "description": "Trabaja como programador freelance y gana NovitaCoins",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "freelancer",
+      "base": "programar",
+      "primary": false,
+      "aliases": [],
+      "description": "Trabaja como programador freelance y gana NovitaCoins",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "gato",
+      "base": "gato",
+      "primary": true,
+      "aliases": [
+        "cat",
+        "gatos",
+        "meow",
+        "kitty"
+      ],
+      "description": "Envía una foto de un gato aleatorio",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "gatos",
+      "base": "gato",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía una foto de un gato aleatorio",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "gemini",
+      "base": "ia",
+      "primary": false,
+      "aliases": [],
+      "description": "Conversa con la IA, descarga música, videos y enlaces",
+      "usage": "<mensaje|descarga ...>",
+      "category": "ia"
+    },
+    {
+      "name": "generar",
+      "base": "imagine",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
+      "usage": "<descripción>",
+      "category": "ia"
+    },
+    {
+      "name": "generarqr",
+      "base": "qrgen",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera un código QR a partir de un texto o enlace",
+      "usage": "<texto o enlace>",
+      "category": "utilidades"
+    },
+    {
+      "name": "geoip",
+      "base": "ip",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra información pública de una dirección IP",
+      "usage": "[dirección ip]",
       "category": "info"
+    },
+    {
+      "name": "gh",
+      "base": "github",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra información de un usuario o repositorio de GitHub",
+      "usage": "<usuario> o <usuario/repositorio>",
+      "category": "info"
+    },
+    {
+      "name": "git",
+      "base": "github",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra información de un usuario o repositorio de GitHub",
+      "usage": "<usuario> o <usuario/repositorio>",
+      "category": "info"
+    },
+    {
+      "name": "github",
+      "base": "github",
+      "primary": true,
+      "aliases": [
+        "git",
+        "gh"
+      ],
+      "description": "Muestra información de un usuario o repositorio de GitHub",
+      "usage": "<usuario> o <usuario/repositorio>",
+      "category": "info"
+    },
+    {
+      "name": "glomp",
+      "base": "hug",
+      "primary": false,
+      "aliases": [],
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "google",
+      "base": "buscar",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca información y enlaces en internet",
+      "usage": "<texto>",
+      "category": "info"
+    },
+    {
+      "name": "gpt",
+      "base": "ia",
+      "primary": false,
+      "aliases": [],
+      "description": "Conversa con la IA, descarga música, videos y enlaces",
+      "usage": "<mensaje|descarga ...>",
+      "category": "ia"
+    },
+    {
+      "name": "groupclose",
+      "base": "cerrar",
+      "primary": false,
+      "aliases": [],
+      "description": "Cierra el grupo para que solo los administradores escriban",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "groupopen",
+      "base": "abrir",
+      "primary": false,
+      "aliases": [],
+      "description": "Abre el grupo para que todos los miembros puedan escribir",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "grupoauto",
+      "base": "horario",
+      "primary": false,
+      "aliases": [],
+      "description": "Programa la apertura y el cierre automático del grupo",
+      "usage": "<cerrar|abrir HH:MM|off|on|borrar>",
+      "category": "admin"
+    },
+    {
+      "name": "guess",
+      "base": "adivina",
+      "primary": false,
+      "aliases": [],
+      "description": "Adivina un número del 1 al 100 y gana monedas",
+      "usage": "[número|cancelar]",
+      "category": "juegos"
+    },
+    {
+      "name": "hablar",
+      "base": "tts",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte texto en audio o nota de voz, con idiomas y velocidad",
+      "usage": "[idioma|nota|lento|rápido|traducir <idioma>] <texto>",
+      "category": "multimedia"
+    },
+    {
+      "name": "hachazo",
+      "base": "talar",
+      "primary": false,
+      "aliases": [],
+      "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "halago",
+      "base": "piropo",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía un piropo aleatorio",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "handhold",
+      "base": "hug",
+      "primary": false,
+      "aliases": [],
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "hangman",
+      "base": "ahorcado",
+      "primary": false,
+      "aliases": [],
+      "description": "Juega al ahorcado y gana monedas",
+      "usage": "[letra|palabra|cancelar]",
+      "category": "juegos"
+    },
+    {
+      "name": "hash",
+      "base": "hash",
+      "primary": true,
+      "aliases": [
+        "md5",
+        "sha1",
+        "sha256",
+        "sha512"
+      ],
+      "description": "Genera el hash MD5, SHA-1, SHA-256 o SHA-512 de un texto",
+      "usage": "[algoritmo] <texto>",
+      "category": "utilidades"
+    },
+    {
+      "name": "hello",
+      "base": "hola",
+      "primary": false,
+      "aliases": [],
+      "description": "Te saluda de forma sencilla, sin usar inteligencia artificial",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "help",
+      "base": "menu",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el menú completo con todos los comandos, sin resumen y sin recortar el contenido",
+      "usage": "",
+      "category": "sistema"
+    },
+    {
+      "name": "hex",
+      "base": "color",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte colores entre HEX, RGB y HSL",
+      "usage": "<hex o rgb>",
+      "category": "utilidades"
+    },
+    {
+      "name": "hi",
+      "base": "hola",
+      "primary": false,
+      "aliases": [],
+      "description": "Te saluda de forma sencilla, sin usar inteligencia artificial",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "highfive",
+      "base": "hug",
+      "primary": false,
+      "aliases": [],
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "hipodromo",
+      "base": "carrera",
+      "primary": false,
+      "aliases": [],
+      "description": "Apuesta por un caballo y gana 3 veces tu apuesta",
+      "usage": "<1-4> <cantidad|todo>",
+      "category": "juegos"
+    },
+    {
+      "name": "hipódromo",
+      "base": "carrera",
+      "primary": false,
+      "aliases": [],
+      "description": "Apuesta por un caballo y gana 3 veces tu apuesta",
+      "usage": "<1-4> <cantidad|todo>",
+      "category": "juegos"
+    },
+    {
+      "name": "historial",
+      "base": "repo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
+      "usage": "[cambios|staff|commits] [cantidad]",
+      "category": "sistema"
+    },
+    {
+      "name": "hola",
+      "base": "hola",
+      "primary": true,
+      "aliases": [
+        "hello",
+        "hi",
+        "holaa"
+      ],
+      "description": "Te saluda de forma sencilla, sin usar inteligencia artificial",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "holaa",
+      "base": "hola",
+      "primary": false,
+      "aliases": [],
+      "description": "Te saluda de forma sencilla, sin usar inteligencia artificial",
+      "usage": "",
+      "category": "entretenimiento"
     },
     {
       "name": "holiday",
@@ -2820,216 +3617,6 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "frase",
-      "base": "frase",
-      "primary": true,
-      "aliases": [
-        "consejo",
-        "motivacion",
-        "motivación"
-      ],
-      "description": "Envía una frase motivacional aleatoria",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "consejo",
-      "base": "frase",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía una frase motivacional aleatoria",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "motivacion",
-      "base": "frase",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía una frase motivacional aleatoria",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "motivación",
-      "base": "frase",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía una frase motivacional aleatoria",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "gato",
-      "base": "gato",
-      "primary": true,
-      "aliases": [
-        "cat",
-        "gatos",
-        "meow",
-        "kitty"
-      ],
-      "description": "Envía una foto de un gato aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "cat",
-      "base": "gato",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía una foto de un gato aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "gatos",
-      "base": "gato",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía una foto de un gato aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "meow",
-      "base": "gato",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía una foto de un gato aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "kitty",
-      "base": "gato",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía una foto de un gato aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "github",
-      "base": "github",
-      "primary": true,
-      "aliases": [
-        "git",
-        "gh"
-      ],
-      "description": "Muestra información de un usuario o repositorio de GitHub",
-      "usage": "<usuario> o <usuario/repositorio>",
-      "category": "info"
-    },
-    {
-      "name": "git",
-      "base": "github",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra información de un usuario o repositorio de GitHub",
-      "usage": "<usuario> o <usuario/repositorio>",
-      "category": "info"
-    },
-    {
-      "name": "gh",
-      "base": "github",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra información de un usuario o repositorio de GitHub",
-      "usage": "<usuario> o <usuario/repositorio>",
-      "category": "info"
-    },
-    {
-      "name": "hash",
-      "base": "hash",
-      "primary": true,
-      "aliases": [
-        "md5",
-        "sha1",
-        "sha256",
-        "sha512"
-      ],
-      "description": "Genera el hash MD5, SHA-1, SHA-256 o SHA-512 de un texto",
-      "usage": "[algoritmo] <texto>",
-      "category": "utilidades"
-    },
-    {
-      "name": "md5",
-      "base": "hash",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera el hash MD5, SHA-1, SHA-256 o SHA-512 de un texto",
-      "usage": "[algoritmo] <texto>",
-      "category": "utilidades"
-    },
-    {
-      "name": "sha1",
-      "base": "hash",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera el hash MD5, SHA-1, SHA-256 o SHA-512 de un texto",
-      "usage": "[algoritmo] <texto>",
-      "category": "utilidades"
-    },
-    {
-      "name": "sha256",
-      "base": "hash",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera el hash MD5, SHA-1, SHA-256 o SHA-512 de un texto",
-      "usage": "[algoritmo] <texto>",
-      "category": "utilidades"
-    },
-    {
-      "name": "sha512",
-      "base": "hash",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera el hash MD5, SHA-1, SHA-256 o SHA-512 de un texto",
-      "usage": "[algoritmo] <texto>",
-      "category": "utilidades"
-    },
-    {
-      "name": "hola",
-      "base": "hola",
-      "primary": true,
-      "aliases": [
-        "hello",
-        "hi",
-        "holaa"
-      ],
-      "description": "Te saluda de forma sencilla, sin usar inteligencia artificial",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "hello",
-      "base": "hola",
-      "primary": false,
-      "aliases": [],
-      "description": "Te saluda de forma sencilla, sin usar inteligencia artificial",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "hi",
-      "base": "hola",
-      "primary": false,
-      "aliases": [],
-      "description": "Te saluda de forma sencilla, sin usar inteligencia artificial",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "holaa",
-      "base": "hola",
-      "primary": false,
-      "aliases": [],
-      "description": "Te saluda de forma sencilla, sin usar inteligencia artificial",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
       "name": "hora",
       "base": "hora",
       "primary": true,
@@ -3044,34 +3631,7 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "time",
-      "base": "hora",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la hora y fecha actuales en cualquier ciudad del mundo",
-      "usage": "<ciudad>",
-      "category": "info"
-    },
-    {
-      "name": "reloj",
-      "base": "hora",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la hora y fecha actuales en cualquier ciudad del mundo",
-      "usage": "<ciudad>",
-      "category": "info"
-    },
-    {
       "name": "horamundial",
-      "base": "hora",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la hora y fecha actuales en cualquier ciudad del mundo",
-      "usage": "<ciudad>",
-      "category": "info"
-    },
-    {
-      "name": "worldtime",
       "base": "hora",
       "primary": false,
       "aliases": [],
@@ -3094,15 +3654,6 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "horarios",
-      "base": "horario",
-      "primary": false,
-      "aliases": [],
-      "description": "Programa la apertura y el cierre automático del grupo",
-      "usage": "<cerrar|abrir HH:MM|off|on|borrar>",
-      "category": "admin"
-    },
-    {
       "name": "horariogrupo",
       "base": "horario",
       "primary": false,
@@ -3112,16 +3663,7 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "grupoauto",
-      "base": "horario",
-      "primary": false,
-      "aliases": [],
-      "description": "Programa la apertura y el cierre automático del grupo",
-      "usage": "<cerrar|abrir HH:MM|off|on|borrar>",
-      "category": "admin"
-    },
-    {
-      "name": "autogrupo",
+      "name": "horarios",
       "base": "horario",
       "primary": false,
       "aliases": [],
@@ -3153,31 +3695,45 @@ window.NOVITA_DATA = {
       "category": "entretenimiento"
     },
     {
-      "name": "zodiaco",
-      "base": "horoscopo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu horóscopo diario según tu signo o fecha de nacimiento",
-      "usage": "<signo o dd/mm>",
-      "category": "entretenimiento"
+      "name": "hug",
+      "base": "hug",
+      "primary": true,
+      "aliases": [
+        "kiss",
+        "kill",
+        "slap",
+        "pat",
+        "cuddle",
+        "bite",
+        "lick",
+        "poke",
+        "tickle",
+        "highfive",
+        "handhold",
+        "bonk",
+        "glomp"
+      ],
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
     },
     {
-      "name": "zodíaco",
-      "base": "horoscopo",
+      "name": "hunt",
+      "base": "cazar",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tu horóscopo diario según tu signo o fecha de nacimiento",
-      "usage": "<signo o dd/mm>",
-      "category": "entretenimiento"
+      "description": "Caza animales para ganar NovitaCoins",
+      "usage": "",
+      "category": "economia"
     },
     {
-      "name": "signo",
-      "base": "horoscopo",
+      "name": "husbando",
+      "base": "neko",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tu horóscopo diario según tu signo o fecha de nacimiento",
-      "usage": "<signo o dd/mm>",
-      "category": "entretenimiento"
+      "description": "Envía imágenes neko aleatorias y gana NovitaCoins",
+      "usage": "[categoría] [cantidad]",
+      "category": "anime"
     },
     {
       "name": "ia",
@@ -3194,40 +3750,31 @@ window.NOVITA_DATA = {
       "category": "ia"
     },
     {
-      "name": "ai",
-      "base": "ia",
+      "name": "id",
+      "base": "owner",
       "primary": false,
       "aliases": [],
-      "description": "Conversa con la IA, descarga música, videos y enlaces",
-      "usage": "<mensaje|descarga ...>",
-      "category": "ia"
+      "description": "Muestra tu JID/número y si estás registrado como dueño",
+      "usage": "",
+      "category": "info"
     },
     {
-      "name": "gemini",
-      "base": "ia",
+      "name": "idioma",
+      "base": "setlang",
       "primary": false,
       "aliases": [],
-      "description": "Conversa con la IA, descarga música, videos y enlaces",
-      "usage": "<mensaje|descarga ...>",
-      "category": "ia"
+      "description": "Cambia el idioma de este bot (es, en o pt)",
+      "usage": "<es|en|pt>",
+      "category": "admin"
     },
     {
-      "name": "chatgpt",
-      "base": "ia",
+      "name": "ig",
+      "base": "igdl",
       "primary": false,
       "aliases": [],
-      "description": "Conversa con la IA, descarga música, videos y enlaces",
-      "usage": "<mensaje|descarga ...>",
-      "category": "ia"
-    },
-    {
-      "name": "gpt",
-      "base": "ia",
-      "primary": false,
-      "aliases": [],
-      "description": "Conversa con la IA, descarga música, videos y enlaces",
-      "usage": "<mensaje|descarga ...>",
-      "category": "ia"
+      "description": "Descarga un video o reel de Instagram",
+      "usage": "<enlace de Instagram>",
+      "category": "descargas"
     },
     {
       "name": "igdl",
@@ -3244,40 +3791,13 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "instagram",
-      "base": "igdl",
+      "name": "imagen",
+      "base": "imagine",
       "primary": false,
       "aliases": [],
-      "description": "Descarga un video o reel de Instagram",
-      "usage": "<enlace de Instagram>",
-      "category": "descargas"
-    },
-    {
-      "name": "ig",
-      "base": "igdl",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video o reel de Instagram",
-      "usage": "<enlace de Instagram>",
-      "category": "descargas"
-    },
-    {
-      "name": "reels",
-      "base": "igdl",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video o reel de Instagram",
-      "usage": "<enlace de Instagram>",
-      "category": "descargas"
-    },
-    {
-      "name": "insta",
-      "base": "igdl",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video o reel de Instagram",
-      "usage": "<enlace de Instagram>",
-      "category": "descargas"
+      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
+      "usage": "<descripción>",
+      "category": "ia"
     },
     {
       "name": "imagine",
@@ -3296,60 +3816,6 @@ window.NOVITA_DATA = {
       "category": "ia"
     },
     {
-      "name": "imagen",
-      "base": "imagine",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
-      "usage": "<descripción>",
-      "category": "ia"
-    },
-    {
-      "name": "imgai",
-      "base": "imagine",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
-      "usage": "<descripción>",
-      "category": "ia"
-    },
-    {
-      "name": "dibuja",
-      "base": "imagine",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
-      "usage": "<descripción>",
-      "category": "ia"
-    },
-    {
-      "name": "pintar",
-      "base": "imagine",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
-      "usage": "<descripción>",
-      "category": "ia"
-    },
-    {
-      "name": "generar",
-      "base": "imagine",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
-      "usage": "<descripción>",
-      "category": "ia"
-    },
-    {
-      "name": "flux",
-      "base": "imagine",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
-      "usage": "<descripción>",
-      "category": "ia"
-    },
-    {
       "name": "imc",
       "base": "imc",
       "primary": true,
@@ -3362,22 +3828,13 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "masa",
-      "base": "imc",
+      "name": "imgai",
+      "base": "imagine",
       "primary": false,
       "aliases": [],
-      "description": "Calcula tu índice de masa corporal (IMC)",
-      "usage": "<peso> <altura>",
-      "category": "utilidades"
-    },
-    {
-      "name": "peso",
-      "base": "imc",
-      "primary": false,
-      "aliases": [],
-      "description": "Calcula tu índice de masa corporal (IMC)",
-      "usage": "<peso> <altura>",
-      "category": "utilidades"
+      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
+      "usage": "<descripción>",
+      "category": "ia"
     },
     {
       "name": "imgur",
@@ -3415,6 +3872,15 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
+      "name": "infobackup",
+      "base": "backupinfo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra información detallada del backup local y remoto",
+      "usage": "[archivos]",
+      "category": "sistema"
+    },
+    {
       "name": "infobot",
       "base": "info",
       "primary": false,
@@ -3424,40 +3890,13 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
-      "name": "botinfo",
-      "base": "info",
+      "name": "infoprem",
+      "base": "infopremium",
       "primary": false,
       "aliases": [],
-      "description": "Muestra información, estado y estadísticas del bot",
+      "description": "Muestra qué incluye un jadibot premium, novedades, precios y comandos",
       "usage": "",
-      "category": "sistema"
-    },
-    {
-      "name": "acerca",
-      "base": "info",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra información, estado y estadísticas del bot",
-      "usage": "",
-      "category": "sistema"
-    },
-    {
-      "name": "about",
-      "base": "info",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra información, estado y estadísticas del bot",
-      "usage": "",
-      "category": "sistema"
-    },
-    {
-      "name": "creador",
-      "base": "info",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra información, estado y estadísticas del bot",
-      "usage": "",
-      "category": "sistema"
+      "category": "economia"
     },
     {
       "name": "infopremium",
@@ -3473,31 +3912,69 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "premiuminfo",
-      "base": "infopremium",
+      "name": "inforespaldo",
+      "base": "backupinfo",
       "primary": false,
       "aliases": [],
-      "description": "Muestra qué incluye un jadibot premium, novedades, precios y comandos",
-      "usage": "",
-      "category": "economia"
+      "description": "Muestra información detallada del backup local y remoto",
+      "usage": "[archivos]",
+      "category": "sistema"
     },
     {
-      "name": "infoprem",
-      "base": "infopremium",
+      "name": "infovideo",
+      "base": "ytinfo",
       "primary": false,
       "aliases": [],
-      "description": "Muestra qué incluye un jadibot premium, novedades, precios y comandos",
-      "usage": "",
-      "category": "economia"
+      "description": "Muestra información de un video de YouTube",
+      "usage": "<enlace o búsqueda>",
+      "category": "descargas"
     },
     {
-      "name": "beneficiospremium",
-      "base": "infopremium",
+      "name": "infoyt",
+      "base": "ytinfo",
       "primary": false,
       "aliases": [],
-      "description": "Muestra qué incluye un jadibot premium, novedades, precios y comandos",
-      "usage": "",
-      "category": "economia"
+      "description": "Muestra información de un video de YouTube",
+      "usage": "<enlace o búsqueda>",
+      "category": "descargas"
+    },
+    {
+      "name": "inspeccionar",
+      "base": "inspect",
+      "primary": false,
+      "aliases": [],
+      "description": "Inspecciona la información de un grupo o canal de WhatsApp",
+      "usage": "[enlace de grupo o canal]",
+      "category": "info"
+    },
+    {
+      "name": "inspect",
+      "base": "inspect",
+      "primary": true,
+      "aliases": [
+        "inspeccionar"
+      ],
+      "description": "Inspecciona la información de un grupo o canal de WhatsApp",
+      "usage": "[enlace de grupo o canal]",
+      "category": "info"
+    },
+    {
+      "name": "insta",
+      "base": "igdl",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video o reel de Instagram",
+      "usage": "<enlace de Instagram>",
+      "category": "descargas"
+    },
+    {
+      "name": "instagram",
+      "base": "igdl",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video o reel de Instagram",
+      "usage": "<enlace de Instagram>",
+      "category": "descargas"
     },
     {
       "name": "interes",
@@ -3522,15 +3999,6 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "interest",
-      "base": "interes",
-      "primary": false,
-      "aliases": [],
-      "description": "Reclama el interés diario de tu saldo en el banco",
-      "usage": "",
-      "category": "economia"
-    },
-    {
       "name": "intereses",
       "base": "interes",
       "primary": false,
@@ -3540,27 +4008,22 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "invertir",
-      "base": "invertir",
-      "primary": true,
-      "aliases": [
-        "invest",
-        "inversion",
-        "inversión",
-        "bolsa"
-      ],
-      "description": "Invierte monedas con riesgo de ganar o perder",
-      "usage": "<cantidad|todo>",
+      "name": "interest",
+      "base": "interes",
+      "primary": false,
+      "aliases": [],
+      "description": "Reclama el interés diario de tu saldo en el banco",
+      "usage": "",
       "category": "economia"
     },
     {
-      "name": "invest",
-      "base": "invertir",
+      "name": "internetarchive",
+      "base": "archiveorg",
       "primary": false,
       "aliases": [],
-      "description": "Invierte monedas con riesgo de ganar o perder",
-      "usage": "<cantidad|todo>",
-      "category": "economia"
+      "description": "Descarga un video de Internet Archive",
+      "usage": "🗄️ *DESCARGA DE INTERNET ARCHIVE* 🔗 Uso: */archiveorg <enlace>* ✨ Ejemplo: */archiveorg https://archive.org/details/BigBuckBunny_124*",
+      "category": "descargas"
     },
     {
       "name": "inversion",
@@ -3581,7 +4044,21 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "bolsa",
+      "name": "invertir",
+      "base": "invertir",
+      "primary": true,
+      "aliases": [
+        "invest",
+        "inversion",
+        "inversión",
+        "bolsa"
+      ],
+      "description": "Invierte monedas con riesgo de ganar o perder",
+      "usage": "<cantidad|todo>",
+      "category": "economia"
+    },
+    {
+      "name": "invest",
       "base": "invertir",
       "primary": false,
       "aliases": [],
@@ -3614,38 +4091,11 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "promo",
-      "base": "invitar",
+      "name": "invitelink",
+      "base": "link",
       "primary": false,
       "aliases": [],
-      "description": "Genera un mensaje listo para invitar gente a Novita Bot",
-      "usage": "",
-      "category": "admin"
-    },
-    {
-      "name": "reclutar",
-      "base": "invitar",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera un mensaje listo para invitar gente a Novita Bot",
-      "usage": "",
-      "category": "admin"
-    },
-    {
-      "name": "compartir",
-      "base": "invitar",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera un mensaje listo para invitar gente a Novita Bot",
-      "usage": "",
-      "category": "admin"
-    },
-    {
-      "name": "publicidad",
-      "base": "invitar",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera un mensaje listo para invitar gente a Novita Bot",
+      "description": "Obtiene el enlace de invitación del grupo actual",
       "usage": "",
       "category": "admin"
     },
@@ -3672,39 +4122,12 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "miip",
-      "base": "ip",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra información pública de una dirección IP",
-      "usage": "[dirección ip]",
-      "category": "info"
-    },
-    {
-      "name": "geoip",
-      "base": "ip",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra información pública de una dirección IP",
-      "usage": "[dirección ip]",
-      "category": "info"
-    },
-    {
       "name": "isbn",
       "base": "isbn",
       "primary": true,
       "aliases": [
         "libroisbn"
       ],
-      "description": "Busca un libro por su código ISBN",
-      "usage": "<ISBN>",
-      "category": "info"
-    },
-    {
-      "name": "libroisbn",
-      "base": "isbn",
-      "primary": false,
-      "aliases": [],
       "description": "Busca un libro por su código ISBN",
       "usage": "<ISBN>",
       "category": "info"
@@ -3724,42 +4147,6 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "estacionespacial",
-      "base": "iss",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la ubicación actual de la Estación Espacial Internacional",
-      "usage": "",
-      "category": "info"
-    },
-    {
-      "name": "satelite",
-      "base": "iss",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la ubicación actual de la Estación Espacial Internacional",
-      "usage": "",
-      "category": "info"
-    },
-    {
-      "name": "satélite",
-      "base": "iss",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la ubicación actual de la Estación Espacial Internacional",
-      "usage": "",
-      "category": "info"
-    },
-    {
-      "name": "station",
-      "base": "iss",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la ubicación actual de la Estación Espacial Internacional",
-      "usage": "",
-      "category": "info"
-    },
-    {
       "name": "jadibot",
       "base": "jadibot",
       "primary": true,
@@ -3767,6 +4154,51 @@ window.NOVITA_DATA = {
       "description": "Gestiona los jadibots (qr, code, list, stop)",
       "usage": "",
       "category": "jadibot"
+    },
+    {
+      "name": "jadibots",
+      "base": "bots",
+      "primary": false,
+      "aliases": [],
+      "description": "Lista los jadibots principales, premium y normales",
+      "usage": "[principal|premium|normal|todos]",
+      "category": "jadibot"
+    },
+    {
+      "name": "jadibotsettings",
+      "base": "setjadibot",
+      "primary": false,
+      "aliases": [],
+      "description": "Permite o bloquea que los usuarios conecten jadibots",
+      "usage": "public|premium on|off",
+      "category": "jadibot"
+    },
+    {
+      "name": "jedi",
+      "base": "starwars",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca un personaje de Star Wars",
+      "usage": "<personaje>",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "joke",
+      "base": "chiste",
+      "primary": false,
+      "aliases": [],
+      "description": "Cuenta un chiste aleatorio",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "jugarconmascota",
+      "base": "mimarmascota",
+      "primary": false,
+      "aliases": [],
+      "description": "Juega con tu mascota para subir su felicidad",
+      "usage": "[número o nombre]",
+      "category": "mascotas"
     },
     {
       "name": "kick",
@@ -3782,31 +4214,76 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "expulsar",
-      "base": "kick",
+      "name": "kill",
+      "base": "hug",
       "primary": false,
       "aliases": [],
-      "description": "Expulsa a un usuario mencionado del grupo",
-      "usage": "@usuario",
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "kiss",
+      "base": "hug",
+      "primary": false,
+      "aliases": [],
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "kitty",
+      "base": "gato",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía una foto de un gato aleatorio",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "lang",
+      "base": "setlang",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el idioma de este bot (es, en o pt)",
+      "usage": "<es|en|pt>",
       "category": "admin"
     },
     {
-      "name": "sacar",
-      "base": "kick",
+      "name": "language",
+      "base": "setlang",
       "primary": false,
       "aliases": [],
-      "description": "Expulsa a un usuario mencionado del grupo",
-      "usage": "@usuario",
+      "description": "Cambia el idioma de este bot (es, en o pt)",
+      "usage": "<es|en|pt>",
       "category": "admin"
     },
     {
-      "name": "remove",
-      "base": "kick",
+      "name": "lenador",
+      "base": "talar",
       "primary": false,
       "aliases": [],
-      "description": "Expulsa a un usuario mencionado del grupo",
-      "usage": "@usuario",
-      "category": "admin"
+      "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "lenar",
+      "base": "talar",
+      "primary": false,
+      "aliases": [],
+      "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "leñador",
+      "base": "talar",
+      "primary": false,
+      "aliases": [],
+      "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
     },
     {
       "name": "letra",
@@ -3821,22 +4298,13 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "lyrics",
-      "base": "letra",
+      "name": "level",
+      "base": "nivel",
       "primary": false,
       "aliases": [],
-      "description": "Busca la letra de una canción",
-      "usage": "<artista> - <canción>",
-      "category": "descargas"
-    },
-    {
-      "name": "lyric",
-      "base": "letra",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca la letra de una canción",
-      "usage": "<artista> - <canción>",
-      "category": "descargas"
+      "description": "Muestra tu nivel, tu progreso y el ranking",
+      "usage": "",
+      "category": "perfil"
     },
     {
       "name": "liberar",
@@ -3848,33 +4316,6 @@ window.NOVITA_DATA = {
         "releasepet",
         "liberarmascota"
       ],
-      "description": "Libera una mascota de tu colección",
-      "usage": "<número o nombre> confirmar",
-      "category": "mascotas"
-    },
-    {
-      "name": "abandonarmascota",
-      "base": "liberar",
-      "primary": false,
-      "aliases": [],
-      "description": "Libera una mascota de tu colección",
-      "usage": "<número o nombre> confirmar",
-      "category": "mascotas"
-    },
-    {
-      "name": "soltarmascota",
-      "base": "liberar",
-      "primary": false,
-      "aliases": [],
-      "description": "Libera una mascota de tu colección",
-      "usage": "<número o nombre> confirmar",
-      "category": "mascotas"
-    },
-    {
-      "name": "releasepet",
-      "base": "liberar",
-      "primary": false,
-      "aliases": [],
       "description": "Libera una mascota de tu colección",
       "usage": "<número o nombre> confirmar",
       "category": "mascotas"
@@ -3903,21 +4344,12 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "books",
-      "base": "libro",
+      "name": "libroisbn",
+      "base": "isbn",
       "primary": false,
       "aliases": [],
-      "description": "Busca libros y muestra portada, autor y año",
-      "usage": "<título o autor>",
-      "category": "info"
-    },
-    {
-      "name": "book",
-      "base": "libro",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca libros y muestra portada, autor y año",
-      "usage": "<título o autor>",
+      "description": "Busca un libro por su código ISBN",
+      "usage": "<ISBN>",
       "category": "info"
     },
     {
@@ -3930,13 +4362,22 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "openlibrary",
-      "base": "libro",
+      "name": "lick",
+      "base": "hug",
       "primary": false,
       "aliases": [],
-      "description": "Busca libros y muestra portada, autor y año",
-      "usage": "<título o autor>",
-      "category": "info"
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "limosna",
+      "base": "mendigar",
+      "primary": false,
+      "aliases": [],
+      "description": "Pide monedas en la calle con un pequeño tiempo de espera",
+      "usage": "",
+      "category": "economia"
     },
     {
       "name": "link",
@@ -3954,7 +4395,7 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "enlace",
+      "name": "linkdelgrupo",
       "base": "link",
       "primary": false,
       "aliases": [],
@@ -3972,30 +4413,48 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "enlacegrupo",
-      "base": "link",
+      "name": "listabots",
+      "base": "bots",
       "primary": false,
       "aliases": [],
-      "description": "Obtiene el enlace de invitación del grupo actual",
-      "usage": "",
-      "category": "admin"
+      "description": "Lista los jadibots principales, premium y normales",
+      "usage": "[principal|premium|normal|todos]",
+      "category": "jadibot"
     },
     {
-      "name": "invitelink",
-      "base": "link",
+      "name": "listajadibots",
+      "base": "bots",
       "primary": false,
       "aliases": [],
-      "description": "Obtiene el enlace de invitación del grupo actual",
-      "usage": "",
-      "category": "admin"
+      "description": "Lista los jadibots principales, premium y normales",
+      "usage": "[principal|premium|normal|todos]",
+      "category": "jadibot"
     },
     {
-      "name": "linkdelgrupo",
-      "base": "link",
+      "name": "listarangos",
+      "base": "rangos",
       "primary": false,
       "aliases": [],
-      "description": "Obtiene el enlace de invitación del grupo actual",
+      "description": "Muestra todos los rangos y lo que necesitas para subir",
       "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "listayt",
+      "base": "ytplaylist",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca listas de reproducción de YouTube",
+      "usage": "<búsqueda>",
+      "category": "descargas"
+    },
+    {
+      "name": "logo",
+      "base": "setlogo",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el logo del menú usando una imagen, un enlace o un archivo",
+      "usage": "[imagen|enlace|novita|neko|reset]",
       "category": "admin"
     },
     {
@@ -4013,40 +4472,58 @@ window.NOVITA_DATA = {
       "category": "perfil"
     },
     {
-      "name": "achievements",
-      "base": "logros",
+      "name": "love",
+      "base": "amor",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tus logros y el progreso de cada uno",
+      "description": "Calcula la compatibilidad amorosa con otro usuario",
+      "usage": "@usuario",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "luck",
+      "base": "suerte",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta tu fortuna diaria y recibe una pequeña recompensa",
+      "usage": "",
+      "category": "juegos"
+    },
+    {
+      "name": "lvl",
+      "base": "nivel",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu nivel, tu progreso y el ranking",
       "usage": "",
       "category": "perfil"
     },
     {
-      "name": "achievement",
-      "base": "logros",
+      "name": "lyric",
+      "base": "letra",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tus logros y el progreso de cada uno",
-      "usage": "",
-      "category": "perfil"
+      "description": "Busca la letra de una canción",
+      "usage": "<artista> - <canción>",
+      "category": "descargas"
     },
     {
-      "name": "mislogros",
-      "base": "logros",
+      "name": "lyrics",
+      "base": "letra",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tus logros y el progreso de cada uno",
-      "usage": "",
-      "category": "perfil"
+      "description": "Busca la letra de una canción",
+      "usage": "<artista> - <canción>",
+      "category": "descargas"
     },
     {
-      "name": "medallas",
-      "base": "logros",
+      "name": "madera",
+      "base": "talar",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tus logros y el progreso de cada uno",
+      "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
       "usage": "",
-      "category": "perfil"
+      "category": "economia"
     },
     {
       "name": "manga",
@@ -4063,7 +4540,7 @@ window.NOVITA_DATA = {
       "category": "anime"
     },
     {
-      "name": "mangainfo",
+      "name": "mangabuscar",
       "base": "manga",
       "primary": false,
       "aliases": [],
@@ -4072,7 +4549,7 @@ window.NOVITA_DATA = {
       "category": "anime"
     },
     {
-      "name": "manhwa",
+      "name": "mangainfo",
       "base": "manga",
       "primary": false,
       "aliases": [],
@@ -4090,13 +4567,22 @@ window.NOVITA_DATA = {
       "category": "anime"
     },
     {
-      "name": "mangabuscar",
+      "name": "manhwa",
       "base": "manga",
       "primary": false,
       "aliases": [],
       "description": "Busca información de un manga, manhwa o manhua",
       "usage": "<título>",
       "category": "anime"
+    },
+    {
+      "name": "masa",
+      "base": "imc",
+      "primary": false,
+      "aliases": [],
+      "description": "Calcula tu índice de masa corporal (IMC)",
+      "usage": "<peso> <altura>",
+      "category": "utilidades"
     },
     {
       "name": "mascota",
@@ -4112,30 +4598,12 @@ window.NOVITA_DATA = {
       "category": "mascotas"
     },
     {
-      "name": "pet",
-      "base": "mascota",
+      "name": "mascotaactiva",
+      "base": "activarmascota",
       "primary": false,
       "aliases": [],
-      "description": "Muestra el estado de tu mascota activa",
-      "usage": "",
-      "category": "mascotas"
-    },
-    {
-      "name": "mipet",
-      "base": "mascota",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra el estado de tu mascota activa",
-      "usage": "",
-      "category": "mascotas"
-    },
-    {
-      "name": "mimascota",
-      "base": "mascota",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra el estado de tu mascota activa",
-      "usage": "",
+      "description": "Elige cuál de tus mascotas está activa",
+      "usage": "<número o nombre>",
       "category": "mascotas"
     },
     {
@@ -4153,39 +4621,12 @@ window.NOVITA_DATA = {
       "category": "mascotas"
     },
     {
-      "name": "mispets",
-      "base": "mascotas",
+      "name": "mascotastienda",
+      "base": "petshop",
       "primary": false,
       "aliases": [],
-      "description": "Lista todas tus mascotas y cuál está activa",
-      "usage": "",
-      "category": "mascotas"
-    },
-    {
-      "name": "mypets",
-      "base": "mascotas",
-      "primary": false,
-      "aliases": [],
-      "description": "Lista todas tus mascotas y cuál está activa",
-      "usage": "",
-      "category": "mascotas"
-    },
-    {
-      "name": "mismascotas",
-      "base": "mascotas",
-      "primary": false,
-      "aliases": [],
-      "description": "Lista todas tus mascotas y cuál está activa",
-      "usage": "",
-      "category": "mascotas"
-    },
-    {
-      "name": "pets",
-      "base": "mascotas",
-      "primary": false,
-      "aliases": [],
-      "description": "Lista todas tus mascotas y cuál está activa",
-      "usage": "",
+      "description": "Muestra la tienda de mascotas y sus precios",
+      "usage": "[raro|épico|legendario]",
       "category": "mascotas"
     },
     {
@@ -4200,6 +4641,24 @@ window.NOVITA_DATA = {
       ],
       "description": "Resuelve operaciones matemáticas y gana monedas",
       "usage": "[resultado|cancelar]",
+      "category": "utilidades"
+    },
+    {
+      "name": "matematica",
+      "base": "calc",
+      "primary": false,
+      "aliases": [],
+      "description": "Calcula operaciones matemáticas",
+      "usage": "<operación>",
+      "category": "utilidades"
+    },
+    {
+      "name": "matemática",
+      "base": "calc",
+      "primary": false,
+      "aliases": [],
+      "description": "Calcula operaciones matemáticas",
+      "usage": "<operación>",
       "category": "utilidades"
     },
     {
@@ -4221,22 +4680,40 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "calcula",
-      "base": "mate",
+      "name": "math",
+      "base": "calc",
       "primary": false,
       "aliases": [],
-      "description": "Resuelve operaciones matemáticas y gana monedas",
-      "usage": "[resultado|cancelar]",
+      "description": "Calcula operaciones matemáticas",
+      "usage": "<operación>",
       "category": "utilidades"
     },
     {
-      "name": "operaciones",
-      "base": "mate",
+      "name": "md5",
+      "base": "hash",
       "primary": false,
       "aliases": [],
-      "description": "Resuelve operaciones matemáticas y gana monedas",
-      "usage": "[resultado|cancelar]",
+      "description": "Genera el hash MD5, SHA-1, SHA-256 o SHA-512 de un texto",
+      "usage": "[algoritmo] <texto>",
       "category": "utilidades"
+    },
+    {
+      "name": "medallas",
+      "base": "logros",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tus logros y el progreso de cada uno",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "mejorespendejos",
+      "base": "pndtop",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el top 10 de los que más veces han sido llamados pendejos",
+      "usage": "",
+      "category": "entretenimiento"
     },
     {
       "name": "meme",
@@ -4260,15 +4737,6 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "randommeme",
-      "base": "meme",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía un meme aleatorio de Reddit",
-      "usage": "",
-      "category": "multimedia"
-    },
-    {
       "name": "memoria",
       "base": "memoria",
       "primary": true,
@@ -4282,7 +4750,7 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "secuencia",
+      "name": "memoriaemoji",
       "base": "memoria",
       "primary": false,
       "aliases": [],
@@ -4300,13 +4768,13 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "memoriaemoji",
-      "base": "memoria",
+      "name": "mencionartodos",
+      "base": "tagall",
       "primary": false,
       "aliases": [],
-      "description": "Memoriza una secuencia de emojis y gana monedas",
-      "usage": "[secuencia|cancelar]",
-      "category": "juegos"
+      "description": "Menciona a todos los miembros del grupo",
+      "usage": "[mensaje]",
+      "category": "admin"
     },
     {
       "name": "mendigar",
@@ -4323,33 +4791,6 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "beg",
-      "base": "mendigar",
-      "primary": false,
-      "aliases": [],
-      "description": "Pide monedas en la calle con un pequeño tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "pedir",
-      "base": "mendigar",
-      "primary": false,
-      "aliases": [],
-      "description": "Pide monedas en la calle con un pequeño tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "limosna",
-      "base": "mendigar",
-      "primary": false,
-      "aliases": [],
-      "description": "Pide monedas en la calle con un pequeño tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
       "name": "mendigo",
       "base": "mendigar",
       "primary": false,
@@ -4357,6 +4798,24 @@ window.NOVITA_DATA = {
       "description": "Pide monedas en la calle con un pequeño tiempo de espera",
       "usage": "",
       "category": "economia"
+    },
+    {
+      "name": "mensajero",
+      "base": "repartir",
+      "primary": false,
+      "aliases": [],
+      "description": "Haz entregas a domicilio y gana NovitaCoins",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "mentionall",
+      "base": "tagall",
+      "primary": false,
+      "aliases": [],
+      "description": "Menciona a todos los miembros del grupo",
+      "usage": "[mensaje]",
+      "category": "admin"
     },
     {
       "name": "menu",
@@ -4392,31 +4851,58 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
-      "name": "help",
-      "base": "menu",
+      "name": "menutipo",
+      "base": "setmenu",
       "primary": false,
       "aliases": [],
-      "description": "Muestra el menú completo con todos los comandos, sin resumen y sin recortar el contenido",
-      "usage": "",
-      "category": "sistema"
+      "description": "Confirma el menú completo; el modo resumen ya no está disponible",
+      "usage": "detallado|reset",
+      "category": "admin"
     },
     {
-      "name": "ayuda",
-      "base": "menu",
+      "name": "meow",
+      "base": "gato",
       "primary": false,
       "aliases": [],
-      "description": "Muestra el menú completo con todos los comandos, sin resumen y sin recortar el contenido",
+      "description": "Envía una foto de un gato aleatorio",
       "usage": "",
-      "category": "sistema"
+      "category": "entretenimiento"
     },
     {
-      "name": "comandos",
-      "base": "menu",
+      "name": "mi-racha",
+      "base": "racha",
       "primary": false,
       "aliases": [],
-      "description": "Muestra el menú completo con todos los comandos, sin resumen y sin recortar el contenido",
+      "description": "Muestra cuántos días llevas usando el bot y tu racha",
       "usage": "",
-      "category": "sistema"
+      "category": "perfil"
+    },
+    {
+      "name": "miempresa",
+      "base": "negocio",
+      "primary": false,
+      "aliases": [],
+      "description": "Compra un negocio y cobra ingresos cada cierto tiempo",
+      "usage": "[comprar <id>|cobrar|lista]",
+      "category": "economia"
+    },
+    {
+      "name": "miip",
+      "base": "ip",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra información pública de una dirección IP",
+      "usage": "[dirección ip]",
+      "category": "info"
+    },
+    {
+      "name": "mimar",
+      "base": "mimarmascota",
+      "primary": false,
+      "aliases": [],
+      "description": "Juega con tu mascota para subir su felicidad",
+      "usage": "[número o nombre]",
+      "category": "mascotas"
     },
     {
       "name": "mimarmascota",
@@ -4433,40 +4919,22 @@ window.NOVITA_DATA = {
       "category": "mascotas"
     },
     {
-      "name": "jugarconmascota",
-      "base": "mimarmascota",
+      "name": "mimascota",
+      "base": "mascota",
       "primary": false,
       "aliases": [],
-      "description": "Juega con tu mascota para subir su felicidad",
-      "usage": "[número o nombre]",
+      "description": "Muestra el estado de tu mascota activa",
+      "usage": "",
       "category": "mascotas"
     },
     {
-      "name": "acariciar",
-      "base": "mimarmascota",
+      "name": "mina",
+      "base": "minar",
       "primary": false,
       "aliases": [],
-      "description": "Juega con tu mascota para subir su felicidad",
-      "usage": "[número o nombre]",
-      "category": "mascotas"
-    },
-    {
-      "name": "petplay",
-      "base": "mimarmascota",
-      "primary": false,
-      "aliases": [],
-      "description": "Juega con tu mascota para subir su felicidad",
-      "usage": "[número o nombre]",
-      "category": "mascotas"
-    },
-    {
-      "name": "mimar",
-      "base": "mimarmascota",
-      "primary": false,
-      "aliases": [],
-      "description": "Juega con tu mascota para subir su felicidad",
-      "usage": "[número o nombre]",
-      "category": "mascotas"
+      "description": "Mina minerales y gana NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
     },
     {
       "name": "minar",
@@ -4492,13 +4960,13 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "mina",
-      "base": "minar",
+      "name": "minekos",
+      "base": "nekos",
       "primary": false,
       "aliases": [],
-      "description": "Mina minerales y gana NovitaCoins con un tiempo de espera",
+      "description": "Muestra tu colección de nekos, premios y ranking",
       "usage": "",
-      "category": "economia"
+      "category": "anime"
     },
     {
       "name": "mineria",
@@ -4519,17 +4987,67 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "misiones",
-      "base": "misiones",
-      "primary": true,
-      "aliases": [
-        "mision",
-        "missions",
-        "misionesdiarias"
-      ],
-      "description": "Muestra y reclama tus misiones diarias",
-      "usage": "[reclamar <número|todo>]",
+      "name": "minivel",
+      "base": "nivel",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu nivel, tu progreso y el ranking",
+      "usage": "",
       "category": "perfil"
+    },
+    {
+      "name": "mipet",
+      "base": "mascota",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el estado de tu mascota activa",
+      "usage": "",
+      "category": "mascotas"
+    },
+    {
+      "name": "mipokemon",
+      "base": "pokeequipo",
+      "primary": false,
+      "aliases": [],
+      "description": "Gestiona tu equipo Pokémon: ver, reroll, elegir, apodos y orden",
+      "usage": "[reroll [1-3]|set <1-3> <pokémon>|info <1-3|nombre>|lista [tipo]|buscar <nombre>|apodo <1-3> <nombre>|orden <1> <2> <3>]",
+      "category": "pokemon"
+    },
+    {
+      "name": "miracha",
+      "base": "racha",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra cuántos días llevas usando el bot y tu racha",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "mirango",
+      "base": "rango",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu rango, prestigio y progreso al siguiente nivel",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "mirank",
+      "base": "rango",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu rango, prestigio y progreso al siguiente nivel",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "misbots",
+      "base": "bots",
+      "primary": false,
+      "aliases": [],
+      "description": "Lista los jadibots principales, premium y normales",
+      "usage": "[principal|premium|normal|todos]",
+      "category": "jadibot"
     },
     {
       "name": "mision",
@@ -4541,10 +5059,14 @@ window.NOVITA_DATA = {
       "category": "perfil"
     },
     {
-      "name": "missions",
+      "name": "misiones",
       "base": "misiones",
-      "primary": false,
-      "aliases": [],
+      "primary": true,
+      "aliases": [
+        "mision",
+        "missions",
+        "misionesdiarias"
+      ],
       "description": "Muestra y reclama tus misiones diarias",
       "usage": "[reclamar <número|todo>]",
       "category": "perfil"
@@ -4559,6 +5081,87 @@ window.NOVITA_DATA = {
       "category": "perfil"
     },
     {
+      "name": "misjadibots",
+      "base": "bots",
+      "primary": false,
+      "aliases": [],
+      "description": "Lista los jadibots principales, premium y normales",
+      "usage": "[principal|premium|normal|todos]",
+      "category": "jadibot"
+    },
+    {
+      "name": "mislogros",
+      "base": "logros",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tus logros y el progreso de cada uno",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "mismascotas",
+      "base": "mascotas",
+      "primary": false,
+      "aliases": [],
+      "description": "Lista todas tus mascotas y cuál está activa",
+      "usage": "",
+      "category": "mascotas"
+    },
+    {
+      "name": "mispets",
+      "base": "mascotas",
+      "primary": false,
+      "aliases": [],
+      "description": "Lista todas tus mascotas y cuál está activa",
+      "usage": "",
+      "category": "mascotas"
+    },
+    {
+      "name": "missions",
+      "base": "misiones",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra y reclama tus misiones diarias",
+      "usage": "[reclamar <número|todo>]",
+      "category": "perfil"
+    },
+    {
+      "name": "mitarjeta",
+      "base": "tarjeta",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
+      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
+      "category": "economia"
+    },
+    {
+      "name": "moderacion",
+      "base": "admin",
+      "primary": false,
+      "aliases": [],
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
+      "category": "admin"
+    },
+    {
+      "name": "moderación",
+      "base": "admin",
+      "primary": false,
+      "aliases": [],
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
+      "category": "admin"
+    },
+    {
+      "name": "modo",
+      "base": "setmode",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el modo público o privado de este bot",
+      "usage": "<public|private>",
+      "category": "admin"
+    },
+    {
       "name": "moneda",
       "base": "moneda",
       "primary": true,
@@ -4566,24 +5169,6 @@ window.NOVITA_DATA = {
         "flip",
         "coinflip"
       ],
-      "description": "Lanza una moneda y apuesta a cara o cruz",
-      "usage": "[cara|cruz] [apuesta]",
-      "category": "juegos"
-    },
-    {
-      "name": "flip",
-      "base": "moneda",
-      "primary": false,
-      "aliases": [],
-      "description": "Lanza una moneda y apuesta a cara o cruz",
-      "usage": "[cara|cruz] [apuesta]",
-      "category": "juegos"
-    },
-    {
-      "name": "coinflip",
-      "base": "moneda",
-      "primary": false,
-      "aliases": [],
       "description": "Lanza una moneda y apuesta a cara o cruz",
       "usage": "[cara|cruz] [apuesta]",
       "category": "juegos"
@@ -4600,13 +5185,58 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "codigomorse",
-      "base": "morse",
+      "name": "morty",
+      "base": "rickmorty",
       "primary": false,
       "aliases": [],
-      "description": "Traduce texto a código Morse y viceversa",
-      "usage": "<texto o morse>",
-      "category": "utilidades"
+      "description": "Busca un personaje de Rick y Morty",
+      "usage": "<personaje>",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "motivacion",
+      "base": "frase",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía una frase motivacional aleatoria",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "motivación",
+      "base": "frase",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía una frase motivacional aleatoria",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "mp3",
+      "base": "play",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga y envía audio de YouTube en M4A",
+      "usage": "",
+      "category": "descargas"
+    },
+    {
+      "name": "mp4",
+      "base": "play2",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga y envía video de YouTube en MP4",
+      "usage": "",
+      "category": "descargas"
+    },
+    {
+      "name": "music",
+      "base": "musica",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca una canción y muestra artista, álbum y portada",
+      "usage": "<canción o artista>",
+      "category": "descargas"
     },
     {
       "name": "musica",
@@ -4623,24 +5253,6 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "song",
-      "base": "musica",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca una canción y muestra artista, álbum y portada",
-      "usage": "<canción o artista>",
-      "category": "descargas"
-    },
-    {
-      "name": "cancion",
-      "base": "musica",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca una canción y muestra artista, álbum y portada",
-      "usage": "<canción o artista>",
-      "category": "descargas"
-    },
-    {
       "name": "música",
       "base": "musica",
       "primary": false,
@@ -4650,13 +5262,22 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "music",
-      "base": "musica",
+      "name": "mypets",
+      "base": "mascotas",
       "primary": false,
       "aliases": [],
-      "description": "Busca una canción y muestra artista, álbum y portada",
-      "usage": "<canción o artista>",
-      "category": "descargas"
+      "description": "Lista todas tus mascotas y cuál está activa",
+      "usage": "",
+      "category": "mascotas"
+    },
+    {
+      "name": "nacimiento",
+      "base": "edad",
+      "primary": false,
+      "aliases": [],
+      "description": "Calcula tu edad exacta y tu próximo cumpleaños",
+      "usage": "<dd/mm/aaaa>",
+      "category": "utilidades"
     },
     {
       "name": "nasa",
@@ -4680,15 +5301,6 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "espacio",
-      "base": "nasa",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca imágenes del archivo de la NASA",
-      "usage": "<búsqueda>",
-      "category": "info"
-    },
-    {
       "name": "navidad",
       "base": "navidad",
       "primary": true,
@@ -4697,24 +5309,6 @@ window.NOVITA_DATA = {
         "xmas",
         "navideño"
       ],
-      "description": "Muestra un mensaje navideño y la cuenta regresiva",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "christmas",
-      "base": "navidad",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra un mensaje navideño y la cuenta regresiva",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "xmas",
-      "base": "navidad",
-      "primary": false,
-      "aliases": [],
       "description": "Muestra un mensaje navideño y la cuenta regresiva",
       "usage": "",
       "category": "entretenimiento"
@@ -4752,33 +5346,6 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "empresa",
-      "base": "negocio",
-      "primary": false,
-      "aliases": [],
-      "description": "Compra un negocio y cobra ingresos cada cierto tiempo",
-      "usage": "[comprar <id>|cobrar|lista]",
-      "category": "economia"
-    },
-    {
-      "name": "business",
-      "base": "negocio",
-      "primary": false,
-      "aliases": [],
-      "description": "Compra un negocio y cobra ingresos cada cierto tiempo",
-      "usage": "[comprar <id>|cobrar|lista]",
-      "category": "economia"
-    },
-    {
-      "name": "miempresa",
-      "base": "negocio",
-      "primary": false,
-      "aliases": [],
-      "description": "Compra un negocio y cobra ingresos cada cierto tiempo",
-      "usage": "[comprar <id>|cobrar|lista]",
-      "category": "economia"
-    },
-    {
       "name": "neko",
       "base": "neko",
       "primary": true,
@@ -4793,24 +5360,6 @@ window.NOVITA_DATA = {
       "category": "anime"
     },
     {
-      "name": "anime",
-      "base": "neko",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía imágenes neko aleatorias y gana NovitaCoins",
-      "usage": "[categoría] [cantidad]",
-      "category": "anime"
-    },
-    {
-      "name": "waifu",
-      "base": "neko",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía imágenes neko aleatorias y gana NovitaCoins",
-      "usage": "[categoría] [cantidad]",
-      "category": "anime"
-    },
-    {
       "name": "nekoimg",
       "base": "neko",
       "primary": false,
@@ -4820,12 +5369,12 @@ window.NOVITA_DATA = {
       "category": "anime"
     },
     {
-      "name": "husbando",
-      "base": "neko",
+      "name": "nekoinfo",
+      "base": "nekos",
       "primary": false,
       "aliases": [],
-      "description": "Envía imágenes neko aleatorias y gana NovitaCoins",
-      "usage": "[categoría] [cantidad]",
+      "description": "Muestra tu colección de nekos, premios y ranking",
+      "usage": "",
       "category": "anime"
     },
     {
@@ -4842,24 +5391,6 @@ window.NOVITA_DATA = {
       "category": "anime"
     },
     {
-      "name": "nekoinfo",
-      "base": "nekos",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu colección de nekos, premios y ranking",
-      "usage": "",
-      "category": "anime"
-    },
-    {
-      "name": "minekos",
-      "base": "nekos",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu colección de nekos, premios y ranking",
-      "usage": "",
-      "category": "anime"
-    },
-    {
       "name": "nekostats",
       "base": "nekos",
       "primary": false,
@@ -4867,6 +5398,15 @@ window.NOVITA_DATA = {
       "description": "Muestra tu colección de nekos, premios y ranking",
       "usage": "",
       "category": "anime"
+    },
+    {
+      "name": "news",
+      "base": "noticias",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los titulares de noticias más recientes en español",
+      "usage": "[tema]",
+      "category": "info"
     },
     {
       "name": "nivel",
@@ -4883,40 +5423,22 @@ window.NOVITA_DATA = {
       "category": "perfil"
     },
     {
-      "name": "ranknivel",
-      "base": "nivel",
+      "name": "nivelesrango",
+      "base": "rangos",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tu nivel, tu progreso y el ranking",
+      "description": "Muestra todos los rangos y lo que necesitas para subir",
       "usage": "",
       "category": "perfil"
     },
     {
-      "name": "level",
-      "base": "nivel",
+      "name": "nombrebot",
+      "base": "setname",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tu nivel, tu progreso y el ranking",
-      "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "lvl",
-      "base": "nivel",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu nivel, tu progreso y el ranking",
-      "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "minivel",
-      "base": "nivel",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu nivel, tu progreso y el ranking",
-      "usage": "",
-      "category": "perfil"
+      "description": "Cambia el nombre visible de este bot",
+      "usage": "<nombre|reset>",
+      "category": "admin"
     },
     {
       "name": "noticias",
@@ -4928,42 +5450,6 @@ window.NOVITA_DATA = {
         "titulares",
         "periodico"
       ],
-      "description": "Muestra los titulares de noticias más recientes en español",
-      "usage": "[tema]",
-      "category": "info"
-    },
-    {
-      "name": "news",
-      "base": "noticias",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los titulares de noticias más recientes en español",
-      "usage": "[tema]",
-      "category": "info"
-    },
-    {
-      "name": "actualidad",
-      "base": "noticias",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los titulares de noticias más recientes en español",
-      "usage": "[tema]",
-      "category": "info"
-    },
-    {
-      "name": "titulares",
-      "base": "noticias",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los titulares de noticias más recientes en español",
-      "usage": "[tema]",
-      "category": "info"
-    },
-    {
-      "name": "periodico",
-      "base": "noticias",
-      "primary": false,
-      "aliases": [],
       "description": "Muestra los titulares de noticias más recientes en español",
       "usage": "[tema]",
       "category": "info"
@@ -4990,13 +5476,67 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "paquete",
-      "base": "npm",
+      "name": "numerosromanos",
+      "base": "romano",
       "primary": false,
       "aliases": [],
-      "description": "Muestra información de un paquete publicado en npm",
-      "usage": "<paquete>",
+      "description": "Convierte números romanos y arábigos",
+      "usage": "<número o romano>",
+      "category": "utilidades"
+    },
+    {
+      "name": "opciones",
+      "base": "botones",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra un mensaje con botones interactivos",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "open",
+      "base": "abrir",
+      "primary": false,
+      "aliases": [],
+      "description": "Abre el grupo para que todos los miembros puedan escribir",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "openlibrary",
+      "base": "libro",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca libros y muestra portada, autor y año",
+      "usage": "<título o autor>",
       "category": "info"
+    },
+    {
+      "name": "operaciones",
+      "base": "mate",
+      "primary": false,
+      "aliases": [],
+      "description": "Resuelve operaciones matemáticas y gana monedas",
+      "usage": "[resultado|cancelar]",
+      "category": "utilidades"
+    },
+    {
+      "name": "oraculo",
+      "base": "8ball",
+      "primary": false,
+      "aliases": [],
+      "description": "Hazle una pregunta a la bola mágica 8",
+      "usage": "<pregunta>",
+      "category": "juegos"
+    },
+    {
+      "name": "oráculo",
+      "base": "8ball",
+      "primary": false,
+      "aliases": [],
+      "description": "Hazle una pregunta a la bola mágica 8",
+      "usage": "<pregunta>",
+      "category": "juegos"
     },
     {
       "name": "ordena",
@@ -5013,34 +5553,7 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "scramble",
-      "base": "ordena",
-      "primary": false,
-      "aliases": [],
-      "description": "Ordena la palabra desordenada y gana monedas",
-      "usage": "[palabra|cancelar]",
-      "category": "juegos"
-    },
-    {
-      "name": "desordena",
-      "base": "ordena",
-      "primary": false,
-      "aliases": [],
-      "description": "Ordena la palabra desordenada y gana monedas",
-      "usage": "[palabra|cancelar]",
-      "category": "juegos"
-    },
-    {
       "name": "ordenapalabra",
-      "base": "ordena",
-      "primary": false,
-      "aliases": [],
-      "description": "Ordena la palabra desordenada y gana monedas",
-      "usage": "[palabra|cancelar]",
-      "category": "juegos"
-    },
-    {
-      "name": "anagrama",
       "base": "ordena",
       "primary": false,
       "aliases": [],
@@ -5060,13 +5573,40 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "id",
-      "base": "owner",
+      "name": "ownerbot",
+      "base": "setowner",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tu JID/número y si estás registrado como dueño",
+      "description": "Cambia el dueño de tu jadibot (el principal no se puede transferir)",
+      "usage": "@usuario",
+      "category": "admin"
+    },
+    {
+      "name": "p",
+      "base": "ping",
+      "primary": false,
+      "aliases": [],
+      "description": "Mide la latencia real del bot contra los servidores de WhatsApp",
       "usage": "",
-      "category": "info"
+      "category": "sistema"
+    },
+    {
+      "name": "pagar",
+      "base": "transferir",
+      "primary": false,
+      "aliases": [],
+      "description": "Transfiere monedas a otro usuario (comisión del 2%)",
+      "usage": "@usuario <cantidad>",
+      "category": "economia"
+    },
+    {
+      "name": "pairing",
+      "base": "code",
+      "primary": false,
+      "aliases": [],
+      "description": "Conecta tu WhatsApp como jadibot con código de emparejamiento",
+      "usage": "[normal|premium] [número]",
+      "category": "jadibot"
     },
     {
       "name": "pais",
@@ -5094,49 +5634,49 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "country",
-      "base": "pais",
+      "name": "palabras",
+      "base": "contar",
       "primary": false,
       "aliases": [],
-      "description": "Elige tu país para ver tu dinero en tu moneda local",
-      "usage": "[código o nombre] | lista",
+      "description": "Cuenta caracteres, palabras y líneas de un texto",
+      "usage": "<texto>",
+      "category": "utilidades"
+    },
+    {
+      "name": "panelgrupo",
+      "base": "estadogrupo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra si antibot, antilink y otras protecciones están ON u OFF",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "panelstaff",
+      "base": "st",
+      "primary": false,
+      "aliases": [],
+      "description": "Panel del staff: últimos reinicios, rangos y estado del bot",
+      "usage": "[reinicios|rangos|menu|ver|revisiones|ayuda]",
+      "category": "staff"
+    },
+    {
+      "name": "paquete",
+      "base": "npm",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra información de un paquete publicado en npm",
+      "usage": "<paquete>",
       "category": "info"
     },
     {
-      "name": "currency",
-      "base": "pais",
+      "name": "pasear",
+      "base": "paseo",
       "primary": false,
       "aliases": [],
-      "description": "Elige tu país para ver tu dinero en tu moneda local",
-      "usage": "[código o nombre] | lista",
-      "category": "info"
-    },
-    {
-      "name": "setpais",
-      "base": "pais",
-      "primary": false,
-      "aliases": [],
-      "description": "Elige tu país para ver tu dinero en tu moneda local",
-      "usage": "[código o nombre] | lista",
-      "category": "info"
-    },
-    {
-      "name": "setcountry",
-      "base": "pais",
-      "primary": false,
-      "aliases": [],
-      "description": "Elige tu país para ver tu dinero en tu moneda local",
-      "usage": "[código o nombre] | lista",
-      "category": "info"
-    },
-    {
-      "name": "setmoneda",
-      "base": "pais",
-      "primary": false,
-      "aliases": [],
-      "description": "Elige tu país para ver tu dinero en tu moneda local",
-      "usage": "[código o nombre] | lista",
-      "category": "info"
+      "description": "Pasea a tu mascota para ganar NovitaCoins",
+      "usage": "[número o nombre]",
+      "category": "mascotas"
     },
     {
       "name": "paseo",
@@ -5153,33 +5693,6 @@ window.NOVITA_DATA = {
       "category": "mascotas"
     },
     {
-      "name": "pasear",
-      "base": "paseo",
-      "primary": false,
-      "aliases": [],
-      "description": "Pasea a tu mascota para ganar NovitaCoins",
-      "usage": "[número o nombre]",
-      "category": "mascotas"
-    },
-    {
-      "name": "walkpet",
-      "base": "paseo",
-      "primary": false,
-      "aliases": [],
-      "description": "Pasea a tu mascota para ganar NovitaCoins",
-      "usage": "[número o nombre]",
-      "category": "mascotas"
-    },
-    {
-      "name": "sacarmascota",
-      "base": "paseo",
-      "primary": false,
-      "aliases": [],
-      "description": "Pasea a tu mascota para ganar NovitaCoins",
-      "usage": "[número o nombre]",
-      "category": "mascotas"
-    },
-    {
       "name": "paseomascota",
       "base": "paseo",
       "primary": false,
@@ -5187,48 +5700,6 @@ window.NOVITA_DATA = {
       "description": "Pasea a tu mascota para ganar NovitaCoins",
       "usage": "[número o nombre]",
       "category": "mascotas"
-    },
-    {
-      "name": "password",
-      "base": "password",
-      "primary": true,
-      "aliases": [
-        "clave",
-        "contrasena",
-        "contraseña",
-        "pass",
-        "passwd"
-      ],
-      "description": "Genera una contraseña segura y aleatoria",
-      "usage": "[longitud]",
-      "category": "utilidades"
-    },
-    {
-      "name": "clave",
-      "base": "password",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera una contraseña segura y aleatoria",
-      "usage": "[longitud]",
-      "category": "utilidades"
-    },
-    {
-      "name": "contrasena",
-      "base": "password",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera una contraseña segura y aleatoria",
-      "usage": "[longitud]",
-      "category": "utilidades"
-    },
-    {
-      "name": "contraseña",
-      "base": "password",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera una contraseña segura y aleatoria",
-      "usage": "[longitud]",
-      "category": "utilidades"
     },
     {
       "name": "pass",
@@ -5249,6 +5720,57 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
+      "name": "password",
+      "base": "password",
+      "primary": true,
+      "aliases": [
+        "clave",
+        "contrasena",
+        "contraseña",
+        "pass",
+        "passwd"
+      ],
+      "description": "Genera una contraseña segura y aleatoria",
+      "usage": "[longitud]",
+      "category": "utilidades"
+    },
+    {
+      "name": "pat",
+      "base": "hug",
+      "primary": false,
+      "aliases": [],
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "pay",
+      "base": "transferir",
+      "primary": false,
+      "aliases": [],
+      "description": "Transfiere monedas a otro usuario (comisión del 2%)",
+      "usage": "@usuario <cantidad>",
+      "category": "economia"
+    },
+    {
+      "name": "pbatalla",
+      "base": "pokebatalla",
+      "primary": false,
+      "aliases": [],
+      "description": "Batalla Pokémon 3 vs 3 contra otro jugador o un rival aleatorio",
+      "usage": "[@usuario]",
+      "category": "pokemon"
+    },
+    {
+      "name": "pedir",
+      "base": "mendigar",
+      "primary": false,
+      "aliases": [],
+      "description": "Pide monedas en la calle con un pequeño tiempo de espera",
+      "usage": "",
+      "category": "economia"
+    },
+    {
       "name": "pelea",
       "base": "pelea",
       "primary": true,
@@ -5263,15 +5785,6 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "fight",
-      "base": "pelea",
-      "primary": false,
-      "aliases": [],
-      "description": "Pelea contra un rival y apuesta monedas",
-      "usage": "<cantidad|todo>",
-      "category": "juegos"
-    },
-    {
       "name": "pelear",
       "base": "pelea",
       "primary": false,
@@ -5281,22 +5794,25 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "combate",
-      "base": "pelea",
-      "primary": false,
-      "aliases": [],
-      "description": "Pelea contra un rival y apuesta monedas",
-      "usage": "<cantidad|todo>",
-      "category": "juegos"
+      "name": "pendejo",
+      "base": "pendejo",
+      "primary": true,
+      "aliases": [
+        "elpendejo",
+        "tonto"
+      ],
+      "description": "Elige al pendejo oficial del grupo al azar",
+      "usage": "",
+      "category": "entretenimiento"
     },
     {
-      "name": "batalla",
-      "base": "pelea",
+      "name": "pendejotop",
+      "base": "pndtop",
       "primary": false,
       "aliases": [],
-      "description": "Pelea contra un rival y apuesta monedas",
-      "usage": "<cantidad|todo>",
-      "category": "juegos"
+      "description": "Muestra el top 10 de los que más veces han sido llamados pendejos",
+      "usage": "",
+      "category": "entretenimiento"
     },
     {
       "name": "perfil",
@@ -5312,31 +5828,22 @@ window.NOVITA_DATA = {
       "category": "perfil"
     },
     {
-      "name": "profile",
-      "base": "perfil",
+      "name": "periodico",
+      "base": "noticias",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tu perfil, nivel y economía",
-      "usage": "",
-      "category": "perfil"
+      "description": "Muestra los titulares de noticias más recientes en español",
+      "usage": "[tema]",
+      "category": "info"
     },
     {
-      "name": "yo",
-      "base": "perfil",
+      "name": "perrito",
+      "base": "perro",
       "primary": false,
       "aliases": [],
-      "description": "Muestra tu perfil, nivel y economía",
+      "description": "Envía una foto aleatoria de un perro",
       "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "cuenta",
-      "base": "perfil",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu perfil, nivel y economía",
-      "usage": "",
-      "category": "perfil"
+      "category": "entretenimiento"
     },
     {
       "name": "perro",
@@ -5350,55 +5857,6 @@ window.NOVITA_DATA = {
       "description": "Envía una foto aleatoria de un perro",
       "usage": "",
       "category": "entretenimiento"
-    },
-    {
-      "name": "dog",
-      "base": "perro",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía una foto aleatoria de un perro",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "perrito",
-      "base": "perro",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía una foto aleatoria de un perro",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "dogs",
-      "base": "perro",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía una foto aleatoria de un perro",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "pescar",
-      "base": "pescar",
-      "primary": true,
-      "aliases": [
-        "fish",
-        "pesca",
-        "pescado"
-      ],
-      "description": "Pesca y gana NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "fish",
-      "base": "pescar",
-      "primary": false,
-      "aliases": [],
-      "description": "Pesca y gana NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
     },
     {
       "name": "pesca",
@@ -5419,6 +5877,55 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
+      "name": "pescar",
+      "base": "pescar",
+      "primary": true,
+      "aliases": [
+        "fish",
+        "pesca",
+        "pescado"
+      ],
+      "description": "Pesca y gana NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "peso",
+      "base": "imc",
+      "primary": false,
+      "aliases": [],
+      "description": "Calcula tu índice de masa corporal (IMC)",
+      "usage": "<peso> <altura>",
+      "category": "utilidades"
+    },
+    {
+      "name": "pet",
+      "base": "mascota",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el estado de tu mascota activa",
+      "usage": "",
+      "category": "mascotas"
+    },
+    {
+      "name": "petplay",
+      "base": "mimarmascota",
+      "primary": false,
+      "aliases": [],
+      "description": "Juega con tu mascota para subir su felicidad",
+      "usage": "[número o nombre]",
+      "category": "mascotas"
+    },
+    {
+      "name": "pets",
+      "base": "mascotas",
+      "primary": false,
+      "aliases": [],
+      "description": "Lista todas tus mascotas y cuál está activa",
+      "usage": "",
+      "category": "mascotas"
+    },
+    {
       "name": "petshop",
       "base": "petshop",
       "primary": true,
@@ -5427,15 +5934,6 @@ window.NOVITA_DATA = {
         "petstore",
         "mascotastienda"
       ],
-      "description": "Muestra la tienda de mascotas y sus precios",
-      "usage": "[raro|épico|legendario]",
-      "category": "mascotas"
-    },
-    {
-      "name": "tiendamascotas",
-      "base": "petshop",
-      "primary": false,
-      "aliases": [],
       "description": "Muestra la tienda de mascotas y sus precios",
       "usage": "[raro|épico|legendario]",
       "category": "mascotas"
@@ -5450,13 +5948,22 @@ window.NOVITA_DATA = {
       "category": "mascotas"
     },
     {
-      "name": "mascotastienda",
-      "base": "petshop",
+      "name": "piedrapapeltijera",
+      "base": "ppt",
       "primary": false,
       "aliases": [],
-      "description": "Muestra la tienda de mascotas y sus precios",
-      "usage": "[raro|épico|legendario]",
-      "category": "mascotas"
+      "description": "Juega piedra, papel o tijera contra el bot",
+      "usage": "<piedra|papel|tijera> [apuesta]",
+      "category": "juegos"
+    },
+    {
+      "name": "pin",
+      "base": "pinterest",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca y envía un carrusel de imágenes de Pinterest",
+      "usage": "<búsqueda>",
+      "category": "descargas"
     },
     {
       "name": "ping",
@@ -5470,30 +5977,7 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
-      "name": "p",
-      "base": "ping",
-      "primary": false,
-      "aliases": [],
-      "description": "Mide la latencia real del bot contra los servidores de WhatsApp",
-      "usage": "",
-      "category": "sistema"
-    },
-    {
-      "name": "pinterest",
-      "base": "pinterest",
-      "primary": true,
-      "aliases": [
-        "pin",
-        "pint",
-        "pinterestimg",
-        "pinimg"
-      ],
-      "description": "Busca y envía un carrusel de imágenes de Pinterest",
-      "usage": "<búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "pin",
+      "name": "pinimg",
       "base": "pinterest",
       "primary": false,
       "aliases": [],
@@ -5511,6 +5995,29 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
+      "name": "pintar",
+      "base": "imagine",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera imágenes con inteligencia artificial a partir de una descripción",
+      "usage": "<descripción>",
+      "category": "ia"
+    },
+    {
+      "name": "pinterest",
+      "base": "pinterest",
+      "primary": true,
+      "aliases": [
+        "pin",
+        "pint",
+        "pinterestimg",
+        "pinimg"
+      ],
+      "description": "Busca y envía un carrusel de imágenes de Pinterest",
+      "usage": "<búsqueda>",
+      "category": "descargas"
+    },
+    {
       "name": "pinterestimg",
       "base": "pinterest",
       "primary": false,
@@ -5520,13 +6027,13 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "pinimg",
-      "base": "pinterest",
+      "name": "piropear",
+      "base": "piropo",
       "primary": false,
       "aliases": [],
-      "description": "Busca y envía un carrusel de imágenes de Pinterest",
-      "usage": "<búsqueda>",
-      "category": "descargas"
+      "description": "Envía un piropo aleatorio",
+      "usage": "",
+      "category": "entretenimiento"
     },
     {
       "name": "piropo",
@@ -5542,33 +6049,6 @@ window.NOVITA_DATA = {
       "category": "entretenimiento"
     },
     {
-      "name": "halago",
-      "base": "piropo",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía un piropo aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "flirt",
-      "base": "piropo",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía un piropo aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
-      "name": "piropear",
-      "base": "piropo",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía un piropo aleatorio",
-      "usage": "",
-      "category": "entretenimiento"
-    },
-    {
       "name": "play",
       "base": "play",
       "primary": true,
@@ -5577,33 +6057,6 @@ window.NOVITA_DATA = {
         "ytmp3",
         "audio"
       ],
-      "description": "Descarga y envía audio de YouTube en M4A",
-      "usage": "",
-      "category": "descargas"
-    },
-    {
-      "name": "mp3",
-      "base": "play",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga y envía audio de YouTube en M4A",
-      "usage": "",
-      "category": "descargas"
-    },
-    {
-      "name": "ytmp3",
-      "base": "play",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga y envía audio de YouTube en M4A",
-      "usage": "",
-      "category": "descargas"
-    },
-    {
-      "name": "audio",
-      "base": "play",
-      "primary": false,
-      "aliases": [],
       "description": "Descarga y envía audio de YouTube en M4A",
       "usage": "",
       "category": "descargas"
@@ -5623,21 +6076,12 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "ytmp4",
-      "base": "play2",
+      "name": "playlistsyt",
+      "base": "ytplaylist",
       "primary": false,
       "aliases": [],
-      "description": "Descarga y envía video de YouTube en MP4",
-      "usage": "",
-      "category": "descargas"
-    },
-    {
-      "name": "video",
-      "base": "play2",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga y envía video de YouTube en MP4",
-      "usage": "",
+      "description": "Busca listas de reproducción de YouTube",
+      "usage": "<búsqueda>",
       "category": "descargas"
     },
     {
@@ -5650,41 +6094,94 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "mp4",
-      "base": "play2",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga y envía video de YouTube en MP4",
-      "usage": "",
-      "category": "descargas"
-    },
-    {
-      "name": "pokemon",
-      "base": "pokemon",
+      "name": "plugins",
+      "base": "plugins",
       "primary": true,
       "aliases": [
-        "poke",
-        "pokedex",
-        "pokémon"
+        "updateplugins",
+        "actualizarplugins",
+        "pluginsupdate"
       ],
-      "description": "Muestra información y una imagen de un Pokémon",
-      "usage": "<nombre o número>",
+      "description": "Estado y actualización de los plugins desde GitHub (dueño)",
+      "usage": "[status|update]",
+      "category": "sistema"
+    },
+    {
+      "name": "pluginsupdate",
+      "base": "plugins",
+      "primary": false,
+      "aliases": [],
+      "description": "Estado y actualización de los plugins desde GitHub (dueño)",
+      "usage": "[status|update]",
+      "category": "sistema"
+    },
+    {
+      "name": "pndtop",
+      "base": "pndtop",
+      "primary": true,
+      "aliases": [
+        "tontotop",
+        "pendejotop",
+        "top10",
+        "rankpendejos",
+        "mejorespendejos"
+      ],
+      "description": "Muestra el top 10 de los que más veces han sido llamados pendejos",
+      "usage": "",
       "category": "entretenimiento"
     },
     {
       "name": "poke",
-      "base": "pokemon",
+      "base": "hug",
       "primary": false,
       "aliases": [],
-      "description": "Muestra información y una imagen de un Pokémon",
-      "usage": "<nombre o número>",
-      "category": "entretenimiento"
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "pokebatalla",
+      "base": "pokebatalla",
+      "primary": true,
+      "aliases": [
+        "pbatalla",
+        "duelopokemon",
+        "pokemonbatalla"
+      ],
+      "description": "Batalla Pokémon 3 vs 3 contra otro jugador o un rival aleatorio",
+      "usage": "[@usuario]",
+      "category": "pokemon"
     },
     {
       "name": "pokedex",
       "base": "pokemon",
       "primary": false,
       "aliases": [],
+      "description": "Muestra información y una imagen de un Pokémon",
+      "usage": "<nombre o número>",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "pokeequipo",
+      "base": "pokeequipo",
+      "primary": true,
+      "aliases": [
+        "mipokemon",
+        "equipopokemon",
+        "ptequipo"
+      ],
+      "description": "Gestiona tu equipo Pokémon: ver, reroll, elegir, apodos y orden",
+      "usage": "[reroll [1-3]|set <1-3> <pokémon>|info <1-3|nombre>|lista [tipo]|buscar <nombre>|apodo <1-3> <nombre>|orden <1> <2> <3>]",
+      "category": "pokemon"
+    },
+    {
+      "name": "pokemon",
+      "base": "pokemon",
+      "primary": true,
+      "aliases": [
+        "pokedex",
+        "pokémon"
+      ],
       "description": "Muestra información y una imagen de un Pokémon",
       "usage": "<nombre o número>",
       "category": "entretenimiento"
@@ -5699,6 +6196,46 @@ window.NOVITA_DATA = {
       "category": "entretenimiento"
     },
     {
+      "name": "pokemonbatalla",
+      "base": "pokebatalla",
+      "primary": false,
+      "aliases": [],
+      "description": "Batalla Pokémon 3 vs 3 contra otro jugador o un rival aleatorio",
+      "usage": "[@usuario]",
+      "category": "pokemon"
+    },
+    {
+      "name": "poketorneo",
+      "base": "poketorneo",
+      "primary": true,
+      "aliases": [
+        "torneopokemon",
+        "ptorneo",
+        "poketour"
+      ],
+      "description": "Torneo Pokémon semanal: inscripción, llaves, premios y ranking",
+      "usage": "[unirme|salir|lista|tabla|ranking|historial|reglas|iniciar|cerrar|cancelar|config]",
+      "category": "pokemon"
+    },
+    {
+      "name": "poketour",
+      "base": "poketorneo",
+      "primary": false,
+      "aliases": [],
+      "description": "Torneo Pokémon semanal: inscripción, llaves, premios y ranking",
+      "usage": "[unirme|salir|lista|tabla|ranking|historial|reglas|iniciar|cerrar|cancelar|config]",
+      "category": "pokemon"
+    },
+    {
+      "name": "poll",
+      "base": "encuesta",
+      "primary": false,
+      "aliases": [],
+      "description": "Crea una encuesta rápida en el chat",
+      "usage": "<pregunta> | <opción 1> | <opción 2> ...",
+      "category": "utilidades"
+    },
+    {
       "name": "ppt",
       "base": "ppt",
       "primary": true,
@@ -5711,22 +6248,67 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "piedrapapeltijera",
-      "base": "ppt",
+      "name": "precios",
+      "base": "tienda",
       "primary": false,
       "aliases": [],
-      "description": "Juega piedra, papel o tijera contra el bot",
-      "usage": "<piedra|papel|tijera> [apuesta]",
+      "description": "Muestra la tienda y los precios de NovitaBot",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "prediccion",
+      "base": "suerte",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta tu fortuna diaria y recibe una pequeña recompensa",
+      "usage": "",
       "category": "juegos"
     },
     {
-      "name": "rps",
-      "base": "ppt",
+      "name": "predicción",
+      "base": "suerte",
       "primary": false,
       "aliases": [],
-      "description": "Juega piedra, papel o tijera contra el bot",
-      "usage": "<piedra|papel|tijera> [apuesta]",
+      "description": "Consulta tu fortuna diaria y recibe una pequeña recompensa",
+      "usage": "",
       "category": "juegos"
+    },
+    {
+      "name": "prefijo",
+      "base": "setprefix",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia los prefijos de este bot (owner o dueño del jadibot)",
+      "usage": "<prefijos|reset>",
+      "category": "admin"
+    },
+    {
+      "name": "prefix",
+      "base": "setprefix",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia los prefijos de este bot (owner o dueño del jadibot)",
+      "usage": "<prefijos|reset>",
+      "category": "admin"
+    },
+    {
+      "name": "pregunta",
+      "base": "trivia",
+      "primary": false,
+      "aliases": [],
+      "description": "Responde preguntas de trivia y gana monedas",
+      "usage": "[nueva|respuesta]",
+      "category": "juegos"
+    },
+    {
+      "name": "prem",
+      "base": "premium",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta y administra los jadibots premium",
+      "usage": "",
+      "category": "economia"
     },
     {
       "name": "premium",
@@ -5740,11 +6322,38 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "prem",
-      "base": "premium",
+      "name": "premiuminfo",
+      "base": "infopremium",
       "primary": false,
       "aliases": [],
-      "description": "Consulta y administra los jadibots premium",
+      "description": "Muestra qué incluye un jadibot premium, novedades, precios y comandos",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "prestigio",
+      "base": "rango",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu rango, prestigio y progreso al siguiente nivel",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "profile",
+      "base": "perfil",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu perfil, nivel y economía",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "programador",
+      "base": "programar",
+      "primary": false,
+      "aliases": [],
+      "description": "Trabaja como programador freelance y gana NovitaCoins",
       "usage": "",
       "category": "economia"
     },
@@ -5763,40 +6372,13 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "freelance",
-      "base": "programar",
+      "name": "promo",
+      "base": "invitar",
       "primary": false,
       "aliases": [],
-      "description": "Trabaja como programador freelance y gana NovitaCoins",
+      "description": "Genera un mensaje listo para invitar gente a Novita Bot",
       "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "freelancer",
-      "base": "programar",
-      "primary": false,
-      "aliases": [],
-      "description": "Trabaja como programador freelance y gana NovitaCoins",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "programador",
-      "base": "programar",
-      "primary": false,
-      "aliases": [],
-      "description": "Trabaja como programador freelance y gana NovitaCoins",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "devjob",
-      "base": "programar",
-      "primary": false,
-      "aliases": [],
-      "description": "Trabaja como programador freelance y gana NovitaCoins",
-      "usage": "",
-      "category": "economia"
+      "category": "admin"
     },
     {
       "name": "promote",
@@ -5820,13 +6402,58 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "daradmin",
-      "base": "promote",
+      "name": "proteccion",
+      "base": "antirobo",
       "primary": false,
       "aliases": [],
-      "description": "Da administrador a un usuario mencionado",
-      "usage": "@usuario",
+      "description": "Protege el grupo contra robos y activa el auto-admin",
+      "usage": "on|off|autoadmin|status",
       "category": "admin"
+    },
+    {
+      "name": "protección",
+      "base": "antirobo",
+      "primary": false,
+      "aliases": [],
+      "description": "Protege el grupo contra robos y activa el auto-admin",
+      "usage": "on|off|autoadmin|status",
+      "category": "admin"
+    },
+    {
+      "name": "ptequipo",
+      "base": "pokeequipo",
+      "primary": false,
+      "aliases": [],
+      "description": "Gestiona tu equipo Pokémon: ver, reroll, elegir, apodos y orden",
+      "usage": "[reroll [1-3]|set <1-3> <pokémon>|info <1-3|nombre>|lista [tipo]|buscar <nombre>|apodo <1-3> <nombre>|orden <1> <2> <3>]",
+      "category": "pokemon"
+    },
+    {
+      "name": "ptorneo",
+      "base": "poketorneo",
+      "primary": false,
+      "aliases": [],
+      "description": "Torneo Pokémon semanal: inscripción, llaves, premios y ranking",
+      "usage": "[unirme|salir|lista|tabla|ranking|historial|reglas|iniciar|cerrar|cancelar|config]",
+      "category": "pokemon"
+    },
+    {
+      "name": "publicidad",
+      "base": "invitar",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera un mensaje listo para invitar gente a Novita Bot",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "purchase",
+      "base": "comprar",
+      "primary": false,
+      "aliases": [],
+      "description": "Compra un producto de la tienda con NovitaCoins",
+      "usage": "",
+      "category": "economia"
     },
     {
       "name": "qr",
@@ -5836,6 +6463,15 @@ window.NOVITA_DATA = {
       "description": "Conecta un jadibot normal o premium escaneando un código QR",
       "usage": "[normal|premium] [id]",
       "category": "jadibot"
+    },
+    {
+      "name": "qrcode",
+      "base": "qrgen",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera un código QR a partir de un texto o enlace",
+      "usage": "<texto o enlace>",
+      "category": "utilidades"
     },
     {
       "name": "qrgen",
@@ -5851,54 +6487,13 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "codigoqr",
-      "base": "qrgen",
+      "name": "quitaradmin",
+      "base": "demote",
       "primary": false,
       "aliases": [],
-      "description": "Genera un código QR a partir de un texto o enlace",
-      "usage": "<texto o enlace>",
-      "category": "utilidades"
-    },
-    {
-      "name": "generarqr",
-      "base": "qrgen",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera un código QR a partir de un texto o enlace",
-      "usage": "<texto o enlace>",
-      "category": "utilidades"
-    },
-    {
-      "name": "qrcode",
-      "base": "qrgen",
-      "primary": false,
-      "aliases": [],
-      "description": "Genera un código QR a partir de un texto o enlace",
-      "usage": "<texto o enlace>",
-      "category": "utilidades"
-    },
-    {
-      "name": "quitarmonedas",
-      "base": "quitarmonedas",
-      "primary": true,
-      "aliases": [
-        "removecoins",
-        "quitarcoins",
-        "quitardinero",
-        "removermonedas"
-      ],
-      "description": "Quita monedas a un usuario (solo dueño)",
-      "usage": "@usuario <cantidad|todo>",
-      "category": "economia"
-    },
-    {
-      "name": "removecoins",
-      "base": "quitarmonedas",
-      "primary": false,
-      "aliases": [],
-      "description": "Quita monedas a un usuario (solo dueño)",
-      "usage": "@usuario <cantidad|todo>",
-      "category": "economia"
+      "description": "Quita el administrador a un usuario mencionado",
+      "usage": "@usuario",
+      "category": "admin"
     },
     {
       "name": "quitarcoins",
@@ -5919,13 +6514,36 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "removermonedas",
+      "name": "quitarmonedas",
       "base": "quitarmonedas",
-      "primary": false,
-      "aliases": [],
+      "primary": true,
+      "aliases": [
+        "removecoins",
+        "quitarcoins",
+        "quitardinero",
+        "removermonedas"
+      ],
       "description": "Quita monedas a un usuario (solo dueño)",
       "usage": "@usuario <cantidad|todo>",
       "category": "economia"
+    },
+    {
+      "name": "quiz",
+      "base": "trivia",
+      "primary": false,
+      "aliases": [],
+      "description": "Responde preguntas de trivia y gana monedas",
+      "usage": "[nueva|respuesta]",
+      "category": "juegos"
+    },
+    {
+      "name": "race",
+      "base": "carrera",
+      "primary": false,
+      "aliases": [],
+      "description": "Apuesta por un caballo y gana 3 veces tu apuesta",
+      "usage": "<1-4> <cantidad|todo>",
+      "category": "juegos"
     },
     {
       "name": "racha",
@@ -5942,40 +6560,13 @@ window.NOVITA_DATA = {
       "category": "perfil"
     },
     {
-      "name": "streak",
-      "base": "racha",
+      "name": "randommeme",
+      "base": "meme",
       "primary": false,
       "aliases": [],
-      "description": "Muestra cuántos días llevas usando el bot y tu racha",
+      "description": "Envía un meme aleatorio de Reddit",
       "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "mi-racha",
-      "base": "racha",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra cuántos días llevas usando el bot y tu racha",
-      "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "miracha",
-      "base": "racha",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra cuántos días llevas usando el bot y tu racha",
-      "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "dias",
-      "base": "racha",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra cuántos días llevas usando el bot y tu racha",
-      "usage": "",
-      "category": "perfil"
+      "category": "multimedia"
     },
     {
       "name": "rango",
@@ -5987,42 +6578,6 @@ window.NOVITA_DATA = {
         "mirank",
         "prestigio"
       ],
-      "description": "Muestra tu rango, prestigio y progreso al siguiente nivel",
-      "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "rank",
-      "base": "rango",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu rango, prestigio y progreso al siguiente nivel",
-      "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "mirango",
-      "base": "rango",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu rango, prestigio y progreso al siguiente nivel",
-      "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "mirank",
-      "base": "rango",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu rango, prestigio y progreso al siguiente nivel",
-      "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "prestigio",
-      "base": "rango",
-      "primary": false,
-      "aliases": [],
       "description": "Muestra tu rango, prestigio y progreso al siguiente nivel",
       "usage": "",
       "category": "perfil"
@@ -6042,38 +6597,20 @@ window.NOVITA_DATA = {
       "category": "perfil"
     },
     {
-      "name": "tierlist",
-      "base": "rangos",
+      "name": "rangostaff",
+      "base": "staff",
       "primary": false,
       "aliases": [],
-      "description": "Muestra todos los rangos y lo que necesitas para subir",
-      "usage": "",
-      "category": "perfil"
+      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
+      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
+      "category": "staff"
     },
     {
-      "name": "listarangos",
-      "base": "rangos",
+      "name": "rank",
+      "base": "rango",
       "primary": false,
       "aliases": [],
-      "description": "Muestra todos los rangos y lo que necesitas para subir",
-      "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "nivelesrango",
-      "base": "rangos",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra todos los rangos y lo que necesitas para subir",
-      "usage": "",
-      "category": "perfil"
-    },
-    {
-      "name": "tablarangos",
-      "base": "rangos",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra todos los rangos y lo que necesitas para subir",
+      "description": "Muestra tu rango, prestigio y progreso al siguiente nivel",
       "usage": "",
       "category": "perfil"
     },
@@ -6091,25 +6628,34 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "topcoins",
+      "name": "ranking",
       "base": "rankcoins",
       "primary": false,
       "aliases": [],
       "description": "Muestra el ranking de usuarios con más NovitaCoins",
       "usage": "",
       "category": "economia"
+    },
+    {
+      "name": "ranknivel",
+      "base": "nivel",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu nivel, tu progreso y el ranking",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "rankpendejos",
+      "base": "pndtop",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el top 10 de los que más veces han sido llamados pendejos",
+      "usage": "",
+      "category": "entretenimiento"
     },
     {
       "name": "rankrico",
-      "base": "rankcoins",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra el ranking de usuarios con más NovitaCoins",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "ranking",
       "base": "rankcoins",
       "primary": false,
       "aliases": [],
@@ -6140,7 +6686,7 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "scratch",
+      "name": "raspar",
       "base": "rasca",
       "primary": false,
       "aliases": [],
@@ -6149,13 +6695,103 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "raspar",
-      "base": "rasca",
+      "name": "rdap",
+      "base": "dominio",
       "primary": false,
       "aliases": [],
-      "description": "Rasca una tarjeta y gana NovitaCoins cada 4 horas",
+      "description": "Consulta la información WHOIS/RDAP de un dominio",
+      "usage": "<dominio>",
+      "category": "info"
+    },
+    {
+      "name": "reboot",
+      "base": "reiniciar",
+      "primary": false,
+      "aliases": [],
+      "description": "Reinicia el bot (solo dueño)",
+      "usage": "confirmar",
+      "category": "sistema"
+    },
+    {
+      "name": "reclamar",
+      "base": "claim",
+      "primary": false,
+      "aliases": [],
+      "description": "Reclama tu recompensa diaria y las recompensas pendientes de nekos",
       "usage": "",
-      "category": "juegos"
+      "category": "economia"
+    },
+    {
+      "name": "reclamarnekos",
+      "base": "rw",
+      "primary": false,
+      "aliases": [],
+      "description": "Da una neko al instante con su info y precio, y reclama tus recompensas",
+      "usage": "[categoría]",
+      "category": "anime"
+    },
+    {
+      "name": "reclutar",
+      "base": "invitar",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera un mensaje listo para invitar gente a Novita Bot",
+      "usage": "",
+      "category": "admin"
+    },
+    {
+      "name": "recompensaneko",
+      "base": "rw",
+      "primary": false,
+      "aliases": [],
+      "description": "Da una neko al instante con su info y precio, y reclama tus recompensas",
+      "usage": "[categoría]",
+      "category": "anime"
+    },
+    {
+      "name": "redimensionar",
+      "base": "toresize",
+      "primary": false,
+      "aliases": [],
+      "description": "Redimensiona una imagen o sticker al tamaño que indiques",
+      "usage": "<ancho> <alto>",
+      "category": "multimedia"
+    },
+    {
+      "name": "reducir",
+      "base": "tocomprimir",
+      "primary": false,
+      "aliases": [],
+      "description": "Comprime una imagen para que ocupe menos espacio",
+      "usage": "[calidad 1-100]",
+      "category": "multimedia"
+    },
+    {
+      "name": "reels",
+      "base": "igdl",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video o reel de Instagram",
+      "usage": "<enlace de Instagram>",
+      "category": "descargas"
+    },
+    {
+      "name": "regalarmonedas",
+      "base": "darmonedas",
+      "primary": false,
+      "aliases": [],
+      "description": "Entrega monedas a un usuario (solo dueño)",
+      "usage": "@usuario <cantidad>",
+      "category": "economia"
+    },
+    {
+      "name": "registrosdns",
+      "base": "dns",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta los registros DNS de un dominio",
+      "usage": "<dominio> [tipo]",
+      "category": "info"
     },
     {
       "name": "reiniciar",
@@ -6170,22 +6806,94 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
-      "name": "restart",
-      "base": "reiniciar",
+      "name": "reinicios",
+      "base": "st",
       "primary": false,
       "aliases": [],
-      "description": "Reinicia el bot (solo dueño)",
-      "usage": "confirmar",
-      "category": "sistema"
+      "description": "Panel del staff: últimos reinicios, rangos y estado del bot",
+      "usage": "[reinicios|rangos|menu|ver|revisiones|ayuda]",
+      "category": "staff"
     },
     {
-      "name": "reboot",
-      "base": "reiniciar",
+      "name": "releasepet",
+      "base": "liberar",
       "primary": false,
       "aliases": [],
-      "description": "Reinicia el bot (solo dueño)",
-      "usage": "confirmar",
-      "category": "sistema"
+      "description": "Libera una mascota de tu colección",
+      "usage": "<número o nombre> confirmar",
+      "category": "mascotas"
+    },
+    {
+      "name": "reloj",
+      "base": "hora",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra la hora y fecha actuales en cualquier ciudad del mundo",
+      "usage": "<ciudad>",
+      "category": "info"
+    },
+    {
+      "name": "remove",
+      "base": "kick",
+      "primary": false,
+      "aliases": [],
+      "description": "Expulsa a un usuario mencionado del grupo",
+      "usage": "@usuario",
+      "category": "admin"
+    },
+    {
+      "name": "removecoins",
+      "base": "quitarmonedas",
+      "primary": false,
+      "aliases": [],
+      "description": "Quita monedas a un usuario (solo dueño)",
+      "usage": "@usuario <cantidad|todo>",
+      "category": "economia"
+    },
+    {
+      "name": "removermonedas",
+      "base": "quitarmonedas",
+      "primary": false,
+      "aliases": [],
+      "description": "Quita monedas a un usuario (solo dueño)",
+      "usage": "@usuario <cantidad|todo>",
+      "category": "economia"
+    },
+    {
+      "name": "renombrarbot",
+      "base": "setname",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el nombre visible de este bot",
+      "usage": "<nombre|reset>",
+      "category": "admin"
+    },
+    {
+      "name": "renta",
+      "base": "alquiler",
+      "primary": false,
+      "aliases": [],
+      "description": "Alquila el bot para un grupo con NovitaCoins",
+      "usage": "[horas|días|semanas|meses|años|planes|estado|dar|quitar|eximir|lista]",
+      "category": "economia"
+    },
+    {
+      "name": "rentar",
+      "base": "alquiler",
+      "primary": false,
+      "aliases": [],
+      "description": "Alquila el bot para un grupo con NovitaCoins",
+      "usage": "[horas|días|semanas|meses|años|planes|estado|dar|quitar|eximir|lista]",
+      "category": "economia"
+    },
+    {
+      "name": "rentarbot",
+      "base": "alquiler",
+      "primary": false,
+      "aliases": [],
+      "description": "Alquila el bot para un grupo con NovitaCoins",
+      "usage": "[horas|días|semanas|meses|años|planes|estado|dar|quitar|eximir|lista]",
+      "category": "economia"
     },
     {
       "name": "repartir",
@@ -6202,34 +6910,7 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "delivery",
-      "base": "repartir",
-      "primary": false,
-      "aliases": [],
-      "description": "Haz entregas a domicilio y gana NovitaCoins",
-      "usage": "",
-      "category": "economia"
-    },
-    {
       "name": "reparto",
-      "base": "repartir",
-      "primary": false,
-      "aliases": [],
-      "description": "Haz entregas a domicilio y gana NovitaCoins",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "mensajero",
-      "base": "repartir",
-      "primary": false,
-      "aliases": [],
-      "description": "Haz entregas a domicilio y gana NovitaCoins",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "domicilio",
       "base": "repartir",
       "primary": false,
       "aliases": [],
@@ -6254,60 +6935,6 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
-      "name": "backups",
-      "base": "repo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
-      "usage": "[cambios|staff|commits] [cantidad]",
-      "category": "sistema"
-    },
-    {
-      "name": "respaldos",
-      "base": "repo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
-      "usage": "[cambios|staff|commits] [cantidad]",
-      "category": "sistema"
-    },
-    {
-      "name": "avances",
-      "base": "repo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
-      "usage": "[cambios|staff|commits] [cantidad]",
-      "category": "sistema"
-    },
-    {
-      "name": "actividad",
-      "base": "repo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
-      "usage": "[cambios|staff|commits] [cantidad]",
-      "category": "sistema"
-    },
-    {
-      "name": "historial",
-      "base": "repo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
-      "usage": "[cambios|staff|commits] [cantidad]",
-      "category": "sistema"
-    },
-    {
-      "name": "devs",
-      "base": "repo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
-      "usage": "[cambios|staff|commits] [cantidad]",
-      "category": "sistema"
-    },
-    {
       "name": "report",
       "base": "report",
       "primary": true,
@@ -6322,15 +6949,6 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "reporte",
-      "base": "report",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía un reporte al creador (verificado por IA) o revisa los reportes (dueño)",
-      "usage": "[texto] | list | close <id>",
-      "category": "admin"
-    },
-    {
       "name": "reportar",
       "base": "report",
       "primary": false,
@@ -6340,16 +6958,7 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "soporte",
-      "base": "report",
-      "primary": false,
-      "aliases": [],
-      "description": "Envía un reporte al creador (verificado por IA) o revisa los reportes (dueño)",
-      "usage": "[texto] | list | close <id>",
-      "category": "admin"
-    },
-    {
-      "name": "bug",
+      "name": "reporte",
       "base": "report",
       "primary": false,
       "aliases": [],
@@ -6379,6 +6988,51 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
+      "name": "resize",
+      "base": "toresize",
+      "primary": false,
+      "aliases": [],
+      "description": "Redimensiona una imagen o sticker al tamaño que indiques",
+      "usage": "<ancho> <alto>",
+      "category": "multimedia"
+    },
+    {
+      "name": "resolver",
+      "base": "dns",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta los registros DNS de un dominio",
+      "usage": "<dominio> [tipo]",
+      "category": "info"
+    },
+    {
+      "name": "respaldar",
+      "base": "backup",
+      "primary": false,
+      "aliases": [],
+      "description": "Crea y sube un backup consolidado del bot al repositorio privado",
+      "usage": "[estado|forzar]",
+      "category": "sistema"
+    },
+    {
+      "name": "respaldobot",
+      "base": "backup",
+      "primary": false,
+      "aliases": [],
+      "description": "Crea y sube un backup consolidado del bot al repositorio privado",
+      "usage": "[estado|forzar]",
+      "category": "sistema"
+    },
+    {
+      "name": "respaldos",
+      "base": "repo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los cambios de los backups y el acceso del staff al repositorio",
+      "usage": "[cambios|staff|commits] [cantidad]",
+      "category": "sistema"
+    },
+    {
       "name": "restablecer",
       "base": "resetbot",
       "primary": false,
@@ -6388,17 +7042,13 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
-      "name": "resumir",
-      "base": "resumir",
-      "primary": true,
-      "aliases": [
-        "resume",
-        "resumen",
-        "sintetizar"
-      ],
-      "description": "Resume un texto largo o el contenido de un enlace usando IA",
-      "usage": "<texto o enlace>",
-      "category": "ia"
+      "name": "restart",
+      "base": "reiniciar",
+      "primary": false,
+      "aliases": [],
+      "description": "Reinicia el bot (solo dueño)",
+      "usage": "confirmar",
+      "category": "sistema"
     },
     {
       "name": "resume",
@@ -6419,10 +7069,14 @@ window.NOVITA_DATA = {
       "category": "ia"
     },
     {
-      "name": "sintetizar",
+      "name": "resumir",
       "base": "resumir",
-      "primary": false,
-      "aliases": [],
+      "primary": true,
+      "aliases": [
+        "resume",
+        "resumen",
+        "sintetizar"
+      ],
       "description": "Resume un texto largo o el contenido de un enlace usando IA",
       "usage": "<texto o enlace>",
       "category": "ia"
@@ -6458,6 +7112,51 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
+      "name": "reto",
+      "base": "verdadreto",
+      "primary": false,
+      "aliases": [],
+      "description": "Lanza una verdad o un reto aleatorio",
+      "usage": "[verdad|reto]",
+      "category": "juegos"
+    },
+    {
+      "name": "revivan",
+      "base": "tagall",
+      "primary": false,
+      "aliases": [],
+      "description": "Menciona a todos los miembros del grupo",
+      "usage": "[mensaje]",
+      "category": "admin"
+    },
+    {
+      "name": "rewardneko",
+      "base": "rw",
+      "primary": false,
+      "aliases": [],
+      "description": "Da una neko al instante con su info y precio, y reclama tus recompensas",
+      "usage": "[categoría]",
+      "category": "anime"
+    },
+    {
+      "name": "rgb",
+      "base": "color",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte colores entre HEX, RGB y HSL",
+      "usage": "<hex o rgb>",
+      "category": "utilidades"
+    },
+    {
+      "name": "rick",
+      "base": "rickmorty",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca un personaje de Rick y Morty",
+      "usage": "<personaje>",
+      "category": "entretenimiento"
+    },
+    {
       "name": "rickmorty",
       "base": "rickmorty",
       "primary": true,
@@ -6470,22 +7169,31 @@ window.NOVITA_DATA = {
       "category": "entretenimiento"
     },
     {
-      "name": "rick",
-      "base": "rickmorty",
+      "name": "rifa",
+      "base": "sorteo",
       "primary": false,
       "aliases": [],
-      "description": "Busca un personaje de Rick y Morty",
-      "usage": "<personaje>",
-      "category": "entretenimiento"
+      "description": "Elige un ganador al azar entre varias opciones",
+      "usage": "<opción1, opción2...> | <número-número>",
+      "category": "juegos"
     },
     {
-      "name": "morty",
-      "base": "rickmorty",
+      "name": "rm",
+      "base": "del",
       "primary": false,
       "aliases": [],
-      "description": "Busca un personaje de Rick y Morty",
-      "usage": "<personaje>",
-      "category": "entretenimiento"
+      "description": "Borra un mensaje respondido (solo dueño o administradores)",
+      "usage": "[responde al mensaje]",
+      "category": "admin"
+    },
+    {
+      "name": "rob",
+      "base": "robar",
+      "primary": false,
+      "aliases": [],
+      "description": "Intenta robar monedas a otro usuario (puedes ser atrapado)",
+      "usage": "[@usuario]",
+      "category": "economia"
     },
     {
       "name": "robar",
@@ -6501,24 +7209,6 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "rob",
-      "base": "robar",
-      "primary": false,
-      "aliases": [],
-      "description": "Intenta robar monedas a otro usuario (puedes ser atrapado)",
-      "usage": "[@usuario]",
-      "category": "economia"
-    },
-    {
-      "name": "steal",
-      "base": "robar",
-      "primary": false,
-      "aliases": [],
-      "description": "Intenta robar monedas a otro usuario (puedes ser atrapado)",
-      "usage": "[@usuario]",
-      "category": "economia"
-    },
-    {
       "name": "robo",
       "base": "robar",
       "primary": false,
@@ -6526,6 +7216,15 @@ window.NOVITA_DATA = {
       "description": "Intenta robar monedas a otro usuario (puedes ser atrapado)",
       "usage": "[@usuario]",
       "category": "economia"
+    },
+    {
+      "name": "roman",
+      "base": "romano",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte números romanos y arábigos",
+      "usage": "<número o romano>",
+      "category": "utilidades"
     },
     {
       "name": "romano",
@@ -6540,22 +7239,22 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "roman",
-      "base": "romano",
+      "name": "roulette",
+      "base": "ruleta",
       "primary": false,
       "aliases": [],
-      "description": "Convierte números romanos y arábigos",
-      "usage": "<número o romano>",
-      "category": "utilidades"
+      "description": "Juega a la ruleta apostando a color o número",
+      "usage": "<rojo|negro|verde|número> [apuesta]",
+      "category": "juegos"
     },
     {
-      "name": "numerosromanos",
-      "base": "romano",
+      "name": "rps",
+      "base": "ppt",
       "primary": false,
       "aliases": [],
-      "description": "Convierte números romanos y arábigos",
-      "usage": "<número o romano>",
-      "category": "utilidades"
+      "description": "Juega piedra, papel o tijera contra el bot",
+      "usage": "<piedra|papel|tijera> [apuesta]",
+      "category": "juegos"
     },
     {
       "name": "ruleta",
@@ -6564,15 +7263,6 @@ window.NOVITA_DATA = {
       "aliases": [
         "roulette"
       ],
-      "description": "Juega a la ruleta apostando a color o número",
-      "usage": "<rojo|negro|verde|número> [apuesta]",
-      "category": "juegos"
-    },
-    {
-      "name": "roulette",
-      "base": "ruleta",
-      "primary": false,
-      "aliases": [],
       "description": "Juega a la ruleta apostando a color o número",
       "usage": "<rojo|negro|verde|número> [apuesta]",
       "category": "juegos"
@@ -6592,40 +7282,148 @@ window.NOVITA_DATA = {
       "category": "anime"
     },
     {
-      "name": "recompensaneko",
-      "base": "rw",
+      "name": "s",
+      "base": "sticker",
       "primary": false,
       "aliases": [],
-      "description": "Da una neko al instante con su info y precio, y reclama tus recompensas",
-      "usage": "[categoría]",
-      "category": "anime"
+      "description": "Convierte una imagen en sticker respondiendo a ella o con el comando en el pie de foto",
+      "usage": "",
+      "category": "multimedia"
     },
     {
-      "name": "claimneko",
-      "base": "rw",
+      "name": "sabias",
+      "base": "curiosidad",
       "primary": false,
       "aliases": [],
-      "description": "Da una neko al instante con su info y precio, y reclama tus recompensas",
-      "usage": "[categoría]",
-      "category": "anime"
+      "description": "Comparte un dato curioso aleatorio",
+      "usage": "",
+      "category": "entretenimiento"
     },
     {
-      "name": "rewardneko",
-      "base": "rw",
+      "name": "sabías",
+      "base": "curiosidad",
       "primary": false,
       "aliases": [],
-      "description": "Da una neko al instante con su info y precio, y reclama tus recompensas",
-      "usage": "[categoría]",
-      "category": "anime"
+      "description": "Comparte un dato curioso aleatorio",
+      "usage": "",
+      "category": "entretenimiento"
     },
     {
-      "name": "reclamarnekos",
-      "base": "rw",
+      "name": "sacar",
+      "base": "kick",
       "primary": false,
       "aliases": [],
-      "description": "Da una neko al instante con su info y precio, y reclama tus recompensas",
-      "usage": "[categoría]",
-      "category": "anime"
+      "description": "Expulsa a un usuario mencionado del grupo",
+      "usage": "@usuario",
+      "category": "admin"
+    },
+    {
+      "name": "sacarmascota",
+      "base": "paseo",
+      "primary": false,
+      "aliases": [],
+      "description": "Pasea a tu mascota para ganar NovitaCoins",
+      "usage": "[número o nombre]",
+      "category": "mascotas"
+    },
+    {
+      "name": "saldo",
+      "base": "cartera",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu saldo de NovitaCoins",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "satelite",
+      "base": "iss",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra la ubicación actual de la Estación Espacial Internacional",
+      "usage": "",
+      "category": "info"
+    },
+    {
+      "name": "satélite",
+      "base": "iss",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra la ubicación actual de la Estación Espacial Internacional",
+      "usage": "",
+      "category": "info"
+    },
+    {
+      "name": "sc",
+      "base": "soundcloud",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga o busca audio completo en SoundCloud",
+      "usage": "",
+      "category": "descargas"
+    },
+    {
+      "name": "scdl",
+      "base": "soundcloud",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga o busca audio completo en SoundCloud",
+      "usage": "",
+      "category": "descargas"
+    },
+    {
+      "name": "scramble",
+      "base": "ordena",
+      "primary": false,
+      "aliases": [],
+      "description": "Ordena la palabra desordenada y gana monedas",
+      "usage": "[palabra|cancelar]",
+      "category": "juegos"
+    },
+    {
+      "name": "scratch",
+      "base": "rasca",
+      "primary": false,
+      "aliases": [],
+      "description": "Rasca una tarjeta y gana NovitaCoins cada 4 horas",
+      "usage": "",
+      "category": "juegos"
+    },
+    {
+      "name": "search",
+      "base": "buscar",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca información y enlaces en internet",
+      "usage": "<texto>",
+      "category": "info"
+    },
+    {
+      "name": "secuencia",
+      "base": "memoria",
+      "primary": false,
+      "aliases": [],
+      "description": "Memoriza una secuencia de emojis y gana monedas",
+      "usage": "[secuencia|cancelar]",
+      "category": "juegos"
+    },
+    {
+      "name": "seguridad",
+      "base": "antirobo",
+      "primary": false,
+      "aliases": [],
+      "description": "Protege el grupo contra robos y activa el auto-admin",
+      "usage": "on|off|autoadmin|status",
+      "category": "admin"
+    },
+    {
+      "name": "seguridadgrupo",
+      "base": "estadogrupo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra si antibot, antilink y otras protecciones están ON u OFF",
+      "usage": "",
+      "category": "admin"
     },
     {
       "name": "serie",
@@ -6650,21 +7448,75 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "tvshow",
-      "base": "serie",
+      "name": "setantibot",
+      "base": "antibot",
       "primary": false,
       "aliases": [],
-      "description": "Busca información de una serie de televisión",
-      "usage": "<título>",
-      "category": "info"
+      "description": "Expulsa bots externos y revisa los grupos principales",
+      "usage": "on|off|on all|scan|scan all|scan force|add|remove|list",
+      "category": "admin"
     },
     {
-      "name": "tv",
-      "base": "serie",
+      "name": "setantilink",
+      "base": "antilink",
       "primary": false,
       "aliases": [],
-      "description": "Busca información de una serie de televisión",
-      "usage": "<título>",
+      "description": "Activa o desactiva el borrado de enlaces de WhatsApp, Telegram y generales",
+      "usage": "on|off|test|tipos|status",
+      "category": "admin"
+    },
+    {
+      "name": "setantirobo",
+      "base": "antirobo",
+      "primary": false,
+      "aliases": [],
+      "description": "Protege el grupo contra robos y activa el auto-admin",
+      "usage": "on|off|autoadmin|status",
+      "category": "admin"
+    },
+    {
+      "name": "setantispam",
+      "base": "antispam",
+      "primary": false,
+      "aliases": [],
+      "description": "Activa el control de spam: flood, repeticiones, menciones y fraudes",
+      "usage": "on|off|kick|reset|status",
+      "category": "admin"
+    },
+    {
+      "name": "setbienvenida",
+      "base": "welcome",
+      "primary": false,
+      "aliases": [],
+      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
+      "usage": "on|off|texto|bye|textobye",
+      "category": "admin"
+    },
+    {
+      "name": "setbotname",
+      "base": "setname",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el nombre visible de este bot",
+      "usage": "<nombre|reset>",
+      "category": "admin"
+    },
+    {
+      "name": "setbye",
+      "base": "welcome",
+      "primary": false,
+      "aliases": [],
+      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
+      "usage": "on|off|texto|bye|textobye",
+      "category": "admin"
+    },
+    {
+      "name": "setcountry",
+      "base": "pais",
+      "primary": false,
+      "aliases": [],
+      "description": "Elige tu país para ver tu dinero en tu moneda local",
+      "usage": "[código o nombre] | lista",
       "category": "info"
     },
     {
@@ -6709,34 +7561,39 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "descripciongrupo",
-      "base": "setdesc",
+      "name": "setdespedida",
+      "base": "welcome",
       "primary": false,
       "aliases": [],
-      "description": "Cambia la descripción del grupo",
-      "usage": "<texto>",
+      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
+      "usage": "on|off|texto|bye|textobye",
       "category": "admin"
     },
     {
-      "name": "setgroupname",
-      "base": "setgroupname",
-      "primary": true,
-      "aliases": [
-        "setnombregrupo",
-        "setgname",
-        "setgruponame"
-      ],
-      "description": "Cambia el nombre del grupo",
-      "usage": "<nombre>",
+      "name": "setestilo",
+      "base": "setstyle",
+      "primary": false,
+      "aliases": [],
+      "description": "Activa o desactiva el marco visual de las respuestas",
+      "usage": "on|off|reset",
       "category": "admin"
     },
     {
-      "name": "setnombregrupo",
-      "base": "setgroupname",
+      "name": "setfotogrupal",
+      "base": "setgroupphoto",
       "primary": false,
       "aliases": [],
-      "description": "Cambia el nombre del grupo",
-      "usage": "<nombre>",
+      "description": "Cambia la foto del grupo respondiendo a una imagen",
+      "usage": "[responde a una imagen]",
+      "category": "admin"
+    },
+    {
+      "name": "setfotogrupo",
+      "base": "setgroupphoto",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia la foto del grupo respondiendo a una imagen",
+      "usage": "[responde a una imagen]",
       "category": "admin"
     },
     {
@@ -6749,10 +7606,14 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "setgruponame",
+      "name": "setgroupname",
       "base": "setgroupname",
-      "primary": false,
-      "aliases": [],
+      "primary": true,
+      "aliases": [
+        "setnombregrupo",
+        "setgname",
+        "setgruponame"
+      ],
       "description": "Cambia el nombre del grupo",
       "usage": "<nombre>",
       "category": "admin"
@@ -6771,30 +7632,30 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "setfotogrupo",
-      "base": "setgroupphoto",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia la foto del grupo respondiendo a una imagen",
-      "usage": "[responde a una imagen]",
-      "category": "admin"
-    },
-    {
-      "name": "setfotogrupal",
-      "base": "setgroupphoto",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia la foto del grupo respondiendo a una imagen",
-      "usage": "[responde a una imagen]",
-      "category": "admin"
-    },
-    {
       "name": "setgrouppic",
       "base": "setgroupphoto",
       "primary": false,
       "aliases": [],
       "description": "Cambia la foto del grupo respondiendo a una imagen",
       "usage": "[responde a una imagen]",
+      "category": "admin"
+    },
+    {
+      "name": "setgruponame",
+      "base": "setgroupname",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el nombre del grupo",
+      "usage": "<nombre>",
+      "category": "admin"
+    },
+    {
+      "name": "setidioma",
+      "base": "setlang",
+      "primary": false,
+      "aliases": [],
+      "description": "Cambia el idioma de este bot (es, en o pt)",
+      "usage": "<es|en|pt>",
       "category": "admin"
     },
     {
@@ -6806,24 +7667,6 @@ window.NOVITA_DATA = {
         "jadibotsettings",
         "setjadibots"
       ],
-      "description": "Permite o bloquea que los usuarios conecten jadibots",
-      "usage": "public|premium on|off",
-      "category": "jadibot"
-    },
-    {
-      "name": "configjadibot",
-      "base": "setjadibot",
-      "primary": false,
-      "aliases": [],
-      "description": "Permite o bloquea que los usuarios conecten jadibots",
-      "usage": "public|premium on|off",
-      "category": "jadibot"
-    },
-    {
-      "name": "jadibotsettings",
-      "base": "setjadibot",
-      "primary": false,
-      "aliases": [],
       "description": "Permite o bloquea que los usuarios conecten jadibots",
       "usage": "public|premium on|off",
       "category": "jadibot"
@@ -6852,42 +7695,6 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "idioma",
-      "base": "setlang",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia el idioma de este bot (es, en o pt)",
-      "usage": "<es|en|pt>",
-      "category": "admin"
-    },
-    {
-      "name": "setidioma",
-      "base": "setlang",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia el idioma de este bot (es, en o pt)",
-      "usage": "<es|en|pt>",
-      "category": "admin"
-    },
-    {
-      "name": "lang",
-      "base": "setlang",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia el idioma de este bot (es, en o pt)",
-      "usage": "<es|en|pt>",
-      "category": "admin"
-    },
-    {
-      "name": "language",
-      "base": "setlang",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia el idioma de este bot (es, en o pt)",
-      "usage": "<es|en|pt>",
-      "category": "admin"
-    },
-    {
       "name": "setlogo",
       "base": "setlogo",
       "primary": true,
@@ -6895,15 +7702,6 @@ window.NOVITA_DATA = {
         "logo",
         "setlogotipo"
       ],
-      "description": "Cambia el logo del menú usando una imagen, un enlace o un archivo",
-      "usage": "[imagen|enlace|novita|neko|reset]",
-      "category": "admin"
-    },
-    {
-      "name": "logo",
-      "base": "setlogo",
-      "primary": false,
-      "aliases": [],
       "description": "Cambia el logo del menú usando una imagen, un enlace o un archivo",
       "usage": "[imagen|enlace|novita|neko|reset]",
       "category": "admin"
@@ -6939,15 +7737,6 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "menutipo",
-      "base": "setmenu",
-      "primary": false,
-      "aliases": [],
-      "description": "Confirma el menú completo; el modo resumen ya no está disponible",
-      "usage": "detallado|reset",
-      "category": "admin"
-    },
-    {
       "name": "setmode",
       "base": "setmode",
       "primary": true,
@@ -6960,7 +7749,7 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "modo",
+      "name": "setmodo",
       "base": "setmode",
       "primary": false,
       "aliases": [],
@@ -6969,13 +7758,13 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "setmodo",
-      "base": "setmode",
+      "name": "setmoneda",
+      "base": "pais",
       "primary": false,
       "aliases": [],
-      "description": "Cambia el modo público o privado de este bot",
-      "usage": "<public|private>",
-      "category": "admin"
+      "description": "Elige tu país para ver tu dinero en tu moneda local",
+      "usage": "[código o nombre] | lista",
+      "category": "info"
     },
     {
       "name": "setname",
@@ -6995,33 +7784,6 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "setnombre",
-      "base": "setname",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia el nombre visible de este bot",
-      "usage": "<nombre|reset>",
-      "category": "admin"
-    },
-    {
-      "name": "nombrebot",
-      "base": "setname",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia el nombre visible de este bot",
-      "usage": "<nombre|reset>",
-      "category": "admin"
-    },
-    {
-      "name": "botname",
-      "base": "setname",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia el nombre visible de este bot",
-      "usage": "<nombre|reset>",
-      "category": "admin"
-    },
-    {
       "name": "setnamebot",
       "base": "setname",
       "primary": false,
@@ -7031,7 +7793,7 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "setbotname",
+      "name": "setnombre",
       "base": "setname",
       "primary": false,
       "aliases": [],
@@ -7040,21 +7802,12 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "renombrarbot",
-      "base": "setname",
+      "name": "setnombregrupo",
+      "base": "setgroupname",
       "primary": false,
       "aliases": [],
-      "description": "Cambia el nombre visible de este bot",
-      "usage": "<nombre|reset>",
-      "category": "admin"
-    },
-    {
-      "name": "cambiarnombre",
-      "base": "setname",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia el nombre visible de este bot",
-      "usage": "<nombre|reset>",
+      "description": "Cambia el nombre del grupo",
+      "usage": "<nombre>",
       "category": "admin"
     },
     {
@@ -7073,48 +7826,30 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "cambiardueño",
-      "base": "setowner",
+      "name": "setpais",
+      "base": "pais",
       "primary": false,
       "aliases": [],
-      "description": "Cambia el dueño de tu jadibot (el principal no se puede transferir)",
-      "usage": "@usuario",
-      "category": "admin"
+      "description": "Elige tu país para ver tu dinero en tu moneda local",
+      "usage": "[código o nombre] | lista",
+      "category": "info"
     },
     {
-      "name": "cambiardueno",
-      "base": "setowner",
+      "name": "setpet",
+      "base": "activarmascota",
       "primary": false,
       "aliases": [],
-      "description": "Cambia el dueño de tu jadibot (el principal no se puede transferir)",
-      "usage": "@usuario",
-      "category": "admin"
+      "description": "Elige cuál de tus mascotas está activa",
+      "usage": "<número o nombre>",
+      "category": "mascotas"
     },
     {
-      "name": "dueñobot",
-      "base": "setowner",
+      "name": "setprefijo",
+      "base": "setprefix",
       "primary": false,
       "aliases": [],
-      "description": "Cambia el dueño de tu jadibot (el principal no se puede transferir)",
-      "usage": "@usuario",
-      "category": "admin"
-    },
-    {
-      "name": "ownerbot",
-      "base": "setowner",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia el dueño de tu jadibot (el principal no se puede transferir)",
-      "usage": "@usuario",
-      "category": "admin"
-    },
-    {
-      "name": "transferirbot",
-      "base": "setowner",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia el dueño de tu jadibot (el principal no se puede transferir)",
-      "usage": "@usuario",
+      "description": "Cambia los prefijos de este bot (owner o dueño del jadibot)",
+      "usage": "<prefijos|reset>",
       "category": "admin"
     },
     {
@@ -7131,31 +7866,13 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "prefijo",
-      "base": "setprefix",
+      "name": "setstaff",
+      "base": "staff",
       "primary": false,
       "aliases": [],
-      "description": "Cambia los prefijos de este bot (owner o dueño del jadibot)",
-      "usage": "<prefijos|reset>",
-      "category": "admin"
-    },
-    {
-      "name": "setprefijo",
-      "base": "setprefix",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia los prefijos de este bot (owner o dueño del jadibot)",
-      "usage": "<prefijos|reset>",
-      "category": "admin"
-    },
-    {
-      "name": "prefix",
-      "base": "setprefix",
-      "primary": false,
-      "aliases": [],
-      "description": "Cambia los prefijos de este bot (owner o dueño del jadibot)",
-      "usage": "<prefijos|reset>",
-      "category": "admin"
+      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
+      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
+      "category": "staff"
     },
     {
       "name": "setstyle",
@@ -7170,22 +7887,76 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "setestilo",
-      "base": "setstyle",
+      "name": "settings",
+      "base": "botconfig",
       "primary": false,
       "aliases": [],
-      "description": "Activa o desactiva el marco visual de las respuestas",
-      "usage": "on|off|reset",
+      "description": "Muestra la configuración editable de este bot",
+      "usage": "",
       "category": "admin"
     },
     {
-      "name": "estilo",
-      "base": "setstyle",
+      "name": "setwelcome",
+      "base": "welcome",
       "primary": false,
       "aliases": [],
-      "description": "Activa o desactiva el marco visual de las respuestas",
-      "usage": "on|off|reset",
+      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
+      "usage": "on|off|texto|bye|textobye",
       "category": "admin"
+    },
+    {
+      "name": "sha1",
+      "base": "hash",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera el hash MD5, SHA-1, SHA-256 o SHA-512 de un texto",
+      "usage": "[algoritmo] <texto>",
+      "category": "utilidades"
+    },
+    {
+      "name": "sha256",
+      "base": "hash",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera el hash MD5, SHA-1, SHA-256 o SHA-512 de un texto",
+      "usage": "[algoritmo] <texto>",
+      "category": "utilidades"
+    },
+    {
+      "name": "sha512",
+      "base": "hash",
+      "primary": false,
+      "aliases": [],
+      "description": "Genera el hash MD5, SHA-1, SHA-256 o SHA-512 de un texto",
+      "usage": "[algoritmo] <texto>",
+      "category": "utilidades"
+    },
+    {
+      "name": "ship",
+      "base": "amor",
+      "primary": false,
+      "aliases": [],
+      "description": "Calcula la compatibilidad amorosa con otro usuario",
+      "usage": "@usuario",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "shop",
+      "base": "tienda",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra la tienda y los precios de NovitaBot",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "short",
+      "base": "shorturl",
+      "primary": false,
+      "aliases": [],
+      "description": "Acorta un enlace largo",
+      "usage": "<enlace>",
+      "category": "utilidades"
     },
     {
       "name": "shorturl",
@@ -7201,31 +7972,22 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "acortar",
-      "base": "shorturl",
+      "name": "signo",
+      "base": "horoscopo",
       "primary": false,
       "aliases": [],
-      "description": "Acorta un enlace largo",
-      "usage": "<enlace>",
-      "category": "utilidades"
+      "description": "Muestra tu horóscopo diario según tu signo o fecha de nacimiento",
+      "usage": "<signo o dd/mm>",
+      "category": "entretenimiento"
     },
     {
-      "name": "tinyurl",
-      "base": "shorturl",
+      "name": "silence",
+      "base": "silencio",
       "primary": false,
       "aliases": [],
-      "description": "Acorta un enlace largo",
-      "usage": "<enlace>",
-      "category": "utilidades"
-    },
-    {
-      "name": "short",
-      "base": "shorturl",
-      "primary": false,
-      "aliases": [],
-      "description": "Acorta un enlace largo",
-      "usage": "<enlace>",
-      "category": "utilidades"
+      "description": "Controla si los jadibots hablan cuando el principal está en el grupo",
+      "usage": "",
+      "category": "admin"
     },
     {
       "name": "silencio",
@@ -7239,13 +8001,13 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "silence",
-      "base": "silencio",
+      "name": "sintetizar",
+      "base": "resumir",
       "primary": false,
       "aliases": [],
-      "description": "Controla si los jadibots hablan cuando el principal está en el grupo",
-      "usage": "",
-      "category": "admin"
+      "description": "Resume un texto largo o el contenido de un enlace usando IA",
+      "usage": "<texto o enlace>",
+      "category": "ia"
     },
     {
       "name": "sismo",
@@ -7262,33 +8024,6 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "terremoto",
-      "base": "sismo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los sismos más recientes del mundo en tiempo real",
-      "usage": "[magnitud] [lugar]",
-      "category": "info"
-    },
-    {
-      "name": "temblor",
-      "base": "sismo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los sismos más recientes del mundo en tiempo real",
-      "usage": "[magnitud] [lugar]",
-      "category": "info"
-    },
-    {
-      "name": "earthquake",
-      "base": "sismo",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra los sismos más recientes del mundo en tiempo real",
-      "usage": "[magnitud] [lugar]",
-      "category": "info"
-    },
-    {
       "name": "sismos",
       "base": "sismo",
       "primary": false,
@@ -7296,6 +8031,24 @@ window.NOVITA_DATA = {
       "description": "Muestra los sismos más recientes del mundo en tiempo real",
       "usage": "[magnitud] [lugar]",
       "category": "info"
+    },
+    {
+      "name": "sith",
+      "base": "starwars",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca un personaje de Star Wars",
+      "usage": "<personaje>",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "slap",
+      "base": "hug",
+      "primary": false,
+      "aliases": [],
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
     },
     {
       "name": "slot",
@@ -7320,24 +8073,6 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "tragamonedas",
-      "base": "slot",
-      "primary": false,
-      "aliases": [],
-      "description": "Juega a la tragaperras y apuesta NovitaCoins",
-      "usage": "[apuesta]",
-      "category": "juegos"
-    },
-    {
-      "name": "tragaperras",
-      "base": "slot",
-      "primary": false,
-      "aliases": [],
-      "description": "Juega a la tragaperras y apuesta NovitaCoins",
-      "usage": "[apuesta]",
-      "category": "juegos"
-    },
-    {
       "name": "sol",
       "base": "sol",
       "primary": true,
@@ -7353,42 +8088,6 @@ window.NOVITA_DATA = {
       "category": "info"
     },
     {
-      "name": "amanecer",
-      "base": "sol",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra el amanecer y atardecer de una ciudad",
-      "usage": "<ciudad>",
-      "category": "info"
-    },
-    {
-      "name": "atardecer",
-      "base": "sol",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra el amanecer y atardecer de una ciudad",
-      "usage": "<ciudad>",
-      "category": "info"
-    },
-    {
-      "name": "sunrise",
-      "base": "sol",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra el amanecer y atardecer de una ciudad",
-      "usage": "<ciudad>",
-      "category": "info"
-    },
-    {
-      "name": "sunset",
-      "base": "sol",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra el amanecer y atardecer de una ciudad",
-      "usage": "<ciudad>",
-      "category": "info"
-    },
-    {
       "name": "solar",
       "base": "sol",
       "primary": false,
@@ -7396,6 +8095,42 @@ window.NOVITA_DATA = {
       "description": "Muestra el amanecer y atardecer de una ciudad",
       "usage": "<ciudad>",
       "category": "info"
+    },
+    {
+      "name": "soltarmascota",
+      "base": "liberar",
+      "primary": false,
+      "aliases": [],
+      "description": "Libera una mascota de tu colección",
+      "usage": "<número o nombre> confirmar",
+      "category": "mascotas"
+    },
+    {
+      "name": "song",
+      "base": "musica",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca una canción y muestra artista, álbum y portada",
+      "usage": "<canción o artista>",
+      "category": "descargas"
+    },
+    {
+      "name": "soporte",
+      "base": "report",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía un reporte al creador (verificado por IA) o revisa los reportes (dueño)",
+      "usage": "[texto] | list | close <id>",
+      "category": "admin"
+    },
+    {
+      "name": "sortear",
+      "base": "sorteo",
+      "primary": false,
+      "aliases": [],
+      "description": "Elige un ganador al azar entre varias opciones",
+      "usage": "<opción1, opción2...> | <número-número>",
+      "category": "juegos"
     },
     {
       "name": "sorteo",
@@ -7410,22 +8145,13 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "sortear",
-      "base": "sorteo",
+      "name": "sound",
+      "base": "soundcloud",
       "primary": false,
       "aliases": [],
-      "description": "Elige un ganador al azar entre varias opciones",
-      "usage": "<opción1, opción2...> | <número-número>",
-      "category": "juegos"
-    },
-    {
-      "name": "rifa",
-      "base": "sorteo",
-      "primary": false,
-      "aliases": [],
-      "description": "Elige un ganador al azar entre varias opciones",
-      "usage": "<opción1, opción2...> | <número-número>",
-      "category": "juegos"
+      "description": "Descarga o busca audio completo en SoundCloud",
+      "usage": "",
+      "category": "descargas"
     },
     {
       "name": "soundcloud",
@@ -7437,34 +8163,16 @@ window.NOVITA_DATA = {
         "sound"
       ],
       "description": "Descarga o busca audio completo en SoundCloud",
-      "usage": "🎧 *DESCARGA DE SOUNDCLOUD*\n\n🔗 Uso: */soundcloud <enlace o búsqueda>*\n\n✨ *EJEMPLOS*\n• */soundcloud https://soundcloud.com/forss/flickermood*\n• */soundcloud lofi hip hop*\n\n📥 Si SoundCloud solo tiene una vista previa de 30 s, busco la canción completa.",
+      "usage": "",
       "category": "descargas"
     },
     {
-      "name": "sc",
-      "base": "soundcloud",
+      "name": "spoti",
+      "base": "spotify",
       "primary": false,
       "aliases": [],
-      "description": "Descarga o busca audio completo en SoundCloud",
-      "usage": "🎧 *DESCARGA DE SOUNDCLOUD*\n\n🔗 Uso: */soundcloud <enlace o búsqueda>*\n\n✨ *EJEMPLOS*\n• */soundcloud https://soundcloud.com/forss/flickermood*\n• */soundcloud lofi hip hop*\n\n📥 Si SoundCloud solo tiene una vista previa de 30 s, busco la canción completa.",
-      "category": "descargas"
-    },
-    {
-      "name": "scdl",
-      "base": "soundcloud",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga o busca audio completo en SoundCloud",
-      "usage": "🎧 *DESCARGA DE SOUNDCLOUD*\n\n🔗 Uso: */soundcloud <enlace o búsqueda>*\n\n✨ *EJEMPLOS*\n• */soundcloud https://soundcloud.com/forss/flickermood*\n• */soundcloud lofi hip hop*\n\n📥 Si SoundCloud solo tiene una vista previa de 30 s, busco la canción completa.",
-      "category": "descargas"
-    },
-    {
-      "name": "sound",
-      "base": "soundcloud",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga o busca audio completo en SoundCloud",
-      "usage": "🎧 *DESCARGA DE SOUNDCLOUD*\n\n🔗 Uso: */soundcloud <enlace o búsqueda>*\n\n✨ *EJEMPLOS*\n• */soundcloud https://soundcloud.com/forss/flickermood*\n• */soundcloud lofi hip hop*\n\n📥 Si SoundCloud solo tiene una vista previa de 30 s, busco la canción completa.",
+      "description": "Muestra info y vista previa de 30 s de Spotify",
+      "usage": "<enlace de Spotify>",
       "category": "descargas"
     },
     {
@@ -7476,15 +8184,6 @@ window.NOVITA_DATA = {
         "spotifydl",
         "spotifydown"
       ],
-      "description": "Muestra info y vista previa de 30 s de Spotify",
-      "usage": "<enlace de Spotify>",
-      "category": "descargas"
-    },
-    {
-      "name": "spoti",
-      "base": "spotify",
-      "primary": false,
-      "aliases": [],
       "description": "Muestra info y vista previa de 30 s de Spotify",
       "usage": "<enlace de Spotify>",
       "category": "descargas"
@@ -7524,6 +8223,30 @@ window.NOVITA_DATA = {
       "category": "staff"
     },
     {
+      "name": "staff",
+      "base": "staff",
+      "primary": true,
+      "aliases": [
+        "equipo",
+        "setstaff",
+        "staffrango",
+        "rangostaff",
+        "darrango"
+      ],
+      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
+      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
+      "category": "staff"
+    },
+    {
+      "name": "staffcreditos",
+      "base": "creditos",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los créditos, el creador y el equipo del bot",
+      "usage": "",
+      "category": "staff"
+    },
+    {
       "name": "staffpanel",
       "base": "st",
       "primary": false,
@@ -7533,25 +8256,16 @@ window.NOVITA_DATA = {
       "category": "staff"
     },
     {
-      "name": "panelstaff",
-      "base": "st",
+      "name": "staffrango",
+      "base": "staff",
       "primary": false,
       "aliases": [],
-      "description": "Panel del staff: últimos reinicios, rangos y estado del bot",
-      "usage": "[reinicios|rangos|menu|ver|revisiones|ayuda]",
+      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
+      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
       "category": "staff"
     },
     {
       "name": "staffstatus",
-      "base": "st",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel del staff: últimos reinicios, rangos y estado del bot",
-      "usage": "[reinicios|rangos|menu|ver|revisiones|ayuda]",
-      "category": "staff"
-    },
-    {
-      "name": "estadostaff",
       "base": "st",
       "primary": false,
       "aliases": [],
@@ -7569,75 +8283,6 @@ window.NOVITA_DATA = {
       "category": "staff"
     },
     {
-      "name": "reinicios",
-      "base": "st",
-      "primary": false,
-      "aliases": [],
-      "description": "Panel del staff: últimos reinicios, rangos y estado del bot",
-      "usage": "[reinicios|rangos|menu|ver|revisiones|ayuda]",
-      "category": "staff"
-    },
-    {
-      "name": "staff",
-      "base": "staff",
-      "primary": true,
-      "aliases": [
-        "equipo",
-        "setstaff",
-        "staffrango",
-        "rangostaff",
-        "darrango"
-      ],
-      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
-      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
-      "category": "staff"
-    },
-    {
-      "name": "equipo",
-      "base": "staff",
-      "primary": false,
-      "aliases": [],
-      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
-      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
-      "category": "staff"
-    },
-    {
-      "name": "setstaff",
-      "base": "staff",
-      "primary": false,
-      "aliases": [],
-      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
-      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
-      "category": "staff"
-    },
-    {
-      "name": "staffrango",
-      "base": "staff",
-      "primary": false,
-      "aliases": [],
-      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
-      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
-      "category": "staff"
-    },
-    {
-      "name": "rangostaff",
-      "base": "staff",
-      "primary": false,
-      "aliases": [],
-      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
-      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
-      "category": "staff"
-    },
-    {
-      "name": "darrango",
-      "base": "staff",
-      "primary": false,
-      "aliases": [],
-      "description": "Gestiona el staff, sus rangos y el acceso al repositorio de plugins",
-      "usage": "[dar|ver|quitar|github|acceso|menu|roles]",
-      "category": "staff"
-    },
-    {
       "name": "starwars",
       "base": "starwars",
       "primary": true,
@@ -7651,31 +8296,31 @@ window.NOVITA_DATA = {
       "category": "entretenimiento"
     },
     {
-      "name": "sw",
-      "base": "starwars",
+      "name": "station",
+      "base": "iss",
       "primary": false,
       "aliases": [],
-      "description": "Busca un personaje de Star Wars",
-      "usage": "<personaje>",
-      "category": "entretenimiento"
+      "description": "Muestra la ubicación actual de la Estación Espacial Internacional",
+      "usage": "",
+      "category": "info"
     },
     {
-      "name": "jedi",
-      "base": "starwars",
+      "name": "statusgrupo",
+      "base": "estadogrupo",
       "primary": false,
       "aliases": [],
-      "description": "Busca un personaje de Star Wars",
-      "usage": "<personaje>",
-      "category": "entretenimiento"
+      "description": "Muestra si antibot, antilink y otras protecciones están ON u OFF",
+      "usage": "",
+      "category": "admin"
     },
     {
-      "name": "sith",
-      "base": "starwars",
+      "name": "steal",
+      "base": "robar",
       "primary": false,
       "aliases": [],
-      "description": "Busca un personaje de Star Wars",
-      "usage": "<personaje>",
-      "category": "entretenimiento"
+      "description": "Intenta robar monedas a otro usuario (puedes ser atrapado)",
+      "usage": "[@usuario]",
+      "category": "economia"
     },
     {
       "name": "sticker",
@@ -7693,43 +8338,16 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "s",
-      "base": "sticker",
+      "name": "stickerbrat",
+      "base": "brat",
       "primary": false,
       "aliases": [],
-      "description": "Convierte una imagen en sticker respondiendo a ella o con el comando en el pie de foto",
-      "usage": "",
+      "description": "Crea un sticker estilo brat con el texto que envíes o respondas",
+      "usage": "<texto>",
       "category": "multimedia"
     },
     {
       "name": "stiker",
-      "base": "sticker",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte una imagen en sticker respondiendo a ella o con el comando en el pie de foto",
-      "usage": "",
-      "category": "multimedia"
-    },
-    {
-      "name": "figu",
-      "base": "sticker",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte una imagen en sticker respondiendo a ella o con el comando en el pie de foto",
-      "usage": "",
-      "category": "multimedia"
-    },
-    {
-      "name": "tosticker",
-      "base": "sticker",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte una imagen en sticker respondiendo a ella o con el comando en el pie de foto",
-      "usage": "",
-      "category": "multimedia"
-    },
-    {
-      "name": "tofigu",
       "base": "sticker",
       "primary": false,
       "aliases": [],
@@ -7749,13 +8367,31 @@ window.NOVITA_DATA = {
       "category": "jadibot"
     },
     {
-      "name": "deljadibot",
-      "base": "stopjadibot",
+      "name": "store",
+      "base": "tienda",
       "primary": false,
       "aliases": [],
-      "description": "Detiene un jadibot activo",
+      "description": "Muestra la tienda y los precios de NovitaBot",
       "usage": "",
-      "category": "jadibot"
+      "category": "economia"
+    },
+    {
+      "name": "strdl",
+      "base": "streamable",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video de Streamable",
+      "usage": "📹 *DESCARGA DE STREAMABLE* 🔗 Uso: */streamable <enlace>* ✨ Ejemplo: */streamable https://streamable.com/moo*",
+      "category": "descargas"
+    },
+    {
+      "name": "streak",
+      "base": "racha",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra cuántos días llevas usando el bot y tu racha",
+      "usage": "",
+      "category": "perfil"
     },
     {
       "name": "streamable",
@@ -7766,16 +8402,7 @@ window.NOVITA_DATA = {
         "streamabledl"
       ],
       "description": "Descarga un video de Streamable",
-      "usage": "📹 *DESCARGA DE STREAMABLE*\n\n🔗 Uso: */streamable <enlace>*\n✨ Ejemplo: */streamable https://streamable.com/moo*",
-      "category": "descargas"
-    },
-    {
-      "name": "strdl",
-      "base": "streamable",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video de Streamable",
-      "usage": "📹 *DESCARGA DE STREAMABLE*\n\n🔗 Uso: */streamable <enlace>*\n✨ Ejemplo: */streamable https://streamable.com/moo*",
+      "usage": "📹 *DESCARGA DE STREAMABLE* 🔗 Uso: */streamable <enlace>* ✨ Ejemplo: */streamable https://streamable.com/moo*",
       "category": "descargas"
     },
     {
@@ -7784,8 +8411,17 @@ window.NOVITA_DATA = {
       "primary": false,
       "aliases": [],
       "description": "Descarga un video de Streamable",
-      "usage": "📹 *DESCARGA DE STREAMABLE*\n\n🔗 Uso: */streamable <enlace>*\n✨ Ejemplo: */streamable https://streamable.com/moo*",
+      "usage": "📹 *DESCARGA DE STREAMABLE* 🔗 Uso: */streamable <enlace>* ✨ Ejemplo: */streamable https://streamable.com/moo*",
       "category": "descargas"
+    },
+    {
+      "name": "subbots",
+      "base": "bots",
+      "primary": false,
+      "aliases": [],
+      "description": "Lista los jadibots principales, premium y normales",
+      "usage": "[principal|premium|normal|todos]",
+      "category": "jadibot"
     },
     {
       "name": "suerte",
@@ -7803,49 +8439,52 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "fortuna",
-      "base": "suerte",
+      "name": "sunrise",
+      "base": "sol",
       "primary": false,
       "aliases": [],
-      "description": "Consulta tu fortuna diaria y recibe una pequeña recompensa",
-      "usage": "",
-      "category": "juegos"
+      "description": "Muestra el amanecer y atardecer de una ciudad",
+      "usage": "<ciudad>",
+      "category": "info"
     },
     {
-      "name": "luck",
-      "base": "suerte",
+      "name": "sunset",
+      "base": "sol",
       "primary": false,
       "aliases": [],
-      "description": "Consulta tu fortuna diaria y recibe una pequeña recompensa",
-      "usage": "",
-      "category": "juegos"
+      "description": "Muestra el amanecer y atardecer de una ciudad",
+      "usage": "<ciudad>",
+      "category": "info"
     },
     {
-      "name": "destino",
-      "base": "suerte",
+      "name": "sw",
+      "base": "starwars",
       "primary": false,
       "aliases": [],
-      "description": "Consulta tu fortuna diaria y recibe una pequeña recompensa",
-      "usage": "",
-      "category": "juegos"
+      "description": "Busca un personaje de Star Wars",
+      "usage": "<personaje>",
+      "category": "entretenimiento"
     },
     {
-      "name": "prediccion",
-      "base": "suerte",
+      "name": "tablarangos",
+      "base": "rangos",
       "primary": false,
       "aliases": [],
-      "description": "Consulta tu fortuna diaria y recibe una pequeña recompensa",
+      "description": "Muestra todos los rangos y lo que necesitas para subir",
       "usage": "",
-      "category": "juegos"
+      "category": "perfil"
     },
     {
-      "name": "predicción",
-      "base": "suerte",
-      "primary": false,
-      "aliases": [],
-      "description": "Consulta tu fortuna diaria y recibe una pequeña recompensa",
-      "usage": "",
-      "category": "juegos"
+      "name": "tag",
+      "base": "tag",
+      "primary": true,
+      "aliases": [
+        "all",
+        "tags"
+      ],
+      "description": "Menciona a todos los miembros del grupo sin mostrar la lista",
+      "usage": "<mensaje>",
+      "category": "admin"
     },
     {
       "name": "tagall",
@@ -7854,37 +8493,20 @@ window.NOVITA_DATA = {
       "aliases": [
         "todos",
         "mencionartodos",
-        "mentionall"
+        "mentionall",
+        "revivan"
       ],
       "description": "Menciona a todos los miembros del grupo",
       "usage": "[mensaje]",
       "category": "admin"
     },
     {
-      "name": "todos",
-      "base": "tagall",
+      "name": "tags",
+      "base": "tag",
       "primary": false,
       "aliases": [],
-      "description": "Menciona a todos los miembros del grupo",
-      "usage": "[mensaje]",
-      "category": "admin"
-    },
-    {
-      "name": "mencionartodos",
-      "base": "tagall",
-      "primary": false,
-      "aliases": [],
-      "description": "Menciona a todos los miembros del grupo",
-      "usage": "[mensaje]",
-      "category": "admin"
-    },
-    {
-      "name": "mentionall",
-      "base": "tagall",
-      "primary": false,
-      "aliases": [],
-      "description": "Menciona a todos los miembros del grupo",
-      "usage": "[mensaje]",
+      "description": "Menciona a todos los miembros del grupo sin mostrar la lista",
+      "usage": "<mensaje>",
       "category": "admin"
     },
     {
@@ -7901,675 +8523,6 @@ window.NOVITA_DATA = {
       "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
       "usage": "",
       "category": "economia"
-    },
-    {
-      "name": "lenar",
-      "base": "talar",
-      "primary": false,
-      "aliases": [],
-      "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "leñador",
-      "base": "talar",
-      "primary": false,
-      "aliases": [],
-      "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "lenador",
-      "base": "talar",
-      "primary": false,
-      "aliases": [],
-      "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "madera",
-      "base": "talar",
-      "primary": false,
-      "aliases": [],
-      "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "hachazo",
-      "base": "talar",
-      "primary": false,
-      "aliases": [],
-      "description": "Tala árboles y gana NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "tarjeta",
-      "base": "tarjeta",
-      "primary": true,
-      "aliases": [
-        "card",
-        "tarjetas",
-        "mitarjeta",
-        "creditcard",
-        "tarjetacredito"
-      ],
-      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
-      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
-      "category": "economia"
-    },
-    {
-      "name": "card",
-      "base": "tarjeta",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
-      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
-      "category": "economia"
-    },
-    {
-      "name": "tarjetas",
-      "base": "tarjeta",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
-      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
-      "category": "economia"
-    },
-    {
-      "name": "mitarjeta",
-      "base": "tarjeta",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
-      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
-      "category": "economia"
-    },
-    {
-      "name": "creditcard",
-      "base": "tarjeta",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
-      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
-      "category": "economia"
-    },
-    {
-      "name": "tarjetacredito",
-      "base": "tarjeta",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
-      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
-      "category": "economia"
-    },
-    {
-      "name": "tienda",
-      "base": "tienda",
-      "primary": true,
-      "aliases": [
-        "shop",
-        "store",
-        "precios"
-      ],
-      "description": "Muestra la tienda y los precios de NovitaBot",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "shop",
-      "base": "tienda",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la tienda y los precios de NovitaBot",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "store",
-      "base": "tienda",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la tienda y los precios de NovitaBot",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "precios",
-      "base": "tienda",
-      "primary": false,
-      "aliases": [],
-      "description": "Muestra la tienda y los precios de NovitaBot",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "tiktok",
-      "base": "tiktok",
-      "primary": true,
-      "aliases": [
-        "tt",
-        "ttdl",
-        "tik"
-      ],
-      "description": "Descarga un video de TikTok sin marca de agua",
-      "usage": "<enlace de TikTok>",
-      "category": "descargas"
-    },
-    {
-      "name": "tt",
-      "base": "tiktok",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video de TikTok sin marca de agua",
-      "usage": "<enlace de TikTok>",
-      "category": "descargas"
-    },
-    {
-      "name": "ttdl",
-      "base": "tiktok",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video de TikTok sin marca de agua",
-      "usage": "<enlace de TikTok>",
-      "category": "descargas"
-    },
-    {
-      "name": "tik",
-      "base": "tiktok",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga un video de TikTok sin marca de agua",
-      "usage": "<enlace de TikTok>",
-      "category": "descargas"
-    },
-    {
-      "name": "toblur",
-      "base": "toblur",
-      "primary": true,
-      "aliases": [
-        "todesenfoque",
-        "toborroso"
-      ],
-      "description": "Aplica un desenfoque a una imagen o sticker",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "todesenfoque",
-      "base": "toblur",
-      "primary": false,
-      "aliases": [],
-      "description": "Aplica un desenfoque a una imagen o sticker",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toborroso",
-      "base": "toblur",
-      "primary": false,
-      "aliases": [],
-      "description": "Aplica un desenfoque a una imagen o sticker",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tobn",
-      "base": "tobn",
-      "primary": true,
-      "aliases": [
-        "tograyscale",
-        "togris",
-        "blancoynegro"
-      ],
-      "description": "Convierte una imagen o sticker a blanco y negro",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tograyscale",
-      "base": "tobn",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte una imagen o sticker a blanco y negro",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "togris",
-      "base": "tobn",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte una imagen o sticker a blanco y negro",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "blancoynegro",
-      "base": "tobn",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte una imagen o sticker a blanco y negro",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tocomprimir",
-      "base": "tocomprimir",
-      "primary": true,
-      "aliases": [
-        "tocompress",
-        "comprimir",
-        "comprimirimagen",
-        "reducir"
-      ],
-      "description": "Comprime una imagen para que ocupe menos espacio",
-      "usage": "[calidad 1-100]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tocompress",
-      "base": "tocomprimir",
-      "primary": false,
-      "aliases": [],
-      "description": "Comprime una imagen para que ocupe menos espacio",
-      "usage": "[calidad 1-100]",
-      "category": "multimedia"
-    },
-    {
-      "name": "comprimir",
-      "base": "tocomprimir",
-      "primary": false,
-      "aliases": [],
-      "description": "Comprime una imagen para que ocupe menos espacio",
-      "usage": "[calidad 1-100]",
-      "category": "multimedia"
-    },
-    {
-      "name": "comprimirimagen",
-      "base": "tocomprimir",
-      "primary": false,
-      "aliases": [],
-      "description": "Comprime una imagen para que ocupe menos espacio",
-      "usage": "[calidad 1-100]",
-      "category": "multimedia"
-    },
-    {
-      "name": "reducir",
-      "base": "tocomprimir",
-      "primary": false,
-      "aliases": [],
-      "description": "Comprime una imagen para que ocupe menos espacio",
-      "usage": "[calidad 1-100]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toflac",
-      "base": "toflac",
-      "primary": true,
-      "aliases": [
-        "toaudioflac",
-        "tolossless"
-      ],
-      "description": "Convierte un audio o video a FLAC sin pérdida",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toaudioflac",
-      "base": "toflac",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un audio o video a FLAC sin pérdida",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tolossless",
-      "base": "toflac",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un audio o video a FLAC sin pérdida",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "togif",
-      "base": "togif",
-      "primary": true,
-      "aliases": [
-        "togifsticker",
-        "togifanimado"
-      ],
-      "description": "Convierte un sticker animado o video en GIF reproducible",
-      "usage": "[responde a un sticker animado o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "togifsticker",
-      "base": "togif",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un sticker animado o video en GIF reproducible",
-      "usage": "[responde a un sticker animado o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "togifanimado",
-      "base": "togif",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un sticker animado o video en GIF reproducible",
-      "usage": "[responde a un sticker animado o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toimg",
-      "base": "toimg",
-      "primary": true,
-      "aliases": [
-        "toimage",
-        "tofoto",
-        "topng",
-        "tojpg"
-      ],
-      "description": "Convierte un sticker en una imagen PNG",
-      "usage": "[responde a un sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toimage",
-      "base": "toimg",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un sticker en una imagen PNG",
-      "usage": "[responde a un sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tofoto",
-      "base": "toimg",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un sticker en una imagen PNG",
-      "usage": "[responde a un sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "topng",
-      "base": "toimg",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un sticker en una imagen PNG",
-      "usage": "[responde a un sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tojpg",
-      "base": "toimg",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un sticker en una imagen PNG",
-      "usage": "[responde a un sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tojpeg",
-      "base": "tojpeg",
-      "primary": true,
-      "aliases": [
-        "tojpegimage",
-        "tojpg2",
-        "ajpg"
-      ],
-      "description": "Convierte una imagen o sticker a JPG",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tojpegimage",
-      "base": "tojpeg",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte una imagen o sticker a JPG",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tojpg2",
-      "base": "tojpeg",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte una imagen o sticker a JPG",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "ajpg",
-      "base": "tojpeg",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte una imagen o sticker a JPG",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tom4a",
-      "base": "tom4a",
-      "primary": true,
-      "aliases": [
-        "toaac",
-        "toaudioaac",
-        "tom4aaudio"
-      ],
-      "description": "Convierte un audio o video a M4A/AAC",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toaac",
-      "base": "tom4a",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un audio o video a M4A/AAC",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toaudioaac",
-      "base": "tom4a",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un audio o video a M4A/AAC",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tom4aaudio",
-      "base": "tom4a",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un audio o video a M4A/AAC",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tomp3",
-      "base": "tomp3",
-      "primary": true,
-      "aliases": [
-        "toaudio",
-        "tomp3audio",
-        "toaudio3"
-      ],
-      "description": "Convierte un video, audio o nota de voz a MP3",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toaudio",
-      "base": "tomp3",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un video, audio o nota de voz a MP3",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tomp3audio",
-      "base": "tomp3",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un video, audio o nota de voz a MP3",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toaudio3",
-      "base": "tomp3",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un video, audio o nota de voz a MP3",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tomp4",
-      "base": "tomp4",
-      "primary": true,
-      "aliases": [
-        "tovideo",
-        "tomp4video"
-      ],
-      "description": "Convierte un sticker animado o un video a MP4",
-      "usage": "[responde a un sticker o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tovideo",
-      "base": "tomp4",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un sticker animado o un video a MP4",
-      "usage": "[responde a un sticker o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tomp4video",
-      "base": "tomp4",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un sticker animado o un video a MP4",
-      "usage": "[responde a un sticker o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toogg",
-      "base": "toogg",
-      "primary": true,
-      "aliases": [
-        "toaudioogg",
-        "tovorbis"
-      ],
-      "description": "Convierte un audio o video a OGG",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toaudioogg",
-      "base": "toogg",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un audio o video a OGG",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tovorbis",
-      "base": "toogg",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte un audio o video a OGG",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "topt",
-      "base": "topt",
-      "primary": true,
-      "aliases": [
-        "tovoz",
-        "tonota",
-        "toptt",
-        "tovoice"
-      ],
-      "description": "Convierte audio o video en nota de voz",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tovoz",
-      "base": "topt",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte audio o video en nota de voz",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tonota",
-      "base": "topt",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte audio o video en nota de voz",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toptt",
-      "base": "topt",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte audio o video en nota de voz",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tovoice",
-      "base": "topt",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte audio o video en nota de voz",
-      "usage": "[responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "toresize",
-      "base": "toresize",
-      "primary": true,
-      "aliases": [
-        "redimensionar",
-        "tamanio",
-        "tamano",
-        "tamaño",
-        "resize"
-      ],
-      "description": "Redimensiona una imagen o sticker al tamaño que indiques",
-      "usage": "<ancho> <alto>",
-      "category": "multimedia"
-    },
-    {
-      "name": "redimensionar",
-      "base": "toresize",
-      "primary": false,
-      "aliases": [],
-      "description": "Redimensiona una imagen o sticker al tamaño que indiques",
-      "usage": "<ancho> <alto>",
-      "category": "multimedia"
     },
     {
       "name": "tamanio",
@@ -8599,13 +8552,682 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "resize",
-      "base": "toresize",
+      "name": "tarjeta",
+      "base": "tarjeta",
+      "primary": true,
+      "aliases": [
+        "card",
+        "tarjetas",
+        "mitarjeta",
+        "creditcard",
+        "tarjetacredito"
+      ],
+      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
+      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
+      "category": "economia"
+    },
+    {
+      "name": "tarjetacredito",
+      "base": "tarjeta",
       "primary": false,
       "aliases": [],
+      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
+      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
+      "category": "economia"
+    },
+    {
+      "name": "tarjetas",
+      "base": "tarjeta",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu tarjeta fake y permite retirar dinero de tu propio banco",
+      "usage": "[ver|nueva|borrar|retirar] [cantidad|@usuario]",
+      "category": "economia"
+    },
+    {
+      "name": "temblor",
+      "base": "sismo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los sismos más recientes del mundo en tiempo real",
+      "usage": "[magnitud] [lugar]",
+      "category": "info"
+    },
+    {
+      "name": "terremoto",
+      "base": "sismo",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los sismos más recientes del mundo en tiempo real",
+      "usage": "[magnitud] [lugar]",
+      "category": "info"
+    },
+    {
+      "name": "tesoro",
+      "base": "cofre",
+      "primary": false,
+      "aliases": [],
+      "description": "Abre un cofre misterioso cada 6 horas",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "textoavoz",
+      "base": "tts",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte texto en audio o nota de voz, con idiomas y velocidad",
+      "usage": "[idioma|nota|lento|rápido|traducir <idioma>] <texto>",
+      "category": "multimedia"
+    },
+    {
+      "name": "tickle",
+      "base": "hug",
+      "primary": false,
+      "aliases": [],
+      "description": "Reacciones anime con GIF (hug, kiss, kill, slap y más)",
+      "usage": "[@usuario]",
+      "category": "anime"
+    },
+    {
+      "name": "tiempo",
+      "base": "clima",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el clima actual y el pronóstico de una ciudad",
+      "usage": "<ciudad>",
+      "category": "info"
+    },
+    {
+      "name": "tiempoactivo",
+      "base": "uptime",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra cuánto tiempo lleva activo el bot",
+      "usage": "",
+      "category": "sistema"
+    },
+    {
+      "name": "tienda",
+      "base": "tienda",
+      "primary": true,
+      "aliases": [
+        "shop",
+        "store",
+        "precios"
+      ],
+      "description": "Muestra la tienda y los precios de NovitaBot",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "tiendamascotas",
+      "base": "petshop",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra la tienda de mascotas y sus precios",
+      "usage": "[raro|épico|legendario]",
+      "category": "mascotas"
+    },
+    {
+      "name": "tierlist",
+      "base": "rangos",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra todos los rangos y lo que necesitas para subir",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "tik",
+      "base": "tiktok",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video de TikTok sin marca de agua",
+      "usage": "<enlace de TikTok>",
+      "category": "descargas"
+    },
+    {
+      "name": "tiktok",
+      "base": "tiktok",
+      "primary": true,
+      "aliases": [
+        "tt",
+        "ttdl",
+        "tik"
+      ],
+      "description": "Descarga un video de TikTok sin marca de agua",
+      "usage": "<enlace de TikTok>",
+      "category": "descargas"
+    },
+    {
+      "name": "time",
+      "base": "hora",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra la hora y fecha actuales en cualquier ciudad del mundo",
+      "usage": "<ciudad>",
+      "category": "info"
+    },
+    {
+      "name": "tinyurl",
+      "base": "shorturl",
+      "primary": false,
+      "aliases": [],
+      "description": "Acorta un enlace largo",
+      "usage": "<enlace>",
+      "category": "utilidades"
+    },
+    {
+      "name": "tipo",
+      "base": "dolar",
+      "primary": false,
+      "aliases": [],
+      "description": "Consulta el tipo de cambio actual entre monedas",
+      "usage": "[moneda base]",
+      "category": "info"
+    },
+    {
+      "name": "titulares",
+      "base": "noticias",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra los titulares de noticias más recientes en español",
+      "usage": "[tema]",
+      "category": "info"
+    },
+    {
+      "name": "toaac",
+      "base": "tom4a",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un audio o video a M4A/AAC",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toaudio",
+      "base": "tomp3",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un video, audio o nota de voz a MP3",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toaudio3",
+      "base": "tomp3",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un video, audio o nota de voz a MP3",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toaudioaac",
+      "base": "tom4a",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un audio o video a M4A/AAC",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toaudioflac",
+      "base": "toflac",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un audio o video a FLAC sin pérdida",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toaudioogg",
+      "base": "toogg",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un audio o video a OGG",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toaudiowav",
+      "base": "towav",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un audio o video a WAV",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toavatar",
+      "base": "tosquare",
+      "primary": false,
+      "aliases": [],
+      "description": "Recorta una imagen o sticker en formato cuadrado",
+      "usage": "[tamaño]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toblur",
+      "base": "toblur",
+      "primary": true,
+      "aliases": [
+        "todesenfoque",
+        "toborroso"
+      ],
+      "description": "Aplica un desenfoque a una imagen o sticker",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tobn",
+      "base": "tobn",
+      "primary": true,
+      "aliases": [
+        "tograyscale",
+        "togris",
+        "blancoynegro"
+      ],
+      "description": "Convierte una imagen o sticker a blanco y negro",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toborroso",
+      "base": "toblur",
+      "primary": false,
+      "aliases": [],
+      "description": "Aplica un desenfoque a una imagen o sticker",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tocompress",
+      "base": "tocomprimir",
+      "primary": false,
+      "aliases": [],
+      "description": "Comprime una imagen para que ocupe menos espacio",
+      "usage": "[calidad 1-100]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tocomprimir",
+      "base": "tocomprimir",
+      "primary": true,
+      "aliases": [
+        "tocompress",
+        "comprimir",
+        "comprimirimagen",
+        "reducir"
+      ],
+      "description": "Comprime una imagen para que ocupe menos espacio",
+      "usage": "[calidad 1-100]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tocuadrado",
+      "base": "tosquare",
+      "primary": false,
+      "aliases": [],
+      "description": "Recorta una imagen o sticker en formato cuadrado",
+      "usage": "[tamaño]",
+      "category": "multimedia"
+    },
+    {
+      "name": "todesenfoque",
+      "base": "toblur",
+      "primary": false,
+      "aliases": [],
+      "description": "Aplica un desenfoque a una imagen o sticker",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "todos",
+      "base": "tagall",
+      "primary": false,
+      "aliases": [],
+      "description": "Menciona a todos los miembros del grupo",
+      "usage": "[mensaje]",
+      "category": "admin"
+    },
+    {
+      "name": "tofigu",
+      "base": "sticker",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte una imagen en sticker respondiendo a ella o con el comando en el pie de foto",
+      "usage": "",
+      "category": "multimedia"
+    },
+    {
+      "name": "toflac",
+      "base": "toflac",
+      "primary": true,
+      "aliases": [
+        "toaudioflac",
+        "tolossless"
+      ],
+      "description": "Convierte un audio o video a FLAC sin pérdida",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tofoto",
+      "base": "toimg",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un sticker en una imagen PNG",
+      "usage": "[responde a un sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tofotoperfil",
+      "base": "tosquare",
+      "primary": false,
+      "aliases": [],
+      "description": "Recorta una imagen o sticker en formato cuadrado",
+      "usage": "[tamaño]",
+      "category": "multimedia"
+    },
+    {
+      "name": "togif",
+      "base": "togif",
+      "primary": true,
+      "aliases": [
+        "togifsticker",
+        "togifanimado"
+      ],
+      "description": "Convierte un sticker animado o video en GIF reproducible",
+      "usage": "[responde a un sticker animado o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "togifanimado",
+      "base": "togif",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un sticker animado o video en GIF reproducible",
+      "usage": "[responde a un sticker animado o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "togifsticker",
+      "base": "togif",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un sticker animado o video en GIF reproducible",
+      "usage": "[responde a un sticker animado o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tograyscale",
+      "base": "tobn",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte una imagen o sticker a blanco y negro",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "togris",
+      "base": "tobn",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte una imagen o sticker a blanco y negro",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toimage",
+      "base": "toimg",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un sticker en una imagen PNG",
+      "usage": "[responde a un sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toimg",
+      "base": "toimg",
+      "primary": true,
+      "aliases": [
+        "toimage",
+        "tofoto",
+        "topng",
+        "tojpg"
+      ],
+      "description": "Convierte un sticker en una imagen PNG",
+      "usage": "[responde a un sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tojpeg",
+      "base": "tojpeg",
+      "primary": true,
+      "aliases": [
+        "tojpegimage",
+        "tojpg2",
+        "ajpg"
+      ],
+      "description": "Convierte una imagen o sticker a JPG",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tojpegimage",
+      "base": "tojpeg",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte una imagen o sticker a JPG",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tojpg",
+      "base": "toimg",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un sticker en una imagen PNG",
+      "usage": "[responde a un sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tojpg2",
+      "base": "tojpeg",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte una imagen o sticker a JPG",
+      "usage": "[responde a una imagen o sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tolossless",
+      "base": "toflac",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un audio o video a FLAC sin pérdida",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tom4a",
+      "base": "tom4a",
+      "primary": true,
+      "aliases": [
+        "toaac",
+        "toaudioaac",
+        "tom4aaudio"
+      ],
+      "description": "Convierte un audio o video a M4A/AAC",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tom4aaudio",
+      "base": "tom4a",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un audio o video a M4A/AAC",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tomp3",
+      "base": "tomp3",
+      "primary": true,
+      "aliases": [
+        "toaudio",
+        "tomp3audio",
+        "toaudio3"
+      ],
+      "description": "Convierte un video, audio o nota de voz a MP3",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tomp3audio",
+      "base": "tomp3",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un video, audio o nota de voz a MP3",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tomp4",
+      "base": "tomp4",
+      "primary": true,
+      "aliases": [
+        "tovideo",
+        "tomp4video"
+      ],
+      "description": "Convierte un sticker animado o un video a MP4",
+      "usage": "[responde a un sticker o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tomp4video",
+      "base": "tomp4",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un sticker animado o un video a MP4",
+      "usage": "[responde a un sticker o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tonota",
+      "base": "topt",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte audio o video en nota de voz",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tonto",
+      "base": "pendejo",
+      "primary": false,
+      "aliases": [],
+      "description": "Elige al pendejo oficial del grupo al azar",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "tontotop",
+      "base": "pndtop",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el top 10 de los que más veces han sido llamados pendejos",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "toogg",
+      "base": "toogg",
+      "primary": true,
+      "aliases": [
+        "toaudioogg",
+        "tovorbis"
+      ],
+      "description": "Convierte un audio o video a OGG",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "top10",
+      "base": "pndtop",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el top 10 de los que más veces han sido llamados pendejos",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "topcoins",
+      "base": "rankcoins",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el ranking de usuarios con más NovitaCoins",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "topng",
+      "base": "toimg",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un sticker en una imagen PNG",
+      "usage": "[responde a un sticker]",
+      "category": "multimedia"
+    },
+    {
+      "name": "topt",
+      "base": "topt",
+      "primary": true,
+      "aliases": [
+        "tovoz",
+        "tonota",
+        "toptt",
+        "tovoice"
+      ],
+      "description": "Convierte audio o video en nota de voz",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toptt",
+      "base": "topt",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte audio o video en nota de voz",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "toresize",
+      "base": "toresize",
+      "primary": true,
+      "aliases": [
+        "redimensionar",
+        "tamanio",
+        "tamano",
+        "tamaño",
+        "resize"
+      ],
       "description": "Redimensiona una imagen o sticker al tamaño que indiques",
       "usage": "<ancho> <alto>",
       "category": "multimedia"
+    },
+    {
+      "name": "torneopokemon",
+      "base": "poketorneo",
+      "primary": false,
+      "aliases": [],
+      "description": "Torneo Pokémon semanal: inscripción, llaves, premios y ranking",
+      "usage": "[unirme|salir|lista|tabla|ranking|historial|reglas|iniciar|cerrar|cancelar|config]",
+      "category": "pokemon"
     },
     {
       "name": "tosquare",
@@ -8621,30 +9243,21 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "tocuadrado",
-      "base": "tosquare",
+      "name": "tosticker",
+      "base": "sticker",
       "primary": false,
       "aliases": [],
-      "description": "Recorta una imagen o sticker en formato cuadrado",
-      "usage": "[tamaño]",
+      "description": "Convierte una imagen en sticker respondiendo a ella o con el comando en el pie de foto",
+      "usage": "",
       "category": "multimedia"
     },
     {
-      "name": "toavatar",
-      "base": "tosquare",
+      "name": "totif",
+      "base": "totiff",
       "primary": false,
       "aliases": [],
-      "description": "Recorta una imagen o sticker en formato cuadrado",
-      "usage": "[tamaño]",
-      "category": "multimedia"
-    },
-    {
-      "name": "tofotoperfil",
-      "base": "tosquare",
-      "primary": false,
-      "aliases": [],
-      "description": "Recorta una imagen o sticker en formato cuadrado",
-      "usage": "[tamaño]",
+      "description": "Convierte una imagen o sticker a TIFF",
+      "usage": "[responde a una imagen o sticker]",
       "category": "multimedia"
     },
     {
@@ -8660,7 +9273,7 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "totif",
+      "name": "totiffimage",
       "base": "totiff",
       "primary": false,
       "aliases": [],
@@ -8669,12 +9282,39 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "totiffimage",
-      "base": "totiff",
+      "name": "tovideo",
+      "base": "tomp4",
       "primary": false,
       "aliases": [],
-      "description": "Convierte una imagen o sticker a TIFF",
-      "usage": "[responde a una imagen o sticker]",
+      "description": "Convierte un sticker animado o un video a MP4",
+      "usage": "[responde a un sticker o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tovoice",
+      "base": "topt",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte audio o video en nota de voz",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tovorbis",
+      "base": "toogg",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte un audio o video a OGG",
+      "usage": "[responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "tovoz",
+      "base": "topt",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte audio o video en nota de voz",
+      "usage": "[responde a un audio o video]",
       "category": "multimedia"
     },
     {
@@ -8699,12 +9339,12 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "toaudiowav",
-      "base": "towav",
+      "name": "toweb",
+      "base": "towebp",
       "primary": false,
       "aliases": [],
-      "description": "Convierte un audio o video a WAV",
-      "usage": "[responde a un audio o video]",
+      "description": "Convierte una imagen o sticker a WebP",
+      "usage": "[responde a una imagen o sticker]",
       "category": "multimedia"
     },
     {
@@ -8720,7 +9360,7 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "toweb",
+      "name": "towebpimage",
       "base": "towebp",
       "primary": false,
       "aliases": [],
@@ -8729,13 +9369,31 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "towebpimage",
-      "base": "towebp",
+      "name": "tr",
+      "base": "traducir",
       "primary": false,
       "aliases": [],
-      "description": "Convierte una imagen o sticker a WebP",
-      "usage": "[responde a una imagen o sticker]",
-      "category": "multimedia"
+      "description": "Traduce un texto del español a otro idioma",
+      "usage": "<idioma> <texto>",
+      "category": "utilidades"
+    },
+    {
+      "name": "trabajar",
+      "base": "work",
+      "primary": false,
+      "aliases": [],
+      "description": "Trabaja para ganar NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "trabajo",
+      "base": "work",
+      "primary": false,
+      "aliases": [],
+      "description": "Trabaja para ganar NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
     },
     {
       "name": "traducir",
@@ -8750,22 +9408,22 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "translate",
-      "base": "traducir",
+      "name": "tragamonedas",
+      "base": "slot",
       "primary": false,
       "aliases": [],
-      "description": "Traduce un texto del español a otro idioma",
-      "usage": "<idioma> <texto>",
-      "category": "utilidades"
+      "description": "Juega a la tragaperras y apuesta NovitaCoins",
+      "usage": "[apuesta]",
+      "category": "juegos"
     },
     {
-      "name": "tr",
-      "base": "traducir",
+      "name": "tragaperras",
+      "base": "slot",
       "primary": false,
       "aliases": [],
-      "description": "Traduce un texto del español a otro idioma",
-      "usage": "<idioma> <texto>",
-      "category": "utilidades"
+      "description": "Juega a la tragaperras y apuesta NovitaCoins",
+      "usage": "[apuesta]",
+      "category": "juegos"
     },
     {
       "name": "transferir",
@@ -8781,31 +9439,22 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "pay",
-      "base": "transferir",
+      "name": "transferirbot",
+      "base": "setowner",
       "primary": false,
       "aliases": [],
-      "description": "Transfiere monedas a otro usuario (comisión del 2%)",
-      "usage": "@usuario <cantidad>",
-      "category": "economia"
+      "description": "Cambia el dueño de tu jadibot (el principal no se puede transferir)",
+      "usage": "@usuario",
+      "category": "admin"
     },
     {
-      "name": "pagar",
-      "base": "transferir",
+      "name": "translate",
+      "base": "traducir",
       "primary": false,
       "aliases": [],
-      "description": "Transfiere monedas a otro usuario (comisión del 2%)",
-      "usage": "@usuario <cantidad>",
-      "category": "economia"
-    },
-    {
-      "name": "enviar",
-      "base": "transferir",
-      "primary": false,
-      "aliases": [],
-      "description": "Transfiere monedas a otro usuario (comisión del 2%)",
-      "usage": "@usuario <cantidad>",
-      "category": "economia"
+      "description": "Traduce un texto del español a otro idioma",
+      "usage": "<idioma> <texto>",
+      "category": "utilidades"
     },
     {
       "name": "trivia",
@@ -8820,22 +9469,31 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "quiz",
-      "base": "trivia",
+      "name": "truth",
+      "base": "verdadreto",
       "primary": false,
       "aliases": [],
-      "description": "Responde preguntas de trivia y gana monedas",
-      "usage": "[nueva|respuesta]",
+      "description": "Lanza una verdad o un reto aleatorio",
+      "usage": "[verdad|reto]",
       "category": "juegos"
     },
     {
-      "name": "pregunta",
-      "base": "trivia",
+      "name": "tt",
+      "base": "tiktok",
       "primary": false,
       "aliases": [],
-      "description": "Responde preguntas de trivia y gana monedas",
-      "usage": "[nueva|respuesta]",
-      "category": "juegos"
+      "description": "Descarga un video de TikTok sin marca de agua",
+      "usage": "<enlace de TikTok>",
+      "category": "descargas"
+    },
+    {
+      "name": "ttdl",
+      "base": "tiktok",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga un video de TikTok sin marca de agua",
+      "usage": "<enlace de TikTok>",
+      "category": "descargas"
     },
     {
       "name": "tts",
@@ -8853,42 +9511,6 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "decir",
-      "base": "tts",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte texto en audio o nota de voz, con idiomas y velocidad",
-      "usage": "[idioma|nota|lento|rápido|traducir <idioma>] <texto>",
-      "category": "multimedia"
-    },
-    {
-      "name": "hablar",
-      "base": "tts",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte texto en audio o nota de voz, con idiomas y velocidad",
-      "usage": "[idioma|nota|lento|rápido|traducir <idioma>] <texto>",
-      "category": "multimedia"
-    },
-    {
-      "name": "voz",
-      "base": "tts",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte texto en audio o nota de voz, con idiomas y velocidad",
-      "usage": "[idioma|nota|lento|rápido|traducir <idioma>] <texto>",
-      "category": "multimedia"
-    },
-    {
-      "name": "textoavoz",
-      "base": "tts",
-      "primary": false,
-      "aliases": [],
-      "description": "Convierte texto en audio o nota de voz, con idiomas y velocidad",
-      "usage": "[idioma|nota|lento|rápido|traducir <idioma>] <texto>",
-      "category": "multimedia"
-    },
-    {
       "name": "ttsvoz",
       "base": "tts",
       "primary": false,
@@ -8896,6 +9518,60 @@ window.NOVITA_DATA = {
       "description": "Convierte texto en audio o nota de voz, con idiomas y velocidad",
       "usage": "[idioma|nota|lento|rápido|traducir <idioma>] <texto>",
       "category": "multimedia"
+    },
+    {
+      "name": "tv",
+      "base": "serie",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca información de una serie de televisión",
+      "usage": "<título>",
+      "category": "info"
+    },
+    {
+      "name": "tvshow",
+      "base": "serie",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca información de una serie de televisión",
+      "usage": "<título>",
+      "category": "info"
+    },
+    {
+      "name": "tw",
+      "base": "xdl",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga videos e imágenes de X (Twitter)",
+      "usage": "<enlace de X o Twitter>",
+      "category": "descargas"
+    },
+    {
+      "name": "twitter",
+      "base": "xdl",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga videos e imágenes de X (Twitter)",
+      "usage": "<enlace de X o Twitter>",
+      "category": "descargas"
+    },
+    {
+      "name": "twitterdl",
+      "base": "xdl",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga videos e imágenes de X (Twitter)",
+      "usage": "<enlace de X o Twitter>",
+      "category": "descargas"
+    },
+    {
+      "name": "unban",
+      "base": "admin",
+      "primary": false,
+      "aliases": [],
+      "description": "Panel de administración: bot on/off, ban, unban y lista de baneados",
+      "usage": "<on|off|ban|unban|list>",
+      "category": "admin"
     },
     {
       "name": "unidades",
@@ -8906,15 +9582,6 @@ window.NOVITA_DATA = {
         "unit",
         "units"
       ],
-      "description": "Convierte unidades de medida",
-      "usage": "<valor> <unidad> <destino>",
-      "category": "utilidades"
-    },
-    {
-      "name": "convertir",
-      "base": "unidades",
-      "primary": false,
-      "aliases": [],
       "description": "Convierte unidades de medida",
       "usage": "<valor> <unidad> <destino>",
       "category": "utilidades"
@@ -8938,6 +9605,24 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
+      "name": "update",
+      "base": "actualizar",
+      "primary": false,
+      "aliases": [],
+      "description": "Aplica una actualización a los jadibots (solo creador)",
+      "usage": "",
+      "category": "sistema"
+    },
+    {
+      "name": "updateplugins",
+      "base": "plugins",
+      "primary": false,
+      "aliases": [],
+      "description": "Estado y actualización de los plugins desde GitHub (dueño)",
+      "usage": "[status|update]",
+      "category": "sistema"
+    },
+    {
       "name": "uptime",
       "base": "uptime",
       "primary": true,
@@ -8951,31 +9636,49 @@ window.NOVITA_DATA = {
       "category": "sistema"
     },
     {
-      "name": "activo",
-      "base": "uptime",
+      "name": "usarmascota",
+      "base": "activarmascota",
       "primary": false,
       "aliases": [],
-      "description": "Muestra cuánto tiempo lleva activo el bot",
-      "usage": "",
-      "category": "sistema"
+      "description": "Elige cuál de tus mascotas está activa",
+      "usage": "<número o nombre>",
+      "category": "mascotas"
     },
     {
-      "name": "encendido",
-      "base": "uptime",
+      "name": "vdl",
+      "base": "videodl",
       "primary": false,
       "aliases": [],
-      "description": "Muestra cuánto tiempo lleva activo el bot",
-      "usage": "",
-      "category": "sistema"
+      "description": "Descarga video de cualquier sitio compatible con yt-dlp",
+      "usage": "🎬 *DESCARGA UNIVERSAL* 🔗 Uso: */videodl <enlace>* ✨ Ejemplo: */videodl https://www.dailymotion.com/video/xbucbr2* _Funciona con YouTube, Dailymotion, Streamable, Archive, Coub y cientos de sitios más._",
+      "category": "descargas"
     },
     {
-      "name": "tiempoactivo",
-      "base": "uptime",
+      "name": "veintiuno",
+      "base": "blackjack",
       "primary": false,
       "aliases": [],
-      "description": "Muestra cuánto tiempo lleva activo el bot",
-      "usage": "",
-      "category": "sistema"
+      "description": "Juega al blackjack contra la casa",
+      "usage": "<cantidad|todo> [pedir]",
+      "category": "juegos"
+    },
+    {
+      "name": "verbots",
+      "base": "bots",
+      "primary": false,
+      "aliases": [],
+      "description": "Lista los jadibots principales, premium y normales",
+      "usage": "[principal|premium|normal|todos]",
+      "category": "jadibot"
+    },
+    {
+      "name": "verdad",
+      "base": "verdadreto",
+      "primary": false,
+      "aliases": [],
+      "description": "Lanza una verdad o un reto aleatorio",
+      "usage": "[verdad|reto]",
+      "category": "juegos"
     },
     {
       "name": "verdadreto",
@@ -8992,40 +9695,22 @@ window.NOVITA_DATA = {
       "category": "juegos"
     },
     {
-      "name": "verdad",
-      "base": "verdadreto",
+      "name": "vergrupo",
+      "base": "estadogrupo",
       "primary": false,
       "aliases": [],
-      "description": "Lanza una verdad o un reto aleatorio",
-      "usage": "[verdad|reto]",
-      "category": "juegos"
+      "description": "Muestra si antibot, antilink y otras protecciones están ON u OFF",
+      "usage": "",
+      "category": "admin"
     },
     {
-      "name": "reto",
-      "base": "verdadreto",
+      "name": "video",
+      "base": "play2",
       "primary": false,
       "aliases": [],
-      "description": "Lanza una verdad o un reto aleatorio",
-      "usage": "[verdad|reto]",
-      "category": "juegos"
-    },
-    {
-      "name": "truth",
-      "base": "verdadreto",
-      "primary": false,
-      "aliases": [],
-      "description": "Lanza una verdad o un reto aleatorio",
-      "usage": "[verdad|reto]",
-      "category": "juegos"
-    },
-    {
-      "name": "dare",
-      "base": "verdadreto",
-      "primary": false,
-      "aliases": [],
-      "description": "Lanza una verdad o un reto aleatorio",
-      "usage": "[verdad|reto]",
-      "category": "juegos"
+      "description": "Descarga y envía video de YouTube en MP4",
+      "usage": "",
+      "category": "descargas"
     },
     {
       "name": "videodl",
@@ -9037,35 +9722,98 @@ window.NOVITA_DATA = {
         "descargar"
       ],
       "description": "Descarga video de cualquier sitio compatible con yt-dlp",
-      "usage": "🎬 *DESCARGA UNIVERSAL*\n\n🔗 Uso: */videodl <enlace>*\n✨ Ejemplo: */videodl https://www.dailymotion.com/video/xbucbr2*\n\n_Funciona con YouTube, Dailymotion, Streamable, Archive, Coub y cientos de sitios más._",
+      "usage": "🎬 *DESCARGA UNIVERSAL* 🔗 Uso: */videodl <enlace>* ✨ Ejemplo: */videodl https://www.dailymotion.com/video/xbucbr2* _Funciona con YouTube, Dailymotion, Streamable, Archive, Coub y cientos de sitios más._",
       "category": "descargas"
     },
     {
-      "name": "vdl",
-      "base": "videodl",
+      "name": "videoinfo",
+      "base": "ytinfo",
       "primary": false,
       "aliases": [],
-      "description": "Descarga video de cualquier sitio compatible con yt-dlp",
-      "usage": "🎬 *DESCARGA UNIVERSAL*\n\n🔗 Uso: */videodl <enlace>*\n✨ Ejemplo: */videodl https://www.dailymotion.com/video/xbucbr2*\n\n_Funciona con YouTube, Dailymotion, Streamable, Archive, Coub y cientos de sitios más._",
+      "description": "Muestra información de un video de YouTube",
+      "usage": "<enlace o búsqueda>",
       "category": "descargas"
     },
     {
-      "name": "dlvideo",
-      "base": "videodl",
+      "name": "vipaudio",
+      "base": "ytvip",
       "primary": false,
       "aliases": [],
-      "description": "Descarga video de cualquier sitio compatible con yt-dlp",
-      "usage": "🎬 *DESCARGA UNIVERSAL*\n\n🔗 Uso: */videodl <enlace>*\n✨ Ejemplo: */videodl https://www.dailymotion.com/video/xbucbr2*\n\n_Funciona con YouTube, Dailymotion, Streamable, Archive, Coub y cientos de sitios más._",
+      "description": "Descarga video o audio de YouTube con ytpremiun-vip (plugin independiente)",
+      "usage": "<enlace o búsqueda>",
       "category": "descargas"
     },
     {
-      "name": "descargar",
-      "base": "videodl",
+      "name": "vipdl",
+      "base": "ytvip",
       "primary": false,
       "aliases": [],
-      "description": "Descarga video de cualquier sitio compatible con yt-dlp",
-      "usage": "🎬 *DESCARGA UNIVERSAL*\n\n🔗 Uso: */videodl <enlace>*\n✨ Ejemplo: */videodl https://www.dailymotion.com/video/xbucbr2*\n\n_Funciona con YouTube, Dailymotion, Streamable, Archive, Coub y cientos de sitios más._",
+      "description": "Descarga video o audio de YouTube con ytpremiun-vip (plugin independiente)",
+      "usage": "<enlace o búsqueda>",
       "category": "descargas"
+    },
+    {
+      "name": "vipmp3",
+      "base": "ytvip",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga video o audio de YouTube con ytpremiun-vip (plugin independiente)",
+      "usage": "<enlace o búsqueda>",
+      "category": "descargas"
+    },
+    {
+      "name": "vipvideo",
+      "base": "ytvip",
+      "primary": false,
+      "aliases": [],
+      "description": "Descarga video o audio de YouTube con ytpremiun-vip (plugin independiente)",
+      "usage": "<enlace o búsqueda>",
+      "category": "descargas"
+    },
+    {
+      "name": "votacion",
+      "base": "encuesta",
+      "primary": false,
+      "aliases": [],
+      "description": "Crea una encuesta rápida en el chat",
+      "usage": "<pregunta> | <opción 1> | <opción 2> ...",
+      "category": "utilidades"
+    },
+    {
+      "name": "votación",
+      "base": "encuesta",
+      "primary": false,
+      "aliases": [],
+      "description": "Crea una encuesta rápida en el chat",
+      "usage": "<pregunta> | <opción 1> | <opción 2> ...",
+      "category": "utilidades"
+    },
+    {
+      "name": "voz",
+      "base": "tts",
+      "primary": false,
+      "aliases": [],
+      "description": "Convierte texto en audio o nota de voz, con idiomas y velocidad",
+      "usage": "[idioma|nota|lento|rápido|traducir <idioma>] <texto>",
+      "category": "multimedia"
+    },
+    {
+      "name": "vozaguda",
+      "base": "vozefecto",
+      "primary": false,
+      "aliases": [],
+      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
+      "usage": "<efecto> [responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "vozeco",
+      "base": "vozefecto",
+      "primary": false,
+      "aliases": [],
+      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
+      "usage": "<efecto> [responde a un audio o video]",
+      "category": "multimedia"
     },
     {
       "name": "vozefecto",
@@ -9087,61 +9835,7 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
-      "name": "efectovoz",
-      "base": "vozefecto",
-      "primary": false,
-      "aliases": [],
-      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
-      "usage": "<efecto> [responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "cambiarvoz",
-      "base": "vozefecto",
-      "primary": false,
-      "aliases": [],
-      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
-      "usage": "<efecto> [responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
       "name": "vozgrave",
-      "base": "vozefecto",
-      "primary": false,
-      "aliases": [],
-      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
-      "usage": "<efecto> [responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "vozaguda",
-      "base": "vozefecto",
-      "primary": false,
-      "aliases": [],
-      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
-      "usage": "<efecto> [responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "vozrobot",
-      "base": "vozefecto",
-      "primary": false,
-      "aliases": [],
-      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
-      "usage": "<efecto> [responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "vozeco",
-      "base": "vozefecto",
-      "primary": false,
-      "aliases": [],
-      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
-      "usage": "<efecto> [responde a un audio o video]",
-      "category": "multimedia"
-    },
-    {
-      "name": "vozradio",
       "base": "vozefecto",
       "primary": false,
       "aliases": [],
@@ -9159,6 +9853,15 @@ window.NOVITA_DATA = {
       "category": "multimedia"
     },
     {
+      "name": "vozradio",
+      "base": "vozefecto",
+      "primary": false,
+      "aliases": [],
+      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
+      "usage": "<efecto> [responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
       "name": "vozrapida",
       "base": "vozefecto",
       "primary": false,
@@ -9166,6 +9869,60 @@ window.NOVITA_DATA = {
       "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
       "usage": "<efecto> [responde a un audio o video]",
       "category": "multimedia"
+    },
+    {
+      "name": "vozrobot",
+      "base": "vozefecto",
+      "primary": false,
+      "aliases": [],
+      "description": "Aplica efectos de voz a un audio o video (grave, aguda, robot, eco y más)",
+      "usage": "<efecto> [responde a un audio o video]",
+      "category": "multimedia"
+    },
+    {
+      "name": "w",
+      "base": "work",
+      "primary": false,
+      "aliases": [],
+      "description": "Trabaja para ganar NovitaCoins con un tiempo de espera",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "waifu",
+      "base": "neko",
+      "primary": false,
+      "aliases": [],
+      "description": "Envía imágenes neko aleatorias y gana NovitaCoins",
+      "usage": "[categoría] [cantidad]",
+      "category": "anime"
+    },
+    {
+      "name": "walkpet",
+      "base": "paseo",
+      "primary": false,
+      "aliases": [],
+      "description": "Pasea a tu mascota para ganar NovitaCoins",
+      "usage": "[número o nombre]",
+      "category": "mascotas"
+    },
+    {
+      "name": "wallet",
+      "base": "cartera",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu saldo de NovitaCoins",
+      "usage": "",
+      "category": "economia"
+    },
+    {
+      "name": "weather",
+      "base": "clima",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra el clima actual y el pronóstico de una ciudad",
+      "usage": "<ciudad>",
+      "category": "info"
     },
     {
       "name": "welcome",
@@ -9184,58 +9941,13 @@ window.NOVITA_DATA = {
       "category": "admin"
     },
     {
-      "name": "bienvenida",
-      "base": "welcome",
+      "name": "whois",
+      "base": "dominio",
       "primary": false,
       "aliases": [],
-      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
-      "usage": "on|off|texto|bye|textobye",
-      "category": "admin"
-    },
-    {
-      "name": "bienvenido",
-      "base": "welcome",
-      "primary": false,
-      "aliases": [],
-      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
-      "usage": "on|off|texto|bye|textobye",
-      "category": "admin"
-    },
-    {
-      "name": "setwelcome",
-      "base": "welcome",
-      "primary": false,
-      "aliases": [],
-      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
-      "usage": "on|off|texto|bye|textobye",
-      "category": "admin"
-    },
-    {
-      "name": "setbienvenida",
-      "base": "welcome",
-      "primary": false,
-      "aliases": [],
-      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
-      "usage": "on|off|texto|bye|textobye",
-      "category": "admin"
-    },
-    {
-      "name": "setbye",
-      "base": "welcome",
-      "primary": false,
-      "aliases": [],
-      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
-      "usage": "on|off|texto|bye|textobye",
-      "category": "admin"
-    },
-    {
-      "name": "setdespedida",
-      "base": "welcome",
-      "primary": false,
-      "aliases": [],
-      "description": "Activa, desactiva y personaliza la bienvenida del grupo",
-      "usage": "on|off|texto|bye|textobye",
-      "category": "admin"
+      "description": "Consulta la información WHOIS/RDAP de un dominio",
+      "usage": "<dominio>",
+      "category": "info"
     },
     {
       "name": "wiki",
@@ -9280,21 +9992,12 @@ window.NOVITA_DATA = {
       "category": "utilidades"
     },
     {
-      "name": "docx",
-      "base": "word",
+      "name": "wordcount",
+      "base": "contar",
       "primary": false,
       "aliases": [],
-      "description": "Crea un documento Word (.docx) con tu texto",
-      "usage": "",
-      "category": "utilidades"
-    },
-    {
-      "name": "documento",
-      "base": "word",
-      "primary": false,
-      "aliases": [],
-      "description": "Crea un documento Word (.docx) con tu texto",
-      "usage": "",
+      "description": "Cuenta caracteres, palabras y líneas de un texto",
+      "usage": "<texto>",
       "category": "utilidades"
     },
     {
@@ -9311,31 +10014,22 @@ window.NOVITA_DATA = {
       "category": "economia"
     },
     {
-      "name": "w",
-      "base": "work",
+      "name": "worldtime",
+      "base": "hora",
       "primary": false,
       "aliases": [],
-      "description": "Trabaja para ganar NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
+      "description": "Muestra la hora y fecha actuales en cualquier ciudad del mundo",
+      "usage": "<ciudad>",
+      "category": "info"
     },
     {
-      "name": "trabajar",
-      "base": "work",
+      "name": "x",
+      "base": "xdl",
       "primary": false,
       "aliases": [],
-      "description": "Trabaja para ganar NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
-    },
-    {
-      "name": "trabajo",
-      "base": "work",
-      "primary": false,
-      "aliases": [],
-      "description": "Trabaja para ganar NovitaCoins con un tiempo de espera",
-      "usage": "",
-      "category": "economia"
+      "description": "Descarga videos e imágenes de X (Twitter)",
+      "usage": "<enlace de X o Twitter>",
+      "category": "descargas"
     },
     {
       "name": "xdl",
@@ -9352,39 +10046,57 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "twitter",
-      "base": "xdl",
+      "name": "xmas",
+      "base": "navidad",
       "primary": false,
       "aliases": [],
-      "description": "Descarga videos e imágenes de X (Twitter)",
-      "usage": "<enlace de X o Twitter>",
+      "description": "Muestra un mensaje navideño y la cuenta regresiva",
+      "usage": "",
+      "category": "entretenimiento"
+    },
+    {
+      "name": "yo",
+      "base": "perfil",
+      "primary": false,
+      "aliases": [],
+      "description": "Muestra tu perfil, nivel y economía",
+      "usage": "",
+      "category": "perfil"
+    },
+    {
+      "name": "youtube",
+      "base": "ytsearch",
+      "primary": false,
+      "aliases": [],
+      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
+      "usage": "<búsqueda>",
       "category": "descargas"
     },
     {
-      "name": "x",
-      "base": "xdl",
+      "name": "yt",
+      "base": "ytsearch",
       "primary": false,
       "aliases": [],
-      "description": "Descarga videos e imágenes de X (Twitter)",
-      "usage": "<enlace de X o Twitter>",
+      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
+      "usage": "<búsqueda>",
       "category": "descargas"
     },
     {
-      "name": "tw",
-      "base": "xdl",
+      "name": "ytbuscar",
+      "base": "ytsearch",
       "primary": false,
       "aliases": [],
-      "description": "Descarga videos e imágenes de X (Twitter)",
-      "usage": "<enlace de X o Twitter>",
+      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
+      "usage": "<búsqueda>",
       "category": "descargas"
     },
     {
-      "name": "twitterdl",
-      "base": "xdl",
+      "name": "ytcanal",
+      "base": "ytchannel",
       "primary": false,
       "aliases": [],
-      "description": "Descarga videos e imágenes de X (Twitter)",
-      "usage": "<enlace de X o Twitter>",
+      "description": "Busca canales de YouTube y muestra seguidores y enlace",
+      "usage": "<nombre del canal>",
       "category": "descargas"
     },
     {
@@ -9403,43 +10115,7 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "ytcanal",
-      "base": "ytchannel",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca canales de YouTube y muestra seguidores y enlace",
-      "usage": "<nombre del canal>",
-      "category": "descargas"
-    },
-    {
-      "name": "canalyt",
-      "base": "ytchannel",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca canales de YouTube y muestra seguidores y enlace",
-      "usage": "<nombre del canal>",
-      "category": "descargas"
-    },
-    {
       "name": "ytchannels",
-      "base": "ytchannel",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca canales de YouTube y muestra seguidores y enlace",
-      "usage": "<nombre del canal>",
-      "category": "descargas"
-    },
-    {
-      "name": "buscarcanal",
-      "base": "ytchannel",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca canales de YouTube y muestra seguidores y enlace",
-      "usage": "<nombre del canal>",
-      "category": "descargas"
-    },
-    {
-      "name": "canalesyt",
       "base": "ytchannel",
       "primary": false,
       "aliases": [],
@@ -9462,39 +10138,39 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "infoyt",
-      "base": "ytinfo",
+      "name": "ytlista",
+      "base": "ytplaylist",
       "primary": false,
       "aliases": [],
-      "description": "Muestra información de un video de YouTube",
-      "usage": "<enlace o búsqueda>",
+      "description": "Busca listas de reproducción de YouTube",
+      "usage": "<búsqueda>",
       "category": "descargas"
     },
     {
-      "name": "videoinfo",
-      "base": "ytinfo",
+      "name": "ytlistas",
+      "base": "ytplaylist",
       "primary": false,
       "aliases": [],
-      "description": "Muestra información de un video de YouTube",
-      "usage": "<enlace o búsqueda>",
+      "description": "Busca listas de reproducción de YouTube",
+      "usage": "<búsqueda>",
       "category": "descargas"
     },
     {
-      "name": "ytvideoinfo",
-      "base": "ytinfo",
+      "name": "ytmp3",
+      "base": "play",
       "primary": false,
       "aliases": [],
-      "description": "Muestra información de un video de YouTube",
-      "usage": "<enlace o búsqueda>",
+      "description": "Descarga y envía audio de YouTube en M4A",
+      "usage": "",
       "category": "descargas"
     },
     {
-      "name": "infovideo",
-      "base": "ytinfo",
+      "name": "ytmp4",
+      "base": "play2",
       "primary": false,
       "aliases": [],
-      "description": "Muestra información de un video de YouTube",
-      "usage": "<enlace o búsqueda>",
+      "description": "Descarga y envía video de YouTube en MP4",
+      "usage": "",
       "category": "descargas"
     },
     {
@@ -9513,47 +10189,20 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "ytlista",
-      "base": "ytplaylist",
+      "name": "ytpremiun",
+      "base": "ytvip",
       "primary": false,
       "aliases": [],
-      "description": "Busca listas de reproducción de YouTube",
-      "usage": "<búsqueda>",
+      "description": "Descarga video o audio de YouTube con ytpremiun-vip (plugin independiente)",
+      "usage": "<enlace o búsqueda>",
       "category": "descargas"
     },
     {
-      "name": "listayt",
-      "base": "ytplaylist",
+      "name": "yts",
+      "base": "ytsearch",
       "primary": false,
       "aliases": [],
-      "description": "Busca listas de reproducción de YouTube",
-      "usage": "<búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "ytlistas",
-      "base": "ytplaylist",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca listas de reproducción de YouTube",
-      "usage": "<búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "playlistsyt",
-      "base": "ytplaylist",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca listas de reproducción de YouTube",
-      "usage": "<búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "buscarplaylist",
-      "base": "ytplaylist",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca listas de reproducción de YouTube",
+      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
       "usage": "<búsqueda>",
       "category": "descargas"
     },
@@ -9574,57 +10223,12 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "yts",
-      "base": "ytsearch",
+      "name": "ytvideoinfo",
+      "base": "ytinfo",
       "primary": false,
       "aliases": [],
-      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
-      "usage": "<búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "ytbuscar",
-      "base": "ytsearch",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
-      "usage": "<búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "buscarvideo",
-      "base": "ytsearch",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
-      "usage": "<búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "buscarvideos",
-      "base": "ytsearch",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
-      "usage": "<búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "yt",
-      "base": "ytsearch",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
-      "usage": "<búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "youtube",
-      "base": "ytsearch",
-      "primary": false,
-      "aliases": [],
-      "description": "Busca videos en YouTube y muestra título, canal, duración y enlace",
-      "usage": "<búsqueda>",
+      "description": "Muestra información de un video de YouTube",
+      "usage": "<enlace o búsqueda>",
       "category": "descargas"
     },
     {
@@ -9643,49 +10247,22 @@ window.NOVITA_DATA = {
       "category": "descargas"
     },
     {
-      "name": "vipdl",
-      "base": "ytvip",
+      "name": "zodiaco",
+      "base": "horoscopo",
       "primary": false,
       "aliases": [],
-      "description": "Descarga video o audio de YouTube con ytpremiun-vip (plugin independiente)",
-      "usage": "<enlace o búsqueda>",
-      "category": "descargas"
+      "description": "Muestra tu horóscopo diario según tu signo o fecha de nacimiento",
+      "usage": "<signo o dd/mm>",
+      "category": "entretenimiento"
     },
     {
-      "name": "ytpremiun",
-      "base": "ytvip",
+      "name": "zodíaco",
+      "base": "horoscopo",
       "primary": false,
       "aliases": [],
-      "description": "Descarga video o audio de YouTube con ytpremiun-vip (plugin independiente)",
-      "usage": "<enlace o búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "vipvideo",
-      "base": "ytvip",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga video o audio de YouTube con ytpremiun-vip (plugin independiente)",
-      "usage": "<enlace o búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "vipmp3",
-      "base": "ytvip",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga video o audio de YouTube con ytpremiun-vip (plugin independiente)",
-      "usage": "<enlace o búsqueda>",
-      "category": "descargas"
-    },
-    {
-      "name": "vipaudio",
-      "base": "ytvip",
-      "primary": false,
-      "aliases": [],
-      "description": "Descarga video o audio de YouTube con ytpremiun-vip (plugin independiente)",
-      "usage": "<enlace o búsqueda>",
-      "category": "descargas"
+      "description": "Muestra tu horóscopo diario según tu signo o fecha de nacimiento",
+      "usage": "<signo o dd/mm>",
+      "category": "entretenimiento"
     }
   ]
-}
+};

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'novita-web-v7';
+const CACHE_NAME = 'novita-web-v8';
 
 const CORE_ASSETS = [
   '/',
@@ -7,13 +7,18 @@ const CORE_ASSETS = [
   '/script.js',
   '/data.js',
   '/manifest.webmanifest',
-  '/assets/logo-256.jpg',
+  '/assets/logo-96.jpg',
+  '/assets/logo-192.jpg',
+  '/assets/favicon.ico',
   '/assets/icon-192.png',
   '/assets/icon-512.png',
   '/assets/icon-maskable-512.png',
   '/assets/apple-touch-icon.png',
   '/assets/menu-1-600.jpg',
   '/assets/welcome-720.jpg',
+  '/assets/novita-hosting.jpg',
+  '/assets/novita-eventos.jpg',
+  '/assets/novita-aviso.jpg',
 ];
 
 self.addEventListener('install', (event) => {

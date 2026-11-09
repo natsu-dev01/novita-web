@@ -2,7 +2,7 @@
   "id": "/",
   "name": "NovitaBot — Tu asistente oficial de WhatsApp",
   "short_name": "NovitaBot",
-  "description": "Explora los 957 comandos de NovitaBot: economía, juegos, IA, mascotas, multimedia, texto a voz y más.",
+  "description": "Explora los 1014 comandos de NovitaBot: economía, juegos, IA, mascotas, multimedia, texto a voz y más.",
   "lang": "es",
   "dir": "ltr",
   "start_url": "/",
@@ -37,7 +37,7 @@
     {
       "name": "Explorar comandos",
       "short_name": "Comandos",
-      "description": "Busca entre los 957 comandos de NovitaBot",
+      "description": "Busca entre los 1014 comandos de NovitaBot",
       "url": "/#comandos",
       "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
     },

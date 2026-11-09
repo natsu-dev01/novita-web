@@ -134,6 +134,8 @@
     toast: $('#toast'),
     year: $('#year'),
     heroCount: $('#hero-command-count'),
+    heroStatusPill: $('#hero-status-pill'),
+    heroStatusText: $('#hero-status-text'),
     commandsTotal: $('#commands-total'),
     categoryGrid: $('#category-grid'),
     sort: $('#command-sort'),
@@ -1579,10 +1581,10 @@
 
   // ---------- Sincronizar textos con los datos ----------
 
-  function syncStats() {
-    const totalCommands = Number(BOT.commands) || COMMANDS.length;
-    const totalPlugins = Number(BOT.plugins) || COMMANDS.length;
-    const totalCategories = CATEGORIES.length || 15;
+  function syncStats(live = {}) {
+    const totalCommands = Number(live.commands) || Number(BOT.commands) || COMMANDS.length;
+    const totalPlugins = Number(live.plugins) || Number(BOT.plugins) || COMMANDS.length;
+    const totalCategories = CATEGORIES.length || 16;
 
     if (els.heroCount) els.heroCount.textContent = formatNumber(totalCommands);
     if (els.commandsTotal) els.commandsTotal.textContent = formatNumber(totalCommands);
@@ -1759,6 +1761,23 @@
 
     if (els.statusCard) els.statusCard.dataset.state = stateName;
 
+    if (els.heroStatusPill) {
+      els.heroStatusPill.dataset.state = stateName;
+      const heroDot = $('.dot', els.heroStatusPill);
+      if (heroDot) heroDot.classList.toggle('dot-live', stateName === 'operational');
+    }
+
+    if (els.heroStatusText) {
+      const heroLabels = {
+        checking: 'Comprobando',
+        operational: 'En línea',
+        degraded: 'Servicio limitado',
+        offline: 'Sin conexión',
+        error: 'Estado no disponible',
+      };
+      els.heroStatusText.textContent = heroLabels[stateName] || 'Comprobando';
+    }
+
     const labels = {
       checking: ['Comprobando', 'Conectando con NovitaBot…'],
       operational: ['En línea', 'Todo funcionando'],
@@ -1851,6 +1870,9 @@
         })
         .join('');
     }
+
+    // Los totales de la web siguen al bot real cuando el latido los incluye.
+    syncStats({ commands: payload.commands, plugins: payload.plugins });
   }
 
   function updateHeaderStatus() {

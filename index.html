@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#07060c" />
     <meta
       name="description"
-      content="NovitaBot es el asistente oficial de WhatsApp con economía, juegos, IA, mascotas, multimedia, texto a voz y más de 950 comandos. Instalable en iPhone, Android y PC."
+      content="NovitaBot es el asistente oficial de WhatsApp con economía, juegos, IA, mascotas, multimedia, texto a voz y más de 1000 comandos. Instalable en iPhone, Android y PC."
     />
     <meta name="format-detection" content="telephone=no" />
     <meta name="mobile-web-app-capable" content="yes" />
@@ -21,29 +21,33 @@
     <meta property="og:title" content="NovitaBot — Tu asistente oficial de WhatsApp" />
     <meta
       property="og:description"
-      content="222 plugins, 957 comandos, IA, TTS, efectos de voz, economía, juegos y administración de grupos."
+      content="234 plugins, 1014 comandos, IA, TTS, efectos de voz, economía, juegos y administración de grupos."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://darkcore.xyz/" />
     <meta property="og:site_name" content="NovitaBot" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:image" content="https://darkcore.xyz/assets/logo.jpeg" />
+    <meta property="og:image" content="https://darkcore.xyz/assets/og-novita.jpg" />
     <meta property="og:image:alt" content="Logo oficial de NovitaBot" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="NovitaBot — Tu asistente oficial de WhatsApp" />
     <meta
       name="twitter:description"
-      content="222 plugins, 957 comandos, IA, TTS, efectos de voz, economía, juegos y administración de grupos."
+      content="234 plugins, 1014 comandos, IA, TTS, efectos de voz, economía, juegos y administración de grupos."
     />
-    <meta name="twitter:image" content="https://darkcore.xyz/assets/logo.jpeg" />
+    <meta name="twitter:image" content="https://darkcore.xyz/assets/og-novita.jpg" />
     <link rel="canonical" href="https://darkcore.xyz/" />
     <title>NovitaBot — Tu asistente oficial de WhatsApp</title>
 
+    <link rel="icon" href="assets/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="preload" as="image" href="assets/logo-256.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="assets/logo-96.jpg" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -70,7 +74,7 @@
             "url": "https://darkcore.xyz/",
             "applicationCategory": "CommunicationApplication",
             "operatingSystem": "WhatsApp",
-            "description": "Asistente oficial de WhatsApp con economía, juegos, IA, mascotas, multimedia, texto a voz y más de 950 comandos.",
+            "description": "Asistente oficial de WhatsApp con economía, juegos, IA, mascotas, multimedia, texto a voz y más de 1000 comandos.",
             "image": "https://darkcore.xyz/assets/logo.jpeg",
             "author": { "@type": "Person", "name": "Manuel VG" },
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -107,7 +111,7 @@
                 "name": "¿Cuántos comandos tiene NovitaBot?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "NovitaBot tiene 222 plugins y 957 comandos en total, incluyendo alias, repartidos en 15 categorías."
+                  "text": "NovitaBot tiene 234 plugins y 1014 comandos en total, incluyendo alias, repartidos en 16 categorías."
                 }
               },
               {
@@ -160,7 +164,7 @@
       <div class="container header-inner">
         <a class="brand" href="#inicio" aria-label="NovitaBot, ir al inicio">
           <img
-            src="assets/logo-256.jpg"
+            src="assets/logo-96.jpg"
             alt="Logo de NovitaBot"
             width="44"
             height="44"
@@ -217,11 +221,15 @@
 
     <main>
       <section class="hero section" id="inicio">
+        <div class="hero-brand-art" aria-hidden="true"></div>
         <div class="container hero-grid">
           <div class="hero-copy">
-            <span class="pill reveal">
-              <span class="dot dot-live" aria-hidden="true"></span>
-              En línea · <strong id="hero-command-count">957</strong> comandos disponibles
+            <span class="pill reveal" id="hero-status-pill" data-state="checking">
+              <span class="dot" aria-hidden="true"></span>
+              <span class="pill-text"
+                ><span id="hero-status-text">Comprobando</span> ·
+                <strong id="hero-command-count">1014</strong> comandos disponibles</span
+              >
             </span>
 
             <h1 class="reveal">
@@ -282,7 +290,7 @@
                 </div>
 
                 <div class="chat-head">
-                  <img src="assets/logo-256.jpg" alt="" width="34" height="34" decoding="async" />
+                  <img src="assets/logo-96.jpg" alt="" width="34" height="34" decoding="async" />
                   <div>
                     <strong>NovitaBot</strong>
                     <span>en línea</span>
@@ -296,8 +304,8 @@
 
                   <div class="bubble bubble-in bubble-menu">
                     <span class="bubble-title">🌸 NovitaBot</span>
-                    <span class="bubble-line">✦ 222 plugins activos</span>
-                    <span class="bubble-line">✦ 957 comandos</span>
+                    <span class="bubble-line">✦ 234 plugins activos</span>
+                    <span class="bubble-line">✦ 1014 comandos</span>
                     <span class="bubble-line">✦ 25 idiomas de voz</span>
                     <div class="mini-grid">
                       <span>💰 Economía</span>
@@ -351,15 +359,15 @@
         <div class="container">
           <div class="stats-card reveal">
             <div class="stat">
-              <strong data-count="222">222</strong>
+              <strong data-count="234">234</strong>
               <span>Plugins</span>
             </div>
             <div class="stat">
-              <strong data-count="957">957</strong>
+              <strong data-count="1014">1014</strong>
               <span>Comandos</span>
             </div>
             <div class="stat">
-              <strong data-count="15">15</strong>
+              <strong data-count="16">16</strong>
               <span>Categorías</span>
             </div>
             <div class="stat">
@@ -427,12 +435,12 @@
                 </div>
                 <div class="status-metric">
                   <span>Comandos</span>
-                  <strong id="status-commands">957</strong>
+                  <strong id="status-commands">1014</strong>
                   <small>activos</small>
                 </div>
                 <div class="status-metric">
                   <span>Plugins</span>
-                  <strong id="status-plugins">222</strong>
+                  <strong id="status-plugins">234</strong>
                   <small>cargados</small>
                 </div>
               </div>
@@ -528,7 +536,7 @@
       <section class="section categories-section" id="categorias">
         <div class="container">
           <div class="section-head reveal">
-            <span class="kicker">15 categorías</span>
+            <span class="kicker">16 categorías</span>
             <h2>Explora por <span class="gradient-text">categoría</span></h2>
             <p>
               Cada área tiene sus propios comandos. Elige una tarjeta y salta directo al
@@ -546,7 +554,7 @@
             <span class="kicker">Explorador</span>
             <h2>Encuentra tu próximo <span class="gradient-text">comando favorito</span></h2>
             <p>
-              Busca entre los <strong id="commands-total">957</strong> comandos reales del bot.
+              Busca entre los <strong id="commands-total">1014</strong> comandos reales del bot.
               Todos usan el prefijo <code>#</code>.
             </p>
           </div>
@@ -606,7 +614,7 @@
               <label class="switch" for="show-aliases">
                 <input type="checkbox" id="show-aliases" />
                 <span class="switch-track" aria-hidden="true"></span>
-                <span class="switch-label">Mostrar alias <b id="alias-count">735</b></span>
+                <span class="switch-label">Mostrar alias <b id="alias-count">780</b></span>
               </label>
               <button class="text-button" id="clear-filters" type="button">Limpiar filtros</button>
             </div>
@@ -728,8 +736,8 @@
             <details class="faq-item reveal" name="faq">
               <summary>¿Cuántos comandos tiene el bot?</summary>
               <p>
-                Tiene <strong>222 plugins</strong> y <strong>957 comandos</strong> en total,
-                incluyendo alias, repartidos en <strong>15 categorías</strong>: economía, juegos,
+                Tiene <strong>234 plugins</strong> y <strong>1014 comandos</strong> en total,
+                incluyendo alias, repartidos en <strong>16 categorías</strong>: economía, juegos,
                 IA, mascotas, multimedia, administración y más.
               </p>
             </details>
@@ -755,7 +763,7 @@
               <summary>¿Puedo ver también los alias de los comandos?</summary>
               <p>
                 Sí. Activa el interruptor <strong>Mostrar alias</strong> en el explorador para
-                incluir los 735 alias además de los 222 comandos principales.
+                incluir los 780 alias además de los 234 comandos principales.
               </p>
             </details>
 
@@ -795,7 +803,9 @@
         <div class="container">
           <div class="community-card reveal">
             <div class="community-glow" aria-hidden="true"></div>
-            <img class="community-logo" src="assets/logo-256.jpg" alt="NovitaBot" width="72" height="72" loading="lazy" decoding="async" />
+            <div class="community-art art-eventos" aria-hidden="true"></div>
+            <div class="community-art art-aviso" aria-hidden="true"></div>
+            <img class="community-logo" src="assets/logo-192.jpg" alt="NovitaBot" width="72" height="72" loading="lazy" decoding="async" />
             <span class="kicker">Comunidad oficial</span>
             <h2>Únete a la familia <span class="gradient-text">Novita</span></h2>
             <p>
@@ -833,7 +843,7 @@
       <div class="container footer-grid">
         <div>
           <a class="brand" href="#inicio">
-            <img src="assets/logo-256.jpg" alt="" width="36" height="36" decoding="async" />
+            <img src="assets/logo-96.jpg" alt="" width="36" height="36" decoding="async" />
             <span class="brand-name">Novita<span>Bot</span></span>
           </a>
           <p class="footer-text">

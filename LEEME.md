@@ -20,18 +20,32 @@ Haz doble clic en `index.html` o abre la carpeta con cualquier navegador moderno
 | `index.html` | Estructura, SEO, metadatos iOS y PWA |
 | `styles.css` | Diseño, animaciones, modo oscuro y responsive |
 | `script.js` | Buscador, filtros, favoritos, modal, enlaces y service worker |
-| `data.js` | Datos reales: 222 plugins y 957 comandos |
+| `data.js` | Datos reales: 234 plugins y 1014 comandos |
 | `status.json` | Respaldo local del estado (la web lee el gist en vivo) |
 | `manifest.webmanifest` | Configuración de la app instalable |
 | `sw.js` | Caché offline y actualización en segundo plano |
-| `assets/` | Logo, capturas e iconos de la app |
+| `assets/` | Logo, imagen para redes, banners de marca, capturas e iconos de la app |
+| `logos/` | Archivos originales entregados por el diseñador (fuente de los assets) |
 | `robots.txt` / `sitemap.xml` | Indexación en buscadores |
+
+## Logos e imágenes
+
+Los assets se generan a partir de `logos/logotipo-novita.jpeg` y se optimizan para cada uso:
+
+| Archivo | Uso |
+| --- | --- |
+| `assets/logo-96.jpg` | Cabecera, chat del inicio y pie de página |
+| `assets/logo-192.jpg` | Tarjeta de comunidad |
+| `assets/logo.jpeg` | Logo principal para redes y datos estructurados |
+| `assets/og-novita.jpg` | Vista previa al compartir la web (1200×630) |
+| `assets/icon-*.png`, `favicon.*`, `apple-touch-icon.png` | App instalable y pestaña del navegador |
+| `assets/novita-hosting.jpg`, `novita-eventos.jpg`, `novita-aviso.jpg` | Banners de marca usados como decoración sutil de fondo en la portada y la comunidad |
 
 ## Funciones
 
 - Buscador de comandos con soporte para tildes y varias palabras.
-- Filtros por 15 categorías y favoritos guardados en el navegador.
-- Interruptor para mostrar los 735 alias además de los 222 comandos principales.
+- Filtros por 16 categorías y favoritos guardados en el navegador.
+- Interruptor para mostrar los 780 alias además de los 234 comandos principales.
 - Orden por nombre, categoría o cantidad de alias.
 - Modal con descripción, uso, alias, copiado y enlace para probar el comando en WhatsApp.
 - Comando aleatorio, copiado rápido y avisos visuales.
@@ -42,8 +56,12 @@ Haz doble clic en `index.html` o abre la carpeta con cualquier navegador moderno
 - Aviso de **nueva versión disponible** para actualizar la app instalada sin salir de la página.
 - Sección de categorías, preguntas frecuentes, barra de progreso y volver arriba.
 - Diseño responsive para celular, tablet y escritorio.
+- **Buscador fijo en celular:** al recorrer los comandos, el buscador, los filtros y el orden se quedan pegados bajo el header.
+- Categorías en dos columnas compactas en el celular, con la descripción oculta para ahorrar espacio.
+- Paginación adaptada: 12 comandos por tanda en celular y 24 en tablet/escritorio.
 - Barra de accesos rápidos en celular: Inicio, Comandos, Estado, Favoritos y WhatsApp.
-- Modal tipo *bottom sheet* en celular, con áreas seguras para iPhone con notch.
+- La barra inferior se oculta al abrir el teclado o tocar un campo, y vuelve al salir.
+- Modal tipo *bottom sheet* en celular, con áreas seguras para iPhone con notch y gesto de arrastre hacia abajo para cerrar.
 - Enlaces compartibles: `#comando=tts` abre un comando y `#comandos=juegos` abre una categoría.
 - Botón **Compartir** en el modal (usa el menú nativo en iPhone y Android).
 - Instalable como aplicación (PWA) con iconos, pantalla completa y modo offline.
@@ -61,12 +79,18 @@ Después de la primera visita la web queda guardada en el dispositivo y puede ab
 
 ## Datos del bot
 
-- **222 plugins**
-- **957 comandos** (222 principales + 735 alias)
-- **15 categorías**
+- **234 plugins**
+- **1014 comandos** (234 principales + 780 alias)
+- **16 categorías**
 - **25 idiomas TTS**
 
-Los datos se generan desde las carpetas reales de `plugins/` del bot. Si agregas o quitas plugins, hay que regenerar `data.js` para que la web refleje los cambios.
+Los datos se generan desde las carpetas reales de `plugins/` del bot. Si agregas o quitas plugins, regenera `data.js` con:
+
+```powershell
+node scripts/generate-data.js "C:\ruta\a\Novita-bot\plugins"
+```
+
+El generador replica el comportamiento del bot: cuenta cada archivo `.js`, detecta comandos y alias, y omite los nombres duplicados (el bot los guarda en un `Map`, así que solo queda el primero). Al terminar imprime plugins, comandos y categorías.
 
 ## Estado del bot
 
@@ -76,6 +100,7 @@ La sección **Estado** (`#estado`) ya no usa un archivo estático: lee el latido
 - **URL que lee la web:** `https://gist.githubusercontent.com/natsu-dev01/96ebdd7b6f0c8faffa7f86ed01ac64bb/raw/status.json`
 - **Frecuencia del latido:** cada 60 segundos (configurable en el bot). GitHub puede tardar cerca de un minuto en reflejar el último cambio en la URL `raw`.
 - **Caducidad:** si el último latido tiene más de 4 minutos, la web marca el bot como **Sin conexión**, aunque el gist todavía diga `online: true`.
+- **Contadores en vivo:** la píldora del hero y las estadísticas (comandos y plugins) se actualizan con los valores del latido real cuando están disponibles.
 
 El bot publica datos reales de su proceso:
 
@@ -89,8 +114,8 @@ El bot publica datos reales de su proceso:
   "updatedAt": "2026-11-08T13:54:30.708Z",
   "uptimeMs": 60167,
   "region": "Perú",
-  "commands": 957,
-  "plugins": 222,
+  "commands": 1014,
+  "plugins": 234,
   "messages": 12,
   "errors": 0,
   "lastMessageAt": "2026-11-08T13:54:20.000Z",
